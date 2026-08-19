@@ -12,11 +12,6 @@
 <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
 <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
 
-<!-- Recharts dependencies (react-is is required, easy to miss) + Recharts itself -->
-<script crossorigin src="https://unpkg.com/react-is@18/umd/react-is.production.min.js"></script>
-<script crossorigin src="https://unpkg.com/prop-types@15/prop-types.min.js"></script>
-<script crossorigin src="https://unpkg.com/recharts/umd/Recharts.min.js"></script>
-
 <!-- Babel standalone: lets the browser transpile JSX directly, no build step -->
 <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
@@ -39,10 +34,6 @@
 
 <script type="text/babel" data-presets="react">
 const { useState, useRef, useContext, createContext } = React;
-const {
-  BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip,
-  ResponsiveContainer, Cell, LabelList,
-} = Recharts;
 
 /* Lightweight inline icon shim (replaces lucide-react so no bundler/npm is needed) */
 function makeIcon(glyph) {
@@ -293,30 +284,47 @@ function ImgHint({ label }) {
   );
 }
 
+/** Lightweight CSS/div bar chart — no external chart library required */
+function SimpleBars({ data, height = 150, colorFor, labelFor }) {
+  const max = Math.max(...data.map((d) => d.value), 1);
+  return (
+    <div style={{ height, display: "flex", alignItems: "flex-end", gap: 16, padding: "0 4px" }}>
+      {data.map((d, i) => {
+        const pct = Math.max((d.value / max) * 100, 3);
+        return (
+          <div key={i} style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-end", height: "100%" }}>
+            <div style={{ fontFamily: "'IBM Plex Mono', monospace", fontSize: 11.5, fontWeight: 600, color: NAVY, marginBottom: 4 }}>
+              {labelFor(d.value)}
+            </div>
+            <div
+              style={{
+                height: `${pct}%`,
+                width: "100%",
+                maxWidth: 50,
+                background: colorFor(i),
+                borderRadius: "8px 8px 0 0",
+                transition: "height 0.3s ease",
+              }}
+            />
+            <div style={{ fontSize: 10.5, color: MUTED, fontFamily: "Inter", marginTop: 8, textAlign: "center" }}>
+              {d.name}
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
 /** Bar chart for "% 개선" style metrics — all framed as positive improvement */
 function ImprovementBars({ data, height = 150 }) {
   return (
-    <ResponsiveContainer width="100%" height={height}>
-      <BarChart data={data} margin={{ top: 20, right: 8, left: -18, bottom: 0 }}>
-        <CartesianGrid vertical={false} stroke="#EDE8DA" />
-        <XAxis dataKey="name" tick={{ fontSize: 10.5, fill: MUTED, fontFamily: "Inter" }} axisLine={{ stroke: "#EDE8DA" }} tickLine={false} />
-        <YAxis hide />
-        <Tooltip
-          cursor={{ fill: "rgba(225,88,63,0.06)" }}
-          contentStyle={{ borderRadius: 10, border: "1px solid #EAE5D8", fontSize: 12, fontFamily: "Inter" }}
-          formatter={(v) => [`+${v}%`, "개선"]}
-        />
-        <Bar dataKey="value" radius={[8, 8, 0, 0]} maxBarSize={50}>
-          <LabelList
-            dataKey="value"
-            position="top"
-            formatter={(v) => `+${v}%`}
-            style={{ fontFamily: "IBM Plex Mono", fontSize: 11.5, fontWeight: 600, fill: NAVY }}
-          />
-          {data.map((d, i) => <Cell key={i} fill={TEAL} />)}
-        </Bar>
-      </BarChart>
-    </ResponsiveContainer>
+    <SimpleBars
+      data={data}
+      height={height}
+      colorFor={() => TEAL}
+      labelFor={(v) => `+${v}%`}
+    />
   );
 }
 
@@ -325,27 +333,12 @@ function ImprovementBars({ data, height = 150 }) {
 function ValueBars({ data, suffix = "", height = 150 }) {
   const palette = [CORAL, TEAL, CORAL_SOFT, NAVY_SOFT];
   return (
-    <ResponsiveContainer width="100%" height={height}>
-      <BarChart data={data} margin={{ top: 20, right: 8, left: -18, bottom: 0 }}>
-        <CartesianGrid vertical={false} stroke="#EDE8DA" />
-        <XAxis dataKey="name" tick={{ fontSize: 10.5, fill: MUTED, fontFamily: "Inter" }} axisLine={{ stroke: "#EDE8DA" }} tickLine={false} />
-        <YAxis hide />
-        <Tooltip
-          cursor={{ fill: "rgba(225,88,63,0.06)" }}
-          contentStyle={{ borderRadius: 10, border: "1px solid #EAE5D8", fontSize: 12, fontFamily: "Inter" }}
-          formatter={(v) => [`${v}${suffix}`, ""]}
-        />
-        <Bar dataKey="value" radius={[8, 8, 0, 0]} maxBarSize={50}>
-          <LabelList
-            dataKey="value"
-            position="top"
-            formatter={(v) => `${v}${suffix}`}
-            style={{ fontFamily: "IBM Plex Mono", fontSize: 11.5, fontWeight: 600, fill: NAVY }}
-          />
-          {data.map((d, i) => <Cell key={i} fill={palette[i % palette.length]} />)}
-        </Bar>
-      </BarChart>
-    </ResponsiveContainer>
+    <SimpleBars
+      data={data}
+      height={height}
+      colorFor={(i) => palette[i % palette.length]}
+      labelFor={(v) => `${v}${suffix}`}
+    />
   );
 }
 

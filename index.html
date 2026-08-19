@@ -4,17 +4,10 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>문희지 — Performance Marketing Portfolio</title>
-
-<!-- Tailwind (no build step needed) -->
 <script src="https://cdn.tailwindcss.com"></script>
-
-<!-- React + ReactDOM -->
 <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
 <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-
-<!-- Babel standalone: lets the browser transpile JSX directly, no build step -->
 <script crossorigin src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js"></script>
-
 <style>
   html, body { margin: 0; padding: 0; }
 </style>
@@ -31,7 +24,6 @@
     }
   });
 </script>
-
 <script type="text/babel" data-presets="react">
 const { useState, useRef, useContext, createContext } = React;
 
@@ -135,17 +127,16 @@ const NAV_ITEMS = [
 ];
 
 const KPI_TILES = [
-  { label: "자사몰 광고 ROAS", value: "327%", sub: "2024 대비 +104%", color: CORAL, target: "kpi-roas" },
-  { label: "CRM ROAS", value: "353→442%", sub: "'24 대비 '26.1–7월", color: TEAL, target: "kpi-crm" },
-  { label: "올리브영 매출 성장", value: "+316%", sub: "전년 동월 대비", color: CORAL, target: "kpi-olive" },
-  { label: "AI 소재 CTR", value: "0.53→1.14%", sub: "+116% 개선", color: TEAL, target: "kpi-ai" },
+  { label: "자사몰 광고 ROAS", value: "+104%", sub: "2024 대비 개선", color: CORAL, target: "kpi-roas" },
+  { label: "CRM ROAS", value: "+25.3%", sub: "'24 대비 '26.1–7월", color: TEAL, target: "kpi-crm" },
+  { label: "올리브영 Online Sales", value: "+316%", sub: "전년 동월 대비", color: CORAL, target: "kpi-olive" },
+  { label: "AI 소재 CTR", value: "+116%", sub: "동일 상품·매체·주차 기준", color: TEAL, target: "kpi-ai" },
 ];
 
 const CAPABILITY_STEPS = [
   { n: "01", title: "Acquisition", desc: "미디어 전략 · 예산 배분", icon: Target },
-  { n: "02", title: "Conversion", desc: "커머스 전환 · 상세페이지 최적화", icon: TrendingUp },
-  { n: "03", title: "Retention", desc: "CRM 세분화 · 연계구매", icon: Users },
-  { n: "04", title: "Data & AI", desc: "성과 진단 · 소재 실험", icon: Sparkles },
+  { n: "02", title: "Conversion", desc: "캠페인 · 상세페이지 CRO", icon: TrendingUp },
+  { n: "03", title: "Retention", desc: "CRM 세분화 · 재구매", icon: Users },
 ];
 
 const GROWTH_LOOP = [
@@ -314,67 +305,59 @@ function SimpleBars({ data, height = 150, colorFor, labelFor }) {
   );
 }
 
-/** Bar chart for "% 개선" style metrics — all framed as positive improvement */
 function ImprovementBars({ data, height = 150 }) {
-  return (
-    <SimpleBars
-      data={data}
-      height={height}
-      colorFor={() => TEAL}
-      labelFor={(v) => `+${v}%`}
-    />
-  );
+  return <SimpleBars data={data} height={height} colorFor={() => TEAL} labelFor={(v) => `+${v}%`} />;
 }
 
-/** Simple raw-value bar chart (not all "improvement" framed) */
-/** Achievement bars — for independent (non-sequential) metrics, hero stat first in coral */
 function ValueBars({ data, suffix = "", height = 150 }) {
   const palette = [CORAL, TEAL, CORAL_SOFT, NAVY_SOFT];
-  return (
-    <SimpleBars
-      data={data}
-      height={height}
-      colorFor={(i) => palette[i % palette.length]}
-      labelFor={(v) => `${v}${suffix}`}
-    />
-  );
+  return <SimpleBars data={data} height={height} colorFor={(i) => palette[i % palette.length]} labelFor={(v) => `${v}${suffix}`} />;
 }
 
 /**
  * BeforeAfterCompare — a true "before → after" pair. The baseline is muted grey,
  * the achieved/current state is coral, and the % change sits on an arrow between them.
+ * indexMode: when the underlying values are confidential, pass beforeValue=100 and
+ * afterValue as a relative index (e.g. 204 for +104%) — the chart labels these as
+ * "Index" instead of raw units, so no real figures are exposed.
  */
-function BeforeAfterCompare({ beforeLabel, beforeValue, afterLabel, afterValue, suffix = "", deltaText, height = 160 }) {
+function BeforeAfterCompare({ beforeLabel, beforeValue, afterLabel, afterValue, suffix = "", deltaText, height = 160, indexMode = false }) {
   const max = Math.max(beforeValue, afterValue) || 1;
   const beforePct = Math.max((beforeValue / max) * 100, 6);
   const afterPct = Math.max((afterValue / max) * 100, 6);
   const barArea = height - 46;
+  const fmt = (v) => (indexMode ? `Index ${v}` : `${v}${suffix}`);
   return (
-    <div className="flex items-end justify-center gap-3 md:gap-4" style={{ height }}>
-      <div className="flex flex-col items-center justify-end" style={{ height: "100%" }}>
-        <div className="text-sm font-semibold mb-1.5" style={{ fontFamily: "'IBM Plex Mono', monospace", color: NAVY_SOFT }}>
-          {beforeValue}{suffix}
-        </div>
-        <div style={{ width: 52, height: (barArea * beforePct) / 100, background: "#D9D2BF", borderRadius: "8px 8px 0 0" }} />
-        <div className="text-xs mt-2" style={{ color: MUTED }}>{beforeLabel}</div>
-      </div>
-
-      <div className="flex flex-col items-center justify-center pb-7 gap-1 px-1">
-        <ArrowRight size={18} color={CORAL} />
-        {deltaText && (
-          <div className="text-xs font-semibold px-2.5 py-1 rounded-full text-white whitespace-nowrap" style={{ background: CORAL }}>
-            {deltaText}
+    <div>
+      <div className="flex items-end justify-center gap-3 md:gap-4" style={{ height }}>
+        <div className="flex flex-col items-center justify-end" style={{ height: "100%" }}>
+          <div className="text-sm font-semibold mb-1.5" style={{ fontFamily: "'IBM Plex Mono', monospace", color: NAVY_SOFT }}>
+            {fmt(beforeValue)}
           </div>
-        )}
-      </div>
-
-      <div className="flex flex-col items-center justify-end" style={{ height: "100%" }}>
-        <div className="text-sm font-semibold mb-1.5" style={{ fontFamily: "'IBM Plex Mono', monospace", color: CORAL }}>
-          {afterValue}{suffix}
+          <div style={{ width: 52, height: (barArea * beforePct) / 100, background: "#D9D2BF", borderRadius: "8px 8px 0 0" }} />
+          <div className="text-xs mt-2" style={{ color: MUTED }}>{beforeLabel}</div>
         </div>
-        <div style={{ width: 52, height: (barArea * afterPct) / 100, background: CORAL, borderRadius: "8px 8px 0 0" }} />
-        <div className="text-xs mt-2 font-medium" style={{ color: NAVY }}>{afterLabel}</div>
+
+        <div className="flex flex-col items-center justify-center pb-7 gap-1 px-1">
+          <ArrowRight size={18} color={CORAL} />
+          {deltaText && (
+            <div className="text-xs font-semibold px-2.5 py-1 rounded-full text-white whitespace-nowrap" style={{ background: CORAL }}>
+              {deltaText}
+            </div>
+          )}
+        </div>
+
+        <div className="flex flex-col items-center justify-end" style={{ height: "100%" }}>
+          <div className="text-sm font-semibold mb-1.5" style={{ fontFamily: "'IBM Plex Mono', monospace", color: CORAL }}>
+            {fmt(afterValue)}
+          </div>
+          <div style={{ width: 52, height: (barArea * afterPct) / 100, background: CORAL, borderRadius: "8px 8px 0 0" }} />
+          <div className="text-xs mt-2 font-medium" style={{ color: NAVY }}>{afterLabel}</div>
+        </div>
       </div>
+      {indexMode && (
+        <div className="text-[10px] text-center mt-1" style={{ color: MUTED }}>* Index 100 기준 (실제 수치 비공개, 증감률만 표기)</div>
+      )}
     </div>
   );
 }
@@ -393,6 +376,7 @@ function MetricCompareRow({ metrics, height = 130 }) {
             suffix={m.suffix || ""}
             deltaText={m.deltaText}
             height={height}
+            indexMode={m.indexMode}
           />
           <div className="text-xs text-center font-medium mt-1" style={{ color: NAVY }}>{m.metricName}</div>
         </div>
@@ -400,6 +384,37 @@ function MetricCompareRow({ metrics, height = 130 }) {
     </div>
   );
 }
+
+/**
+ * KPIDeltaCard — for cases with several metrics moving together (Case B in the
+ * design brief). No absolute values, no bars — just direction + % change per metric,
+ * so metrics where "down is good" (e.g. CPA) aren't visually confused with "up is good".
+ */
+function KPIDeltaCard({ metrics }) {
+  return (
+    <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+      {metrics.map((m, i) => {
+        const isGood = m.good !== false;
+        const color = isGood ? CORAL : NAVY_SOFT;
+        return (
+          <div key={i} className="rounded-xl p-4" style={{ background: "#FAF7EF" }}>
+            <div className="text-xs mb-2" style={{ color: MUTED }}>{m.label}</div>
+            <div className="flex items-center gap-1.5">
+              <span style={{ color, fontSize: 15 }}>{m.direction === "down" ? "↓" : "↑"}</span>
+              <span
+                className="text-lg font-semibold"
+                style={{ color, fontFamily: "'IBM Plex Mono', monospace" }}
+              >
+                {m.value}
+              </span>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
 function StatChip({ value, label, color = CORAL }) {
   return (
     <div className="rounded-xl px-4 py-3 flex-1 min-w-[130px]" style={{ background: "#F3EFE3" }}>
@@ -412,7 +427,39 @@ function StatChip({ value, label, color = CORAL }) {
 /**
  * ProjectCard — Problem → How → Result → My Role, the core repeated unit.
  */
-function ProjectCard({ index, title, client, tag, problem, how, result, role, chart, imgHint, evidence, anchorId }) {
+function YouTubeClickToLoad({ videoId, caption }) {
+  const [loaded, setLoaded] = useState(false);
+  return (
+    <div className="mt-4">
+      <div className="relative rounded-xl overflow-hidden" style={{ aspectRatio: "16/9", background: "#000" }}>
+        {loaded ? (
+          <iframe
+            className="w-full h-full"
+            src={`https://www.youtube.com/embed/${videoId}?autoplay=1`}
+            title={caption || "video"}
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          />
+        ) : (
+          <button
+            onClick={() => setLoaded(true)}
+            className="absolute inset-0 w-full h-full flex items-center justify-center group"
+            style={{ background: `#000 center / cover no-repeat url(https://img.youtube.com/vi/${videoId}/hqdefault.jpg)` }}
+            aria-label="영상 재생"
+          >
+            <div className="absolute inset-0" style={{ background: "rgba(20,31,59,0.25)" }} />
+            <div className="relative w-14 h-14 rounded-full flex items-center justify-center group-hover:scale-105 transition-transform" style={{ background: CORAL }}>
+              <div style={{ width: 0, height: 0, borderTop: "9px solid transparent", borderBottom: "9px solid transparent", borderLeft: "14px solid white", marginLeft: 3 }} />
+            </div>
+          </button>
+        )}
+      </div>
+      {caption && <div className="text-xs mt-2" style={{ color: MUTED }}>{caption}</div>}
+    </div>
+  );
+}
+
+function ProjectCard({ index, title, client, tag, problem, how, result, role, chart, imgHint, evidence, video, anchorId }) {
   return (
     <Card id={anchorId} className="p-6 md:p-7 scroll-mt-24">
       <div className="flex items-start justify-between gap-3 flex-wrap mb-1">
@@ -458,6 +505,7 @@ function ProjectCard({ index, title, client, tag, problem, how, result, role, ch
         <span style={{ color: MUTED }}>{role}</span>
       </div>
 
+      {video && <YouTubeClickToLoad videoId={video.id} caption={video.caption} />}
       {evidence && <EvidenceGallery images={evidence} />}
       {imgHint && <ImgHint label={imgHint} />}
     </Card>
@@ -488,7 +536,14 @@ function Portfolio() {
   const [navOpen, setNavOpen] = useState(false);
   const [active, setActive] = useState("overview");
   const [lightbox, setLightbox] = useState(null);
+  const [showTop, setShowTop] = useState(false);
   const refs = useRef({});
+
+  React.useEffect(() => {
+    const onScroll = () => setShowTop(window.scrollY > 600);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   const scrollTo = (id) => {
     setActive(id);
@@ -502,6 +557,11 @@ function Portfolio() {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
+  const scrollToTop = () => {
+    setActive("overview");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
     <LightboxContext.Provider value={setLightbox}>
     <div style={{ background: IVORY, minHeight: "100vh" }}>
@@ -511,9 +571,24 @@ function Portfolio() {
         .scroll-thin::-webkit-scrollbar { width: 6px; }
         .scroll-thin::-webkit-scrollbar-thumb { background: #33406333; border-radius: 999px; }
         html { scroll-behavior: smooth; }
+        p, li { word-break: keep-all; overflow-wrap: break-word; }
+        h1, h2, h3 { text-wrap: balance; }
       `}</style>
 
       <Lightbox image={lightbox} onClose={() => setLightbox(null)} />
+
+      {showTop && (
+        <button
+          onClick={scrollToTop}
+          aria-label="맨 위로"
+          className="fixed z-50 flex items-center justify-center rounded-full shadow-lg"
+          style={{
+            bottom: 20, right: 16, width: 46, height: 46, background: NAVY,
+          }}
+        >
+          <span style={{ color: CORAL_SOFT, fontSize: 18, transform: "rotate(-90deg)", display: "inline-block" }}>→</span>
+        </button>
+      )}
 
       {/* Mobile top bar */}
       <div className="lg:hidden sticky top-0 z-40 flex items-center justify-between px-4 py-3" style={{ background: NAVY }}>
@@ -574,14 +649,15 @@ function Portfolio() {
           {/* OVERVIEW */}
           <section id="overview" ref={setRef("overview")} className="mb-20 scroll-mt-6">
             <div className="text-xs font-semibold tracking-[0.2em] mb-3" style={{ color: CORAL, fontFamily: "'IBM Plex Mono', monospace" }}>
-              PERFORMANCE MARKETING DASHBOARD
+              GROWTH / PERFORMANCE MARKETER
             </div>
-            <h1 className="text-3xl md:text-5xl font-semibold leading-tight mb-4" style={{ color: NAVY, fontFamily: "'Space Grotesk', sans-serif" }}>
-              광고 성과를 데이터·CRM·크리에이티브로 연결해<br />
-              <span style={{ color: CORAL }}>획득부터 재구매까지</span> 전환 구조를 설계합니다
+            <h1 className="text-3xl md:text-5xl font-semibold leading-tight mb-4" style={{ color: NAVY, fontFamily: "'Space Grotesk', sans-serif", textWrap: "balance" }}>
+              데이터로 진단하고,<br />
+              <span style={{ color: CORAL }}>전략으로</span> 매출을 만듭니다
             </h1>
-            <p className="text-sm md:text-base mb-8" style={{ color: MUTED }}>
-              문희지 — Performance Marketing · CRM · E-commerce · AI Creative
+            <p className="text-sm md:text-base mb-8 max-w-2xl" style={{ color: MUTED, textWrap: "balance" }}>
+              Performance · CRM · CRO · Data · AI를 연결해<br className="sm:hidden" />
+              고객 획득부터 구매·재구매까지 성장 구조를 설계합니다.
             </p>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {KPI_TILES.map((k, i) => (
@@ -597,23 +673,39 @@ function Portfolio() {
 
           {/* CAPABILITY */}
           <section id="capability" ref={setRef("capability")} className="mb-20 scroll-mt-6">
-            <SectionHeading eyebrow="Capability Overview" title="획득부터 재구매까지, 하나의 전환 구조로 연결합니다" />
-            <div className="grid md:grid-cols-4 gap-4">
+            <SectionHeading
+              eyebrow="Growth Framework"
+              title="광고 유입부터 구매·재구매까지, 데이터를 기준으로 성장 지점을 설계합니다"
+              sub="미디어 전략과 예산 배분부터 CRM, 상세페이지 CRO, AI 기반 크리에이티브 실험까지 직접 설계하고 실행합니다."
+            />
+            <div className="flex flex-col sm:flex-row items-stretch gap-2 sm:gap-0 mb-3">
               {CAPABILITY_STEPS.map((s, i) => {
                 const Icon = s.icon;
                 return (
-                  <Card key={i} className="p-5 flex flex-col items-start gap-3">
-                    <div className="w-10 h-10 rounded-full flex items-center justify-center" style={{ background: NAVY }}>
-                      <Icon size={18} color={CORAL_SOFT} />
+                  <React.Fragment key={i}>
+                    <div className="flex-1 rounded-xl p-4 flex items-center gap-3" style={{ background: "#FAF7EF" }}>
+                      <div className="w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0" style={{ background: NAVY }}>
+                        <Icon size={16} color={CORAL_SOFT} />
+                      </div>
+                      <div className="min-w-0">
+                        <div className="font-semibold text-sm" style={{ color: NAVY }}>{s.n} {s.title}</div>
+                        <div className="text-xs mt-0.5" style={{ color: MUTED }}>{s.desc}</div>
+                      </div>
                     </div>
-                    <div>
-                      <div className="text-xs mb-0.5" style={{ color: MUTED, fontFamily: "'IBM Plex Mono', monospace" }}>{s.n}</div>
-                      <div className="font-semibold text-sm" style={{ color: NAVY }}>{s.title}</div>
-                      <div className="text-xs mt-1" style={{ color: MUTED }}>{s.desc}</div>
-                    </div>
-                  </Card>
+                    {i < CAPABILITY_STEPS.length - 1 && (
+                      <div className="hidden sm:flex items-center justify-center px-1">
+                        <ArrowRight size={16} color={MUTED} />
+                      </div>
+                    )}
+                  </React.Fragment>
                 );
               })}
+            </div>
+            <div className="rounded-xl px-4 py-3 flex items-center gap-3" style={{ background: NAVY }}>
+              <Sparkles size={16} color={CORAL_SOFT} className="flex-shrink-0" />
+              <div className="text-xs md:text-sm text-white">
+                <span className="font-semibold">Data & AI</span> — 성과 진단 · 가설 수립 · 실험 가속. 위 3단계 전체를 관통하는 기반 역량입니다.
+              </div>
             </div>
           </section>
 
@@ -640,11 +732,11 @@ function Portfolio() {
                   <div>
                     <BeforeAfterCompare
                       beforeLabel="2024"
-                      beforeValue={160}
+                      beforeValue={100}
                       afterLabel="2025"
-                      afterValue={327}
-                      suffix="%"
+                      afterValue={204}
                       deltaText="+104%"
+                      indexMode
                     />
                     <div className="text-xs text-center mt-1" style={{ color: MUTED }}>자사몰 채널 ROAS · 연도별 채널 실적 기준</div>
                   </div>
@@ -656,22 +748,34 @@ function Portfolio() {
                 anchorId="kpi-crm"
                 index="02"
                 title="고객 데이터 기반 CRM 운영 구조 개편"
-                problem="기존 CRM은 고객 구분 없이 전체 대상 일괄 발송이 중심이라 불필요한 발송비용이 발생하고 보유 고객 데이터가 충분히 활용되지 못했습니다."
+                problem="기존 CRM은 고객 구분 없이 전체 대상으로 일괄 발송하고 있어, 구매 가능성이 낮은 고객에게도 동일한 메시지가 발송되며 불필요한 발송 비용이 발생했습니다. 보유하고 있는 구매·행동 데이터를 기준으로 발송 대상을 재설계할 필요가 있었습니다."
                 how={[
-                  "전체 일괄 발송 → 최근 1년 구매 활성 고객 중심 타겟 발송",
-                  "최근구매·장바구니·신규미구매·이탈임박·관심고객·RFM 우수고객 등 세분화",
+                  "전체 일괄 발송 → 최근 1년 구매 활성 고객 중심 타겟 발송으로 전환",
+                  "최근구매·장바구니·신규미구매·이탈임박·관심고객·RFM 우수고객으로 세분화",
                   "문자·카카오·앱푸시 채널별 메시지 차별화",
-                  "발송 후 고객군별 CVR·ROAS 분석해 다음 캠페인에 반영",
+                  "발송 후 고객군별 CVR·ROAS 분석해 다음 캠페인 타겟 기준에 반영",
                 ]}
                 chart={
-                  <MetricCompareRow
-                    metrics={[
-                      { metricName: "구매전환율 (CVR)", beforeLabel: "담당 전 ('24)", beforeValue: 4, afterLabel: "담당 후 ('26.1–7)", afterValue: 8, suffix: "%", deltaText: "+102.7%" },
-                      { metricName: "ROAS", beforeLabel: "담당 전 ('24)", beforeValue: 353, afterLabel: "담당 후 ('26.1–7)", afterValue: 442, suffix: "%", deltaText: "+25.3%" },
-                    ]}
-                  />
+                  <div>
+                    <div className="flex flex-wrap items-center gap-1.5 mb-4 text-xs" style={{ color: NAVY }}>
+                      <span className="px-2.5 py-1 rounded-full" style={{ background: "#F3EFE3" }}>전체 고객</span>
+                      <ArrowRight size={12} color={MUTED} />
+                      <span className="px-2.5 py-1 rounded-full" style={{ background: "#F3EFE3" }}>구매·행동 데이터</span>
+                      <ArrowRight size={12} color={MUTED} />
+                      <span className="px-2.5 py-1 rounded-full" style={{ background: "#F3EFE3" }}>세그먼트 설계</span>
+                      <ArrowRight size={12} color={MUTED} />
+                      <span className="px-2.5 py-1 rounded-full text-white" style={{ background: TEAL }}>전환·재구매</span>
+                    </div>
+                    <KPIDeltaCard
+                      metrics={[
+                        { label: "구매전환율 (CVR)", value: "+102.7%", direction: "up" },
+                        { label: "CPA", value: "-10.4%", direction: "down" },
+                        { label: "ROAS", value: "+25.3%", direction: "up" },
+                      ]}
+                    />
+                  </div>
                 }
-                result={["CPA 14,264→12,779원 (-10.4%)", "고효율 프로모션 ROAS 900~1,000%"]}
+                result={["담당 전('24) 대비 담당 후('26.1–7) 기준"]}
                 role="CRM 전략 및 운영 전담, 타깃 세그먼트 설계, 메시지·프로모션 기획, 발송 후 성과 분석"
               />
               <ProjectCard
@@ -687,7 +791,7 @@ function Portfolio() {
                 ]}
                 chart={
                   <div>
-                    <BeforeAfterCompare beforeLabel="전년 동월" beforeValue={100} afterLabel="당해 동월" afterValue={416} deltaText="+316%" />
+                    <BeforeAfterCompare beforeLabel="전년 동월" beforeValue={100} afterLabel="당해 동월" afterValue={416} deltaText="+316%" indexMode />
                     <div className="text-xs text-center mt-1" style={{ color: MUTED }}>전년 동월 = 100 기준 지수</div>
                   </div>
                 }
@@ -722,7 +826,7 @@ function Portfolio() {
                   "CTR·CVR·ROAS 기준 소재별 성과 평가",
                   "Winning Creative의 메시지·구도를 후속 소재로 확대",
                 ]}
-                chart={<BeforeAfterCompare beforeLabel="기존 소재" beforeValue={0.53} afterLabel="AI 소재" afterValue={1.14} suffix="%" deltaText="+116%" />}
+                chart={<BeforeAfterCompare beforeLabel="기존 소재" beforeValue={100} afterLabel="AI 소재" afterValue={216} deltaText="+116%" indexMode />}
                 result={["CTR +116% 개선", "Winning Creative 발굴 주기 단축"]}
                 evidence={[
                   { src: IMG_HANSKIN_AI, caption: "한스킨 PDRN 세럼 · AI 활용 후기형 소재" },
@@ -797,7 +901,7 @@ function Portfolio() {
                 ]}
                 chart={<ImprovementBars data={[{ name: "유입", value: 91 }, { name: "구매전환", value: 120 }, { name: "ROAS", value: 60 }, { name: "CVR", value: 94 }]} />}
                 result={["브랜드 선호도 +1.5%", "오가닉 검색량 +25%", "Google 국내·글로벌 우수사례 등재"]}
-                evidence={[{ src: IMG_BODYLUV, caption: "바디럽 · Google Ads 공식 성공사례 등재 화면" }]}
+                video={{ id: "Y0BZ_NOctHs", caption: "바디럽 · 브랜딩 캠페인 영상" }}
                 role="대규모 DA·VA 캠페인 운영, 브랜딩·퍼포먼스 미디어믹스 설계, 브랜드 효과 측정"
               />
               <ProjectCard

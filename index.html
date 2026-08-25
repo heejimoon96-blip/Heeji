@@ -142,7 +142,7 @@ const LANG_CONTENT = {
       { label: "자사몰 광고 ROAS", value: "+104%", sub: "2024 Annual vs 2025" },
       { label: "CRM 구매전환율", value: "+102.7%", sub: "2024 Annual vs 2026 Jan–Jul" },
       { label: "올리브영 Online Sales", value: "+316%", sub: "전년 동월 대비" },
-      { label: "AI 소재 CTR", value: "+116%", sub: "동일 상품·매체·주차 기준" },
+      { label: "Amazon Promotion Sales", value: "+801%", sub: "Prime Day vs Prime Big Deal" },
     ],
     capability: {
       eyebrow: "Growth Framework",
@@ -154,7 +154,7 @@ const LANG_CONTENT = {
         { n: "03", title: "Retention", desc: "CRM 세분화 · 재구매" },
       ],
       foundationLabel: "Data & AI",
-      foundationDesc: "성과 진단 · 가설 수립 · 실험 가속. 위 3단계 전체를 관통하는 기반 역량입니다.",
+      foundationDesc: "성과를 읽고, 가설을 세우고, 더 빠르게 검증합니다.",
     },
   },
   en: {
@@ -171,7 +171,7 @@ const LANG_CONTENT = {
       { label: "D2C Ad ROAS", value: "+104%", sub: "2024 Annual vs. 2025" },
       { label: "CRM Conversion Rate", value: "+102.7%", sub: "2024 Annual vs. Jan–Jul 2026" },
       { label: "Olive Young Online Sales", value: "+316%", sub: "YoY, Same Month" },
-      { label: "AI Creative CTR", value: "+116%", sub: "Same product/channel/week basis" },
+      { label: "Amazon Promotion Sales", value: "+801%", sub: "Prime Day vs. Prime Big Deal" },
     ],
     capability: {
       eyebrow: "Growth Framework",
@@ -183,7 +183,7 @@ const LANG_CONTENT = {
         { n: "03", title: "Retention", desc: "CRM segmentation · Repeat purchase" },
       ],
       foundationLabel: "Data & AI",
-      foundationDesc: "Performance diagnosis · Hypothesis · Faster experimentation — the foundation running through all three stages above.",
+      foundationDesc: "Reading performance, forming hypotheses, and testing them faster.",
     },
   },
 };
@@ -192,7 +192,7 @@ const KPI_TILE_META = [
   { color: CORAL, target: "kpi-roas" },
   { color: TEAL, target: "kpi-crm" },
   { color: CORAL, target: "kpi-olive" },
-  { color: TEAL, target: "kpi-ai" },
+  { color: NAVY_SOFT, target: "kpi-global-amazon" },
 ];
 
 const CAPABILITY_ICONS = [Target, TrendingUp, Users];
@@ -449,7 +449,7 @@ function BeforeAfterCompare({ beforeLabel, beforeValue, afterLabel, afterValue, 
         </div>
       </div>
       {indexMode && (
-        <div className="text-[10px] text-center mt-1" style={{ color: MUTED }}>* Index 100 기준 (실제 수치 비공개, 증감률만 표기)</div>
+        <div className="text-[10px] text-center mt-1" style={{ color: MUTED }}>Baseline = 100</div>
       )}
     </div>
   );
@@ -812,7 +812,6 @@ function Portfolio() {
           <div className="mt-auto pt-8 border-t" style={{ borderColor: "rgba(255,255,255,0.1)" }}>
             <div className="text-xs text-white/40 mb-2">Contact</div>
             <div className="text-xs text-white/70">heejimoon96@gmail.com</div>
-            <div className="text-xs text-white/70">010-8755-8532</div>
           </div>
         </aside>
 
@@ -1052,108 +1051,119 @@ function Portfolio() {
           {/* GLOBAL COMMERCE PERFORMANCE */}
           <section id="global" ref={setRef("global")} className="mb-20 scroll-mt-6">
             <SectionHeading
-              eyebrow="Global Commerce Performance"
-              title="시장과 플랫폼이 달라져도 성과 구조를 설계합니다"
-              sub="Amazon US, Shopee, 올리브영 글로벌 등 해외 커머스 채널에서 시장·플랫폼별 고객 획득 경로에 맞춰 퍼포먼스를 운영해왔습니다."
+              eyebrow="Global Performance"
+              title="시장마다 다른 구매 흐름에 맞춰 광고 구조와 예산을 달리했습니다"
+              sub="미국 Amazon에서 시작해 싱가포르·베트남 Shopee, 일본 Qoo10까지 확장했습니다."
             />
+            <div className="flex flex-wrap gap-1.5 mb-6 text-xs">
+              {["US", "Singapore", "Vietnam", "Japan"].map((m, i) => (
+                <span key={i} className="px-2.5 py-1 rounded-full" style={{ background: "#F3EFE3", color: NAVY }}>{m}</span>
+              ))}
+              <span className="px-2.5 py-1 rounded-full text-white" style={{ background: NAVY_SOFT }}>Amazon</span>
+              <span className="px-2.5 py-1 rounded-full text-white" style={{ background: NAVY_SOFT }}>Shopee</span>
+              <span className="px-2.5 py-1 rounded-full text-white" style={{ background: NAVY_SOFT }}>Qoo10</span>
+              <span className="px-2.5 py-1 rounded-full" style={{ background: "#F3EFE3", color: NAVY }}>Google Search</span>
+              <span className="px-2.5 py-1 rounded-full" style={{ background: "#F3EFE3", color: NAVY }}>Meta</span>
+              <span className="px-2.5 py-1 rounded-full" style={{ background: "#F3EFE3", color: NAVY }}>TikTok</span>
+            </div>
 
-            <Card className="p-6 md:p-7 mb-5">
+            {/* Amazon Hero Case */}
+            <Card className="p-6 md:p-7 mb-5" id="kpi-global-amazon">
               <div className="flex items-start justify-between gap-3 flex-wrap mb-1">
                 <div className="text-xs font-semibold tracking-wider" style={{ color: CORAL, fontFamily: "'IBM Plex Mono', monospace" }}>GLOBAL · HERO CASE</div>
-                <Tag tone="navy">Amazon US</Tag>
+                <Tag tone="navy">Amazon US · Prime Campaign</Tag>
               </div>
-              <h3 className="text-lg md:text-xl font-semibold mb-3" style={{ color: NAVY, fontFamily: "'Space Grotesk', sans-serif" }}>
-                검색·지역·크리에이티브를 연결한 미국 시장 획득 구조
-              </h3>
-              <div className="flex flex-wrap items-center gap-1.5 mb-4 text-xs" style={{ color: NAVY }}>
-                <span className="px-2.5 py-1 rounded-full text-white" style={{ background: NAVY_SOFT }}>Google Search</span>
-                <ArrowRight size={12} color={MUTED} />
-                <span className="px-2.5 py-1 rounded-full text-white" style={{ background: NAVY_SOFT }}>Meta Geo</span>
-                <ArrowRight size={12} color={MUTED} />
-                <span className="px-2.5 py-1 rounded-full" style={{ background: CORAL_SOFT, color: NAVY }}>TikTok 검증 소재</span>
-                <ArrowRight size={12} color={MUTED} />
-                <span className="px-2.5 py-1 rounded-full text-white" style={{ background: CORAL }}>Amazon 구매전환</span>
-              </div>
-              <ul className="text-sm space-y-1 mb-4" style={{ color: INK }}>
-                <li className="flex gap-2"><span style={{ color: CORAL }}>·</span>Google Search로 브랜드·연관 검색 접점 확대</li>
-                <li className="flex gap-2"><span style={{ color: CORAL }}>·</span>미국 Pop-up 오픈 전엔 뉴욕 중심, 오픈 후엔 매장 반경 기반으로 Meta Geo 타겟 조정</li>
-                <li className="flex gap-2"><span style={{ color: CORAL }}>·</span>TikTok에서 반응이 검증된 소재를 선별해 Meta·Amazon Ads로 확장 운영</li>
-              </ul>
-              <div className="flex flex-wrap gap-2 mb-4">
-                <div className="text-xs px-3 py-1.5 rounded-full" style={{ background: "#F3EFE3", color: NAVY }}>
-                  <span style={{ fontFamily: "'IBM Plex Mono', monospace", fontWeight: 600 }}>소재 재활용 성과 +34%</span>
+              <p className="text-sm leading-relaxed mb-5" style={{ color: INK }}>
+                광고비 증액보다 <span className="font-semibold" style={{ color: NAVY }}>어디에, 누구에게, 어떤 랜딩으로 연결할지</span>를 먼저 바꿨습니다.
+              </p>
+
+              {/* Spend -> Restructure -> Purchases */}
+              <div className="flex flex-col sm:flex-row items-center gap-3 mb-6">
+                <div className="flex-1 w-full text-center rounded-xl p-4" style={{ background: "#FAF7EF" }}>
+                  <div className="text-xs mb-1" style={{ color: MUTED }}>Spend</div>
+                  <div className="text-xl font-semibold" style={{ color: NAVY_SOFT, fontFamily: "'IBM Plex Mono', monospace" }}>+4%</div>
+                </div>
+                <ArrowRight size={16} color={MUTED} className="rotate-90 sm:rotate-0 flex-shrink-0" />
+                <div className="flex-1 w-full text-center rounded-xl p-4" style={{ background: "#FAF7EF" }}>
+                  <div className="text-xs" style={{ color: MUTED }}>Media · Target · Landing</div>
+                  <div className="text-sm font-semibold" style={{ color: NAVY }}>Restructure</div>
+                </div>
+                <ArrowRight size={16} color={MUTED} className="rotate-90 sm:rotate-0 flex-shrink-0" />
+                <div className="flex-1 w-full text-center rounded-xl p-4" style={{ background: CORAL }}>
+                  <div className="text-xs mb-1" style={{ color: "rgba(255,255,255,0.8)" }}>Purchases</div>
+                  <div className="text-xl font-semibold text-white" style={{ fontFamily: "'IBM Plex Mono', monospace" }}>+846%</div>
                 </div>
               </div>
-              <div className="text-xs mb-3" style={{ color: MUTED }}>
-                * &quot;+34%&quot;는 TikTok→Meta 소재 재활용 관련 확인된 수치입니다. &quot;Hero Product Views&quot; 등 특정 지표명으로 표시하려면 원자료 상 정확한 지표 정의 확인이 필요합니다.
+              <div className="text-xs text-center mb-6" style={{ color: MUTED }}>
+                광고 기여 매출(Attributed Sales) <span className="font-semibold" style={{ color: NAVY }}>+801%</span> · 2025 Jul Prime Day → 2025 Oct Prime Big Deal
               </div>
-              <div className="pt-3 border-t text-sm" style={{ borderColor: "#EDE8DA" }}>
-                <span className="font-semibold" style={{ color: CORAL }}>MY ROLE  </span>
-                <span style={{ color: MUTED }}>Amazon US 퍼포먼스 운영(Google·Meta), Geo 타겟 전략, Cross-channel 크리에이티브 확장</span>
+
+              {/* Before -> Change -> After per lever */}
+              <div className="grid sm:grid-cols-3 gap-3 mb-4">
+                <div className="rounded-xl p-4" style={{ background: "#FAF7EF" }}>
+                  <div className="text-xs font-semibold mb-2" style={{ color: NAVY_SOFT }}>MEDIA · Google</div>
+                  <div className="text-xs mb-1" style={{ color: MUTED }}>Demand Gen</div>
+                  <div className="text-xs mb-1" style={{ color: CORAL }}>↓ Search Intent 중심으로 전환</div>
+                  <div className="text-sm font-semibold mb-2" style={{ color: NAVY }}>Google Search</div>
+                  <div className="text-[11px]" style={{ color: MUTED }}>구매 의도가 있는 검색 수요를 직접 포착하는 방향으로 매체 역할 변경</div>
+                </div>
+                <div className="rounded-xl p-4" style={{ background: "#FAF7EF", border: `1px solid ${CORAL_SOFT}` }}>
+                  <div className="text-xs font-semibold mb-2" style={{ color: CORAL }}>TARGET · LANDING · Meta</div>
+                  <div className="text-xs mb-1" style={{ color: MUTED }}>Instagram Only · Interest</div>
+                  <div className="text-xs mb-1" style={{ color: CORAL }}>↓</div>
+                  <div className="text-sm font-semibold mb-2" style={{ color: NAVY }}>Facebook+Instagram · Interest+Lookalike · PDP Landing</div>
+                  <div className="text-[11px]" style={{ color: MUTED }}>팔로워·참여자 기반 유사타겟 확장, 랜딩을 PDP로 통일</div>
+                </div>
+                <div className="rounded-xl p-4" style={{ background: "#FAF7EF" }}>
+                  <div className="text-xs font-semibold mb-2" style={{ color: NAVY_SOFT }}>BUDGET</div>
+                  <div className="text-xs mb-1" style={{ color: MUTED }}>단순 증액이 아니라</div>
+                  <div className="text-sm font-semibold mb-2" style={{ color: NAVY }}>전환 가능성 높은 캠페인 중심 재배분</div>
+                  <div className="text-[11px]" style={{ color: MUTED }}>매체·타깃·랜딩 변경과 함께 예산 비중 조정</div>
+                </div>
+              </div>
+
+              <div className="rounded-xl px-4 py-3 mb-1" style={{ background: NAVY }}>
+                <div className="text-xs font-semibold mb-1" style={{ color: CORAL_SOFT }}>LEARNING</div>
+                <div className="text-xs text-white">
+                  높은 트래픽이 높은 구매전환을 의미하지 않았습니다. TikTok 소재는 CTR·DPV뿐 아니라 ATC·Purchase까지 연결해 매체 역할을 다시 판단했습니다.
+                </div>
               </div>
             </Card>
 
-            <div className="grid md:grid-cols-2 gap-5 mb-6">
-              <Card className="p-6">
-                <div className="flex items-start justify-between gap-3 flex-wrap mb-1">
-                  <div className="text-xs font-semibold tracking-wider" style={{ color: CORAL, fontFamily: "'IBM Plex Mono', monospace" }}>GLOBAL</div>
-                  <Tag tone="teal">Shopee</Tag>
-                </div>
-                <h4 className="text-base font-semibold mb-3" style={{ color: NAVY, fontFamily: "'Space Grotesk', sans-serif" }}>
-                  Shopee CPAS 기획 및 운영
-                </h4>
-                <div className="flex flex-wrap items-center gap-1.5 mb-4 text-xs" style={{ color: NAVY }}>
-                  <span className="px-2.5 py-1 rounded-full" style={{ background: "#F3EFE3" }}>Product</span>
-                  <ArrowRight size={12} color={MUTED} />
-                  <span className="px-2.5 py-1 rounded-full" style={{ background: "#F3EFE3" }}>CPAS</span>
-                  <ArrowRight size={12} color={MUTED} />
-                  <span className="px-2.5 py-1 rounded-full" style={{ background: "#F3EFE3" }}>Product View</span>
-                  <ArrowRight size={12} color={MUTED} />
-                  <span className="px-2.5 py-1 rounded-full text-white" style={{ background: TEAL }}>Purchase</span>
-                </div>
-                <div className="pt-3 border-t text-sm" style={{ borderColor: "#EDE8DA" }}>
-                  <span className="font-semibold" style={{ color: CORAL }}>MY ROLE  </span>
-                  <span style={{ color: MUTED }}>Shopee CPAS 캠페인 직접 기획·운영</span>
-                </div>
-              </Card>
+            {/* Shopee supporting case */}
+            <Card className="p-5 mb-4">
+              <div className="flex items-start justify-between gap-3 flex-wrap mb-2">
+                <div className="text-xs font-semibold tracking-wider" style={{ color: CORAL, fontFamily: "'IBM Plex Mono', monospace" }}>SHOPEE · FUNNEL RESTRUCTURE</div>
+                <Tag tone="teal">Singapore · Vietnam</Tag>
+              </div>
+              <div className="flex flex-wrap items-center gap-1.5 mb-3 text-xs">
+                <span className="px-2.5 py-1 rounded-full" style={{ background: "#F3EFE3", color: NAVY }}>Reach</span>
+                <ArrowRight size={12} color={MUTED} />
+                <span className="px-2.5 py-1 rounded-full" style={{ background: "#F3EFE3", color: NAVY }}>Content View</span>
+                <ArrowRight size={12} color={MUTED} />
+                <span className="px-2.5 py-1 rounded-full text-white" style={{ background: TEAL }}>Purchase</span>
+              </div>
+              <p className="text-sm mb-3" style={{ color: INK }}>광고비를 줄이면서 구매와 매출을 함께 확대했습니다.</p>
+              <div className="flex flex-wrap gap-4 text-xs" style={{ fontFamily: "'IBM Plex Mono', monospace" }}>
+                <span style={{ color: NAVY_SOFT }}>Spend -24%</span>
+                <span style={{ color: TEAL }}>Purchases +163%</span>
+                <span style={{ color: CORAL }}>Sales +229%</span>
+              </div>
+            </Card>
 
-              <Card className="p-6">
-                <div className="flex items-start justify-between gap-3 flex-wrap mb-1">
-                  <div className="text-xs font-semibold tracking-wider" style={{ color: CORAL, fontFamily: "'IBM Plex Mono', monospace" }}>GLOBAL</div>
-                  <Tag tone="coral">Currently Operating</Tag>
-                </div>
-                <h4 className="text-base font-semibold mb-3" style={{ color: NAVY, fontFamily: "'Space Grotesk', sans-serif" }}>
-                  올리브영 글로벌 몰 퍼포먼스 운영
-                </h4>
-                <ul className="text-sm space-y-1 mb-4" style={{ color: INK }}>
-                  <li className="flex gap-2"><span style={{ color: CORAL }}>·</span>올리브영 글로벌 몰 Performance Ads 운영</li>
-                  <li className="flex gap-2"><span style={{ color: CORAL }}>·</span>글로벌 프로모션 일정 기반 캠페인 운영</li>
-                  <li className="flex gap-2"><span style={{ color: CORAL }}>·</span>국가·상품별 성과 분석 및 최적화</li>
-                </ul>
-                <div className="pt-3 border-t text-sm" style={{ borderColor: "#EDE8DA" }}>
-                  <span className="font-semibold" style={{ color: CORAL }}>MY ROLE  </span>
-                  <span style={{ color: MUTED }}>Creative 운영, 국가별 성과 분석 — 현재 진행 중인 프로젝트로 성과 데이터 축적 중</span>
-                </div>
-              </Card>
+            {/* Qoo10 one-liner */}
+            <div className="rounded-xl p-4 mb-4 flex items-center gap-3 flex-wrap" style={{ background: "#FAF7EF" }}>
+              <span className="text-xs font-semibold" style={{ color: NAVY }}>Qoo10 Japan</span>
+              <span className="text-xs" style={{ color: MUTED }}>Conversion Tracking 제한 → CTR·CPC·Traffic 중심 KPI로 재정의</span>
             </div>
 
-            <div className="grid sm:grid-cols-2 gap-3">
-              <div className="rounded-xl p-4" style={{ background: "#FAF7EF" }}>
-                <div className="text-xs font-semibold tracking-wider mb-2.5" style={{ color: NAVY_SOFT, fontFamily: "'IBM Plex Mono', monospace" }}>KOREA</div>
-                <div className="flex flex-wrap gap-1.5">
-                  {["D2C", "올리브영", "네이버"].map((it, i) => (
-                    <span key={i} className="text-xs px-2.5 py-1 rounded-full" style={{ background: "white", color: NAVY, border: "1px solid #EAE5D8" }}>{it}</span>
-                  ))}
-                </div>
+            {/* Olive Young Global — current, compact */}
+            <div className="rounded-xl p-4 flex items-center justify-between gap-3 flex-wrap" style={{ background: NAVY }}>
+              <div>
+                <span className="text-xs font-semibold" style={{ color: CORAL_SOFT }}>CURRENT — </span>
+                <span className="text-xs text-white">올리브영 글로벌 몰: Performance Ads · Promotion · 국가/상품별 성과 분석</span>
               </div>
-              <div className="rounded-xl p-4" style={{ background: "#FAF7EF" }}>
-                <div className="text-xs font-semibold tracking-wider mb-2.5" style={{ color: CORAL, fontFamily: "'IBM Plex Mono', monospace" }}>GLOBAL</div>
-                <div className="flex flex-wrap gap-1.5">
-                  {["Amazon", "Shopee", "올리브영 글로벌"].map((it, i) => (
-                    <span key={i} className="text-xs px-2.5 py-1 rounded-full" style={{ background: "white", color: NAVY, border: "1px solid #EAE5D8" }}>{it}</span>
-                  ))}
-                </div>
-              </div>
+              <Tag tone="coral">Currently Operating</Tag>
             </div>
           </section>
 
@@ -1442,11 +1452,10 @@ function Portfolio() {
                     PERFORMANCE MARKETING PORTFOLIO
                   </div>
                   <h2 className="text-2xl md:text-3xl font-semibold text-white mb-8 leading-snug" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
-                    데이터를 보고 문제를 정의하고,<br />실행까지 가져가는 마케터가 필요하다면 이야기 나누고 싶습니다.
+                    이 지원자가 궁금하다면,<br />더 깊이 이야기 나눠보는 것은 어떨까요?
                   </h2>
                   <div className="flex flex-wrap gap-6 text-sm text-white/80">
                     <div className="flex items-center gap-2"><Mail size={15} color={CORAL_SOFT} />heejimoon96@gmail.com</div>
-                    <div className="flex items-center gap-2"><Phone size={15} color={CORAL_SOFT} />010-8755-8532</div>
                     <div className="flex items-center gap-2"><Linkedin size={15} color={CORAL_SOFT} />linkedin.com/in/heeji-moon-76000a179</div>
                   </div>
                 </div>

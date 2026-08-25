@@ -27,7 +27,6 @@
 <script type="text/babel" data-presets="react">
 const { useState, useRef, useContext, createContext } = React;
 
-/* Lightweight inline icon shim (replaces lucide-react so no bundler/npm is needed) */
 function makeIcon(glyph) {
   return function Icon({ size = 16, color = "currentColor", className = "", style = {} }) {
     return (
@@ -115,29 +114,110 @@ const IMG_BODYLUV = "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAAAAAAD/4QEZRXhp
 /*  Nav                                                                     */
 /* ---------------------------------------------------------------------- */
 const NAV_ITEMS = [
-  { id: "overview", label: "Overview", icon: Gauge },
-  { id: "capability", label: "Capability", icon: Layers },
-  { id: "celltrion", label: "셀트리온스킨큐어", icon: BarChart3 },
-  { id: "adefficiency", label: "애드이피션시", icon: Building2 },
-  { id: "madup", label: "매드업", icon: TrendingUp },
-  { id: "role", label: "Role Evolution", icon: GitBranch },
-  { id: "growth", label: "Growth Loop", icon: RefreshCw },
-  { id: "career", label: "Career & Startup", icon: ListOrdered },
-  { id: "contact", label: "Contact", icon: Mail },
+  { id: "overview", icon: Gauge },
+  { id: "career", icon: ListOrdered },
+  { id: "celltrion", icon: BarChart3 },
+  { id: "global", icon: TrendingUp },
+  { id: "kpi-ai", icon: Sparkles },
+  { id: "contact", icon: Mail },
 ];
 
-const KPI_TILES = [
-  { label: "자사몰 광고 ROAS", value: "+104%", sub: "2024 대비 개선", color: CORAL, target: "kpi-roas" },
-  { label: "CRM ROAS", value: "+25.3%", sub: "'24 대비 '26.1–7월", color: TEAL, target: "kpi-crm" },
-  { label: "올리브영 Online Sales", value: "+316%", sub: "전년 동월 대비", color: CORAL, target: "kpi-olive" },
-  { label: "AI 소재 CTR", value: "+116%", sub: "동일 상품·매체·주차 기준", color: TEAL, target: "kpi-ai" },
+/* ---------------------------------------------------------------------- */
+/*  Bilingual content — KR/EN. Numbers and comparison bases stay identical */
+/*  across languages; only labels/copy are localized. Extend this object   */
+/*  section by section as translation work continues.                      */
+/* ---------------------------------------------------------------------- */
+const LANG_CONTENT = {
+  kr: {
+    navLabels: { overview: "Overview", career: "Career", celltrion: "Growth Cases", global: "Global", "kpi-ai": "AI & Data", contact: "About" },
+    hero: {
+      eyebrow: "GROWTH / PERFORMANCE MARKETER",
+      title1: "데이터로 진단하고,",
+      title2Pre: "",
+      title2Highlight: "전략으로",
+      title2Post: " 매출을 만듭니다",
+      subtitle: "Performance · CRM · CRO · Data · AI를 연결해 고객 획득부터 구매·재구매까지 성장 구조를 설계합니다.",
+    },
+    kpiTiles: [
+      { label: "자사몰 광고 ROAS", value: "+104%", sub: "2024 Annual vs 2025" },
+      { label: "CRM 구매전환율", value: "+102.7%", sub: "2024 Annual vs 2026 Jan–Jul" },
+      { label: "올리브영 Online Sales", value: "+316%", sub: "전년 동월 대비" },
+      { label: "AI 소재 CTR", value: "+116%", sub: "동일 상품·매체·주차 기준" },
+    ],
+    capability: {
+      eyebrow: "Growth Framework",
+      title: "광고 유입부터 구매·재구매까지, 데이터를 기준으로 성장 지점을 설계합니다",
+      sub: "미디어 전략과 예산 배분부터 CRM, 상세페이지 CRO, AI 기반 크리에이티브 실험까지 직접 설계하고 실행합니다.",
+      steps: [
+        { n: "01", title: "Acquisition", desc: "미디어 전략 · 예산 배분" },
+        { n: "02", title: "Conversion", desc: "캠페인 · 상세페이지 CRO" },
+        { n: "03", title: "Retention", desc: "CRM 세분화 · 재구매" },
+      ],
+      foundationLabel: "Data & AI",
+      foundationDesc: "성과 진단 · 가설 수립 · 실험 가속. 위 3단계 전체를 관통하는 기반 역량입니다.",
+    },
+  },
+  en: {
+    navLabels: { overview: "Overview", career: "Career", celltrion: "Growth Cases", global: "Global", "kpi-ai": "AI & Data", contact: "About" },
+    hero: {
+      eyebrow: "GROWTH / PERFORMANCE MARKETER",
+      title1: "Diagnose with data.",
+      title2Pre: "",
+      title2Highlight: "Drive",
+      title2Post: " revenue with strategy.",
+      subtitle: "I connect Performance, CRM, CRO, Data, and AI to design growth structures across acquisition, conversion, and retention.",
+    },
+    kpiTiles: [
+      { label: "D2C Ad ROAS", value: "+104%", sub: "2024 Annual vs. 2025" },
+      { label: "CRM Conversion Rate", value: "+102.7%", sub: "2024 Annual vs. Jan–Jul 2026" },
+      { label: "Olive Young Online Sales", value: "+316%", sub: "YoY, Same Month" },
+      { label: "AI Creative CTR", value: "+116%", sub: "Same product/channel/week basis" },
+    ],
+    capability: {
+      eyebrow: "Growth Framework",
+      title: "From paid traffic to repeat purchase, I design growth points on data",
+      sub: "I plan and execute everything from media strategy and budget allocation to CRM, product-page CRO, and AI-driven creative experiments.",
+      steps: [
+        { n: "01", title: "Acquisition", desc: "Media strategy · Budget allocation" },
+        { n: "02", title: "Conversion", desc: "Campaigns · Product-page CRO" },
+        { n: "03", title: "Retention", desc: "CRM segmentation · Repeat purchase" },
+      ],
+      foundationLabel: "Data & AI",
+      foundationDesc: "Performance diagnosis · Hypothesis · Faster experimentation — the foundation running through all three stages above.",
+    },
+  },
+};
+
+const KPI_TILE_META = [
+  { color: CORAL, target: "kpi-roas" },
+  { color: TEAL, target: "kpi-crm" },
+  { color: CORAL, target: "kpi-olive" },
+  { color: TEAL, target: "kpi-ai" },
 ];
 
-const CAPABILITY_STEPS = [
-  { n: "01", title: "Acquisition", desc: "미디어 전략 · 예산 배분", icon: Target },
-  { n: "02", title: "Conversion", desc: "캠페인 · 상세페이지 CRO", icon: TrendingUp },
-  { n: "03", title: "Retention", desc: "CRM 세분화 · 재구매", icon: Users },
-];
+const CAPABILITY_ICONS = [Target, TrendingUp, Users];
+
+function LanguageSwitcher({ lang, setLang, dark = false }) {
+  const base = dark ? "rgba(255,255,255,0.5)" : MUTED;
+  const activeColor = dark ? "white" : NAVY;
+  return (
+    <div className="flex items-center gap-1.5 text-xs" style={{ fontFamily: "'IBM Plex Mono', monospace" }}>
+      <button
+        onClick={() => setLang("kr")}
+        style={{ color: lang === "kr" ? activeColor : base, fontWeight: lang === "kr" ? 700 : 400 }}
+      >
+        KR
+      </button>
+      <span style={{ color: base }}>|</span>
+      <button
+        onClick={() => setLang("en")}
+        style={{ color: lang === "en" ? activeColor : base, fontWeight: lang === "en" ? 700 : 400 }}
+      >
+        ENG
+      </button>
+    </div>
+  );
+}
 
 const GROWTH_LOOP = [
   { n: "01", t: "Diagnose", d: "매체·GA4 데이터로 실매출 기여도 진단" },
@@ -273,7 +353,6 @@ function ImgHint({ label }) {
   );
 }
 
-/** Lightweight CSS/div bar chart — no external chart library required */
 function SimpleBars({ data, height = 150, colorFor, labelFor }) {
   const max = Math.max(...data.map((d) => d.value), 1);
   return (
@@ -305,13 +384,27 @@ function SimpleBars({ data, height = 150, colorFor, labelFor }) {
   );
 }
 
-function ImprovementBars({ data, height = 150 }) {
-  return <SimpleBars data={data} height={height} colorFor={() => TEAL} labelFor={(v) => `+${v}%`} />;
+function ImprovementBars({ data, height = 150, color = CORAL }) {
+  return (
+    <SimpleBars
+      data={data}
+      height={height}
+      colorFor={(i) => (Array.isArray(color) ? color[i % color.length] : color)}
+      labelFor={(v) => `+${v}%`}
+    />
+  );
 }
 
 function ValueBars({ data, suffix = "", height = 150 }) {
   const palette = [CORAL, TEAL, CORAL_SOFT, NAVY_SOFT];
-  return <SimpleBars data={data} height={height} colorFor={(i) => palette[i % palette.length]} labelFor={(v) => `${v}${suffix}`} />;
+  return (
+    <SimpleBars
+      data={data}
+      height={height}
+      colorFor={(i) => palette[i % palette.length]}
+      labelFor={(v) => `${v}${suffix}`}
+    />
+  );
 }
 
 /**
@@ -459,7 +552,7 @@ function YouTubeClickToLoad({ videoId, caption }) {
   );
 }
 
-function ProjectCard({ index, title, client, tag, problem, how, result, role, chart, imgHint, evidence, video, anchorId }) {
+function ProjectCard({ index, title, client, tag, contribution, problem, decision, how, result, role, chart, imgHint, evidence, video, note, anchorId }) {
   return (
     <Card id={anchorId} className="p-6 md:p-7 scroll-mt-24">
       <div className="flex items-start justify-between gap-3 flex-wrap mb-1">
@@ -474,15 +567,39 @@ function ProjectCard({ index, title, client, tag, problem, how, result, role, ch
       <h3 className="text-lg md:text-xl font-semibold mb-0.5" style={{ color: NAVY, fontFamily: "'Space Grotesk', sans-serif" }}>
         {title}
       </h3>
-      {client && <p className="text-xs mb-4" style={{ color: MUTED }}>{client}</p>}
+      {client && <p className="text-xs mb-3" style={{ color: MUTED }}>{client}</p>}
+
+      {(contribution || role) && (
+        <div className="rounded-lg p-3 mb-4 flex flex-col sm:flex-row sm:items-start gap-2 sm:gap-4" style={{ background: "#FAF7EF" }}>
+          {contribution && (
+            <div className="flex-shrink-0">
+              <div className="text-[10px] font-semibold tracking-wider mb-0.5" style={{ color: CORAL }}>CONTRIBUTION</div>
+              <div className="text-sm font-semibold" style={{ color: NAVY, fontFamily: "'IBM Plex Mono', monospace" }}>{contribution}</div>
+            </div>
+          )}
+          {role && (
+            <div>
+              <div className="text-[10px] font-semibold tracking-wider mb-0.5" style={{ color: CORAL }}>MY ROLE</div>
+              <div className="text-xs" style={{ color: INK }}>{role}</div>
+            </div>
+          )}
+        </div>
+      )}
 
       <div className="mb-4">
         <div className="text-xs font-semibold mb-1.5" style={{ color: NAVY_SOFT }}>PROBLEM</div>
         <p className="text-sm leading-relaxed" style={{ color: INK }}>{problem}</p>
       </div>
 
+      {decision && (
+        <div className="mb-5 rounded-lg p-3.5" style={{ background: "#FAF7EF", borderLeft: `3px solid ${CORAL}` }}>
+          <div className="text-xs font-semibold mb-1.5" style={{ color: CORAL }}>MY DECISION</div>
+          <p className="text-sm leading-relaxed" style={{ color: INK }}>{decision}</p>
+        </div>
+      )}
+
       <div className="mb-5">
-        <div className="text-xs font-semibold mb-1.5" style={{ color: NAVY_SOFT }}>HOW</div>
+        <div className="text-xs font-semibold mb-1.5" style={{ color: NAVY_SOFT }}>EXECUTION</div>
         <ul className="text-sm space-y-1" style={{ color: INK }}>
           {how.map((p, i) => <li key={i} className="flex gap-2"><span style={{ color: CORAL }}>·</span>{p}</li>)}
         </ul>
@@ -500,10 +617,7 @@ function ProjectCard({ index, title, client, tag, problem, how, result, role, ch
         </div>
       )}
 
-      <div className="mt-4 pt-4 border-t text-sm" style={{ borderColor: "#EDE8DA" }}>
-        <span className="font-semibold" style={{ color: CORAL }}>MY ROLE  </span>
-        <span style={{ color: MUTED }}>{role}</span>
-      </div>
+      {note && <p className="text-sm leading-relaxed mt-3" style={{ color: INK }}>{note}</p>}
 
       {video && <YouTubeClickToLoad videoId={video.id} caption={video.caption} />}
       {evidence && <EvidenceGallery images={evidence} />}
@@ -537,7 +651,29 @@ function Portfolio() {
   const [active, setActive] = useState("overview");
   const [lightbox, setLightbox] = useState(null);
   const [showTop, setShowTop] = useState(false);
+  const [lang, setLangState] = useState("kr");
   const refs = useRef({});
+  const t = LANG_CONTENT[lang];
+
+  React.useEffect(() => {
+    try {
+      const url = new URL(window.location.href);
+      const urlLang = url.searchParams.get("lang");
+      const stored = window.localStorage.getItem("portfolio_lang");
+      const initial = urlLang === "en" || urlLang === "kr" ? urlLang : (stored === "en" || stored === "kr" ? stored : "kr");
+      setLangState(initial);
+    } catch (e) { /* ignore in restricted environments */ }
+  }, []);
+
+  const setLang = (next) => {
+    setLangState(next);
+    try {
+      window.localStorage.setItem("portfolio_lang", next);
+      const url = new URL(window.location.href);
+      url.searchParams.set("lang", next);
+      window.history.replaceState({}, "", url);
+    } catch (e) { /* ignore */ }
+  };
 
   React.useEffect(() => {
     const onScroll = () => setShowTop(window.scrollY > 600);
@@ -548,7 +684,8 @@ function Portfolio() {
   const scrollTo = (id) => {
     setActive(id);
     setNavOpen(false);
-    refs.current[id]?.scrollIntoView({ behavior: "smooth", block: "start" });
+    const el = refs.current[id] || document.getElementById(id);
+    el?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
   const setRef = (id) => (el) => { refs.current[id] = el; };
 
@@ -564,48 +701,80 @@ function Portfolio() {
 
   return (
     <LightboxContext.Provider value={setLightbox}>
-    <div style={{ background: IVORY, minHeight: "100vh" }}>
+    <div data-lang={lang} style={{ background: IVORY, minHeight: "100vh" }}>
       <style>{`
         ${FONT_IMPORT}
         * { font-family: 'Inter', sans-serif; }
         .scroll-thin::-webkit-scrollbar { width: 6px; }
         .scroll-thin::-webkit-scrollbar-thumb { background: #33406333; border-radius: 999px; }
         html { scroll-behavior: smooth; }
-        p, li { word-break: keep-all; overflow-wrap: break-word; }
+        [data-lang="kr"] p, [data-lang="kr"] li { word-break: keep-all; overflow-wrap: break-word; }
+        [data-lang="en"] p, [data-lang="en"] li { word-break: normal; overflow-wrap: break-word; }
         h1, h2, h3 { text-wrap: balance; }
       `}</style>
 
       <Lightbox image={lightbox} onClose={() => setLightbox(null)} />
 
+      {/* Desktop floating TOP button */}
       {showTop && (
         <button
           onClick={scrollToTop}
           aria-label="맨 위로"
-          className="fixed z-50 flex items-center justify-center rounded-full shadow-lg"
+          className="hidden lg:flex fixed z-50 items-center justify-center rounded-full shadow-lg"
           style={{
-            bottom: 20, right: 16, width: 46, height: 46, background: NAVY,
+            bottom: 24, right: 24, width: 46, height: 46, background: NAVY,
           }}
         >
           <span style={{ color: CORAL_SOFT, fontSize: 18, transform: "rotate(-90deg)", display: "inline-block" }}>→</span>
         </button>
       )}
 
-      {/* Mobile top bar */}
-      <div className="lg:hidden sticky top-0 z-40 flex items-center justify-between px-4 py-3" style={{ background: NAVY }}>
-        <div className="text-white font-semibold" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>문희지 — Portfolio</div>
-        <button onClick={() => setNavOpen(!navOpen)} className="text-white p-1">
-          {navOpen ? <X size={22} /> : <Menu size={22} />}
+      {/* Mobile floating menu button + panel — replaces top-bar dropdown per spec */}
+      <div className="lg:hidden">
+        {navOpen && (
+          <div
+            className="fixed z-50 rounded-2xl shadow-xl overflow-hidden"
+            style={{ bottom: 84, right: 16, width: 200, background: NAVY, border: "1px solid rgba(255,255,255,0.1)" }}
+          >
+            {NAV_ITEMS.map((item) => (
+              <button
+                key={item.id}
+                onClick={() => scrollTo(item.id)}
+                className="w-full text-left px-4 py-2.5 text-sm"
+                style={{ color: active === item.id ? CORAL_SOFT : "rgba(255,255,255,0.8)" }}
+              >
+                {t.navLabels[item.id]}
+              </button>
+            ))}
+            {showTop && (
+              <button
+                onClick={() => { scrollToTop(); setNavOpen(false); }}
+                className="w-full text-left px-4 py-2.5 text-sm border-t"
+                style={{ color: "rgba(255,255,255,0.6)", borderColor: "rgba(255,255,255,0.1)" }}
+              >
+                ↑ {lang === "kr" ? "맨 위로" : "Back to top"}
+              </button>
+            )}
+            <div className="px-4 py-2.5 border-t flex justify-center" style={{ borderColor: "rgba(255,255,255,0.1)" }}>
+              <LanguageSwitcher lang={lang} setLang={setLang} dark />
+            </div>
+          </div>
+        )}
+        <button
+          onClick={() => setNavOpen(!navOpen)}
+          aria-label="메뉴"
+          className="fixed z-50 flex items-center justify-center rounded-full shadow-lg"
+          style={{ bottom: 20, right: 16, width: 50, height: 50, background: navOpen ? CORAL : NAVY }}
+        >
+          {navOpen ? <X size={22} color="white" /> : <Menu size={22} color="white" />}
         </button>
       </div>
-      {navOpen && (
-        <div className="lg:hidden sticky top-[52px] z-40 px-2 py-2" style={{ background: NAVY }}>
-          {NAV_ITEMS.map((item) => (
-            <button key={item.id} onClick={() => scrollTo(item.id)} className="w-full text-left px-3 py-2 rounded-lg text-sm text-white/80 hover:bg-white/10">
-              {item.label}
-            </button>
-          ))}
-        </div>
-      )}
+
+      {/* Mobile top bar — branding + language switcher, section nav moved to floating button */}
+      <div className="lg:hidden sticky top-0 z-40 flex items-center justify-between px-4 py-3" style={{ background: NAVY }}>
+        <div className="text-white font-semibold" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>문희지 — Portfolio</div>
+        <LanguageSwitcher lang={lang} setLang={setLang} dark />
+      </div>
 
       <div className="flex">
         {/* Sidebar */}
@@ -632,11 +801,14 @@ function Portfolio() {
                   style={{ background: isActive ? "rgba(225,88,63,0.15)" : "transparent", color: isActive ? CORAL_SOFT : "rgba(255,255,255,0.6)" }}
                 >
                   <Icon size={16} />
-                  {item.label}
+                  {t.navLabels[item.id]}
                 </button>
               );
             })}
           </nav>
+          <div className="mt-4">
+            <LanguageSwitcher lang={lang} setLang={setLang} dark />
+          </div>
           <div className="mt-auto pt-8 border-t" style={{ borderColor: "rgba(255,255,255,0.1)" }}>
             <div className="text-xs text-white/40 mb-2">Contact</div>
             <div className="text-xs text-white/70">heejimoon96@gmail.com</div>
@@ -649,21 +821,20 @@ function Portfolio() {
           {/* OVERVIEW */}
           <section id="overview" ref={setRef("overview")} className="mb-20 scroll-mt-6">
             <div className="text-xs font-semibold tracking-[0.2em] mb-3" style={{ color: CORAL, fontFamily: "'IBM Plex Mono', monospace" }}>
-              GROWTH / PERFORMANCE MARKETER
+              {t.hero.eyebrow}
             </div>
             <h1 className="text-3xl md:text-5xl font-semibold leading-tight mb-4" style={{ color: NAVY, fontFamily: "'Space Grotesk', sans-serif", textWrap: "balance" }}>
-              데이터로 진단하고,<br />
-              <span style={{ color: CORAL }}>전략으로</span> 매출을 만듭니다
+              {t.hero.title1}<br />
+              {t.hero.title2Pre}<span style={{ color: CORAL }}>{t.hero.title2Highlight}</span>{t.hero.title2Post}
             </h1>
             <p className="text-sm md:text-base mb-8 max-w-2xl" style={{ color: MUTED, textWrap: "balance" }}>
-              Performance · CRM · CRO · Data · AI를 연결해<br className="sm:hidden" />
-              고객 획득부터 구매·재구매까지 성장 구조를 설계합니다.
+              {t.hero.subtitle}
             </p>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              {KPI_TILES.map((k, i) => (
-                <Card key={i} className="p-5 relative" onClick={() => scrollToCase(k.target)}>
+              {t.kpiTiles.map((k, i) => (
+                <Card key={i} className="p-5 relative" onClick={() => scrollToCase(KPI_TILE_META[i].target)}>
                   <ChevronRight size={14} className="absolute top-4 right-4 opacity-40" color={NAVY} />
-                  <div className="text-2xl md:text-3xl font-semibold mb-1" style={{ color: k.color, fontFamily: "'IBM Plex Mono', monospace" }}>{k.value}</div>
+                  <div className="text-2xl md:text-3xl font-semibold mb-1" style={{ color: KPI_TILE_META[i].color, fontFamily: "'IBM Plex Mono', monospace" }}>{k.value}</div>
                   <div className="text-sm font-medium mb-1" style={{ color: NAVY }}>{k.label}</div>
                   <div className="text-xs" style={{ color: MUTED }}>{k.sub}</div>
                 </Card>
@@ -674,13 +845,13 @@ function Portfolio() {
           {/* CAPABILITY */}
           <section id="capability" ref={setRef("capability")} className="mb-20 scroll-mt-6">
             <SectionHeading
-              eyebrow="Growth Framework"
-              title="광고 유입부터 구매·재구매까지, 데이터를 기준으로 성장 지점을 설계합니다"
-              sub="미디어 전략과 예산 배분부터 CRM, 상세페이지 CRO, AI 기반 크리에이티브 실험까지 직접 설계하고 실행합니다."
+              eyebrow={t.capability.eyebrow}
+              title={t.capability.title}
+              sub={t.capability.sub}
             />
             <div className="flex flex-col sm:flex-row items-stretch gap-2 sm:gap-0 mb-3">
-              {CAPABILITY_STEPS.map((s, i) => {
-                const Icon = s.icon;
+              {t.capability.steps.map((s, i) => {
+                const Icon = CAPABILITY_ICONS[i];
                 return (
                   <React.Fragment key={i}>
                     <div className="flex-1 rounded-xl p-4 flex items-center gap-3" style={{ background: "#FAF7EF" }}>
@@ -692,7 +863,7 @@ function Portfolio() {
                         <div className="text-xs mt-0.5" style={{ color: MUTED }}>{s.desc}</div>
                       </div>
                     </div>
-                    {i < CAPABILITY_STEPS.length - 1 && (
+                    {i < t.capability.steps.length - 1 && (
                       <div className="hidden sm:flex items-center justify-center px-1">
                         <ArrowRight size={16} color={MUTED} />
                       </div>
@@ -704,7 +875,7 @@ function Portfolio() {
             <div className="rounded-xl px-4 py-3 flex items-center gap-3" style={{ background: NAVY }}>
               <Sparkles size={16} color={CORAL_SOFT} className="flex-shrink-0" />
               <div className="text-xs md:text-sm text-white">
-                <span className="font-semibold">Data & AI</span> — 성과 진단 · 가설 수립 · 실험 가속. 위 3단계 전체를 관통하는 기반 역량입니다.
+                <span className="font-semibold">{t.capability.foundationLabel}</span> — {t.capability.foundationDesc}
               </div>
             </div>
           </section>
@@ -721,9 +892,11 @@ function Portfolio() {
                 anchorId="kpi-roas"
                 index="01"
                 title="수익성 중심의 퍼포먼스 마케팅 구조 개편"
-                problem="매체 대시보드 ROAS만 기준으로 운영하면 실제 매출 기여도가 낮은 캠페인에도 예산이 계속 투입되는 구조였습니다. 성과가 검증된 영역에 예산을 집중하는 운영 구조가 필요했습니다."
+                contribution="Lead"
+                problem="매체 대시보드 ROAS와 GA4 실매출을 대조한 결과, 매체상 효율과 실제 매출 기여도 사이에 차이가 있는 캠페인을 확인했습니다."
+                decision="매체 ROAS만으로 예산을 판단하지 않고, GA4 기준 실매출 기여도를 추가 판단 기준으로 삼기로 했습니다."
                 how={[
-                  "GA4 + 매체 데이터로 매체·캠페인별 실매출 기여도 분석",
+                  "매체·캠페인별 실매출 기여도 분석",
                   "기여도·효율 낮은 매체·캠페인 Cut-off",
                   "검증된 매체·상품·캠페인 중심 예산 재배분",
                   "리타겟팅·기존 고객 타겟 비중 확대, CTR·CVR·ROAS 기준 지속 조정",
@@ -741,16 +914,17 @@ function Portfolio() {
                     <div className="text-xs text-center mt-1" style={{ color: MUTED }}>자사몰 채널 ROAS · 연도별 채널 실적 기준</div>
                   </div>
                 }
-                result={["자사몰 스킨케어 판매 1위 (한스킨)"]}
+                result={["실매출 기준 예산 재배분 체계 구축"]}
                 role="자사몰 퍼포먼스 광고 전략 및 운영 총괄, 매체·캠페인별 예산 배분, GA4 기반 실매출 기여도 분석"
               />
               <ProjectCard
                 anchorId="kpi-crm"
                 index="02"
                 title="고객 데이터 기반 CRM 운영 구조 개편"
-                problem="기존 CRM은 고객 구분 없이 전체 대상으로 일괄 발송하고 있어, 구매 가능성이 낮은 고객에게도 동일한 메시지가 발송되며 불필요한 발송 비용이 발생했습니다. 보유하고 있는 구매·행동 데이터를 기준으로 발송 대상을 재설계할 필요가 있었습니다."
+                contribution="Lead"
+                problem="기존 CRM은 고객 상태 구분 없이 전체 대상으로 일괄 발송되고 있어, 구매 가능성이 낮은 고객에게도 동일한 메시지와 발송 비용이 사용되고 있었습니다."
+                decision="전체 일괄 발송 대신, 보유하고 있는 구매·행동 데이터를 기준으로 고객을 세분화해 발송 대상과 메시지를 다르게 적용하기로 했습니다."
                 how={[
-                  "전체 일괄 발송 → 최근 1년 구매 활성 고객 중심 타겟 발송으로 전환",
                   "최근구매·장바구니·신규미구매·이탈임박·관심고객·RFM 우수고객으로 세분화",
                   "문자·카카오·앱푸시 채널별 메시지 차별화",
                   "발송 후 고객군별 CVR·ROAS 분석해 다음 캠페인 타겟 기준에 반영",
@@ -775,7 +949,8 @@ function Portfolio() {
                     />
                   </div>
                 }
-                result={["담당 전('24) 대비 담당 후('26.1–7) 기준"]}
+                result={["담당 전('24) 대비 담당 후('26.1–7) 기준", "고효율 세그먼트·메시지 조합 발굴"]}
+                note="일부 프로모션에서는 평균 대비 높은 CRM 효율을 확인하고, 성과가 높은 타겟·메시지 조합을 후속 운영에 반영했습니다."
                 role="CRM 전략 및 운영 전담, 타깃 세그먼트 설계, 메시지·프로모션 기획, 발송 후 성과 분석"
               />
               <ProjectCard
@@ -792,48 +967,193 @@ function Portfolio() {
                 chart={
                   <div>
                     <BeforeAfterCompare beforeLabel="전년 동월" beforeValue={100} afterLabel="당해 동월" afterValue={416} deltaText="+316%" indexMode />
-                    <div className="text-xs text-center mt-1" style={{ color: MUTED }}>전년 동월 = 100 기준 지수</div>
+                    <div className="text-xs text-center mt-1" style={{ color: MUTED }}>전년 동월 = INDEX 100</div>
                   </div>
                 }
-                result={["온라인 매출 +316%", "입점 이래 월 최고 매출"]}
+                result={["전년 동월 대비 Online Sales +316%", "입점 이래 월 최고 매출"]}
                 role="올리브영 온라인 협력광고 전략·운영, 세일 전후 캠페인 구조 및 예산 배분"
+                contribution="주도"
               />
               <ProjectCard
                 index="04"
-                title="상세페이지 구매전환 구조 개선"
-                problem="광고를 통한 상세페이지 유입은 충분했지만 이탈률이 높고 유입 대비 구매전환율이 기대에 못 미쳤습니다."
+                title="광고 유입 이후 구매전환 구조 개선"
+                problem="광고를 통한 상세페이지 유입은 충분했지만, 유입 대비 구매전환율이 기대에 못 미쳤습니다. 광고 효율을 개선하는 것만으로는 이 문제를 해결할 수 없어, 랜딩 이후 고객 행동을 확인할 필요가 있었습니다."
                 how={[
+                  "VOC 분석 결과 스펙보다 실사용 후기가 구매 판단에 더 크게 작용함을 확인",
+                  "중반부에 있던 리얼 리뷰 영역을 상세페이지 최상단으로 재배치",
                   "'시크릿 특가 · 뒤로가기 시 재입장 불가' 이탈 방지 띠배너 추가",
-                  "VOC 분석 결과 스펙보다 실사용 후기가 구매 판단에 중요함을 확인",
-                  "중반부 리얼 리뷰 영역을 상세페이지 최상단으로 재배치",
-                  "개편 전후 CVR 비교 후 타 상품군으로 확대 적용",
+                  "개편 전후 CVR 비교 후 지피덤 등 다른 상품군으로 확대 적용",
                 ]}
+                chart={
+                  <div className="flex flex-wrap items-center gap-1.5 mb-4 text-xs" style={{ color: NAVY }}>
+                    <span className="px-2.5 py-1 rounded-full text-white" style={{ background: NAVY_SOFT }}>광고 유입</span>
+                    <ArrowRight size={12} color={MUTED} />
+                    <span className="px-2.5 py-1 rounded-full" style={{ background: "#F3EFE3" }}>구매전환 저하 발견</span>
+                    <ArrowRight size={12} color={MUTED} />
+                    <span className="px-2.5 py-1 rounded-full" style={{ background: "#F3EFE3" }}>VOC·행동 분석</span>
+                    <ArrowRight size={12} color={MUTED} />
+                    <span className="px-2.5 py-1 rounded-full" style={{ background: "#F3EFE3" }}>리뷰 영역 재배치</span>
+                    <ArrowRight size={12} color={MUTED} />
+                    <span className="px-2.5 py-1 rounded-full text-white" style={{ background: CORAL }}>구매전환 개선</span>
+                  </div>
+                }
                 result={["구매전환율(CVR) +20%", "지피덤 브랜드로 확대 적용"]}
+                note="광고 최적화만으로는 해결되지 않는 문제였고, 랜딩 이후의 구매전환까지 함께 봤을 때 개선이 가능했습니다."
                 evidence={[
                   { src: IMG_INNERLAB_LP, caption: "이너랩 홀드잇 MAD · 이탈방지 배너 적용 화면" },
                   { src: IMG_ZIPIDERM_REVIEW, caption: "지피덤 · 동일 전략 확대 적용 + 크리에이터 픽" },
                 ]}
                 role="상품별 유입·이탈·전환 데이터 분석, 이탈방지 장치 기획, VOC 기반 콘텐츠 구조 개선"
+                contribution="주도"
               />
               <ProjectCard
                 anchorId="kpi-ai"
                 index="05"
-                title="생성형 AI 기반 퍼포먼스 크리에이티브 운영"
-                problem="동일 소재 장기 운영으로 소재 피로도가 빠르게 발생했고, 내부 디자인 리소스만으로는 충분한 소재를 빠르게 테스트하기 어려웠습니다."
+                title="생성형 AI 기반 크리에이티브 실험 속도 개선"
+                problem="동일 소재를 장기간 운영하면 소재 피로도가 빠르게 발생했지만, 내부 디자인 리소스만으로는 충분한 수의 변형 소재를 빠르게 만들어 테스트하기 어려웠습니다."
                 how={[
-                  "Midjourney·Nano Banana로 후기형·제보형·커뮤니티형 소재 다수 제작",
-                  "하나의 USP를 다양한 메시지·비주얼로 확장",
-                  "CTR·CVR·ROAS 기준 소재별 성과 평가",
-                  "Winning Creative의 메시지·구도를 후속 소재로 확대",
+                  "VOC·성과 데이터에서 반응이 좋았던 메시지·톤 파악",
+                  "가설을 세우고 후기형·제보형·커뮤니티형 등 다양한 버전으로 소재 제작",
+                  "CTR·CVR·ROAS 기준으로 소재별 성과 비교 테스트",
+                  "Winning Creative의 메시지·구도를 다음 테스트에 다시 반영",
                 ]}
-                chart={<BeforeAfterCompare beforeLabel="기존 소재" beforeValue={100} afterLabel="AI 소재" afterValue={216} deltaText="+116%" indexMode />}
-                result={["CTR +116% 개선", "Winning Creative 발굴 주기 단축"]}
+                chart={
+                  <div>
+                    <div className="flex flex-wrap items-center gap-1.5 mb-4 text-xs" style={{ color: NAVY }}>
+                      <span className="px-2.5 py-1 rounded-full text-white" style={{ background: NAVY_SOFT }}>VOC·성과 데이터</span>
+                      <ArrowRight size={12} color={MUTED} />
+                      <span className="px-2.5 py-1 rounded-full" style={{ background: "#F3EFE3" }}>Insight</span>
+                      <ArrowRight size={12} color={MUTED} />
+                      <span className="px-2.5 py-1 rounded-full" style={{ background: "#F3EFE3" }}>Hypothesis</span>
+                      <ArrowRight size={12} color={MUTED} />
+                      <span className="px-2.5 py-1 rounded-full" style={{ background: CORAL_SOFT }}>AI Creative Variants</span>
+                      <ArrowRight size={12} color={MUTED} />
+                      <span className="px-2.5 py-1 rounded-full" style={{ background: "#F3EFE3" }}>Media Test</span>
+                      <ArrowRight size={12} color={MUTED} />
+                      <span className="px-2.5 py-1 rounded-full text-white" style={{ background: CORAL }}>Winning Creative</span>
+                      <ArrowRight size={12} color={MUTED} />
+                      <span className="px-2.5 py-1 rounded-full" style={{ background: "#F3EFE3" }}>Learning → Next Test</span>
+                    </div>
+                    <BeforeAfterCompare beforeLabel="기존 소재" beforeValue={100} afterLabel="AI 소재" afterValue={216} deltaText="+116%" indexMode />
+                  </div>
+                }
+                result={["CTR +116%", "Winning Creative 발굴 주기 단축"]}
+                note="AI 도구 자체보다, AI로 분석·제작·테스트 속도를 높여 더 많은 가설을 더 빠르게 검증할 수 있었던 과정이 핵심입니다."
                 evidence={[
                   { src: IMG_HANSKIN_AI, caption: "한스킨 PDRN 세럼 · AI 활용 후기형 소재" },
                   { src: IMG_VIDEO_POSTER, caption: "동일 소재 3-section 영상 버전 (자사몰 상시 운영)" },
                 ]}
                 role="광고 소재 전략 및 크리에이티브 기획, AI 이미지 제작, 소재별 성과 분석"
+                contribution="주도"
               />
+            </div>
+          </section>
+
+          {/* GLOBAL COMMERCE PERFORMANCE */}
+          <section id="global" ref={setRef("global")} className="mb-20 scroll-mt-6">
+            <SectionHeading
+              eyebrow="Global Commerce Performance"
+              title="시장과 플랫폼이 달라져도 성과 구조를 설계합니다"
+              sub="Amazon US, Shopee, 올리브영 글로벌 등 해외 커머스 채널에서 시장·플랫폼별 고객 획득 경로에 맞춰 퍼포먼스를 운영해왔습니다."
+            />
+
+            <Card className="p-6 md:p-7 mb-5">
+              <div className="flex items-start justify-between gap-3 flex-wrap mb-1">
+                <div className="text-xs font-semibold tracking-wider" style={{ color: CORAL, fontFamily: "'IBM Plex Mono', monospace" }}>GLOBAL · HERO CASE</div>
+                <Tag tone="navy">Amazon US</Tag>
+              </div>
+              <h3 className="text-lg md:text-xl font-semibold mb-3" style={{ color: NAVY, fontFamily: "'Space Grotesk', sans-serif" }}>
+                검색·지역·크리에이티브를 연결한 미국 시장 획득 구조
+              </h3>
+              <div className="flex flex-wrap items-center gap-1.5 mb-4 text-xs" style={{ color: NAVY }}>
+                <span className="px-2.5 py-1 rounded-full text-white" style={{ background: NAVY_SOFT }}>Google Search</span>
+                <ArrowRight size={12} color={MUTED} />
+                <span className="px-2.5 py-1 rounded-full text-white" style={{ background: NAVY_SOFT }}>Meta Geo</span>
+                <ArrowRight size={12} color={MUTED} />
+                <span className="px-2.5 py-1 rounded-full" style={{ background: CORAL_SOFT, color: NAVY }}>TikTok 검증 소재</span>
+                <ArrowRight size={12} color={MUTED} />
+                <span className="px-2.5 py-1 rounded-full text-white" style={{ background: CORAL }}>Amazon 구매전환</span>
+              </div>
+              <ul className="text-sm space-y-1 mb-4" style={{ color: INK }}>
+                <li className="flex gap-2"><span style={{ color: CORAL }}>·</span>Google Search로 브랜드·연관 검색 접점 확대</li>
+                <li className="flex gap-2"><span style={{ color: CORAL }}>·</span>미국 Pop-up 오픈 전엔 뉴욕 중심, 오픈 후엔 매장 반경 기반으로 Meta Geo 타겟 조정</li>
+                <li className="flex gap-2"><span style={{ color: CORAL }}>·</span>TikTok에서 반응이 검증된 소재를 선별해 Meta·Amazon Ads로 확장 운영</li>
+              </ul>
+              <div className="flex flex-wrap gap-2 mb-4">
+                <div className="text-xs px-3 py-1.5 rounded-full" style={{ background: "#F3EFE3", color: NAVY }}>
+                  <span style={{ fontFamily: "'IBM Plex Mono', monospace", fontWeight: 600 }}>소재 재활용 성과 +34%</span>
+                </div>
+              </div>
+              <div className="text-xs mb-3" style={{ color: MUTED }}>
+                * &quot;+34%&quot;는 TikTok→Meta 소재 재활용 관련 확인된 수치입니다. &quot;Hero Product Views&quot; 등 특정 지표명으로 표시하려면 원자료 상 정확한 지표 정의 확인이 필요합니다.
+              </div>
+              <div className="pt-3 border-t text-sm" style={{ borderColor: "#EDE8DA" }}>
+                <span className="font-semibold" style={{ color: CORAL }}>MY ROLE  </span>
+                <span style={{ color: MUTED }}>Amazon US 퍼포먼스 운영(Google·Meta), Geo 타겟 전략, Cross-channel 크리에이티브 확장</span>
+              </div>
+            </Card>
+
+            <div className="grid md:grid-cols-2 gap-5 mb-6">
+              <Card className="p-6">
+                <div className="flex items-start justify-between gap-3 flex-wrap mb-1">
+                  <div className="text-xs font-semibold tracking-wider" style={{ color: CORAL, fontFamily: "'IBM Plex Mono', monospace" }}>GLOBAL</div>
+                  <Tag tone="teal">Shopee</Tag>
+                </div>
+                <h4 className="text-base font-semibold mb-3" style={{ color: NAVY, fontFamily: "'Space Grotesk', sans-serif" }}>
+                  Shopee CPAS 기획 및 운영
+                </h4>
+                <div className="flex flex-wrap items-center gap-1.5 mb-4 text-xs" style={{ color: NAVY }}>
+                  <span className="px-2.5 py-1 rounded-full" style={{ background: "#F3EFE3" }}>Product</span>
+                  <ArrowRight size={12} color={MUTED} />
+                  <span className="px-2.5 py-1 rounded-full" style={{ background: "#F3EFE3" }}>CPAS</span>
+                  <ArrowRight size={12} color={MUTED} />
+                  <span className="px-2.5 py-1 rounded-full" style={{ background: "#F3EFE3" }}>Product View</span>
+                  <ArrowRight size={12} color={MUTED} />
+                  <span className="px-2.5 py-1 rounded-full text-white" style={{ background: TEAL }}>Purchase</span>
+                </div>
+                <div className="pt-3 border-t text-sm" style={{ borderColor: "#EDE8DA" }}>
+                  <span className="font-semibold" style={{ color: CORAL }}>MY ROLE  </span>
+                  <span style={{ color: MUTED }}>Shopee CPAS 캠페인 직접 기획·운영</span>
+                </div>
+              </Card>
+
+              <Card className="p-6">
+                <div className="flex items-start justify-between gap-3 flex-wrap mb-1">
+                  <div className="text-xs font-semibold tracking-wider" style={{ color: CORAL, fontFamily: "'IBM Plex Mono', monospace" }}>GLOBAL</div>
+                  <Tag tone="coral">Currently Operating</Tag>
+                </div>
+                <h4 className="text-base font-semibold mb-3" style={{ color: NAVY, fontFamily: "'Space Grotesk', sans-serif" }}>
+                  올리브영 글로벌 몰 퍼포먼스 운영
+                </h4>
+                <ul className="text-sm space-y-1 mb-4" style={{ color: INK }}>
+                  <li className="flex gap-2"><span style={{ color: CORAL }}>·</span>올리브영 글로벌 몰 Performance Ads 운영</li>
+                  <li className="flex gap-2"><span style={{ color: CORAL }}>·</span>글로벌 프로모션 일정 기반 캠페인 운영</li>
+                  <li className="flex gap-2"><span style={{ color: CORAL }}>·</span>국가·상품별 성과 분석 및 최적화</li>
+                </ul>
+                <div className="pt-3 border-t text-sm" style={{ borderColor: "#EDE8DA" }}>
+                  <span className="font-semibold" style={{ color: CORAL }}>MY ROLE  </span>
+                  <span style={{ color: MUTED }}>Creative 운영, 국가별 성과 분석 — 현재 진행 중인 프로젝트로 성과 데이터 축적 중</span>
+                </div>
+              </Card>
+            </div>
+
+            <div className="grid sm:grid-cols-2 gap-3">
+              <div className="rounded-xl p-4" style={{ background: "#FAF7EF" }}>
+                <div className="text-xs font-semibold tracking-wider mb-2.5" style={{ color: NAVY_SOFT, fontFamily: "'IBM Plex Mono', monospace" }}>KOREA</div>
+                <div className="flex flex-wrap gap-1.5">
+                  {["D2C", "올리브영", "네이버"].map((it, i) => (
+                    <span key={i} className="text-xs px-2.5 py-1 rounded-full" style={{ background: "white", color: NAVY, border: "1px solid #EAE5D8" }}>{it}</span>
+                  ))}
+                </div>
+              </div>
+              <div className="rounded-xl p-4" style={{ background: "#FAF7EF" }}>
+                <div className="text-xs font-semibold tracking-wider mb-2.5" style={{ color: CORAL, fontFamily: "'IBM Plex Mono', monospace" }}>GLOBAL</div>
+                <div className="flex flex-wrap gap-1.5">
+                  {["Amazon", "Shopee", "올리브영 글로벌"].map((it, i) => (
+                    <span key={i} className="text-xs px-2.5 py-1 rounded-full" style={{ background: "white", color: NAVY, border: "1px solid #EAE5D8" }}>{it}</span>
+                  ))}
+                </div>
+              </div>
             </div>
           </section>
 
@@ -855,10 +1175,33 @@ function Portfolio() {
                   "특정 계절·피부고민 언급 긍정 리뷰 볼륨 증가 발견 → 광고 소구로 전환",
                   "VOC 분석 → 니즈 발견 → 광고 가설 → 크리에이티브 테스트 프로세스 구축",
                 ]}
-                chart={<ValueBars data={[{ name: "기획전 ROAS", value: 222 }, { name: "직전 대비 ROI", value: 144 }, { name: "VOC 소재 ROI", value: 200 }]} suffix="%" />}
+                chart={
+                  <div>
+                    <div className="flex flex-wrap items-center gap-1.5 mb-4 text-xs" style={{ color: NAVY }}>
+                      <span className="px-2.5 py-1 rounded-full text-white" style={{ background: NAVY_SOFT }}>리뷰 1,000건</span>
+                      <ArrowRight size={12} color={MUTED} />
+                      <span className="px-2.5 py-1 rounded-full" style={{ background: "#F3EFE3" }}>VOC Insight</span>
+                      <ArrowRight size={12} color={MUTED} />
+                      <span className="px-2.5 py-1 rounded-full" style={{ background: "#F3EFE3" }}>광고 가설</span>
+                      <ArrowRight size={12} color={MUTED} />
+                      <span className="px-2.5 py-1 rounded-full" style={{ background: CORAL_SOFT }}>Creative 테스트</span>
+                      <ArrowRight size={12} color={MUTED} />
+                      <span className="px-2.5 py-1 rounded-full text-white" style={{ background: CORAL }}>성과 개선</span>
+                    </div>
+                    <KPIDeltaCard
+                      metrics={[
+                        { label: "Campaign Efficiency (직전 대비 ROI)", value: "+144%", direction: "up" },
+                      ]}
+                    />
+                    <div className="text-xs mt-3 px-3 py-2 rounded-lg" style={{ background: "#F3EFE3", color: NAVY }}>
+                      VOC 반영 소재가 기존 소재 대비 높은 ROI를 기록해, 이후 시즌 캠페인의 기본 소재 방향으로 채택
+                    </div>
+                  </div>
+                }
                 result={["상품 품절알림·VOC 대시보드 기획"]}
                 evidence={[{ src: IMG_HANYUL_VOC, caption: "한율 · 계절성 VOC 반영 소재 (Meta·Kakao)" }]}
                 role="브랜드 퍼포먼스 캠페인 운영, 매체 운영, VOC 데이터 분석, 소재 전략 기획"
+                contribution="담당"
               />
               <ProjectCard
                 index="02"
@@ -870,9 +1213,10 @@ function Portfolio() {
                   "키워드별 CPC·CVR·CPA 기준 운영 우선순위 설정",
                   "GA4로 실제 구매 발생 상품·브랜드 분석, CAC 우수 상품군 발굴",
                 ]}
-                chart={<ImprovementBars data={[{ name: "구매전환", value: 44 }]} />}
+                chart={<ImprovementBars data={[{ name: "구매전환", value: 44 }]} color={CORAL} />}
                 result={["CPC -65% 절감", "CPA -35% 절감"]}
                 role="Naver·Google·Kakao SA/DA 운영, 캠페인 구조 설계, GA4 기반 성과 분석"
+                contribution="담당"
               />
               <ProjectCard
                 index="03"
@@ -885,9 +1229,10 @@ function Portfolio() {
                   "신청 건수가 아닌 실제 예약 전환 DB 품질 기준으로 성과 분석",
                   "SA 캠페인 구조 개편 병행",
                 ]}
-                chart={<ImprovementBars data={[{ name: "예약 완료 DB", value: 57 }]} />}
+                chart={<ImprovementBars data={[{ name: "예약 완료 DB", value: 57 }]} color={CORAL} />}
                 result={["Meta CPA -66.1% 절감", "SA CPA -27% 절감", "사내 성공사례 발표"]}
                 role="SA·DA·YouTube 운영, 상담신청 CPA 최적화, Meta Instant 캠페인 구조 설계"
+                contribution="담당"
               />
               <ProjectCard
                 index="04"
@@ -899,10 +1244,23 @@ function Portfolio() {
                   "퍼포먼스 캠페인 — 관심 고객 리타겟팅, 실제 구매전환 유도",
                   "Google BLS·검색량 데이터로 전환지표와 브랜드 효과 함께 측정",
                 ]}
-                chart={<ImprovementBars data={[{ name: "유입", value: 91 }, { name: "구매전환", value: 120 }, { name: "ROAS", value: 60 }, { name: "CVR", value: 94 }]} />}
+                chart={
+                  <div>
+                    <MetricCompareRow
+                      metrics={[
+                        { metricName: "유입", beforeLabel: "Before", beforeValue: 100, afterLabel: "After", afterValue: 191, deltaText: "+91%", indexMode: true },
+                        { metricName: "구매전환", beforeLabel: "Before", beforeValue: 100, afterLabel: "After", afterValue: 220, deltaText: "+120%", indexMode: true },
+                        { metricName: "ROAS", beforeLabel: "Before", beforeValue: 100, afterLabel: "After", afterValue: 160, deltaText: "+60%", indexMode: true },
+                        { metricName: "CVR", beforeLabel: "Before", beforeValue: 100, afterLabel: "After", afterValue: 194, deltaText: "+94%", indexMode: true },
+                      ]}
+                      height={110}
+                    />
+                  </div>
+                }
                 result={["브랜드 선호도 +1.5%", "오가닉 검색량 +25%", "Google 국내·글로벌 우수사례 등재"]}
                 video={{ id: "Y0BZ_NOctHs", caption: "바디럽 · 브랜딩 캠페인 영상" }}
                 role="대규모 DA·VA 캠페인 운영, 브랜딩·퍼포먼스 미디어믹스 설계, 브랜드 효과 측정"
+                contribution="담당"
               />
               <ProjectCard
                 index="05"
@@ -920,6 +1278,7 @@ function Portfolio() {
                   { src: IMG_HEODAK_2, caption: "허닭 · 첫 구매 100원딜 소재" },
                 ]}
                 role="Meta·GDN·네이버DA 운영, 신규회원·매출 캠페인 관리, 소재 A/B 테스트"
+                contribution="담당"
               />
             </div>
           </section>
@@ -945,6 +1304,7 @@ function Portfolio() {
                 result={["쿠팡 협력광고 ROAS 965~1,028% (품목별)", "네이버 LIVE쇼핑 매출 ×4 (동일 상품·구성 기준)"]}
                 evidence={[{ src: IMG_MAEIL_TOSS, caption: "매일유업 · 쿠팡 협력광고 소재 (상하목장·어메이징오트)" }]}
                 role="Meta·네이버DA·카카오모먼트 운영, 신규 광고상품 제안, 고객DB 활용 타겟 전략"
+                contribution="담당"
               />
               <ProjectCard
                 index="02"
@@ -959,6 +1319,7 @@ function Portfolio() {
                 ]}
                 result={["플랫폼별 SA 운영 구조 구축", "키워드 최적화 프로세스 고도화"]}
                 role="Naver·Google SA 운영, 검색광고 전략 수립, 키워드·CAC 최적화"
+                contribution="담당"
               />
             </div>
           </section>
@@ -1011,6 +1372,28 @@ function Portfolio() {
           {/* CAREER & STARTUP */}
           <section id="career" ref={setRef("career")} className="mb-20 scroll-mt-6">
             <SectionHeading eyebrow="Career & Startup" title="대행사에서 실무를 쌓고, 인하우스에서 전략으로 확장했습니다" />
+
+            <div className="grid sm:grid-cols-3 gap-3 mb-8">
+              {[
+                { label: "CHANNEL", items: ["D2C", "올리브영", "네이버", "Amazon", "Shopee", "올리브영 글로벌"] },
+                { label: "FUNCTION", items: ["Performance", "CRM", "CRO", "Creative", "Data", "AI"] },
+                { label: "ROLE", items: ["Strategy", "Operation", "Analysis", "Budget", "Agency 관리"] },
+              ].map((group, i) => (
+                <div key={i} className="rounded-xl p-4" style={{ background: "#FAF7EF" }}>
+                  <div className="text-xs font-semibold tracking-wider mb-2.5" style={{ color: CORAL, fontFamily: "'IBM Plex Mono', monospace" }}>
+                    {group.label}
+                  </div>
+                  <div className="flex flex-wrap gap-1.5">
+                    {group.items.map((it, j) => (
+                      <span key={j} className="text-xs px-2.5 py-1 rounded-full" style={{ background: "white", color: NAVY, border: "1px solid #EAE5D8" }}>
+                        {it}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+
             <div className="grid lg:grid-cols-5 gap-6">
               <div className="lg:col-span-3 space-y-3">
                 {CAREER_TIMELINE.map((c, i) => (
@@ -1059,7 +1442,7 @@ function Portfolio() {
                     PERFORMANCE MARKETING PORTFOLIO
                   </div>
                   <h2 className="text-2xl md:text-3xl font-semibold text-white mb-8 leading-snug" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
-                    이 지원자가 궁금하다면,<br />만나서 더 많은 이야기를 나눠보는 것은 어떨까요?
+                    데이터를 보고 문제를 정의하고,<br />실행까지 가져가는 마케터가 필요하다면 이야기 나누고 싶습니다.
                   </h2>
                   <div className="flex flex-wrap gap-6 text-sm text-white/80">
                     <div className="flex items-center gap-2"><Mail size={15} color={CORAL_SOFT} />heejimoon96@gmail.com</div>

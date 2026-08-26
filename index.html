@@ -552,6 +552,63 @@ function YouTubeClickToLoad({ videoId, caption }) {
   );
 }
 
+/**
+ * VideoCard — local /videos/*.mp4 creative evidence card.
+ * Click-to-play (no autoplay), native controls, preload="metadata" only,
+ * so the grid doesn't download full video weight just by scrolling into view.
+ */
+function VideoCard({ src, label, desc }) {
+  const [playing, setPlaying] = useState(false);
+  return (
+    <div className="rounded-xl overflow-hidden flex-shrink-0" style={{ background: "#FAF7EF", width: "100%" }}>
+      <div className="relative" style={{ aspectRatio: "9/16", background: "#000" }}>
+        {playing ? (
+          <video
+            src={src}
+            controls
+            playsInline
+            preload="metadata"
+            autoPlay
+            className="w-full h-full object-contain"
+          />
+        ) : (
+          <button
+            onClick={() => setPlaying(true)}
+            className="absolute inset-0 w-full h-full flex items-center justify-center group"
+            aria-label="영상 재생"
+          >
+            <video src={src} preload="metadata" className="w-full h-full object-cover" muted playsInline />
+            <div className="absolute inset-0" style={{ background: "rgba(20,31,59,0.2)" }} />
+            <div className="relative w-12 h-12 rounded-full flex items-center justify-center group-hover:scale-105 transition-transform" style={{ background: CORAL }}>
+              <div style={{ width: 0, height: 0, borderTop: "8px solid transparent", borderBottom: "8px solid transparent", borderLeft: "12px solid white", marginLeft: 2 }} />
+            </div>
+          </button>
+        )}
+      </div>
+      <div className="p-3">
+        <div className="text-xs font-semibold mb-0.5" style={{ color: NAVY }}>{label}</div>
+        {desc && <div className="text-[11px]" style={{ color: MUTED }}>{desc}</div>}
+      </div>
+    </div>
+  );
+}
+
+/** Horizontal-scroll video gallery (desktop: grid via CSS; mobile: swipe carousel via overflow-x) */
+function VideoGallery({ videos, columns = 3 }) {
+  return (
+    <div
+      className="flex gap-3 overflow-x-auto sm:grid sm:overflow-visible scroll-thin"
+      style={{ gridTemplateColumns: `repeat(${columns}, minmax(0, 1fr))`, WebkitOverflowScrolling: "touch" }}
+    >
+      {videos.map((v, i) => (
+        <div key={i} className="w-[62%] xs:w-[55%] sm:w-full flex-shrink-0">
+          <VideoCard {...v} />
+        </div>
+      ))}
+    </div>
+  );
+}
+
 function ProjectCard({ index, title, client, tag, contribution, problem, decision, how, result, role, chart, imgHint, evidence, video, note, anchorId }) {
   return (
     <Card id={anchorId} className="p-6 md:p-7 scroll-mt-24">
@@ -1127,12 +1184,25 @@ function Portfolio() {
                 </div>
               </div>
 
-              <div className="rounded-xl px-4 py-3" style={{ background: NAVY }}>
+              <div className="rounded-xl px-4 py-3 mb-5" style={{ background: NAVY }}>
                 <div className="text-xs font-semibold mb-1" style={{ color: CORAL_SOFT }}>LEARNING</div>
                 <div className="text-xs text-white">
                   높은 트래픽이 높은 구매전환을 의미하지 않았습니다. TikTok 소재는 CTR·DPV뿐 아니라 ATC·Purchase까지 연결해 매체 역할을 다시 판단했습니다.
                 </div>
               </div>
+
+              <div className="text-xs font-semibold tracking-wider mb-1.5" style={{ color: NAVY_SOFT, fontFamily: "'IBM Plex Mono', monospace" }}>CREATIVE TESTING</div>
+              <p className="text-xs leading-relaxed mb-3" style={{ color: MUTED }}>
+                UGC·Demonstration·B&A 포맷을 테스트하고, CTR 이후 DPV·ATC·Purchase까지 연결해 소재 역할을 판단했습니다.
+              </p>
+              <VideoGallery
+                columns={3}
+                videos={[
+                  { src: "videos/amazon-ugc-natural.mp4", label: "NATURAL USAGE", desc: "제품 사용 맥락 중심 UGC" },
+                  { src: "videos/amazon-usp-demo.mp4", label: "USP + DEMO", desc: "사용 과정과 효능 포인트 전달" },
+                  { src: "videos/amazon-ba-proof.mp4", label: "B&A / PROOF", desc: "효능을 빠르게 이해시키는 Visual Proof" },
+                ]}
+              />
             </Card>
 
             {/* CASE 02 — Shopee: Funnel Restructure */}
@@ -1149,12 +1219,40 @@ function Portfolio() {
                 <ArrowRight size={12} color={MUTED} />
                 <span className="px-2.5 py-1 rounded-full text-white" style={{ background: TEAL }}>Reach + Conversion</span>
               </div>
-              <div className="flex flex-wrap gap-4 text-xs mb-2" style={{ fontFamily: "'IBM Plex Mono', monospace" }}>
+              <div className="flex flex-wrap gap-4 text-xs mb-5" style={{ fontFamily: "'IBM Plex Mono', monospace" }}>
                 <span style={{ color: NAVY_SOFT }}>Spend -24%</span>
                 <span style={{ color: TEAL }}>Purchases +163%</span>
                 <span style={{ color: CORAL }}>Sales +229%</span>
+                <span className="text-[11px]" style={{ color: MUTED, fontFamily: "Inter" }}>Sep → Oct · Singapore · Vietnam</span>
               </div>
-              <div className="text-[11px]" style={{ color: MUTED }}>Sep → Oct · Singapore · Vietnam</div>
+
+              <div className="text-xs font-semibold tracking-wider mb-1.5" style={{ color: NAVY_SOFT, fontFamily: "'IBM Plex Mono', monospace" }}>LOCALIZED CREATIVE TESTING</div>
+              <p className="text-xs leading-relaxed mb-3" style={{ color: MUTED }}>
+                국가별 반응에 맞춰 Creative Angle도 다르게 운영했습니다.
+              </p>
+              <div className="grid sm:grid-cols-2 gap-4">
+                <div>
+                  <div className="text-[11px] font-semibold mb-2" style={{ color: NAVY }}>SINGAPORE · UGC · Usage · Routine</div>
+                  <VideoGallery
+                    columns={2}
+                    videos={[
+                      { src: "videos/shopee-sg-ugc.mp4", label: "UGC · Product Benefit", desc: "제품 사용 경험과 효능 전달" },
+                      { src: "videos/shopee-sg-routine.mp4", label: "Routine / Demo", desc: "사용 과정 중심" },
+                    ]}
+                  />
+                </div>
+                <div>
+                  <div className="text-[11px] font-semibold mb-2" style={{ color: NAVY }}>VIETNAM · Comparison · UGC</div>
+                  <VideoGallery
+                    columns={2}
+                    videos={[
+                      { src: "videos/shopee-vn-comparison.mp4", label: "Product Comparison", desc: "BHA·PHA·AHA 라인 비교" },
+                      { src: "videos/shopee-vn-ugc-makeup.mp4", label: "UGC · Makeup Routine", desc: "사용 → 메이크업 완성" },
+                    ]}
+                  />
+                </div>
+              </div>
+              <div className="text-[11px] mt-3" style={{ color: MUTED }}>CTR뿐 아니라 Content View·ATC·Purchase까지 연결해 소재의 역할을 판단했습니다.</div>
             </Card>
 
             {/* CASE 03 — Qoo10: Marketplace Growth */}
@@ -1207,6 +1305,43 @@ function Portfolio() {
                 <div className="text-xs text-white">
                   행사 노출만 늘리는 것으로는 매출이 지속되지 않았습니다. Product Focus·Search Demand·In-app Media·Commerce Exposure를 함께 관리했습니다.
                 </div>
+              </div>
+            </Card>
+
+            {/* AI CREATIVE EXPERIMENT — separate from local market execution galleries */}
+            <Card className="p-6 mb-5">
+              <div className="flex items-start justify-between gap-3 flex-wrap mb-2">
+                <div className="text-xs font-semibold tracking-wider" style={{ color: CORAL, fontFamily: "'IBM Plex Mono', monospace" }}>AI CREATIVE EXPERIMENT</div>
+                <Tag tone="coral">Midjourney 활용 기획·제작</Tag>
+              </div>
+              <h4 className="text-base font-semibold mb-2" style={{ color: NAVY, fontFamily: "'Space Grotesk', sans-serif" }}>
+                아이디어를 빠르게 시각화하고, 실제 광고 소재로 만들었습니다
+              </h4>
+              <p className="text-sm leading-relaxed mb-3" style={{ color: INK }}>
+                반복적인 제품 광고에서 벗어나기 위해 Midjourney를 활용한 캐릭터·밈·상황극 크리에이티브를 직접 기획·제작했습니다.
+              </p>
+              <div className="flex flex-wrap items-center gap-1.5 mb-4 text-xs">
+                <span className="px-2.5 py-1 rounded-full" style={{ background: "#F3EFE3", color: NAVY }}>Insight / Idea</span>
+                <ArrowRight size={12} color={MUTED} />
+                <span className="px-2.5 py-1 rounded-full" style={{ background: "#F3EFE3", color: NAVY }}>Concept</span>
+                <ArrowRight size={12} color={MUTED} />
+                <span className="px-2.5 py-1 rounded-full" style={{ background: "#F3EFE3", color: NAVY }}>Midjourney</span>
+                <ArrowRight size={12} color={MUTED} />
+                <span className="px-2.5 py-1 rounded-full" style={{ background: "#F3EFE3", color: NAVY }}>Video Creative</span>
+                <ArrowRight size={12} color={MUTED} />
+                <span className="px-2.5 py-1 rounded-full text-white" style={{ background: CORAL }}>Media Test</span>
+              </div>
+              <VideoGallery
+                columns={3}
+                videos={[
+                  { src: "videos/ai-meme-situation.mp4", label: "MEME / SITUATION", desc: "일상 상황극에 제품을 결합" },
+                  { src: "videos/ai-character.mp4", label: "CHARACTER", desc: "캐릭터 기반 제품 의인화" },
+                  { src: "videos/ai-storytelling.mp4", label: "STORYTELLING", desc: "일상 밈·스토리로 메시지 연결" },
+                ]}
+              />
+              <div className="mt-4 pt-3 border-t text-sm" style={{ borderColor: "#EDE8DA" }}>
+                <span className="font-semibold" style={{ color: CORAL }}>MY CONTRIBUTION  </span>
+                <span style={{ color: MUTED }}>콘셉트 기획 · Creative Direction · Midjourney 제작 · 광고 소재화</span>
               </div>
             </Card>
 

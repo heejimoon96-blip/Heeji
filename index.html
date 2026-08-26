@@ -156,6 +156,74 @@ const LANG_CONTENT = {
       foundationLabel: "Data & AI",
       foundationDesc: "성과를 읽고, 가설을 세우고, 더 빠르게 검증합니다.",
     },
+    celltrion: [
+      {
+        title: "수익성 중심의 퍼포먼스 마케팅 구조 개편",
+        problem: "매체 대시보드 ROAS와 GA4 실매출을 대조한 결과, 매체상 효율과 실제 매출 기여도 사이에 차이가 있는 캠페인을 확인했습니다.",
+        decision: "매체 ROAS만으로 예산을 판단하지 않고, GA4 기준 실매출 기여도를 추가 판단 기준으로 삼기로 했습니다.",
+        how: [
+          "매체·캠페인별 실매출 기여도 분석",
+          "기여도·효율 낮은 매체·캠페인 Cut-off, 검증된 영역으로 예산 재배분",
+          "리타겟팅·기존 고객 비중 확대, CTR·CVR·ROAS 기준 지속 조정",
+        ],
+        chartCaption: "자사몰 채널 ROAS · 연도별 채널 실적 기준",
+        result: ["실매출 기준 예산 재배분 체계 구축"],
+        role: "자사몰 퍼포먼스 광고 전략 및 운영 총괄, 매체·캠페인별 예산 배분, GA4 기반 실매출 기여도 분석",
+      },
+      {
+        title: "고객 데이터 기반 CRM 운영 구조 개편",
+        problem: "기존 CRM은 고객 상태 구분 없이 전체 대상으로 일괄 발송되고 있어, 구매 가능성이 낮은 고객에게도 동일한 메시지와 발송 비용이 사용되고 있었습니다.",
+        decision: "전체 일괄 발송 대신, 보유하고 있는 구매·행동 데이터를 기준으로 고객을 세분화해 발송 대상과 메시지를 다르게 적용하기로 했습니다.",
+        how: [
+          "최근구매·장바구니·신규미구매·이탈임박·관심고객·RFM 우수고객으로 세분화",
+          "문자·카카오·앱푸시 채널별 메시지 차별화",
+          "발송 후 고객군별 CVR·ROAS 분석해 다음 캠페인 타겟 기준에 반영",
+        ],
+        flowChips: ["전체 고객", "구매·행동 데이터", "세그먼트 설계", "전환·재구매"],
+        result: ["담당 전('24) 대비 담당 후('26.1–7) 기준", "고효율 세그먼트·메시지 조합 발굴"],
+        note: "일부 프로모션에서는 평균 대비 높은 CRM 효율을 확인하고, 성과가 높은 타겟·메시지 조합을 후속 운영에 반영했습니다.",
+        role: "CRM 전략 및 운영 전담, 타깃 세그먼트 설계, 메시지·프로모션 기획, 발송 후 성과 분석",
+      },
+      {
+        title: "올리브영 온라인 채널 매출 스케일업",
+        problem: "대형 프로모션 기간에 유입·구매가 집중되는 플랫폼 특성상 평시와 동일한 운영 방식을 적용하면 세일 기간 트래픽·리타겟팅 모수 확보가 부족했습니다.",
+        how: [
+          "평시 — 저비용 트래픽 확보, 리타겟팅 모수 축적",
+          "세일 사전 — 관심 고객 확대, 잠재고객 사전 확보",
+          "세일 기간 — 구매 가능성 높은 고객 중심 전환 광고, 예산 확대",
+          "세일 이후 — 잔여 리타겟팅으로 추가 전환, 효율 회수",
+        ],
+        chartCaption: "전년 동월 = INDEX 100",
+        result: ["전년 동월 대비 Online Sales +316%", "입점 이래 월 최고 매출"],
+        role: "올리브영 온라인 협력광고 전략·운영, 세일 전후 캠페인 구조 및 예산 배분",
+      },
+      {
+        title: "광고 유입 이후 구매전환 구조 개선",
+        problem: "광고를 통한 상세페이지 유입은 충분했지만, 유입 대비 구매전환율이 기대에 못 미쳤습니다. 광고 효율을 개선하는 것만으로는 이 문제를 해결할 수 없어, 랜딩 이후 고객 행동을 확인할 필요가 있었습니다.",
+        how: [
+          "VOC 분석 결과 스펙보다 실사용 후기가 구매 판단에 더 크게 작용함을 확인",
+          "리얼 리뷰 영역 최상단 재배치 + 이탈 방지 띠배너 추가",
+          "개편 전후 CVR 비교 후 지피덤 등 다른 상품군으로 확대 적용",
+        ],
+        flowChips: ["광고 유입", "구매전환 저하 발견", "VOC·행동 분석", "리뷰 영역 재배치", "구매전환 개선"],
+        result: ["구매전환율(CVR) +20%", "지피덤 브랜드로 확대 적용"],
+        note: "광고 최적화만으로는 해결되지 않는 문제였고, 랜딩 이후의 구매전환까지 함께 봤을 때 개선이 가능했습니다.",
+        role: "상품별 유입·이탈·전환 데이터 분석, 이탈방지 장치 기획, VOC 기반 콘텐츠 구조 개선",
+      },
+      {
+        title: "생성형 AI 기반 크리에이티브 실험 속도 개선",
+        problem: "동일 소재를 장기간 운영하면 소재 피로도가 빠르게 발생했지만, 내부 디자인 리소스만으로는 충분한 수의 변형 소재를 빠르게 만들어 테스트하기 어려웠습니다.",
+        how: [
+          "VOC·성과 데이터에서 반응 좋았던 메시지·톤 파악해 가설 수립",
+          "후기형·제보형·커뮤니티형 등 다양한 버전으로 소재 제작 및 테스트",
+          "Winning Creative의 메시지·구도를 다음 테스트에 반영",
+        ],
+        flowChips: ["VOC·성과 데이터", "Insight", "Hypothesis", "AI Creative Variants", "Media Test", "Winning Creative", "Learning → Next Test"],
+        result: ["CTR +116%", "Winning Creative 발굴 주기 단축"],
+        note: "AI 도구 자체보다, AI로 분석·제작·테스트 속도를 높여 더 많은 가설을 더 빠르게 검증할 수 있었던 과정이 핵심입니다.",
+        role: "광고 소재 전략 및 크리에이티브 기획, AI 이미지 제작, 소재별 성과 분석",
+      },
+    ],
   },
   en: {
     navLabels: { overview: "Overview", career: "Career", celltrion: "Growth Cases", global: "Global", "kpi-ai": "AI & Data", contact: "About" },
@@ -185,6 +253,74 @@ const LANG_CONTENT = {
       foundationLabel: "Data & AI",
       foundationDesc: "Reading performance, forming hypotheses, and testing them faster.",
     },
+    celltrion: [
+      {
+        title: "Profit-driven Performance Restructuring",
+        problem: "Cross-checking media-reported ROAS against GA4 revenue revealed a gap between platform-level efficiency and actual revenue contribution.",
+        decision: "I stopped judging budget by media ROAS alone and added GA4-based revenue contribution as an additional decision metric.",
+        how: [
+          "Analyzed revenue contribution by media and campaign",
+          "Cut low-contribution, low-efficiency campaigns and reallocated budget to proven areas",
+          "Expanded retargeting and existing-customer targeting, continuously adjusting by CTR, CVR, and ROAS",
+        ],
+        chartCaption: "D2C channel ROAS · Year-over-year channel performance",
+        result: ["Built a revenue-based budget reallocation system"],
+        role: "Led D2C performance ad strategy and operations, budget allocation by media and campaign, GA4-based revenue contribution analysis",
+      },
+      {
+        title: "Customer Data-driven CRM Restructuring",
+        problem: "The existing CRM sent the same blanket message to the entire list regardless of purchase likelihood, spending the same cost on low-intent customers.",
+        decision: "Instead of blanket sends, I segmented customers using purchase and behavior data and varied both targeting and messaging.",
+        how: [
+          "Segmented into recent purchasers, cart abandoners, new non-purchasers, at-risk, interest-based, and top RFM customers",
+          "Differentiated messaging by channel — SMS, KakaoTalk, app push",
+          "Analyzed CVR and ROAS by segment after each send, feeding results into the next campaign's targeting",
+        ],
+        flowChips: ["All Customers", "Purchase & Behavior Data", "Segment Design", "Conversion · Repeat Purchase"],
+        result: ["2024 Annual vs. Jan–Jul 2026", "Identified high-efficiency segment/message combinations"],
+        note: "Some promotions showed above-average CRM efficiency, and I carried the highest-performing target/message combinations into later campaigns.",
+        role: "Owned CRM strategy and operations, target segment design, messaging and promotion planning, post-send performance analysis",
+      },
+      {
+        title: "Olive Young Online Channel Sales Scale-up",
+        problem: "Because traffic and purchases concentrate around major promotions on this platform, running the same approach as normal periods left traffic and retargeting pools under-built for sale periods.",
+        how: [
+          "Always-on — low-cost traffic acquisition, retargeting pool accumulation",
+          "Pre-sale — expand interested audience, pre-secure prospects",
+          "Sale period — conversion-focused ads on high-intent customers, expanded budget",
+          "Post-sale — additional conversions from remaining retargeting, efficiency recovery",
+        ],
+        chartCaption: "Same month last year = Index 100",
+        result: ["Online Sales +316% YoY, same month", "Highest monthly sales since launch on the platform"],
+        role: "Led Olive Young co-op ad strategy and operations, campaign structure and budget allocation across the promotion cycle",
+      },
+      {
+        title: "Post-click Purchase Conversion Improvement",
+        problem: "Ad traffic to the product page was sufficient, but conversion from that traffic fell short of expectations. Since ad optimization alone couldn't fix it, I needed to look at customer behavior after landing.",
+        how: [
+          "VOC analysis showed real-use reviews mattered more to purchase decisions than spec sheets",
+          "Moved the real-review section to the top of the page and added an exit-prevention banner",
+          "Compared CVR before/after, then expanded to other product lines including GpDerm",
+        ],
+        flowChips: ["Paid Traffic", "Low Conversion Found", "VOC & Behavior Analysis", "Review Section Repositioned", "Conversion Improved"],
+        result: ["Purchase Conversion Rate (CVR) +20%", "Expanded to GpDerm brand"],
+        note: "Ad optimization alone didn't solve it — the fix came from also addressing post-landing conversion.",
+        role: "Analyzed traffic, exit, and conversion data by product, designed exit-prevention mechanisms, restructured content based on VOC",
+      },
+      {
+        title: "Faster Creative Experimentation with Generative AI",
+        problem: "Running the same creative for too long caused fast creative fatigue, but internal design resources alone couldn't produce and test enough variations quickly.",
+        how: [
+          "Identified high-performing messages and tones from VOC and performance data to form hypotheses",
+          "Produced and tested multiple creative variants — review-style, tip-style, community-style",
+          "Fed the winning creative's message and composition into the next test",
+        ],
+        flowChips: ["VOC & Performance Data", "Insight", "Hypothesis", "AI Creative Variants", "Media Test", "Winning Creative", "Learning → Next Test"],
+        result: ["CTR +116%", "Shortened the cycle to find winning creative"],
+        note: "The core wasn't the AI tool itself, but using it to speed up analysis, production, and testing — validating more hypotheses, faster.",
+        role: "Creative strategy and planning, AI image production, per-creative performance analysis",
+      },
+    ],
   },
 };
 
@@ -1011,15 +1147,11 @@ function Portfolio() {
               <ProjectCard
                 anchorId="kpi-roas"
                 index="01"
-                title="수익성 중심의 퍼포먼스 마케팅 구조 개편"
+                title={t.celltrion[0].title}
                 contribution="Lead"
-                problem="매체 대시보드 ROAS와 GA4 실매출을 대조한 결과, 매체상 효율과 실제 매출 기여도 사이에 차이가 있는 캠페인을 확인했습니다."
-                decision="매체 ROAS만으로 예산을 판단하지 않고, GA4 기준 실매출 기여도를 추가 판단 기준으로 삼기로 했습니다."
-                how={[
-                  "매체·캠페인별 실매출 기여도 분석",
-                  "기여도·효율 낮은 매체·캠페인 Cut-off, 검증된 영역으로 예산 재배분",
-                  "리타겟팅·기존 고객 비중 확대, CTR·CVR·ROAS 기준 지속 조정",
-                ]}
+                problem={t.celltrion[0].problem}
+                decision={t.celltrion[0].decision}
+                how={t.celltrion[0].how}
                 chart={
                   <div>
                     <BeforeAfterCompare
@@ -1030,138 +1162,121 @@ function Portfolio() {
                       deltaText="+104%"
                       indexMode
                     />
-                    <div className="text-xs text-center mt-1" style={{ color: MUTED }}>자사몰 채널 ROAS · 연도별 채널 실적 기준</div>
+                    <div className="text-xs text-center mt-1" style={{ color: MUTED }}>{t.celltrion[0].chartCaption}</div>
                   </div>
                 }
-                result={["실매출 기준 예산 재배분 체계 구축"]}
-                role="자사몰 퍼포먼스 광고 전략 및 운영 총괄, 매체·캠페인별 예산 배분, GA4 기반 실매출 기여도 분석"
+                result={t.celltrion[0].result}
+                role={t.celltrion[0].role}
               />
               <ProjectCard
                 anchorId="kpi-crm"
                 index="02"
-                title="고객 데이터 기반 CRM 운영 구조 개편"
+                title={t.celltrion[1].title}
                 contribution="Lead"
-                problem="기존 CRM은 고객 상태 구분 없이 전체 대상으로 일괄 발송되고 있어, 구매 가능성이 낮은 고객에게도 동일한 메시지와 발송 비용이 사용되고 있었습니다."
-                decision="전체 일괄 발송 대신, 보유하고 있는 구매·행동 데이터를 기준으로 고객을 세분화해 발송 대상과 메시지를 다르게 적용하기로 했습니다."
-                how={[
-                  "최근구매·장바구니·신규미구매·이탈임박·관심고객·RFM 우수고객으로 세분화",
-                  "문자·카카오·앱푸시 채널별 메시지 차별화",
-                  "발송 후 고객군별 CVR·ROAS 분석해 다음 캠페인 타겟 기준에 반영",
-                ]}
+                problem={t.celltrion[1].problem}
+                decision={t.celltrion[1].decision}
+                how={t.celltrion[1].how}
                 chart={
                   <div>
                     <div className="flex flex-wrap items-center gap-1.5 mb-4 text-xs" style={{ color: NAVY }}>
-                      <span className="px-2.5 py-1 rounded-full" style={{ background: "#F3EFE3" }}>전체 고객</span>
+                      <span className="px-2.5 py-1 rounded-full" style={{ background: "#F3EFE3" }}>{t.celltrion[1].flowChips[0]}</span>
                       <ArrowRight size={12} color={MUTED} />
-                      <span className="px-2.5 py-1 rounded-full" style={{ background: "#F3EFE3" }}>구매·행동 데이터</span>
+                      <span className="px-2.5 py-1 rounded-full" style={{ background: "#F3EFE3" }}>{t.celltrion[1].flowChips[1]}</span>
                       <ArrowRight size={12} color={MUTED} />
-                      <span className="px-2.5 py-1 rounded-full" style={{ background: "#F3EFE3" }}>세그먼트 설계</span>
+                      <span className="px-2.5 py-1 rounded-full" style={{ background: "#F3EFE3" }}>{t.celltrion[1].flowChips[2]}</span>
                       <ArrowRight size={12} color={MUTED} />
-                      <span className="px-2.5 py-1 rounded-full text-white" style={{ background: TEAL }}>전환·재구매</span>
+                      <span className="px-2.5 py-1 rounded-full text-white" style={{ background: TEAL }}>{t.celltrion[1].flowChips[3]}</span>
                     </div>
                     <KPIDeltaCard
                       metrics={[
-                        { label: "구매전환율 (CVR)", value: "+102.7%", direction: "up" },
+                        { label: lang === "kr" ? "구매전환율 (CVR)" : "Conversion Rate (CVR)", value: "+102.7%", direction: "up" },
                         { label: "CPA", value: "-10.4%", direction: "down" },
                         { label: "ROAS", value: "+25.3%", direction: "up" },
                       ]}
                     />
                   </div>
                 }
-                result={["담당 전('24) 대비 담당 후('26.1–7) 기준", "고효율 세그먼트·메시지 조합 발굴"]}
-                note="일부 프로모션에서는 평균 대비 높은 CRM 효율을 확인하고, 성과가 높은 타겟·메시지 조합을 후속 운영에 반영했습니다."
-                role="CRM 전략 및 운영 전담, 타깃 세그먼트 설계, 메시지·프로모션 기획, 발송 후 성과 분석"
+                result={t.celltrion[1].result}
+                note={t.celltrion[1].note}
+                role={t.celltrion[1].role}
               />
               <ProjectCard
                 anchorId="kpi-olive"
                 index="03"
-                title="올리브영 온라인 채널 매출 스케일업"
-                problem="대형 프로모션 기간에 유입·구매가 집중되는 플랫폼 특성상 평시와 동일한 운영 방식을 적용하면 세일 기간 트래픽·리타겟팅 모수 확보가 부족했습니다."
-                how={[
-                  "평시 — 저비용 트래픽 확보, 리타겟팅 모수 축적",
-                  "세일 사전 — 관심 고객 확대, 잠재고객 사전 확보",
-                  "세일 기간 — 구매 가능성 높은 고객 중심 전환 광고, 예산 확대",
-                  "세일 이후 — 잔여 리타겟팅으로 추가 전환, 효율 회수",
-                ]}
+                title={t.celltrion[2].title}
+                problem={t.celltrion[2].problem}
+                how={t.celltrion[2].how}
                 chart={
                   <div>
-                    <BeforeAfterCompare beforeLabel="전년 동월" beforeValue={100} afterLabel="당해 동월" afterValue={416} deltaText="+316%" indexMode />
-                    <div className="text-xs text-center mt-1" style={{ color: MUTED }}>전년 동월 = INDEX 100</div>
+                    <BeforeAfterCompare beforeLabel={lang === "kr" ? "전년 동월" : "Same Month LY"} beforeValue={100} afterLabel={lang === "kr" ? "당해 동월" : "Same Month"} afterValue={416} deltaText="+316%" indexMode />
+                    <div className="text-xs text-center mt-1" style={{ color: MUTED }}>{t.celltrion[2].chartCaption}</div>
                   </div>
                 }
-                result={["전년 동월 대비 Online Sales +316%", "입점 이래 월 최고 매출"]}
-                role="올리브영 온라인 협력광고 전략·운영, 세일 전후 캠페인 구조 및 예산 배분"
-                contribution="주도"
+                result={t.celltrion[2].result}
+                role={t.celltrion[2].role}
+                contribution={lang === "kr" ? "주도" : "Lead"}
               />
               <ProjectCard
                 index="04"
-                title="광고 유입 이후 구매전환 구조 개선"
-                problem="광고를 통한 상세페이지 유입은 충분했지만, 유입 대비 구매전환율이 기대에 못 미쳤습니다. 광고 효율을 개선하는 것만으로는 이 문제를 해결할 수 없어, 랜딩 이후 고객 행동을 확인할 필요가 있었습니다."
-                how={[
-                  "VOC 분석 결과 스펙보다 실사용 후기가 구매 판단에 더 크게 작용함을 확인",
-                  "리얼 리뷰 영역 최상단 재배치 + 이탈 방지 띠배너 추가",
-                  "개편 전후 CVR 비교 후 지피덤 등 다른 상품군으로 확대 적용",
-                ]}
+                title={t.celltrion[3].title}
+                problem={t.celltrion[3].problem}
+                how={t.celltrion[3].how}
                 chart={
                   <div className="flex flex-wrap items-center gap-1.5 mb-4 text-xs" style={{ color: NAVY }}>
-                    <span className="px-2.5 py-1 rounded-full text-white" style={{ background: NAVY_SOFT }}>광고 유입</span>
+                    <span className="px-2.5 py-1 rounded-full text-white" style={{ background: NAVY_SOFT }}>{t.celltrion[3].flowChips[0]}</span>
                     <ArrowRight size={12} color={MUTED} />
-                    <span className="px-2.5 py-1 rounded-full" style={{ background: "#F3EFE3" }}>구매전환 저하 발견</span>
+                    <span className="px-2.5 py-1 rounded-full" style={{ background: "#F3EFE3" }}>{t.celltrion[3].flowChips[1]}</span>
                     <ArrowRight size={12} color={MUTED} />
-                    <span className="px-2.5 py-1 rounded-full" style={{ background: "#F3EFE3" }}>VOC·행동 분석</span>
+                    <span className="px-2.5 py-1 rounded-full" style={{ background: "#F3EFE3" }}>{t.celltrion[3].flowChips[2]}</span>
                     <ArrowRight size={12} color={MUTED} />
-                    <span className="px-2.5 py-1 rounded-full" style={{ background: "#F3EFE3" }}>리뷰 영역 재배치</span>
+                    <span className="px-2.5 py-1 rounded-full" style={{ background: "#F3EFE3" }}>{t.celltrion[3].flowChips[3]}</span>
                     <ArrowRight size={12} color={MUTED} />
-                    <span className="px-2.5 py-1 rounded-full text-white" style={{ background: CORAL }}>구매전환 개선</span>
+                    <span className="px-2.5 py-1 rounded-full text-white" style={{ background: CORAL }}>{t.celltrion[3].flowChips[4]}</span>
                   </div>
                 }
-                result={["구매전환율(CVR) +20%", "지피덤 브랜드로 확대 적용"]}
-                note="광고 최적화만으로는 해결되지 않는 문제였고, 랜딩 이후의 구매전환까지 함께 봤을 때 개선이 가능했습니다."
+                result={t.celltrion[3].result}
+                note={t.celltrion[3].note}
                 evidence={[
-                  { src: IMG_INNERLAB_LP, caption: "이너랩 홀드잇 MAD · 이탈방지 배너 적용 화면" },
-                  { src: IMG_ZIPIDERM_REVIEW, caption: "지피덤 · 동일 전략 확대 적용 + 크리에이터 픽" },
+                  { src: IMG_INNERLAB_LP, caption: lang === "kr" ? "이너랩 홀드잇 MAD · 이탈방지 배너 적용 화면" : "InnerLab Hold-it MAD · Exit-prevention banner applied" },
+                  { src: IMG_ZIPIDERM_REVIEW, caption: lang === "kr" ? "지피덤 · 동일 전략 확대 적용 + 크리에이터 픽" : "GpDerm · Same strategy expanded + creator picks" },
                 ]}
-                role="상품별 유입·이탈·전환 데이터 분석, 이탈방지 장치 기획, VOC 기반 콘텐츠 구조 개선"
-                contribution="주도"
+                role={t.celltrion[3].role}
+                contribution={lang === "kr" ? "주도" : "Lead"}
               />
               <ProjectCard
                 anchorId="kpi-ai"
                 index="05"
-                title="생성형 AI 기반 크리에이티브 실험 속도 개선"
-                problem="동일 소재를 장기간 운영하면 소재 피로도가 빠르게 발생했지만, 내부 디자인 리소스만으로는 충분한 수의 변형 소재를 빠르게 만들어 테스트하기 어려웠습니다."
-                how={[
-                  "VOC·성과 데이터에서 반응 좋았던 메시지·톤 파악해 가설 수립",
-                  "후기형·제보형·커뮤니티형 등 다양한 버전으로 소재 제작 및 테스트",
-                  "Winning Creative의 메시지·구도를 다음 테스트에 반영",
-                ]}
+                title={t.celltrion[4].title}
+                problem={t.celltrion[4].problem}
+                how={t.celltrion[4].how}
                 chart={
                   <div>
                     <div className="flex flex-wrap items-center gap-1.5 mb-4 text-xs" style={{ color: NAVY }}>
-                      <span className="px-2.5 py-1 rounded-full text-white" style={{ background: NAVY_SOFT }}>VOC·성과 데이터</span>
+                      <span className="px-2.5 py-1 rounded-full text-white" style={{ background: NAVY_SOFT }}>{t.celltrion[4].flowChips[0]}</span>
                       <ArrowRight size={12} color={MUTED} />
-                      <span className="px-2.5 py-1 rounded-full" style={{ background: "#F3EFE3" }}>Insight</span>
+                      <span className="px-2.5 py-1 rounded-full" style={{ background: "#F3EFE3" }}>{t.celltrion[4].flowChips[1]}</span>
                       <ArrowRight size={12} color={MUTED} />
-                      <span className="px-2.5 py-1 rounded-full" style={{ background: "#F3EFE3" }}>Hypothesis</span>
+                      <span className="px-2.5 py-1 rounded-full" style={{ background: "#F3EFE3" }}>{t.celltrion[4].flowChips[2]}</span>
                       <ArrowRight size={12} color={MUTED} />
-                      <span className="px-2.5 py-1 rounded-full" style={{ background: CORAL_SOFT }}>AI Creative Variants</span>
+                      <span className="px-2.5 py-1 rounded-full" style={{ background: CORAL_SOFT }}>{t.celltrion[4].flowChips[3]}</span>
                       <ArrowRight size={12} color={MUTED} />
-                      <span className="px-2.5 py-1 rounded-full" style={{ background: "#F3EFE3" }}>Media Test</span>
+                      <span className="px-2.5 py-1 rounded-full" style={{ background: "#F3EFE3" }}>{t.celltrion[4].flowChips[4]}</span>
                       <ArrowRight size={12} color={MUTED} />
-                      <span className="px-2.5 py-1 rounded-full text-white" style={{ background: CORAL }}>Winning Creative</span>
+                      <span className="px-2.5 py-1 rounded-full text-white" style={{ background: CORAL }}>{t.celltrion[4].flowChips[5]}</span>
                       <ArrowRight size={12} color={MUTED} />
-                      <span className="px-2.5 py-1 rounded-full" style={{ background: "#F3EFE3" }}>Learning → Next Test</span>
+                      <span className="px-2.5 py-1 rounded-full" style={{ background: "#F3EFE3" }}>{t.celltrion[4].flowChips[6]}</span>
                     </div>
-                    <BeforeAfterCompare beforeLabel="기존 소재" beforeValue={100} afterLabel="AI 소재" afterValue={216} deltaText="+116%" indexMode />
+                    <BeforeAfterCompare beforeLabel={lang === "kr" ? "기존 소재" : "Baseline Creative"} beforeValue={100} afterLabel={lang === "kr" ? "AI 소재" : "AI Creative"} afterValue={216} deltaText="+116%" indexMode />
                   </div>
                 }
-                result={["CTR +116%", "Winning Creative 발굴 주기 단축"]}
-                note="AI 도구 자체보다, AI로 분석·제작·테스트 속도를 높여 더 많은 가설을 더 빠르게 검증할 수 있었던 과정이 핵심입니다."
+                result={t.celltrion[4].result}
+                note={t.celltrion[4].note}
                 evidence={[
-                  { src: IMG_HANSKIN_AI, caption: "한스킨 PDRN 세럼 · AI 활용 후기형 소재" },
-                  { src: IMG_VIDEO_POSTER, caption: "동일 소재 3-section 영상 버전 (자사몰 상시 운영)" },
+                  { src: IMG_HANSKIN_AI, caption: lang === "kr" ? "한스킨 PDRN 세럼 · AI 활용 후기형 소재" : "Hanskin PDRN Serum · AI-generated review-style creative" },
+                  { src: IMG_VIDEO_POSTER, caption: lang === "kr" ? "동일 소재 3-section 영상 버전 (자사몰 상시 운영)" : "Same creative, 3-section video version (always-on D2C)" },
                 ]}
-                role="광고 소재 전략 및 크리에이티브 기획, AI 이미지 제작, 소재별 성과 분석"
-                contribution="주도"
+                role={t.celltrion[4].role}
+                contribution={lang === "kr" ? "주도" : "Lead"}
               />
             </div>
           </section>

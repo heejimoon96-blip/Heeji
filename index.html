@@ -232,7 +232,7 @@ const LANG_CONTENT = {
     agency: [
       {
         title: "VOC 기반 올영세일 성과 개선",
-        client: "아모레퍼시픽 한율 · 연간 광고예산 약 18억원",
+        client: "아모레퍼시픽 한율",
         problem: "프로모션 기간마다 광고 경쟁이 심화되어 제품 USP 중심 소재만으로는 반응·효율을 지속적으로 높이기 어려웠습니다.",
         how: [
           "올리브영 리뷰 약 1,000건 분석, 반복 등장 키워드·표현 도출",
@@ -248,7 +248,7 @@ const LANG_CONTENT = {
       },
       {
         title: "SA 캠페인 구조 개편",
-        client: "웅진씽크빅·웅진책방 · 연간 광고예산 약 14억원",
+        client: "웅진씽크빅·웅진책방",
         problem: "다수 키워드·상품을 유사 기준으로 운영해 광고비 대비 구매전환 효율을 높이는 데 한계가 있었습니다.",
         how: [
           "검색 목적·상품 특성에 따라 SA 캠페인 구조 재설계",
@@ -260,7 +260,7 @@ const LANG_CONTENT = {
       },
       {
         title: "광고 전환을 실제 예약으로 연결",
-        client: "밝은세상안과 · 연간 광고예산 약 16억원",
+        client: "밝은세상안과",
         problem: "광고 플랫폼상 상담신청 전환은 발생했지만 실제 예약으로 이어지지 않는 불량 DB가 존재했습니다.",
         how: [
           "Meta Instant 캠페인으로 상담신청 과정 단축, 신청폼 실명 입력 유도",
@@ -324,6 +324,12 @@ const LANG_CONTENT = {
         result: ["플랫폼별 SA 운영 구조 구축", "키워드 최적화 프로세스 고도화"],
         role: "Naver·Google SA 운영, 검색광고 전략 수립, 키워드·CAC 최적화",
       },
+    ],
+    additionalExperience: [
+      { client: "블랭크코퍼레이션 바디럽", problem: "브랜딩·퍼포먼스 투트랙 캠페인 설계", result: "브랜드 선호도 +1.5%, 오가닉 검색량 +25%, Google 우수사례 등재" },
+      { client: "허닭 · 프레시지", problem: "매출·신규회원 KPI 동시 운영", result: "목표 동시 달성 유지, 프레시지몰 광고 추가 담당" },
+      { client: "매일유업", problem: "신규 광고상품 발굴 및 고객DB 타겟팅", result: "쿠팡 협력광고 신설, 네이버 LIVE쇼핑 매출 ×4" },
+      { client: "카카오스타일 (지그재그·포스티)", problem: "플랫폼별 검색광고 전략 분리", result: "SA 운영 구조 구축, 키워드 최적화 프로세스 고도화" },
     ],
     growthLoop: [
       { n: "01", t: "Diagnose", d: "매체·GA4 데이터로 실매출 기여도 진단" },
@@ -541,7 +547,7 @@ const LANG_CONTENT = {
     agency: [
       {
         title: "VOC-driven Olive Young Sale Performance Improvement",
-        client: "Amorepacific Hanyul · Annual ad budget ~₩1.8B",
+        client: "Amorepacific Hanyul",
         problem: "Ad competition ramped up every promotion period, and creative built around product USPs alone couldn't keep response and efficiency climbing.",
         how: [
           "Analyzed ~1,000 Olive Young reviews to extract recurring keywords and phrases",
@@ -557,7 +563,7 @@ const LANG_CONTENT = {
       },
       {
         title: "SA Campaign Restructuring",
-        client: "Woongjin Thinkbig / Woongjin Bookstore · Annual ad budget ~₩1.4B",
+        client: "Woongjin Thinkbig / Woongjin Bookstore",
         problem: "We were running too many keywords and products under the same rules, which capped how much purchase efficiency could improve for the money we spent.",
         how: [
           "Redesigned SA campaign structure around search intent and product characteristics",
@@ -569,7 +575,7 @@ const LANG_CONTENT = {
       },
       {
         title: "Connecting Ad Conversions to Actual Bookings",
-        client: "Bright Eye Clinic · Annual ad budget ~₩1.6B",
+        client: "Bright Eye Clinic",
         problem: "Consultation-request conversions were happening on the ad platform, but part of that DB never converted into actual bookings.",
         how: [
           "Shortened the consultation-request flow with Meta Instant campaigns and prompted real-name form entry",
@@ -633,6 +639,12 @@ const LANG_CONTENT = {
         result: ["Built a platform-specific SA operating structure", "Matured the keyword-optimization process"],
         role: "Ran Naver and Google SA, search-ad strategy, keyword and CAC optimization",
       },
+    ],
+    additionalExperience: [
+      { client: "Blank Corporation Bodyluv", problem: "Two-track branding × performance campaign", result: "Brand preference +1.5%, organic search +25%, Google success case" },
+      { client: "Heodak · Fresheasy", problem: "Ran revenue and new-member KPIs together", result: "Consistently hit both targets, took on Fresheasy mall ads" },
+      { client: "Maeil Dairies", problem: "New ad products & customer-DB targeting", result: "Launched Coupang co-op ads, Naver LIVE Shopping revenue ×4" },
+      { client: "Kakao Style (Zigzag, Posty)", problem: "Split search-ad strategy by platform", result: "Built platform-specific SA structure, matured keyword optimization" },
     ],
     growthLoop: [
       { n: "01", t: "Diagnose", d: "Diagnose revenue contribution from media and GA4 data" },
@@ -802,7 +814,7 @@ function Card({ children, className = "", style = {}, id, onClick }) {
     <div
       id={id}
       onClick={onClick}
-      className={`rounded-2xl border ${className} ${clickable ? "cursor-pointer transition-shadow hover:shadow-md" : ""}`}
+      className={`rounded-2xl border card-print ${className} ${clickable ? "cursor-pointer transition-shadow hover:shadow-md" : ""}`}
       style={{ background: CARD, borderColor: "#EAE5D8", ...style }}
     >
       {children}
@@ -1093,7 +1105,7 @@ function VideoCard({ src, label, desc }) {
 
   if (failed) {
     return (
-      <div className="rounded-xl overflow-hidden flex-shrink-0" style={{ background: "#FAF7EF", width: "100%" }}>
+      <div className="rounded-xl overflow-hidden flex-shrink-0 card-print" style={{ background: "#FAF7EF", width: "100%" }}>
         <div className="relative flex flex-col items-center justify-center gap-2 text-center px-3" style={{ aspectRatio: "9/16", background: "#F0ECE0" }}>
           <ImageIcon size={22} color="#B8B09C" />
           <div className="text-[11px]" style={{ color: "#B8B09C" }}>영상 준비 중</div>
@@ -1107,7 +1119,7 @@ function VideoCard({ src, label, desc }) {
   }
 
   return (
-    <div className="rounded-xl overflow-hidden flex-shrink-0" style={{ background: "#FAF7EF", width: "100%" }}>
+    <div className="rounded-xl overflow-hidden flex-shrink-0 card-print" style={{ background: "#FAF7EF", width: "100%" }}>
       <div className="relative" style={{ aspectRatio: "9/16", background: "#000" }}>
         {playing ? (
           <video
@@ -1343,6 +1355,24 @@ function Portfolio() {
 
         /* No forced heights on cards — content defines height */
         .auto-h { height: auto; min-height: 0; }
+
+        /* ============ PRINT / PDF (A4 Landscape) ============ */
+        @page { size: A4 landscape; margin: 10mm; }
+        @media print {
+          html, body {
+            margin: 0; padding: 0; background: #fff;
+            -webkit-print-color-adjust: exact; print-color-adjust: exact;
+          }
+          .no-print { display: none !important; }
+          aside { position: static !important; height: auto !important; width: auto !important; display: none !important; }
+          .lg\\:ml-64 { margin-left: 0 !important; }
+          * { position: static !important; }
+          video { display: none !important; }
+          img { max-width: 100% !important; height: auto !important; object-fit: contain !important; }
+          h1, h2, h3, h4, .avoid-break-after { break-after: avoid; page-break-after: avoid; }
+          p, li { orphans: 3; widows: 3; }
+          .card-print, figure { break-inside: avoid; page-break-inside: avoid; }
+        }
       `}</style>
 
       <Lightbox image={lightbox} onClose={() => setLightbox(null)} />
@@ -1352,7 +1382,7 @@ function Portfolio() {
         <button
           onClick={scrollToTop}
           aria-label="맨 위로"
-          className="hidden lg:flex fixed z-50 items-center justify-center rounded-full shadow-lg"
+          className="hidden lg:flex fixed z-50 items-center justify-center rounded-full shadow-lg no-print"
           style={{
             bottom: 24, right: 24, width: 46, height: 46, background: NAVY,
           }}
@@ -1362,7 +1392,7 @@ function Portfolio() {
       )}
 
       {/* Mobile floating menu button + panel — replaces top-bar dropdown per spec */}
-      <div className="lg:hidden">
+      <div className="lg:hidden no-print">
         {navOpen && (
           <div
             className="fixed z-50 rounded-2xl shadow-xl overflow-hidden"
@@ -1403,7 +1433,7 @@ function Portfolio() {
       </div>
 
       {/* Mobile top bar — branding + language switcher, section nav moved to floating button */}
-      <div className="lg:hidden sticky top-0 z-40 flex items-center justify-between px-4 py-3" style={{ background: NAVY }}>
+      <div className="lg:hidden sticky top-0 z-40 flex items-center justify-between px-4 py-3 no-print" style={{ background: NAVY }}>
         <div className="text-white font-semibold" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>{lang === "kr" ? "문희지 — Portfolio" : "Heeji MOON — Portfolio"}</div>
         <LanguageSwitcher lang={lang} setLang={setLang} dark />
       </div>
@@ -1458,19 +1488,9 @@ function Portfolio() {
               {t.hero.title1}<br />
               {t.hero.title2Pre}<span style={{ color: CORAL }}>{t.hero.title2Highlight}</span>{t.hero.title2Post}
             </h1>
-            <p className="text-sm md:text-base mb-8 max-w-2xl" style={{ color: MUTED, textWrap: "balance" }}>
+            <p className="text-sm md:text-base max-w-2xl" style={{ color: MUTED, textWrap: "balance" }}>
               {t.hero.subtitle}
             </p>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              {t.kpiTiles.map((k, i) => (
-                <Card key={i} className="p-5 relative" onClick={() => scrollToCase(KPI_TILE_META[i].target)}>
-                  <ChevronRight size={14} className="absolute top-4 right-4 opacity-40" color={NAVY} />
-                  <div className="text-2xl md:text-3xl font-semibold mb-1" style={{ color: KPI_TILE_META[i].color, fontFamily: "'IBM Plex Mono', monospace" }}>{k.value}</div>
-                  <div className="text-sm font-medium mb-1" style={{ color: NAVY }}>{k.label}</div>
-                  <div className="text-xs" style={{ color: MUTED }}>{k.sub}</div>
-                </Card>
-              ))}
-            </div>
           </section>
 
           {/* EXPERIENCE SNAPSHOT */}
@@ -1517,6 +1537,33 @@ function Portfolio() {
             </div>
           </section>
 
+          {/* ROLE SNAPSHOT — moved up per hiring-priority ordering */}
+          <section id="role" ref={setRef("role")} className="mb-20 scroll-mt-6">
+            <SectionHeading eyebrow="Role Snapshot" title={t.roleSnapshot.title} />
+            <div className="grid sm:grid-cols-2 gap-3">
+              <div className="rounded-xl p-5" style={{ background: "#FAF7EF" }}>
+                <div className="text-xs mb-1" style={{ color: MUTED, fontFamily: "'IBM Plex Mono', monospace" }}>{t.roleSnapshot.agencyPeriod}</div>
+                <div className="text-sm font-semibold mb-2" style={{ color: NAVY }}>{t.roleSnapshot.agencyTag}</div>
+                <div className="flex flex-wrap gap-1.5">
+                  {t.roleSnapshot.agencyItems.map((item, i) => (
+                    <span key={i} className="text-xs px-2.5 py-1 rounded-full" style={{ background: "white", color: NAVY, border: "1px solid #EAE5D8" }}>{item}</span>
+                  ))}
+                </div>
+              </div>
+              <div className="rounded-xl p-5" style={{ background: NAVY }}>
+                <div className="text-xs mb-1" style={{ color: "rgba(255,255,255,0.6)", fontFamily: "'IBM Plex Mono', monospace" }}>{t.roleSnapshot.inhousePeriod}</div>
+                <div className="text-sm font-semibold mb-2" style={{ color: CORAL_SOFT }}>{t.roleSnapshot.inhouseTag}</div>
+                <div className="flex flex-wrap gap-1.5">
+                  {t.roleSnapshot.inhouseItems.map((item, i) => (
+                    <span key={i} className="text-xs px-2.5 py-1 rounded-full text-white" style={{ background: "rgba(255,255,255,0.12)" }}>{item}</span>
+                  ))}
+                </div>
+              </div>
+            </div>
+            <div className="mt-3 text-xs text-center" style={{ color: MUTED }}>
+              {t.roleSnapshot.common}
+            </div>
+          </section>
 
           <section id="capability" ref={setRef("capability")} className="mb-20 scroll-mt-6">
             <SectionHeading
@@ -1964,13 +2011,9 @@ function Portfolio() {
           </section>
 
 
-          {/* 애드이피션시 */}
+          {/* SELECTED AGENCY EXPERIENCE — 3 detailed cases + compact Additional Experience list */}
           <section id="adefficiency" ref={setRef("adefficiency")} className="mb-20 scroll-mt-6">
-            <CompanyHeader
-              name={t.companyHeaders.adefficiency.name}
-              meta={t.companyHeaders.adefficiency.meta}
-              note={t.companyHeaders.adefficiency.note}
-            />
+            <SectionHeading eyebrow="Selected Agency Experience" title={lang === "kr" ? "대행사에서 쌓은 실행력의 증거" : "Evidence of Hands-on Execution at Agencies"} />
             <div className="grid md:grid-cols-2 gap-5">
               <ProjectCard
                 index="01"
@@ -2028,125 +2071,20 @@ function Portfolio() {
                 role={t.agency[2].role}
                 contribution={lang === "kr" ? "담당" : "Owner"}
               />
-              <ProjectCard
-                index="04"
-                title={t.agency[3].title}
-                client={t.agency[3].client}
-                problem={t.agency[3].problem}
-                how={t.agency[3].how}
-                chart={
-                  <div>
-                    <MetricCompareRow
-                      metrics={[
-                        { metricName: lang === "kr" ? "유입" : "Traffic", beforeLabel: "Before", beforeValue: 100, afterLabel: "After", afterValue: 191, deltaText: "+91%", indexMode: true },
-                        { metricName: lang === "kr" ? "구매전환" : "Conversion", beforeLabel: "Before", beforeValue: 100, afterLabel: "After", afterValue: 220, deltaText: "+120%", indexMode: true },
-                        { metricName: "ROAS", beforeLabel: "Before", beforeValue: 100, afterLabel: "After", afterValue: 160, deltaText: "+60%", indexMode: true },
-                        { metricName: "CVR", beforeLabel: "Before", beforeValue: 100, afterLabel: "After", afterValue: 194, deltaText: "+94%", indexMode: true },
-                      ]}
-                      height={110}
-                    />
+            </div>
+
+            {/* Additional Experience — compact 1-line list, no large cards */}
+            <div className="mt-6">
+              <div className="text-xs font-semibold tracking-wider mb-3" style={{ color: NAVY_SOFT, fontFamily: "'IBM Plex Mono', monospace" }}>ADDITIONAL EXPERIENCE</div>
+              <div className="rounded-xl overflow-hidden" style={{ background: "#FAF7EF" }}>
+                {t.additionalExperience.map((item, i) => (
+                  <div key={i} className={`flex flex-wrap gap-x-3 gap-y-1 px-4 py-3 text-xs ${i > 0 ? "border-t" : ""}`} style={{ borderColor: "#EDE8DA" }}>
+                    <span className="font-semibold" style={{ color: NAVY, minWidth: 160 }}>{item.client}</span>
+                    <span style={{ color: MUTED }}>{item.problem}</span>
+                    <span style={{ color: CORAL }}>{item.result}</span>
                   </div>
-                }
-                result={t.agency[3].result}
-                video={{ id: "Y0BZ_NOctHs", caption: t.agency[3].videoCaption }}
-                role={t.agency[3].role}
-                contribution={lang === "kr" ? "담당" : "Owner"}
-              />
-              <ProjectCard
-                index="05"
-                title={t.agency[4].title}
-                client={t.agency[4].client}
-                problem={t.agency[4].problem}
-                how={t.agency[4].how}
-                result={t.agency[4].result}
-                evidence={[
-                  { src: IMG_HEODAK, caption: t.agency[4].evidenceCaptions[0] },
-                  { src: IMG_HEODAK_2, caption: t.agency[4].evidenceCaptions[1] },
-                ]}
-                role={t.agency[4].role}
-                contribution={lang === "kr" ? "담당" : "Owner"}
-              />
-            </div>
-          </section>
-
-
-          {/* 매드업 */}
-          <section id="madup" ref={setRef("madup")} className="mb-20 scroll-mt-6">
-            <CompanyHeader
-              name={t.companyHeaders.madup.name}
-              meta={t.companyHeaders.madup.meta}
-              note={t.companyHeaders.madup.note}
-            />
-            <div className="grid md:grid-cols-2 gap-5">
-              <ProjectCard
-                index="01"
-                title={t.madupCases[0].title}
-                client={t.madupCases[0].client}
-                problem={t.madupCases[0].problem}
-                how={t.madupCases[0].how}
-                result={t.madupCases[0].result}
-                evidence={[{ src: IMG_MAEIL_TOSS, caption: t.madupCases[0].evidenceCaption }]}
-                role={t.madupCases[0].role}
-                contribution={lang === "kr" ? "담당" : "Owner"}
-              />
-              <ProjectCard
-                index="02"
-                title={t.madupCases[1].title}
-                client={t.madupCases[1].client}
-                tag={t.madupCases[1].tag}
-                problem={t.madupCases[1].problem}
-                how={t.madupCases[1].how}
-                result={t.madupCases[1].result}
-                role={t.madupCases[1].role}
-                contribution={lang === "kr" ? "담당" : "Owner"}
-              />
-            </div>
-          </section>
-
-          {/* ROLE SNAPSHOT — merged compact version (was duplicated across Role Evolution + Career) */}
-          <section id="role" ref={setRef("role")} className="mb-20 scroll-mt-6">
-            <SectionHeading eyebrow="Role Snapshot" title={t.roleSnapshot.title} />
-            <div className="grid sm:grid-cols-2 gap-3">
-              <div className="rounded-xl p-5" style={{ background: "#FAF7EF" }}>
-                <div className="text-xs mb-1" style={{ color: MUTED, fontFamily: "'IBM Plex Mono', monospace" }}>{t.roleSnapshot.agencyPeriod}</div>
-                <div className="text-sm font-semibold mb-2" style={{ color: NAVY }}>{t.roleSnapshot.agencyTag}</div>
-                <div className="flex flex-wrap gap-1.5">
-                  {t.roleSnapshot.agencyItems.map((item, i) => (
-                    <span key={i} className="text-xs px-2.5 py-1 rounded-full" style={{ background: "white", color: NAVY, border: "1px solid #EAE5D8" }}>{item}</span>
-                  ))}
-                </div>
+                ))}
               </div>
-              <div className="rounded-xl p-5" style={{ background: NAVY }}>
-                <div className="text-xs mb-1" style={{ color: "rgba(255,255,255,0.6)", fontFamily: "'IBM Plex Mono', monospace" }}>{t.roleSnapshot.inhousePeriod}</div>
-                <div className="text-sm font-semibold mb-2" style={{ color: CORAL_SOFT }}>{t.roleSnapshot.inhouseTag}</div>
-                <div className="flex flex-wrap gap-1.5">
-                  {t.roleSnapshot.inhouseItems.map((item, i) => (
-                    <span key={i} className="text-xs px-2.5 py-1 rounded-full text-white" style={{ background: "rgba(255,255,255,0.12)" }}>{item}</span>
-                  ))}
-                </div>
-              </div>
-            </div>
-            <div className="mt-3 text-xs text-center" style={{ color: MUTED }}>
-              {t.roleSnapshot.common}
-            </div>
-          </section>
-
-          {/* GROWTH LOOP */}
-          <section id="growth" ref={setRef("growth")} className="mb-20 scroll-mt-6">
-            <SectionHeading eyebrow="Repeatable Growth Loop" title={t.growthLoopTitle} />
-            <div className="flex flex-col md:flex-row gap-3">
-              {t.growthLoop.map((s, i) => (
-                <React.Fragment key={i}>
-                  <Card className="p-4 flex-1" style={i === t.growthLoop.length - 1 ? { background: CORAL, borderColor: CORAL } : {}}>
-                    <div className="text-xs mb-1" style={{ color: i === t.growthLoop.length - 1 ? "white" : CORAL, fontFamily: "'IBM Plex Mono', monospace" }}>{s.n}</div>
-                    <div className="font-semibold text-sm mb-1" style={{ color: i === t.growthLoop.length - 1 ? "white" : NAVY }}>{s.t}</div>
-                    <div className="text-xs" style={{ color: i === t.growthLoop.length - 1 ? "rgba(255,255,255,0.85)" : MUTED }}>{s.d}</div>
-                  </Card>
-                  {i < t.growthLoop.length - 1 && (
-                    <div className="hidden md:flex items-center justify-center"><ArrowRight size={16} color={CORAL} /></div>
-                  )}
-                </React.Fragment>
-              ))}
             </div>
           </section>
 

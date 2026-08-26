@@ -779,13 +779,34 @@ function Portfolio() {
     <div data-lang={lang} style={{ background: IVORY, minHeight: "100vh" }}>
       <style>{`
         ${FONT_IMPORT}
-        * { font-family: 'Inter', sans-serif; }
+        * { font-family: 'Inter', sans-serif; box-sizing: border-box; }
         .scroll-thin::-webkit-scrollbar { width: 6px; }
         .scroll-thin::-webkit-scrollbar-thumb { background: #33406333; border-radius: 999px; }
         html { scroll-behavior: smooth; }
-        [data-lang="kr"] p, [data-lang="kr"] li { word-break: keep-all; overflow-wrap: break-word; }
-        [data-lang="en"] p, [data-lang="en"] li { word-break: normal; overflow-wrap: break-word; }
-        h1, h2, h3 { text-wrap: balance; }
+
+        /* Korean: never split words/particles mid-syllable-block */
+        [data-lang="kr"] p, [data-lang="kr"] li, [data-lang="kr"] span, [data-lang="kr"] div {
+          word-break: keep-all;
+          overflow-wrap: break-word;
+          line-break: strict;
+        }
+        [data-lang="kr"] p, [data-lang="kr"] li { text-wrap: pretty; }
+
+        /* English: normal word-break, no forced mid-word hyphenation */
+        [data-lang="en"] p, [data-lang="en"] li, [data-lang="en"] span, [data-lang="en"] div {
+          word-break: normal;
+          overflow-wrap: break-word;
+          hyphens: none;
+        }
+        [data-lang="en"] p, [data-lang="en"] li { text-wrap: pretty; }
+
+        h1, h2, h3, h4 { text-wrap: balance; }
+
+        /* Never let text overflow fixed-width flex/grid children */
+        .flex > *, .grid > * { min-width: 0; }
+
+        /* No forced heights on cards — content defines height */
+        .auto-h { height: auto; min-height: 0; }
       `}</style>
 
       <Lightbox image={lightbox} onClose={() => setLightbox(null)} />
@@ -897,7 +918,7 @@ function Portfolio() {
             <div className="text-xs font-semibold tracking-[0.2em] mb-3" style={{ color: CORAL, fontFamily: "'IBM Plex Mono', monospace" }}>
               {t.hero.eyebrow}
             </div>
-            <h1 className="text-3xl md:text-5xl font-semibold leading-tight mb-4" style={{ color: NAVY, fontFamily: "'Space Grotesk', sans-serif", textWrap: "balance" }}>
+            <h1 className="font-semibold leading-tight mb-4" style={{ color: NAVY, fontFamily: "'Space Grotesk', sans-serif", textWrap: "balance", fontSize: "clamp(28px, 5vw, 52px)" }}>
               {t.hero.title1}<br />
               {t.hero.title2Pre}<span style={{ color: CORAL }}>{t.hero.title2Highlight}</span>{t.hero.title2Post}
             </h1>
@@ -916,7 +937,32 @@ function Portfolio() {
             </div>
           </section>
 
-          {/* CAPABILITY */}
+          {/* SUCCESS CASES AT A GLANCE */}
+          <section id="glance" ref={setRef("glance")} className="mb-20 scroll-mt-6">
+            <SectionHeading eyebrow="Selected Impact" title="대표 성과를 한눈에 확인할 수 있습니다" />
+            <div className="grid grid-cols-2 lg:grid-cols-5 gap-3">
+              {[
+                { cat: "CRM", kpiLabel: "CVR", kpi: "+102.7%", name: "Customer Segmentation", change: "전체 발송 → 구매·행동 데이터 기반 세분화", color: TEAL, target: "kpi-crm" },
+                { cat: "COMMERCE", kpiLabel: "Online Sales", kpi: "+316%", name: "Olive Young", change: "Always-on → Promotion 단계별 운영", color: CORAL, target: "kpi-olive" },
+                { cat: "GLOBAL PAID MEDIA", kpiLabel: "Purchases", kpi: "+846%", name: "Amazon US", change: "Media · Target · Landing Restructure", color: NAVY_SOFT, target: "kpi-global-amazon" },
+                { cat: "GLOBAL FUNNEL", kpiLabel: "Sales", kpi: "+229%", name: "Shopee", change: "Conversion Only → Funnel Restructure", color: CORAL, target: "kpi-shopee" },
+                { cat: "MARKETPLACE", kpiLabel: "Sales", kpi: "+176.58%", name: "Qoo10 Japan", change: "Paid Media → Marketplace Growth", color: NAVY_SOFT, target: "kpi-qoo10" },
+              ].map((c, i) => (
+                <Card key={i} className="p-4 flex flex-col" onClick={() => scrollToCase(c.target)}>
+                  <div className="text-[10px] font-semibold tracking-wider mb-2" style={{ color: MUTED, fontFamily: "'IBM Plex Mono', monospace" }}>{c.cat}</div>
+                  <div className="text-xl font-semibold mb-0.5" style={{ color: c.color, fontFamily: "'IBM Plex Mono', monospace" }}>{c.kpi}</div>
+                  <div className="text-[11px] mb-2" style={{ color: MUTED }}>{c.kpiLabel}</div>
+                  <div className="text-xs font-semibold mb-1" style={{ color: NAVY }}>{c.name}</div>
+                  <div className="text-[11px] leading-snug mb-3" style={{ color: MUTED }}>{c.change}</div>
+                  <div className="mt-auto flex items-center gap-1 text-[11px] font-semibold" style={{ color: CORAL }}>
+                    View Case <ChevronRight size={12} color={CORAL} />
+                  </div>
+                </Card>
+              ))}
+            </div>
+          </section>
+
+
           <section id="capability" ref={setRef("capability")} className="mb-20 scroll-mt-6">
             <SectionHeading
               eyebrow={t.capability.eyebrow}
@@ -971,9 +1017,8 @@ function Portfolio() {
                 decision="매체 ROAS만으로 예산을 판단하지 않고, GA4 기준 실매출 기여도를 추가 판단 기준으로 삼기로 했습니다."
                 how={[
                   "매체·캠페인별 실매출 기여도 분석",
-                  "기여도·효율 낮은 매체·캠페인 Cut-off",
-                  "검증된 매체·상품·캠페인 중심 예산 재배분",
-                  "리타겟팅·기존 고객 타겟 비중 확대, CTR·CVR·ROAS 기준 지속 조정",
+                  "기여도·효율 낮은 매체·캠페인 Cut-off, 검증된 영역으로 예산 재배분",
+                  "리타겟팅·기존 고객 비중 확대, CTR·CVR·ROAS 기준 지속 조정",
                 ]}
                 chart={
                   <div>
@@ -1054,8 +1099,7 @@ function Portfolio() {
                 problem="광고를 통한 상세페이지 유입은 충분했지만, 유입 대비 구매전환율이 기대에 못 미쳤습니다. 광고 효율을 개선하는 것만으로는 이 문제를 해결할 수 없어, 랜딩 이후 고객 행동을 확인할 필요가 있었습니다."
                 how={[
                   "VOC 분석 결과 스펙보다 실사용 후기가 구매 판단에 더 크게 작용함을 확인",
-                  "중반부에 있던 리얼 리뷰 영역을 상세페이지 최상단으로 재배치",
-                  "'시크릿 특가 · 뒤로가기 시 재입장 불가' 이탈 방지 띠배너 추가",
+                  "리얼 리뷰 영역 최상단 재배치 + 이탈 방지 띠배너 추가",
                   "개편 전후 CVR 비교 후 지피덤 등 다른 상품군으로 확대 적용",
                 ]}
                 chart={
@@ -1086,10 +1130,9 @@ function Portfolio() {
                 title="생성형 AI 기반 크리에이티브 실험 속도 개선"
                 problem="동일 소재를 장기간 운영하면 소재 피로도가 빠르게 발생했지만, 내부 디자인 리소스만으로는 충분한 수의 변형 소재를 빠르게 만들어 테스트하기 어려웠습니다."
                 how={[
-                  "VOC·성과 데이터에서 반응이 좋았던 메시지·톤 파악",
-                  "가설을 세우고 후기형·제보형·커뮤니티형 등 다양한 버전으로 소재 제작",
-                  "CTR·CVR·ROAS 기준으로 소재별 성과 비교 테스트",
-                  "Winning Creative의 메시지·구도를 다음 테스트에 다시 반영",
+                  "VOC·성과 데이터에서 반응 좋았던 메시지·톤 파악해 가설 수립",
+                  "후기형·제보형·커뮤니티형 등 다양한 버전으로 소재 제작 및 테스트",
+                  "Winning Creative의 메시지·구도를 다음 테스트에 반영",
                 ]}
                 chart={
                   <div>
@@ -1224,7 +1267,7 @@ function Portfolio() {
             </Card>
 
             {/* CASE 02 — Shopee: Funnel Restructure */}
-            <Card className="p-5 mb-5">
+            <Card className="p-5 mb-5" id="kpi-shopee">
               <div className="flex items-start justify-between gap-3 flex-wrap mb-2">
                 <div className="text-xs font-semibold tracking-wider" style={{ color: CORAL, fontFamily: "'IBM Plex Mono', monospace" }}>SHOPEE · FUNNEL RESTRUCTURE</div>
                 <Tag tone="teal">Singapore · Vietnam</Tag>
@@ -1274,7 +1317,7 @@ function Portfolio() {
             </Card>
 
             {/* CASE 03 — Qoo10: Marketplace Growth */}
-            <Card className="p-6 mb-5">
+            <Card className="p-6 mb-5" id="kpi-qoo10">
               <div className="flex items-start justify-between gap-3 flex-wrap mb-2">
                 <div className="text-xs font-semibold tracking-wider" style={{ color: CORAL, fontFamily: "'IBM Plex Mono', monospace" }}>QOO10 JAPAN · MARKETPLACE GROWTH</div>
                 <Tag tone="navy">Japan</Tag>
@@ -1453,8 +1496,7 @@ function Portfolio() {
                 client="밝은세상안과 · 연간 광고예산 약 16억원"
                 problem="광고 플랫폼상 상담신청 전환은 발생했지만 실제 예약으로 이어지지 않는 불량 DB가 존재했습니다."
                 how={[
-                  "Meta Instant 캠페인으로 상담신청 과정 단축",
-                  "신청폼 실명 입력 유도로 입력 구조 개선",
+                  "Meta Instant 캠페인으로 상담신청 과정 단축, 신청폼 실명 입력 유도",
                   "신청 건수가 아닌 실제 예약 전환 DB 품질 기준으로 성과 분석",
                   "SA 캠페인 구조 개편 병행",
                 ]}
@@ -1501,7 +1543,7 @@ function Portfolio() {
                   "소재별 CTR·CVR·ROAS 반복 A/B 테스트",
                   "고성과 메시지·비주얼 패턴을 후속 소재 기준으로 축적",
                 ]}
-                result={["ROAS 1,000%대 유지", "신규가입 CPA 2,000원대 유지", "성과 기반 프레시지몰 광고 추가 담당"]}
+                result={["매출·신규회원 KPI 동시 목표 달성 유지", "성과 기반 프레시지몰 광고 추가 담당"]}
                 evidence={[
                   { src: IMG_HEODAK, caption: "허닭 · 다이어터 식단추천 (아침·점심·저녁)" },
                   { src: IMG_HEODAK_2, caption: "허닭 · 첫 구매 100원딜 소재" },
@@ -1530,7 +1572,7 @@ function Portfolio() {
                   "ADID·광고주 내부 고객 DB로 네이버DA 타겟팅 최적화",
                   "카카오 플러스친구 CRM과 Paid Media 결합 운영",
                 ]}
-                result={["쿠팡 협력광고 ROAS 965~1,028% (품목별)", "네이버 LIVE쇼핑 매출 ×4 (동일 상품·구성 기준)"]}
+                result={["쿠팡 협력광고 신규 개설 및 안정적 운영", "네이버 LIVE쇼핑 매출 ×4 (동일 상품·구성 기준)"]}
                 evidence={[{ src: IMG_MAEIL_TOSS, caption: "매일유업 · 쿠팡 협력광고 소재 (상하목장·어메이징오트)" }]}
                 role="Meta·네이버DA·카카오모먼트 운영, 신규 광고상품 제안, 고객DB 활용 타겟 전략"
                 contribution="담당"
@@ -1600,7 +1642,31 @@ function Portfolio() {
 
           {/* CAREER & STARTUP */}
           <section id="career" ref={setRef("career")} className="mb-20 scroll-mt-6">
-            <SectionHeading eyebrow="Career & Startup" title="대행사에서 실무를 쌓고, 인하우스에서 전략으로 확장했습니다" />
+            <SectionHeading eyebrow="Career & Startup" title="직접 운영에서 전략·예산 의사결정까지" />
+
+            <div className="grid sm:grid-cols-2 gap-3 mb-8">
+              <div className="rounded-xl p-5" style={{ background: "#FAF7EF" }}>
+                <div className="text-xs mb-1" style={{ color: MUTED, fontFamily: "'IBM Plex Mono', monospace" }}>AGENCY · 2021–2024</div>
+                <div className="text-sm font-semibold mb-2" style={{ color: NAVY }}>DIRECT OPERATION</div>
+                <ul className="text-xs space-y-1" style={{ color: INK }}>
+                  <li className="flex gap-2"><span style={{ color: NAVY_SOFT }}>·</span>매체 세팅·운영</li>
+                  <li className="flex gap-2"><span style={{ color: NAVY_SOFT }}>·</span>캠페인·소재 실행</li>
+                  <li className="flex gap-2"><span style={{ color: NAVY_SOFT }}>·</span>광고주 커뮤니케이션</li>
+                </ul>
+              </div>
+              <div className="rounded-xl p-5" style={{ background: NAVY }}>
+                <div className="text-xs mb-1" style={{ color: "rgba(255,255,255,0.6)", fontFamily: "'IBM Plex Mono', monospace" }}>IN-HOUSE · 2025–NOW</div>
+                <div className="text-sm font-semibold mb-2" style={{ color: CORAL_SOFT }}>STRATEGY & GROWTH OWNERSHIP</div>
+                <ul className="text-xs space-y-1 text-white">
+                  <li className="flex gap-2"><span style={{ color: CORAL_SOFT }}>·</span>미디어 전략·예산·KPI</li>
+                  <li className="flex gap-2"><span style={{ color: CORAL_SOFT }}>·</span>CRM · CRO · AI Creative</li>
+                  <li className="flex gap-2"><span style={{ color: CORAL_SOFT }}>·</span>실매출 기여도 분석</li>
+                </ul>
+              </div>
+            </div>
+            <div className="text-xs mb-8" style={{ color: MUTED }}>
+              목표 대비 실적 분석 → 개선 우선순위 결정 → 재실행
+            </div>
 
             <div className="grid sm:grid-cols-3 gap-3 mb-8">
               {[

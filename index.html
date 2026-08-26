@@ -337,28 +337,17 @@ const LANG_CONTENT = {
       { period: "2024.01–2024.03", org: "㈜매드업", role: "퍼포먼스마케팅 · M2", detail: "식품·패션 커머스 광고 운영 및 신규 광고상품 제안" },
       { period: "2025.07–재직중", org: "셀트리온스킨큐어", role: "옴니채널사업팀 · 사원", detail: "2025 하반기 국내 퍼포먼스·CRM 총괄 / 2026 조직개편 후 퍼포먼스·CRM 전담", current: true },
     ],
-    roleEvolution: {
-      title: "매체를 직접 운영하던 실무자에서 전략과 예산을 결정하는 역할로 확장했습니다",
-      agencyPeriod: "2021–2024 (대행사)",
-      agencyTag: "직접 운영",
-      agencyItems: ["매체 관리자 직접 세팅 · 운영", "캠페인 · 소재 직접 집행, 광고주 커뮤니케이션"],
-      inhousePeriod: "2025–현재 (인하우스)",
-      inhouseTag: "전략 및 운영 총괄",
-      inhouseItems: ["매체 전략·예산·KPI 방향 결정 및 실매출 기여도 분석", "CRM·상세페이지·AI 소재는 직접 기획·실행"],
-      common: "공통 — 목표 대비 실적 분석 → 개선 우선순위 결정 → 재실행",
+    roleSnapshot: {
+      title: "직접 운영에서 전략·예산 의사결정까지",
+      agencyPeriod: "AGENCY · 2021–2024",
+      agencyTag: "HANDS-ON EXECUTION",
+      agencyItems: ["Media Operation", "Campaign", "Creative", "Client Communication"],
+      inhousePeriod: "IN-HOUSE · 2025–NOW",
+      inhouseTag: "GROWTH OWNERSHIP",
+      inhouseItems: ["Strategy", "Budget", "KPI", "CRM / CRO", "Sales Analysis"],
+      common: "목표 대비 실적 → 문제 진단 → 개선 우선순위 결정 → 재실행",
     },
     growthLoopTitle: "데이터를 기준으로 의사결정과 실행을 반복합니다",
-    careerCompact: {
-      title: "직접 운영에서 전략·예산 의사결정까지",
-      agencyItems: ["매체 세팅·운영", "캠페인·소재 실행", "광고주 커뮤니케이션"],
-      inhouseItems: ["미디어 전략·예산·KPI", "CRM · CRO · AI Creative", "실매출 기여도 분석"],
-      common: "목표 대비 실적 분석 → 개선 우선순위 결정 → 재실행",
-    },
-    scopeSummary: [
-      { label: "CHANNEL", items: ["D2C", "올리브영", "네이버", "Amazon", "Shopee", "올리브영 글로벌"] },
-      { label: "FUNCTION", items: ["Performance", "CRM", "CRO", "Creative", "Data", "AI"] },
-      { label: "ROLE", items: ["Strategy", "Operation", "Analysis", "Budget", "Agency 관리"] },
-    ],
     startup: {
       desc: "광고 이전의 제품과 고객 문제부터 고민해본 마케터입니다. FGI·설문 기반 고객 문제 발굴로 스킨케어 브랜드를 기획하고, 상세페이지·광고·바이럴을 직접 운영했습니다.",
       metric: "와디즈 크라우드펀딩 2회 성공 (목표 대비)",
@@ -378,14 +367,23 @@ const LANG_CONTENT = {
       backToTop: "맨 위로",
       imagePlaceholder: "이미지 있으면 추가 가능",
     },
+    snapshot: {
+      headline: "경험 범위를 한눈에",
+      categories: [
+        { label: "MARKETS", items: ["한국", "미국", "싱가포르", "베트남", "일본"] },
+        { label: "PAID MEDIA", items: ["Meta", "Google", "TikTok", "Naver", "Kakao", "Buzzvil", "Toss"] },
+        { label: "COMMERCE", items: ["D2C", "올리브영", "올리브영 글로벌", "네이버 스마트스토어", "Amazon", "Shopee", "Qoo10"] },
+        { label: "DATA & TRACKING", items: ["GA4", "GTM", "Airbridge", "UTM", "ADID Audience Data"] },
+        { label: "AI", items: ["Midjourney", "ChatGPT", "Claude"] },
+      ],
+    },
     glance: {
-      title: "대표 성과를 한눈에 확인할 수 있습니다",
+      title: "성과를 만든 핵심 의사결정",
       changes: [
         "전체 발송 → 구매·행동 데이터 기반 세분화",
         "Always-on → Promotion 단계별 운영",
         "Media · Target · Landing Restructure",
         "Conversion Only → Funnel Restructure",
-        "Paid Media → Marketplace Growth",
       ],
     },
     global: {
@@ -406,7 +404,7 @@ const LANG_CONTENT = {
         targetDesc: "팔로워·참여자 기반 유사타겟 확장, 랜딩을 PDP로 통일",
         budgetBefore: "저전환 영역 축소",
         budgetAfter: "구매 전환 확인된 매체·캠페인 중심 재배분",
-        learning: "높은 트래픽이 높은 구매전환을 의미하지 않았습니다. TikTok 소재는 CTR·DPV뿐 아니라 ATC·Purchase까지 연결해 매체 역할을 다시 판단했습니다.",
+        learning: "높은 트래픽이 구매전환으로 이어지지 않아, TikTok 소재는 CTR·DPV뿐 아니라 ATC·Purchase까지 연결해 매체 역할을 재평가했습니다.",
         creativeDesc: "UGC·Demonstration·B&A 포맷을 테스트하고, CTR 이후 DPV·ATC·Purchase까지 연결해 소재 역할을 판단했습니다.",
         creativeVideos: ["제품 사용 맥락 중심 UGC", "사용 과정과 효능 포인트 전달", "효능을 빠르게 이해시키는 Visual Proof"],
       },
@@ -423,7 +421,7 @@ const LANG_CONTENT = {
         inappDesc: "Power Rank-up 등 상위 노출형 광고 중심으로 믹스 조정",
         exposureDesc: "Ranking·TS구좌·기획전·Seller Shop·Wishlist 등 내부 접점 활용",
         measurement: "Paid Media에서는 CTR·CPC·Traffic을 확인하고, Qoo10의 Sales·Product·Search·Ranking 데이터를 함께 확인해 성과를 판단했습니다.",
-        learning: "행사 노출만 늘리는 것으로는 매출이 지속되지 않았습니다. Product Focus·Search Demand·In-app Media·Commerce Exposure를 함께 관리했습니다.",
+        learning: "행사 노출 확대만으로는 매출이 지속되지 않아, Product Focus·Search Demand·In-app Media·Commerce Exposure를 함께 관리했습니다.",
       },
       aiCreative: {
         tag: "Midjourney 활용 기획·제작",
@@ -648,28 +646,17 @@ const LANG_CONTENT = {
       { period: "Jan 2024–Mar 2024", org: "Madup Co., Ltd.", role: "Performance Marketing · M2", detail: "Ran F&B and fashion commerce ads, proposed new ad products" },
       { period: "Jul 2025–Present", org: "Celltrion Skincare", role: "Omnichannel Business Team · Associate", detail: "Led domestic performance/CRM in H2 2025, sole owner of performance/CRM after the 2026 reorg", current: true },
     ],
-    roleEvolution: {
-      title: "From hands-on media execution to owning strategy and budget decisions",
-      agencyPeriod: "2021–2024 (Agency)",
-      agencyTag: "Direct Operation",
-      agencyItems: ["Set up and ran media accounts directly", "Executed campaigns and creative, handled client communication"],
-      inhousePeriod: "2025–Present (In-house)",
-      inhouseTag: "Strategy & Operations Ownership",
-      inhouseItems: ["Set media strategy, budget, and KPI direction; analyzed revenue contribution", "Planned and executed CRM, product pages, and AI creative directly"],
-      common: "Common thread — analyze results against targets → set improvement priorities → re-execute",
+    roleSnapshot: {
+      title: "From hands-on execution to growth strategy and budget ownership",
+      agencyPeriod: "AGENCY · 2021–2024",
+      agencyTag: "HANDS-ON EXECUTION",
+      agencyItems: ["Media Operation", "Campaign", "Creative", "Client Communication"],
+      inhousePeriod: "IN-HOUSE · 2025–NOW",
+      inhouseTag: "GROWTH OWNERSHIP",
+      inhouseItems: ["Strategy", "Budget", "KPI", "CRM / CRO", "Sales Analysis"],
+      common: "Results vs. targets → diagnose the problem → set improvement priorities → re-execute",
     },
     growthLoopTitle: "I repeat decision-making and execution on a data-driven cycle",
-    careerCompact: {
-      title: "From hands-on execution to growth strategy and budget ownership",
-      agencyItems: ["Media setup & operations", "Campaign & creative execution", "Client communication"],
-      inhouseItems: ["Media strategy · budget · KPI", "CRM · CRO · AI Creative", "Revenue contribution analysis"],
-      common: "Analyze results against targets → set improvement priorities → re-execute",
-    },
-    scopeSummary: [
-      { label: "CHANNEL", items: ["D2C", "Olive Young", "Naver", "Amazon", "Shopee", "Olive Young Global"] },
-      { label: "FUNCTION", items: ["Performance", "CRM", "CRO", "Creative", "Data", "AI"] },
-      { label: "ROLE", items: ["Strategy", "Operation", "Analysis", "Budget", "Agency Management"] },
-    ],
     startup: {
       desc: "Before I ever touched an ad account, I was already thinking about the product and the customer's problem. I ran FGIs and surveys to find real customer pain points, planned a skincare brand around them, and personally ran the product page, ads, and viral push.",
       metric: "Two successful Wadiz crowdfunding campaigns (vs. target)",
@@ -689,14 +676,23 @@ const LANG_CONTENT = {
       backToTop: "Back to top",
       imagePlaceholder: "Image can be added here",
     },
+    snapshot: {
+      headline: "Experience at a Glance",
+      categories: [
+        { label: "MARKETS", items: ["Korea", "US", "Singapore", "Vietnam", "Japan"] },
+        { label: "PAID MEDIA", items: ["Meta", "Google", "TikTok", "Naver", "Kakao", "Buzzvil", "Toss"] },
+        { label: "COMMERCE", items: ["D2C", "Olive Young", "Olive Young Global", "Naver Smart Store", "Amazon", "Shopee", "Qoo10"] },
+        { label: "DATA & TRACKING", items: ["GA4", "GTM", "Airbridge", "UTM", "ADID Audience Data"] },
+        { label: "AI", items: ["Midjourney", "ChatGPT", "Claude"] },
+      ],
+    },
     glance: {
-      title: "See representative results at a glance",
+      title: "The decisions behind the results",
       changes: [
         "Blanket sends → Purchase/behavior data-based segmentation",
         "Always-on → Staged promotion operation",
         "Media · Target · Landing Restructure",
         "Conversion Only → Funnel Restructure",
-        "Paid Media → Marketplace Growth",
       ],
     },
     global: {
@@ -717,7 +713,7 @@ const LANG_CONTENT = {
         targetDesc: "Expanded lookalikes from followers and engaged users, unified landing to the PDP",
         budgetBefore: "Cut low-conversion areas",
         budgetAfter: "Reallocated toward media/campaigns with confirmed conversion",
-        learning: "High traffic didn't mean high conversion. I re-evaluated TikTok creative's media role by tracing beyond CTR/DPV through to ATC/Purchase.",
+        learning: "High traffic didn't translate into conversion, so I re-evaluated TikTok's media role by tracing CTR/DPV through to ATC/Purchase.",
         creativeDesc: "I tested UGC, demonstration, and B&A formats, judging each creative's role by tracing CTR through DPV, ATC, and Purchase.",
         creativeVideos: ["UGC centered on real product-use context", "Conveys the usage process and efficacy points", "Visual proof that communicates efficacy at a glance"],
       },
@@ -734,7 +730,7 @@ const LANG_CONTENT = {
         inappDesc: "Shifted the media mix toward top-placement ads like Power Rank-up",
         exposureDesc: "Also worked internal touchpoints — Ranking, TS slots, planned exhibits, Seller Shop, Wishlist",
         measurement: "For paid media I tracked CTR, CPC, and traffic; for Qoo10 I also reviewed Sales, Product, Search, and Ranking data to judge performance.",
-        learning: "Boosting event exposure alone didn't sustain sales. I managed Product Focus, Search Demand, In-app Media, and Commerce Exposure together.",
+        learning: "Boosting event exposure alone didn't sustain sales, so I managed Product Focus, Search Demand, In-app Media, and Commerce Exposure together.",
       },
       aiCreative: {
         tag: "Concept & Production with Midjourney",
@@ -1477,16 +1473,35 @@ function Portfolio() {
             </div>
           </section>
 
+          {/* EXPERIENCE SNAPSHOT */}
+          <section id="snapshot" ref={setRef("snapshot")} className="mb-20 scroll-mt-6">
+            <div className="text-xs font-semibold tracking-[0.18em] mb-2" style={{ color: CORAL, fontFamily: "'IBM Plex Mono', monospace" }}>EXPERIENCE SNAPSHOT</div>
+            <h2 className="text-xl md:text-2xl font-semibold mb-4" style={{ color: NAVY, fontFamily: "'Space Grotesk', sans-serif" }}>{t.snapshot.headline}</h2>
+            <div className="rounded-xl p-5" style={{ background: "#FAF7EF" }}>
+              {t.snapshot.categories.map((cat, i) => (
+                <div key={i} className={i > 0 ? "mt-3 pt-3 border-t" : ""} style={i > 0 ? { borderColor: "#EDE8DA" } : {}}>
+                  <div className="flex flex-col sm:flex-row sm:items-center gap-1.5 sm:gap-3">
+                    <div className="text-[10px] font-semibold tracking-wider flex-shrink-0 sm:w-32" style={{ color: MUTED, fontFamily: "'IBM Plex Mono', monospace" }}>{cat.label}</div>
+                    <div className="flex flex-wrap gap-1.5">
+                      {cat.items.map((it, j) => (
+                        <span key={j} className="text-xs px-2.5 py-1 rounded-full" style={{ background: "white", color: NAVY, border: "1px solid #EAE5D8" }}>{it}</span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+
           {/* SUCCESS CASES AT A GLANCE */}
           <section id="glance" ref={setRef("glance")} className="mb-20 scroll-mt-6">
             <SectionHeading eyebrow="Selected Impact" title={t.glance.title} />
-            <div className="grid grid-cols-2 lg:grid-cols-5 gap-3">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
               {[
                 { cat: "CRM", kpiLabel: "CVR", kpi: "+102.7%", name: "Customer Segmentation", change: t.glance.changes[0], color: TEAL, target: "kpi-crm" },
                 { cat: "COMMERCE", kpiLabel: "Online Sales", kpi: "+316%", name: "Olive Young", change: t.glance.changes[1], color: CORAL, target: "kpi-olive" },
                 { cat: "GLOBAL PAID MEDIA", kpiLabel: "Purchases", kpi: "+846%", name: "Amazon US", change: t.glance.changes[2], color: NAVY_SOFT, target: "kpi-global-amazon" },
                 { cat: "GLOBAL FUNNEL", kpiLabel: "Sales", kpi: "+229%", name: "Shopee", change: t.glance.changes[3], color: CORAL, target: "kpi-shopee" },
-                { cat: "MARKETPLACE", kpiLabel: "Sales", kpi: "+176.58%", name: "Qoo10 Japan", change: t.glance.changes[4], color: NAVY_SOFT, target: "kpi-qoo10" },
               ].map((c, i) => (
                 <Card key={i} className="p-4 flex flex-col" onClick={() => scrollToCase(c.target)}>
                   <div className="text-[10px] font-semibold tracking-wider mb-2" style={{ color: MUTED, fontFamily: "'IBM Plex Mono', monospace" }}>{c.cat}</div>
@@ -2088,31 +2103,31 @@ function Portfolio() {
             </div>
           </section>
 
-          {/* ROLE EVOLUTION */}
+          {/* ROLE SNAPSHOT — merged compact version (was duplicated across Role Evolution + Career) */}
           <section id="role" ref={setRef("role")} className="mb-20 scroll-mt-6">
-            <SectionHeading eyebrow="Role Evolution" title={t.roleEvolution.title} />
-            <div className="grid md:grid-cols-2 gap-5">
-              <Card className="p-6">
-                <div className="text-sm font-semibold mb-1" style={{ color: MUTED }}>{t.roleEvolution.agencyPeriod}</div>
-                <Tag>{t.roleEvolution.agencyTag}</Tag>
-                <ul className="text-sm mt-4 space-y-2" style={{ color: INK }}>
-                  {t.roleEvolution.agencyItems.map((item, i) => (
-                    <li key={i} className="flex gap-2"><span style={{ color: CORAL }}>·</span>{item}</li>
+            <SectionHeading eyebrow="Role Snapshot" title={t.roleSnapshot.title} />
+            <div className="grid sm:grid-cols-2 gap-3">
+              <div className="rounded-xl p-5" style={{ background: "#FAF7EF" }}>
+                <div className="text-xs mb-1" style={{ color: MUTED, fontFamily: "'IBM Plex Mono', monospace" }}>{t.roleSnapshot.agencyPeriod}</div>
+                <div className="text-sm font-semibold mb-2" style={{ color: NAVY }}>{t.roleSnapshot.agencyTag}</div>
+                <div className="flex flex-wrap gap-1.5">
+                  {t.roleSnapshot.agencyItems.map((item, i) => (
+                    <span key={i} className="text-xs px-2.5 py-1 rounded-full" style={{ background: "white", color: NAVY, border: "1px solid #EAE5D8" }}>{item}</span>
                   ))}
-                </ul>
-              </Card>
-              <Card className="p-6" style={{ background: NAVY }}>
-                <div className="text-sm font-semibold mb-1 text-white/60">{t.roleEvolution.inhousePeriod}</div>
-                <Tag tone="coral">{t.roleEvolution.inhouseTag}</Tag>
-                <ul className="text-sm mt-4 space-y-2 text-white/80">
-                  {t.roleEvolution.inhouseItems.map((item, i) => (
-                    <li key={i} className="flex gap-2"><span style={{ color: CORAL_SOFT }}>·</span>{item}</li>
+                </div>
+              </div>
+              <div className="rounded-xl p-5" style={{ background: NAVY }}>
+                <div className="text-xs mb-1" style={{ color: "rgba(255,255,255,0.6)", fontFamily: "'IBM Plex Mono', monospace" }}>{t.roleSnapshot.inhousePeriod}</div>
+                <div className="text-sm font-semibold mb-2" style={{ color: CORAL_SOFT }}>{t.roleSnapshot.inhouseTag}</div>
+                <div className="flex flex-wrap gap-1.5">
+                  {t.roleSnapshot.inhouseItems.map((item, i) => (
+                    <span key={i} className="text-xs px-2.5 py-1 rounded-full text-white" style={{ background: "rgba(255,255,255,0.12)" }}>{item}</span>
                   ))}
-                </ul>
-              </Card>
+                </div>
+              </div>
             </div>
-            <div className="mt-4 rounded-xl p-4 text-sm font-medium text-center" style={{ background: "#F3EFE3", color: NAVY }}>
-              {t.roleEvolution.common}
+            <div className="mt-3 text-xs text-center" style={{ color: MUTED }}>
+              {t.roleSnapshot.common}
             </div>
           </section>
 
@@ -2137,48 +2152,7 @@ function Portfolio() {
 
           {/* CAREER & STARTUP */}
           <section id="career" ref={setRef("career")} className="mb-20 scroll-mt-6">
-            <SectionHeading eyebrow="Career & Startup" title={t.careerCompact.title} />
-
-            <div className="grid sm:grid-cols-2 gap-3 mb-8">
-              <div className="rounded-xl p-5" style={{ background: "#FAF7EF" }}>
-                <div className="text-xs mb-1" style={{ color: MUTED, fontFamily: "'IBM Plex Mono', monospace" }}>AGENCY · 2021–2024</div>
-                <div className="text-sm font-semibold mb-2" style={{ color: NAVY }}>DIRECT OPERATION</div>
-                <ul className="text-xs space-y-1" style={{ color: INK }}>
-                  {t.careerCompact.agencyItems.map((item, i) => (
-                    <li key={i} className="flex gap-2"><span style={{ color: NAVY_SOFT }}>·</span>{item}</li>
-                  ))}
-                </ul>
-              </div>
-              <div className="rounded-xl p-5" style={{ background: NAVY }}>
-                <div className="text-xs mb-1" style={{ color: "rgba(255,255,255,0.6)", fontFamily: "'IBM Plex Mono', monospace" }}>IN-HOUSE · 2025–NOW</div>
-                <div className="text-sm font-semibold mb-2" style={{ color: CORAL_SOFT }}>STRATEGY & GROWTH OWNERSHIP</div>
-                <ul className="text-xs space-y-1 text-white">
-                  {t.careerCompact.inhouseItems.map((item, i) => (
-                    <li key={i} className="flex gap-2"><span style={{ color: CORAL_SOFT }}>·</span>{item}</li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-            <div className="text-xs mb-8" style={{ color: MUTED }}>
-              {t.careerCompact.common}
-            </div>
-
-            <div className="grid sm:grid-cols-3 gap-3 mb-8">
-              {t.scopeSummary.map((group, i) => (
-                <div key={i} className="rounded-xl p-4" style={{ background: "#FAF7EF" }}>
-                  <div className="text-xs font-semibold tracking-wider mb-2.5" style={{ color: CORAL, fontFamily: "'IBM Plex Mono', monospace" }}>
-                    {group.label}
-                  </div>
-                  <div className="flex flex-wrap gap-1.5">
-                    {group.items.map((it, j) => (
-                      <span key={j} className="text-xs px-2.5 py-1 rounded-full" style={{ background: "white", color: NAVY, border: "1px solid #EAE5D8" }}>
-                        {it}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
+            <SectionHeading eyebrow="Career & Startup" title={lang === "kr" ? "회사별 이력과 창업 경험" : "Company History & Startup Experience"} />
 
             <div className="grid lg:grid-cols-5 gap-6">
               <div className="lg:col-span-3 space-y-3">

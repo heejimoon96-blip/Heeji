@@ -351,7 +351,7 @@ const LANG_CONTENT = {
       inhousePeriod: "IN-HOUSE · 2025–NOW",
       inhouseTag: "GROWTH OWNERSHIP",
       inhouseItems: ["Strategy", "Budget", "KPI", "CRM / CRO", "Sales Analysis"],
-      common: "목표 대비 실적 → 문제 진단 → 개선 우선순위 결정 → 재실행",
+      common: "캠페인 결과를 목표 대비 진단하고, 저효율 영역부터 예산·타겟을 재조정합니다. Acquisition(미디어·예산) → Conversion(캠페인·CRO) → Retention(CRM·재구매) — 광고 유입부터 구매·재구매까지 하나의 흐름으로 설계합니다.",
     },
     growthLoopTitle: "데이터를 기준으로 의사결정과 실행을 반복합니다",
     startup: {
@@ -666,7 +666,7 @@ const LANG_CONTENT = {
       inhousePeriod: "IN-HOUSE · 2025–NOW",
       inhouseTag: "GROWTH OWNERSHIP",
       inhouseItems: ["Strategy", "Budget", "KPI", "CRM / CRO", "Sales Analysis"],
-      common: "Results vs. targets → diagnose the problem → set improvement priorities → re-execute",
+      common: "I diagnose campaign results against targets and reallocate budget and targeting away from low-efficiency areas. Acquisition (media, budget) → Conversion (campaigns, CRO) → Retention (CRM, repeat purchase) — I design one continuous flow from paid traffic to repeat purchase.",
     },
     growthLoopTitle: "I repeat decision-making and execution on a data-driven cycle",
     startup: {
@@ -844,7 +844,7 @@ function EvidenceGallery({ images }) {
           style={{ borderColor: "#EAE5D8" }}
           onClick={(e) => { e.stopPropagation(); openLightbox(img); }}
         >
-          <img src={img.src} alt={img.caption} className="w-full h-32 object-cover object-top" />
+          <img src={img.src} alt={img.caption} className="w-full h-32 object-cover object-top evidence-thumb" />
           <div className="absolute inset-0 flex items-center justify-center bg-black/0 group-hover:bg-black/20 transition-colors">
             <ZoomIn size={18} className="text-white opacity-0 group-hover:opacity-90 transition-opacity" />
           </div>
@@ -1106,7 +1106,7 @@ function VideoCard({ src, label, desc }) {
   if (failed) {
     return (
       <div className="rounded-xl overflow-hidden flex-shrink-0 card-print" style={{ background: "#FAF7EF", width: "100%" }}>
-        <div className="relative flex flex-col items-center justify-center gap-2 text-center px-3" style={{ aspectRatio: "9/16", background: "#F0ECE0" }}>
+        <div className="relative flex flex-col items-center justify-center gap-2 text-center px-3 video-frame" style={{ aspectRatio: "9/16", background: "#F0ECE0" }}>
           <ImageIcon size={22} color="#B8B09C" />
           <div className="text-[11px]" style={{ color: "#B8B09C" }}>영상 준비 중</div>
         </div>
@@ -1120,7 +1120,7 @@ function VideoCard({ src, label, desc }) {
 
   return (
     <div className="rounded-xl overflow-hidden flex-shrink-0 card-print" style={{ background: "#FAF7EF", width: "100%" }}>
-      <div className="relative" style={{ aspectRatio: "9/16", background: "#000" }}>
+      <div className="relative video-frame" style={{ aspectRatio: "9/16", background: "#000" }}>
         {playing ? (
           <video
             src={src}
@@ -1368,7 +1368,13 @@ function Portfolio() {
           .lg\\:ml-64 { margin-left: 0 !important; }
           * { position: static !important; }
           video { display: none !important; }
-          img { max-width: 100% !important; height: auto !important; object-fit: contain !important; }
+          /* Video thumbnails collapse entirely in print (native video block would otherwise
+             leave a tall empty 9:16 box and blow out the page count); caption/label still show. */
+          .video-frame { display: none !important; }
+          img:not(.evidence-thumb) { max-width: 100% !important; height: auto !important; object-fit: contain !important; }
+          /* Evidence gallery thumbnails keep their fixed grid size in print so a single
+             full-resolution photo can't fill an entire page. */
+          .evidence-thumb { max-width: 100% !important; max-height: 120px !important; width: 100% !important; height: 120px !important; object-fit: cover !important; }
           h1, h2, h3, h4, .avoid-break-after { break-after: avoid; page-break-after: avoid; }
           p, li { orphans: 3; widows: 3; }
           .card-print, figure { break-inside: avoid; page-break-inside: avoid; }
@@ -1562,43 +1568,6 @@ function Portfolio() {
             </div>
             <div className="mt-3 text-xs text-center" style={{ color: MUTED }}>
               {t.roleSnapshot.common}
-            </div>
-          </section>
-
-          <section id="capability" ref={setRef("capability")} className="mb-20 scroll-mt-6">
-            <SectionHeading
-              eyebrow={t.capability.eyebrow}
-              title={t.capability.title}
-              sub={t.capability.sub}
-            />
-            <div className="flex flex-col sm:flex-row items-stretch gap-2 sm:gap-0 mb-3">
-              {t.capability.steps.map((s, i) => {
-                const Icon = CAPABILITY_ICONS[i];
-                return (
-                  <React.Fragment key={i}>
-                    <div className="flex-1 rounded-xl p-4 flex items-center gap-3" style={{ background: "#FAF7EF" }}>
-                      <div className="w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0" style={{ background: NAVY }}>
-                        <Icon size={16} color={CORAL_SOFT} />
-                      </div>
-                      <div className="min-w-0">
-                        <div className="font-semibold text-sm" style={{ color: NAVY }}>{s.n} {s.title}</div>
-                        <div className="text-xs mt-0.5" style={{ color: MUTED }}>{s.desc}</div>
-                      </div>
-                    </div>
-                    {i < t.capability.steps.length - 1 && (
-                      <div className="hidden sm:flex items-center justify-center px-1">
-                        <ArrowRight size={16} color={MUTED} />
-                      </div>
-                    )}
-                  </React.Fragment>
-                );
-              })}
-            </div>
-            <div className="rounded-xl px-4 py-3 flex items-center gap-3" style={{ background: NAVY }}>
-              <Sparkles size={16} color={CORAL_SOFT} className="flex-shrink-0" />
-              <div className="text-xs md:text-sm text-white">
-                <span className="font-semibold">{t.capability.foundationLabel}</span> — {t.capability.foundationDesc}
-              </div>
             </div>
           </section>
 
@@ -2133,7 +2102,7 @@ function Portfolio() {
 
           {/* CONTACT */}
           <section id="contact" ref={setRef("contact")} className="scroll-mt-6">
-            <div className="rounded-2xl p-8 md:p-12 overflow-hidden relative" style={{ background: NAVY }}>
+            <div className="rounded-2xl p-8 md:p-12 overflow-hidden relative card-print" style={{ background: NAVY }}>
               <div className="flex flex-col md:flex-row items-start md:items-end gap-8">
                 <div className="flex-1">
                   <div className="text-xs font-semibold tracking-[0.2em] mb-4" style={{ color: CORAL_SOFT, fontFamily: "'IBM Plex Mono', monospace" }}>

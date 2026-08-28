@@ -117,662 +117,497 @@ const IMG_BODYLUV = "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAAAAAAD/4QEZRXhp
 /* ---------------------------------------------------------------------- */
 const NAV_ITEMS = [
   { id: "overview", icon: Gauge },
-  { id: "cases", icon: BarChart3 },
   { id: "inhouse", icon: Layers },
   { id: "global", icon: TrendingUp },
+  { id: "experiment", icon: Sparkles },
   { id: "agency", icon: Building2 },
+  { id: "startup", icon: GitBranch },
   { id: "career", icon: ListOrdered },
   { id: "contact", icon: Mail },
 ];
 
 /* ---------------------------------------------------------------------- */
 /*  Bilingual content — KR/EN. Numbers and comparison bases stay identical */
-/*  across languages; only labels/copy are localized.                      */
+/*  across languages; only copy is localized. Plain, active-voice tone.    */
 /* ---------------------------------------------------------------------- */
 const LANG_CONTENT = {
   kr: {
-    navLabels: { overview: "Overview", cases: "Selected Cases", inhouse: "In-house Growth", global: "Global Commerce", agency: "Agency", career: "Career", contact: "About" },
+    navLabels: { overview: "Overview", inhouse: "In-house", global: "Global", experiment: "Experiment", agency: "Agency", startup: "Startup", career: "Career", contact: "About" },
     hero: {
-      eyebrow: "PERFORMANCE-LED COMMERCE GROWTH MARKETER",
-      title1: "데이터로 진단하고,",
-      titleHighlight: "전략으로",
-      title2: " 매출을 만듭니다.",
-      sub: "광고 효율에서 끝나지 않습니다. Paid Media에서 시작해 CRM·CRO·Commerce까지 확장하며, 고객 획득 이후 실제 구매와 매출이 막히는 지점을 개선해왔습니다.",
+      eyebrow: "PERFORMANCE & GROWTH MARKETER",
+      title1: "광고 효율을 넘어,",
+      titleHighlight: "실제 구매와 매출",
+      title2: "을 만듭니다.",
+      sub: "자사몰·올리브영·글로벌 이커머스에서 Media·Budget·CRM·CRO를 연결해 온라인 매출 성장을 만들어왔습니다.",
       evolutionFrom: "AGENCY EXECUTION",
-      evolutionTo: "IN-HOUSE GROWTH OWNERSHIP",
-      quad: [
-        { label: "WHO", value: "Performance-led Commerce Growth Marketer" },
-        { label: "HOW", value: "Platform KPI가 아닌 Business KPI를 기준으로 문제를 판단합니다" },
-        { label: "SCOPE", value: "Domestic + Global · Paid Media + CRM + CRO + Commerce" },
-        { label: "EXPERIENCE", value: "Markets · Media · Commerce · Data · AI" },
+      evolutionTo: "IN-HOUSE BUSINESS OWNERSHIP",
+    },
+    currentRole: {
+      tag: "CURRENT ROLE",
+      org: "셀트리온스킨큐어",
+      role: "Performance Marketing · CRM",
+      note: "In-house · 2025.07–재직중",
+    },
+    scope: {
+      rows: [
+        { label: "CHANNEL", value: "D2C · 올리브영 · Amazon · Shopee · Qoo10" },
+        { label: "MARKET", value: "KR · US · SG · VN · JP" },
+        { label: "CORE", value: "Media Strategy · Budget · CRM · CRO · Data" },
       ],
     },
     snapshot: {
-      headline: "경험 범위를 한눈에",
+      headline: "경험 범위",
       categories: [
-        { label: "MARKETS", items: ["한국", "미국", "싱가포르", "베트남", "일본"] },
         { label: "PAID MEDIA", items: ["Meta", { label: "Google", sub: "Search · Demand Gen · YouTube" }, "TikTok", { label: "Naver", sub: "SA · GFA" }, "Kakao", { label: "올리브영", sub: "협력광고" }, "Buzzvil", "Toss"] },
         { label: "COMMERCE", items: ["D2C", "올리브영", "올리브영 글로벌", "네이버 스마트스토어", "Amazon", "Shopee", "Qoo10", "Coupang"] },
-        { label: "DATA & TRACKING", items: ["GA4", "GTM", "Airbridge", "UTM", "ADID Audience Data"] },
+        { label: "DATA / TRACKING", items: ["GA4", "GTM", "Airbridge", "UTM", "ADID"] },
         { label: "AI", items: ["Midjourney", "ChatGPT", "Claude"] },
       ],
     },
-    impactTitle: "지원자의 서로 다른 성장 역량을 보여주는 4개 사례",
     selectedImpact: [
-      { num: "01", tag: "BUSINESS KPI QUALITY", name: "Bright Eye Clinic", kpiLabel: "Actual Bookings", kpi: "+57%", change: "Lead → Actual Booking KPI", target: "case-brighteye", color: CORAL },
-      { num: "02", tag: "CUSTOMER SEGMENTATION", name: "CRM", kpiLabel: "CVR", kpi: "+102.7%", change: "Blanket Send → Purchase/Behavior Segmentation", target: "case-crm", color: TEAL },
-      { num: "03", tag: "GLOBAL COMMERCE", name: "Amazon US", kpiLabel: "Purchases", kpi: "+846%", change: "Spend +4% · Media·Target·Landing Restructure", target: "case-amazon", color: NAVY_SOFT },
-      { num: "04", tag: "0→1 BUSINESS BUILDING", name: "Startup · Wadiz", kpiLabel: "Funding", kpi: "1,106% / 949%", change: "Customer Research → Product → Commerce", target: "case-startup", color: CORAL },
-    ],
-    casesEyebrow: "SELECTED GROWTH CASES",
-    casesTitle: "회사와 연도가 아니라, 가장 강하게 증명되는 문제 해결 순서로",
-    casesSub: "네 개 사례 모두 “어떤 Business Problem을 어떤 데이터와 판단으로 해결했는가”를 기준으로 골랐습니다.",
-    measurementLabels: { period: "PERIOD", comparison: "COMPARISON", primaryKpi: "PRIMARY KPI", scale: "SCALE", myScope: "MY SCOPE", limitation: "LIMITATION" },
-    mainCases: [
-      {
-        id: "case-brighteye",
-        index: "CASE 01",
-        headline: ["광고 전환이 아니라,", "실제 예약을 KPI로 바꿨습니다."],
-        client: "서울부산밝은세상안과",
-        problem: "광고 플랫폼에서는 상담신청이 발생했지만 실제 예약으로 연결되지 않는 불량 DB가 존재했습니다.",
-        observationLabel: "OBSERVATION",
-        observation: "상담신청 수만 최적화하면 매체상 CPA는 좋아져도 Business Outcome은 개선되지 않았습니다.",
-        hypothesisLabel: "HYPOTHESIS",
-        hypothesis: "광고 전환 수보다 신청 품질과 실제 예약 전환을 성과 기준으로 봐야 한다고 판단했습니다.",
-        action: [
-          "Meta Instant Campaign으로 신청 과정을 단축",
-          "Form 내 실명 입력을 유도해 불량 DB 감소",
-          "상담신청 건수가 아닌 실제 예약 완료 DB 품질을 기준으로 Media Performance 재평가",
-          "SA 구조 개편 병행",
-        ],
-        validationLabel: "VALIDATION",
-        validation: "상담신청 CPA가 아니라 예약 완료 DB 품질을 North Star Metric으로 바꿔 매체 성과를 재평가했습니다.",
-        result: [
-          { label: "ACTUAL BOOKING DB", value: "+57%" },
-          { label: "META CPA", value: "-66.1%" },
-          { label: "SA CPA", value: "-27%" },
-        ],
-        secondary: "사내 성공사례 발표",
-        learningLabel: "LEARNING",
-        learning: "전환 수 최적화가 곧 비즈니스 성과 개선은 아니라는 것을 확인했고, 이후 캠페인에서도 신청 품질 지표를 함께 봅니다.",
-        measurement: [
-          { label: "PERIOD", value: "Campaign operating period" },
-          { label: "COMPARISON", value: "Before/After North Star Metric change" },
-          { label: "PRIMARY KPI", value: "Actual booking-completed DB" },
-          { label: "MY SCOPE", value: "SA·DA·VA Operation · Meta Instant 구조 설계 · Conversion Quality Analysis" },
-          { label: "LIMITATION", value: "정확한 분석 기간·DB 절대값은 비공개 — 방향성 비교로 해석", muted: true },
-        ],
-      },
-      {
-        id: "case-crm",
-        index: "CASE 02",
-        headline: ["모든 고객에게 보내던 CRM을,", "고객 상태별 운영으로 바꿨습니다."],
-        client: "셀트리온스킨큐어",
-        problem: "구매 가능성과 관계없이 전체 고객에게 동일 메시지를 보내고 있었습니다.",
-        observationLabel: "OBSERVATION",
-        observation: "동일 비용을 사용하면서도 구매 의도·구매 이력에 따른 효율 차이를 활용하지 못하고 있었습니다.",
-        hypothesisLabel: "HYPOTHESIS",
-        hypothesis: "구매·행동 상태에 따라 Target과 Message를 분리하면 전환 효율을 높일 수 있다고 판단했습니다.",
-        action: [
-          "구매·행동 데이터를 기준으로 Recent Purchasers / Cart Abandoners / New Non-purchasers / At-risk / Interest-based / Top RFM으로 세분화",
-          "SMS·Kakao·App Push 채널별 메시지 차별화",
-          "발송 후 세그먼트별 CVR·ROAS 분석 → 다음 캠페인 타겟 기준에 반영",
-        ],
-        validationLabel: "VALIDATION",
-        validation: "세그먼트별 CVR·ROAS를 비교해 고효율 조합을 다음 캠페인 타겟 기준으로 반영했습니다.",
-        result: [
-          { label: "CVR", value: "+102.7%" },
-          { label: "CPA", value: "-10.4%" },
-          { label: "ROAS", value: "+25.3%" },
-        ],
-        learningLabel: "LEARNING",
-        learning: "전체 발송보다 세분화가 효율적이라는 것을 확인했고, 이후 세그먼트를 프로모션마다 갱신합니다.",
-        measurement: [
-          { label: "PERIOD", value: "2024 Annual → 2026 Jan–Jul" },
-          { label: "COMPARISON", value: "Before/After aggregate (담당 전 vs 담당 후)" },
-          { label: "PRIMARY KPI", value: "CRM Campaign CVR · CPA · ROAS" },
-          { label: "MY SCOPE", value: "Segmentation · Messaging · Operation · Analysis" },
-          { label: "LIMITATION", value: "비교 기간의 계절성이 동일하지 않음 (연간 vs 상반기)", muted: true },
-        ],
-      },
-      {
-        id: "case-amazon",
-        index: "CASE 03",
-        headline: ["광고비를 더 쓰기보다,", "구매가 발생하는 구조를 바꿨습니다."],
-        client: "Amazon US",
-        tag: "Prime Day → Prime Big Deal",
-        problem: "Traffic KPI는 만들어졌지만 구매까지 이어지는 효율이 낮았습니다.",
-        observationLabel: "OBSERVATION",
-        observation: "7월 Prime Day 운영에서 Demand Gen · IG-only · Interest Target · 분산 Landing 구조가 Purchase Intent를 충분히 포착하지 못했습니다.",
-        hypothesisLabel: "HYPOTHESIS",
-        hypothesis: "Purchase Intent가 더 높은 매체로 이동하고 Audience Signal을 확장하고 Landing을 구매 페이지에 집중하면, 동일한 Spend 수준에서도 구매 효율이 개선될 수 있다고 판단했습니다.",
-        levers: [
-          { lever: "MEDIA", before: "Google Demand Gen", after: "Google Search" },
-          { lever: "TARGET", before: "Interest", after: "Interest + Lookalike" },
-          { lever: "PLACEMENT", before: "Instagram Only", after: "Facebook + Instagram" },
-          { lever: "LANDING", before: "분산 Landing", after: "PDP 통일" },
-          { lever: "BUDGET", before: "저전환 영역", after: "구매 전환 확인된 영역" },
-        ],
-        validationLabel: "VALIDATION",
-        validation: "14-day attributed purchases 기준으로 매체·타겟·랜딩 변경 전후 성과를 비교했습니다.",
-        result: [
-          { label: "SPEND", value: "+4%" },
-          { label: "ATC", value: "+479%" },
-          { label: "PURCHASES", value: "+846%" },
-          { label: "ATTRIBUTED SALES", value: "+801%" },
-        ],
-        purchaseScale: "Purchases 30+ → 300+ (39 → 369)",
-        learningLabel: "LEARNING",
-        learning: "TikTok에서 CTR·DPV가 높아도 Purchase로 이어지지 않는 현상을 확인했습니다. Traffic Efficiency ≠ Purchase Efficiency — 이후 CTR → DPV → ATC → Purchase까지 연결해 매체·소재 역할을 판단합니다.",
-        measurement: [
-          { label: "PERIOD", value: "2025 Jul → 2025 Oct" },
-          { label: "COMPARISON", value: "Prime Day → Prime Big Deal (Event-to-event)" },
-          { label: "PRIMARY KPI", value: "14-day attributed purchases / sales" },
-          { label: "SCALE", value: "Media Spend ₩30M-range" },
-          { label: "MY SCOPE", value: "Media Strategy · Budget · Target · Landing Analysis" },
-          { label: "LIMITATION", value: "서로 다른 프로모션 이벤트 간 비교이며 통제집단 없음 — 방향성으로 해석", muted: true },
-        ],
-      },
-      {
-        id: "case-startup",
-        index: "CASE 04",
-        headline: ["광고하기 전에,", "팔릴 고객 문제부터 찾았습니다."],
-        client: "단, 순한 (스킨케어 브랜드 · 창업)",
-        problem: "제품을 먼저 만들고 광고로 판매하는 방식이 아니라, 실제 고객 문제부터 제품 기회를 찾는 것이 필요했습니다.",
-        observationLabel: "RESEARCH",
-        observation: "FGI·Survey를 통해 스킨케어 고객의 반복적인 Pain Point를 발굴했습니다.",
-        hypothesisLabel: "HYPOTHESIS",
-        hypothesis: "반복적으로 등장한 고객 문제를 제품·USP·Content에 직접 반영하면 초기 브랜드에서도 구매 의사를 만들 수 있다고 판단했습니다.",
-        action: [
-          "Customer Research → Product Planning → ODM → Brand/Positioning → Product Detail Page → Ads/Viral → Customer Management",
-          "전 과정을 직접 기획·운영",
-        ],
-        validationLabel: "VALIDATION",
-        validation: "와디즈 펀딩 성과와 초기 재고 완판 여부로 가설을 검증했습니다.",
-        result: [
-          { label: "WADIZ CAMPAIGN 01", value: "1,106%" },
-          { label: "WADIZ CAMPAIGN 02", value: "949%" },
-        ],
-        secondary: "초기 물량 2주 완판 · 연세대학교 창업경진대회 최우수상",
-        learningLabel: "LEARNING",
-        learning: "고객 문제 검증 없이 제품부터 만들지 않는 습관이 이후 마케팅 업무에도 이어졌습니다.",
-        measurement: [
-          { label: "PERIOD", value: "2019–2021" },
-          { label: "COMPARISON", value: "Wadiz 펀딩 목표 대비 실적" },
-          { label: "PRIMARY KPI", value: "Wadiz 펀딩율 (목표 대비 %)" },
-          { label: "MY SCOPE", value: "Customer Research · Product Planning · PDP · Ads/Viral · CS 전 과정" },
-          { label: "LIMITATION", value: "크라우드펀딩 플랫폼 목표 대비 성과이며, 시장 전체 매출 벤치마크는 아님", muted: true },
-        ],
-      },
+      { tag: "COMMERCE SALES", kpi: "+316%", label: "ONLINE SALES", name: "Olive Young", context: "YoY · Same Month", color: CORAL, target: "lever-commerce" },
+      { tag: "CUSTOMER GROWTH", kpi: "+102.7%", label: "CRM CVR", name: "Customer Segmentation", context: "CPA -10.4% · ROAS +25.3%", color: TEAL, target: "lever-crm" },
+      { tag: "GLOBAL PERFORMANCE", kpi: "+846%", label: "PURCHASES", name: "Amazon US", context: "Spend +4% · Prime Day → Prime Big Deal", color: NAVY_SOFT, target: "global-amazon" },
+      { tag: "CREATIVE EXPERIMENT", kpi: "+116%", label: "CTR", name: "AI Creative", context: "Same Product · Media · Week", color: CORAL, target: "experiment" },
     ],
     inhouse: {
-      eyebrow: "IN-HOUSE GROWTH SYSTEM",
-      title: "대표 Case로 쓰지 않은 인하우스 강점",
-      sub: "셀트리온스킨큐어 재직 중 만든 운영 구조 변화를 4개 Supporting Case로 정리했습니다.",
-      cases: [
+      eyebrow: "CURRENT IN-HOUSE GROWTH",
+      title: "온라인 매출을 기준으로 Media·CRM·CRO를 함께 운영했습니다.",
+      sub: "셀트리온스킨큐어에서 자사몰과 주요 Commerce Channel의 Performance Marketing과 CRM을 담당하며, 광고 유입부터 구매전환까지 성과가 막히는 구간에 따라 운영 방식을 바꿔왔습니다.",
+      levers: [
         {
-          title: "REVENUE-BASED BUDGETING",
-          headline: "매체 ROAS가 아니라 GA4 실매출 기여도를 예산 결정 기준으로 바꿨습니다.",
-          flow: ["매체 ROAS", "GA4 Actual Revenue", "Low-contribution Cut-off", "Budget Reallocation"],
-          note: "핵심은 자사몰 ROAS +104%라는 결과가 아니라, Budget Decision Rule 자체를 바꾼 것입니다.",
-          result: [{ label: "자사몰 ROAS (Index)", value: "+104%" }],
-          caveat: "2024 vs 2025 연도 비교이므로 대표 인과 KPI로는 쓰지 않고 Supporting 지표로만 사용합니다.",
+          id: "lever-media",
+          tag: "MEDIA / BUDGET",
+          title: "광고 플랫폼의 ROAS보다 실제 매출 기여도를 봤습니다.",
+          challenge: "매체 대시보드 ROAS만 보면, 효율이 좋아 보여도 실제 매출로 이어지지 않는 캠페인을 가려낼 수 없었습니다.",
+          changes: [
+            "매체 대시보드와 GA4 실매출을 대조해 성과가 과대평가된 캠페인을 찾음",
+            "실제 매출 기여도가 높은 영역으로 예산을 다시 배분",
+            "리타겟팅·기존 고객 비중을 늘려 효율을 계속 조정",
+          ],
+          flow: ["Media ROAS", "GA4 Revenue", "Cut / Scale", "Budget Reallocation"],
+          result: [{ label: "자사몰 ROAS (Index)", value: "+104%", context: "Supporting KPI" }],
+          role: "Media Strategy · Budget Allocation · GA4 Analysis",
         },
         {
-          title: "POST-CLICK CRO",
-          headline: "유입은 충분했지만 구매전환이 낮아, 랜딩 이후 고객 행동을 봤습니다.",
-          flow: ["Traffic", "Low CVR", "VOC / Behavior", "Review Repositioning"],
+          id: "lever-commerce",
+          tag: "COMMERCE",
+          title: "프로모션 하루가 아니라, 전후 전체 Funnel을 운영했습니다.",
+          challenge: "대형 프로모션 때만 반짝 운영하면 트래픽·리타겟팅 모수가 세일 기간에 부족했습니다.",
+          changes: [
+            "평시 — 저비용 트래픽 확보, 리타겟팅 모수 축적",
+            "세일 전 — 관심 고객 확대",
+            "세일 기간 — 구매 가능성 높은 고객 중심으로 예산 확대",
+          ],
+          flow: ["Always-on", "Pre-sale", "Sale", "Post-sale"],
+          result: [{ label: "ONLINE SALES", value: "+316%", context: "YoY · Same Month" }],
+          secondary: "입점 이래 월 최고 매출",
+          role: "Campaign Strategy · Budget · Co-op Ads · Performance Analysis",
+        },
+        {
+          id: "lever-crm",
+          tag: "CRM",
+          title: "전체 발송에서, 고객 상태별 CRM으로 바꿨습니다.",
+          challenge: "구매 가능성과 상관없이 전체 고객에게 같은 메시지를 보내고 있었습니다.",
+          changes: [
+            "구매 이력과 행동 데이터를 기준으로 고객을 다시 나눔",
+            "세그먼트별로 메시지와 채널(SMS·Kakao·App Push)을 다르게 운영",
+            "발송 후 세그먼트별 CVR·ROAS를 보고 다음 타겟에 반영",
+          ],
+          flow: ["All Customers", "Purchase / Behavior Data", "Customer Segments", "Message / Offer"],
+          result: [
+            { label: "CVR", value: "+102.7%" },
+            { label: "CPA", value: "-10.4%" },
+            { label: "ROAS", value: "+25.3%" },
+          ],
+          context: "2024 Annual → Jan–Jul 2026",
+          role: "Segmentation · Messaging · Operation",
+        },
+        {
+          id: "lever-cro",
+          tag: "CRO",
+          title: "유입이 충분한데 안 팔리면, 광고가 아니라 랜딩을 봤습니다.",
+          challenge: "광고 유입은 충분했지만 유입 대비 구매전환율이 낮았습니다.",
+          changes: [
+            "VOC와 고객 행동 데이터를 확인",
+            "리얼 리뷰 영역을 상단으로 재배치하고 이탈 방지 배너 추가",
+            "개편 전후 CVR을 비교한 뒤 다른 상품군(지피덤)으로 확대 적용",
+          ],
+          flow: ["Traffic", "Low CVR", "VOC / Behavior", "Page Change"],
           result: [{ label: "CVR", value: "+20%" }],
-          note: "VOC 분석 결과 실사용 후기가 구매 판단에 더 크게 작용함을 확인해 리뷰 영역을 재배치했습니다.",
+          role: "유입·전환 데이터 분석 · 개선안 기획",
           evidence: [
             { src: "IMG_INNERLAB_LP", caption: "이너랩 홀드잇 MAD · 이탈방지 배너 적용 화면" },
-            { src: "IMG_ZIPIDERM_REVIEW", caption: "지피덤 · 동일 전략 확대 적용 + 크리에이터 픽" },
+            { src: "IMG_ZIPIDERM_REVIEW", caption: "지피덤 · 동일 전략 확대 적용" },
           ],
-        },
-        {
-          title: "OLIVE YOUNG COMMERCE",
-          headline: "프로모션 단계별로 다른 운영 방식을 설계했습니다.",
-          flow: ["Always-on", "Pre-sale", "Sale", "Post-sale"],
-          result: [{ label: "Online Sales (전년 동월)", value: "+316%" }],
-          note: "전년 동월 대비 기준이며, 입점 이래 월 최고 매출을 기록했습니다.",
-        },
-        {
-          title: "AI CREATIVE EXPERIMENT",
-          headline: "AI를 잘 쓰는 것이 아니라, 더 빠르게 가설을 검증했습니다.",
-          flow: ["VOC / Performance Data", "Hypothesis", "AI Variants", "Media Test", "Winning Pattern"],
-          result: [{ label: "CTR (Index 100 → 216)", value: "+116%" }],
-          note: "Same Product · Same Media · Same Week 기준 통제 비교입니다. Baseline Creative 대비 AI Creative의 CTR을 비교했습니다.",
-          contribution: "Concept Planning · Creative Direction · AI Production · Performance Analysis",
         },
       ],
     },
     global: {
-      eyebrow: "GLOBAL COMMERCE",
-      title: "Shopee와 Qoo10 — 성공과 실패를 함께 보여주는 성장 기록",
-      sub: "Amazon은 Selected Growth Case로 이미 다뤘습니다. 여기서는 Shopee와 Qoo10을 하나의 Global Commerce로 묶었습니다.",
-      shopee: {
-        title: "SHOPEE — Reach부터 Conversion까지",
-        period: "2025 Sep → Oct · Singapore + Vietnam",
-        before: "Conversion Only",
-        after: "Reach → Conversion",
-        result: [
-          { label: "Spend", value: "-24%" },
-          { label: "ATC", value: "+90%" },
-          { label: "Purchases", value: "+163%" },
-          { label: "Sales", value: "+229%" },
+      eyebrow: "GLOBAL PERFORMANCE & COMMERCE",
+      title: "시장과 판매 채널에 따라 다른 전환 구조를 설계했습니다.",
+      sub: "미국 Amazon, 싱가포르·베트남 Shopee, 일본 Qoo10에서 광고 퍼널과 실제 이커머스 매출을 함께 운영했습니다.",
+      amazon: {
+        tag: "AMAZON US · GLOBAL HERO",
+        title: "광고비를 더 쓰기보다, 구매가 발생하는 구조를 바꿨습니다.",
+        levers: [
+          { lever: "GOOGLE", before: "Demand Gen", after: "Search", desc: "검색 의도가 있는 고객을 직접 포착" },
+          { lever: "META", before: "Interest", after: "Interest + Lookalike", desc: "기존 반응 고객과 유사한 타겟까지 확장" },
+          { lever: "PLACEMENT", before: "Instagram", after: "Facebook + Instagram", desc: "" },
+          { lever: "LANDING", before: "분산 랜딩", after: "PDP", desc: "" },
         ],
-        scale: "Purchases 8 → 21",
-        failTitle: "WHAT DIDN'T WORK — 11월",
-        failBody: "Reach + Content View Conversion 구조를 추가한 결과 Singapore DPV +461%, Vietnam DPV +754%를 기록했지만, CVR과 Sales는 오히려 감소했습니다.",
-        failQuote: "상단 퍼널 볼륨 확대만으로 구매 품질까지 보장되지 않았습니다.",
-        learningLabel: "LEARNING",
-        learning: "DPV가 아니라 ATC·Purchase·Sales까지 연결해 Upper Funnel의 품질을 판단합니다.",
+        result: [
+          { label: "SPEND", value: "+4%" },
+          { label: "PURCHASES", value: "+846%" },
+          { label: "ATTRIBUTED SALES", value: "+801%" },
+        ],
+        scale: "Purchases 39 → 369",
+        caption: "2025 Jul Prime Day → Oct Prime Big Deal · 14-day attributed data",
+        footnote: "* 서로 다른 프로모션 기간 비교이며, 방향성 참고용입니다.",
+        learning: "TikTok은 CTR·DPV는 높았지만 구매로 잘 이어지지 않아, 이후 ATC·Purchase까지 함께 봤습니다.",
+      },
+      shopee: {
+        tag: "SHOPEE · SUPPORTING",
+        title: "전환 광고에서, 도달까지 함께 보는 구조로 바꿨습니다.",
+        flow: ["Conversion Only", "Reach + Conversion"],
+        result: [
+          { label: "SPEND", value: "-24%" },
+          { label: "PURCHASES", value: "+163%" },
+          { label: "SALES", value: "+229%" },
+        ],
+        context: "2025 Sep → Oct · Singapore + Vietnam",
+        learning: "11월 Upper Funnel을 확대한 뒤 DPV는 늘었지만 Sales는 줄었습니다. 이후 Traffic보다 ATC·Purchase까지 연결해 판단했습니다.",
       },
       qoo10: {
-        title: "QOO10 — Marketplace Growth + Customer Mix",
-        headline: "광고 클릭을 넘어, Marketplace 안에서 팔리는 구조를 봤습니다.",
-        levers: [
-          { label: "PRODUCT", desc: "DD크림 중심으로 판매 구조 강화 (매출 비중 73%)" },
-          { label: "SEARCH", desc: "BB크림·한스킨·클렌징오일 등 구매 가능성 높은 키워드 중심 운영" },
-          { label: "IN-APP MEDIA", desc: "Power Rank-up 등 상위 노출형 광고 중심으로 믹스 조정" },
-          { label: "EXPOSURE", desc: "Ranking·TS구좌·기획전·Seller Shop·Wishlist 등 내부 접점 활용" },
-        ],
-        result: { label: "TOTAL SALES", value: "+176.58%", period: "2025 Aug → Nov" },
-        signalTag: "MARKETPLACE CUSTOMER MIX SIGNAL",
-        signalCopy: "운영 기간 중 Returning Customers가 43명에서 383명으로 확대됐습니다.",
-        signalNote: "Marketplace-level observation이며, 광고 기여로 인한 재구매율 상승이라고 단정하지 않습니다.",
-        retentionLeverTag: "MARKETPLACE RETENTION LEVERS (Operating Direction)",
-        retentionLevers: ["Wishlist 기반 타겟팅", "Cart Coupon", "Push Notification", "Follower Audience"],
-        measurement: "Paid Media에서는 CTR·CPC·Traffic을 확인하고, Qoo10의 Sales·Product·Search·Ranking 데이터를 함께 확인해 성과를 판단했습니다.",
+        tag: "QOO10 · SUPPORTING",
+        title: "Product·Search·In-app Media·Exposure를 함께 관리했습니다.",
+        result: [{ label: "TOTAL SALES", value: "+176.58%", context: "2025 Aug → Nov" }],
+        signalLabel: "MARKETPLACE CUSTOMER SIGNAL",
+        signalCopy: "Returning Customers 43 → 383",
+      },
+    },
+    experiment: {
+      eyebrow: "EXPERIMENT & MEASUREMENT",
+      title: "같은 상품·매체·기간에서 Creative Angle만 바꿔 테스트했습니다.",
+      sub: "매체 지표를 넘어 Creative Testing과 Measurement까지 직접 다뤄본 경험입니다.",
+      flow: ["Insight", "Creative Hypothesis", "Variants", "Media Test", "Learning"],
+      result: [{ label: "CTR", value: "+116%", context: "Index 100 → 216 · Same Product · Media · Week" }],
+      contribution: "Concept · Creative Direction · Production · Performance Analysis",
+      tools: "Midjourney · ChatGPT · Claude",
+      recap: {
+        title: "CRM / CRO Evidence",
+        note: "세그먼트 운영과 랜딩 개선 내용은 In-house Growth 섹션에서 다뤘습니다. 여기서는 소재로만 간단히 남깁니다.",
       },
     },
     agency: {
       eyebrow: "SELECTED AGENCY EXPERIENCE",
-      title: "대행사에서 쌓은 실행력의 증거",
-      sub: "Bright Eye Clinic은 Selected Growth Case로 이동했으므로 여기서는 반복하지 않습니다.",
+      title: "다양한 브랜드에서 Media Execution의 기본기를 쌓았습니다.",
       cases: [
         {
-          title: "HANYUL",
-          headline: "1,000개의 고객 리뷰를 광고 가설로 바꿨습니다.",
+          tag: "HANYUL",
+          title: "1,000개의 고객 리뷰를 광고 가설로 바꿨습니다.",
           client: "아모레퍼시픽 한율",
-          flow: ["1,000 Reviews", "VOC Pattern", "Customer Need", "Ad Hypothesis", "Creative Test"],
+          changes: ["올리브영 리뷰 약 1,000건을 분석해 반복 키워드를 찾음", "특정 계절·피부고민 언급 리뷰를 광고 소재로 전환", "VOC → 가설 → Creative Test 프로세스로 구축"],
+          flow: ["1,000 Reviews", "VOC", "Creative Hypothesis"],
           result: [
-            { label: "Promotion ROAS", value: "222%" },
-            { label: "ROI (직전 대비)", value: "+144%" },
-          ],
-          note: "VOC 기반 메시지가 이후 시즌 캠페인의 기본 소재 방향으로 채택됐습니다.",
-          evidence: [{ src: "IMG_HANYUL_VOC", caption: "한율 · 계절성 VOC 반영 소재 (Meta·Kakao)", focus: "center 30%" }],
-        },
-        {
-          title: "WOONGJIN",
-          headline: "키워드가 아니라, 실제 구매가 발생하는 상품부터 다시 봤습니다.",
-          client: "웅진씽크빅·웅진책방",
-          flow: ["Search Intent", "Product Characteristics", "GA4 Purchases", "SA Structure Rebuild"],
-          result: [
-            { label: "Purchases", value: "+44%" },
-            { label: "CPC", value: "-65%" },
-            { label: "CPA", value: "-35%" },
+            { label: "ROI", value: "+144%" },
+            { label: "PROMOTION ROAS", value: "222%" },
           ],
         },
         {
-          title: "BODYLUV",
-          headline: "브랜딩과 전환을 하나의 Funnel로 운영했습니다.",
+          tag: "BODYLUV",
+          title: "브랜딩과 전환을 함께 운영했습니다.",
           client: "블랭크코퍼레이션 바디럽",
-          flow: ["Branding → New Reach", "Performance → Retargeting/Purchase"],
-          measurementNote: "Purchase Performance + Google Brand Lift + Organic Search로 함께 측정했습니다.",
+          changes: ["브랜딩 캠페인으로 신규 도달을 늘림", "퍼포먼스 캠페인으로 관심 고객을 리타겟팅", "Google Brand Lift Survey로 브랜드 효과까지 측정"],
+          flow: ["Branding", "Performance"],
           result: [
-            { label: "Business · Purchases", value: "+120%" },
-            { label: "Efficiency · CVR", value: "+94%" },
-            { label: "Brand · Preference", value: "+1.5%p" },
+            { label: "PURCHASES", value: "+120%" },
+            { label: "CVR", value: "+94%" },
+            { label: "BRAND PREFERENCE", value: "+1.5%p" },
           ],
-          secondaryResult: "Traffic +91% · ROAS +60% · Organic Search +25% · Google 국내·글로벌 우수사례 등재",
+          secondary: "Google Brand Lift Survey · 국내·글로벌 우수사례 등재",
         },
+        {
+          tag: "MAEIL",
+          title: "라이브커머스에 광고를 붙여 매출을 키웠습니다.",
+          client: "매일유업",
+          changes: ["Toss 라이브쇼핑 광고를 신규로 제안·운영", "네이버 LIVE쇼핑에 Paid Media 연결"],
+          flow: ["Live Commerce", "Paid Media"],
+          result: [{ label: "SALES", value: "×4", context: "동일 상품·구성 기준" }],
+        },
+      ],
+      additionalTitle: "ADDITIONAL EXPERIENCE",
+      additional: [
+        { client: "웅진씽크빅·웅진책방", result: "Purchases +44% · CPC -65% · CPA -35%" },
+        { client: "밝은세상안과", result: "Actual Booking DB +57% · Meta CPA -66.1% · SA CPA -27%" },
+        { client: "허닭·프레시지", result: "ROAS 1,000% Range" },
+        { client: "카카오스타일(지그재그·포스티)", result: "플랫폼별 SA 운영 구조 구축" },
       ],
     },
-    additionalExperience: {
-      title: "ADDITIONAL EXPERIENCE",
-      items: [
-        { client: "허닭 · 프레시지", result: "ROAS 1,000% Range · 신규가입 CPA ₩2,000 Range" },
-        { client: "매일유업", result: "네이버 LIVE Shopping 매출 ×4 (동일 상품·구성 기준)" },
-        { client: "카카오스타일 (지그재그·포스티)", result: "플랫폼별 SA 운영 구조 구축" },
+    startup: {
+      eyebrow: "0→1 EXPERIENCE",
+      title: "고객 문제에서 시작해 제품과 판매까지 직접 경험했습니다.",
+      brand: "단, 순한 (스킨케어 브랜드)",
+      flow: ["FGI / Survey", "Product Planning", "ODM", "Brand / PDP", "Marketing"],
+      result: [
+        { label: "WADIZ", value: "1,106% / 949%" },
+        { label: "INITIAL STOCK", value: "2주 완판" },
       ],
+      secondary: "연세대학교 창업경진대회 최우수상",
     },
     career: {
-      title: "커리어 타임라인",
-      storyline: "CUSTOMER / PRODUCT → MEDIA EXECUTION → BUSINESS GROWTH OWNERSHIP",
+      title: "Career",
+      storyline: "STARTUP · Customer/Product → AGENCY · Hands-on Media Execution → IN-HOUSE · Strategy·Budget·CRM·CRO·Commerce",
       timeline: [
-        { period: "2019–2021", org: "창업", role: "Startup · Brand Owner", detail: "Customer Research 기반 스킨케어 브랜드 기획 및 전 과정 운영" },
-        { period: "2021–2024", org: "㈜애드이피션시 / ㈜매드업", role: "Agency · Hands-on Performance Execution", detail: "뷰티·식품·교육·의료·패션 등 다양한 업종 SA·DA·VA 운영" },
-        { period: "2025–NOW", org: "셀트리온스킨큐어", role: "In-house · Strategy / Budget / CRM / CRO / Commerce Ownership", detail: "2025 하반기 국내 퍼포먼스·CRM 총괄 / 2026 조직개편 이후 퍼포먼스·CRM 전담", current: true },
+        { period: "2019–2021", org: "창업", role: "Customer / Product", detail: "" },
+        { period: "2021–2024", org: "㈜애드이피션시 / ㈜매드업", role: "Agency · Hands-on Media Execution", detail: "" },
+        { period: "2025–NOW", org: "셀트리온스킨큐어", role: "In-house · Strategy · Budget · CRM · CRO · Commerce", detail: "2025 하반기 국내 퍼포먼스·CRM 총괄 / 2026 조직개편 이후 퍼포먼스·CRM 전담", current: true },
       ],
     },
     contact: {
-      line: "이 지원자가 궁금하다면,",
-      lineBreak: "더 깊이 이야기 나눠보는 것은 어떨까요?",
+      line: "온라인 매출과 퍼포먼스,",
+      lineBreak: "직접 이야기 나눠보시겠어요?",
     },
-    misc: { close: "닫기", playVideo: "영상 재생", menu: "메뉴", backToTop: "맨 위로" },
+    misc: { backToTop: "맨 위로" },
   },
   en: {
-    navLabels: { overview: "Overview", cases: "Selected Cases", inhouse: "In-house Growth", global: "Global Commerce", agency: "Agency", career: "Career", contact: "About" },
+    navLabels: { overview: "Overview", inhouse: "In-house", global: "Global", experiment: "Experiment", agency: "Agency", startup: "Startup", career: "Career", contact: "About" },
     hero: {
-      eyebrow: "PERFORMANCE-LED COMMERCE GROWTH MARKETER",
-      title1: "Diagnose with data.",
-      titleHighlight: "Drive",
-      title2: " revenue with strategy.",
-      sub: "I look beyond media efficiency. Starting from paid media, I extend into CRM, CRO, and commerce to fix the points where acquisition stops turning into actual purchase and revenue.",
+      eyebrow: "PERFORMANCE & GROWTH MARKETER",
+      title1: "Beyond media efficiency —",
+      titleHighlight: "real purchases",
+      title2: " and revenue.",
+      sub: "Across D2C, Olive Young, and global e-commerce, I connect media, budget, CRM, and CRO to grow online revenue.",
       evolutionFrom: "AGENCY EXECUTION",
-      evolutionTo: "IN-HOUSE GROWTH OWNERSHIP",
-      quad: [
-        { label: "WHO", value: "Performance-led Commerce Growth Marketer" },
-        { label: "HOW", value: "I judge problems by Business KPI, not platform KPI" },
-        { label: "SCOPE", value: "Domestic + Global · Paid Media + CRM + CRO + Commerce" },
-        { label: "EXPERIENCE", value: "Markets · Media · Commerce · Data · AI" },
+      evolutionTo: "IN-HOUSE BUSINESS OWNERSHIP",
+    },
+    currentRole: {
+      tag: "CURRENT ROLE",
+      org: "Celltrion Skincare",
+      role: "Performance Marketing · CRM",
+      note: "In-house · Jul 2025–Present",
+    },
+    scope: {
+      rows: [
+        { label: "CHANNEL", value: "D2C · Olive Young · Amazon · Shopee · Qoo10" },
+        { label: "MARKET", value: "KR · US · SG · VN · JP" },
+        { label: "CORE", value: "Media Strategy · Budget · CRM · CRO · Data" },
       ],
     },
     snapshot: {
-      headline: "Experience at a Glance",
+      headline: "Experience Range",
       categories: [
-        { label: "MARKETS", items: ["Korea", "US", "Singapore", "Vietnam", "Japan"] },
         { label: "PAID MEDIA", items: ["Meta", { label: "Google", sub: "Search · Demand Gen · YouTube" }, "TikTok", { label: "Naver", sub: "SA · GFA" }, "Kakao", { label: "Olive Young", sub: "Partnership Ads" }, "Buzzvil", "Toss"] },
         { label: "COMMERCE", items: ["D2C", "Olive Young", "Olive Young Global", "Naver Smart Store", "Amazon", "Shopee", "Qoo10", "Coupang"] },
-        { label: "DATA & TRACKING", items: ["GA4", "GTM", "Airbridge", "UTM", "ADID Audience Data"] },
+        { label: "DATA / TRACKING", items: ["GA4", "GTM", "Airbridge", "UTM", "ADID"] },
         { label: "AI", items: ["Midjourney", "ChatGPT", "Claude"] },
       ],
     },
-    impactTitle: "Four cases, four different growth capabilities",
     selectedImpact: [
-      { num: "01", tag: "BUSINESS KPI QUALITY", name: "Bright Eye Clinic", kpiLabel: "Actual Bookings", kpi: "+57%", change: "Lead → Actual Booking KPI", target: "case-brighteye", color: CORAL },
-      { num: "02", tag: "CUSTOMER SEGMENTATION", name: "CRM", kpiLabel: "CVR", kpi: "+102.7%", change: "Blanket Send → Purchase/Behavior Segmentation", target: "case-crm", color: TEAL },
-      { num: "03", tag: "GLOBAL COMMERCE", name: "Amazon US", kpiLabel: "Purchases", kpi: "+846%", change: "Spend +4% · Media·Target·Landing Restructure", target: "case-amazon", color: NAVY_SOFT },
-      { num: "04", tag: "0→1 BUSINESS BUILDING", name: "Startup · Wadiz", kpiLabel: "Funding", kpi: "1,106% / 949%", change: "Customer Research → Product → Commerce", target: "case-startup", color: CORAL },
-    ],
-    casesEyebrow: "SELECTED GROWTH CASES",
-    casesTitle: "Ordered by strength of problem-solving, not by company or year",
-    casesSub: "Each case answers one question: which business problem did I solve, with what data and what judgment?",
-    measurementLabels: { period: "PERIOD", comparison: "COMPARISON", primaryKpi: "PRIMARY KPI", scale: "SCALE", myScope: "MY SCOPE", limitation: "LIMITATION" },
-    mainCases: [
-      {
-        id: "case-brighteye",
-        index: "CASE 01",
-        headline: ["Optimizing for actual bookings,", "not just ad conversions"],
-        client: "Bright Eye Clinic (Seoul/Busan)",
-        problem: "Consultation-request conversions were happening on the ad platform, but part of that DB never converted into actual bookings.",
-        observationLabel: "OBSERVATION",
-        observation: "Optimizing for request volume alone improved platform CPA without improving the actual business outcome.",
-        hypothesisLabel: "HYPOTHESIS",
-        hypothesis: "I judged that request quality and actual booking conversion, not raw conversion count, should be the performance standard.",
-        action: [
-          "Shortened the consultation-request flow with Meta Instant campaigns",
-          "Prompted real-name form entry to reduce low-quality DB",
-          "Re-evaluated media performance by actual-booking DB quality instead of request volume",
-          "Restructured SA campaigns in parallel",
-        ],
-        validationLabel: "VALIDATION",
-        validation: "I re-evaluated media performance against a new North Star Metric — actual-booking DB quality — instead of consultation-request CPA.",
-        result: [
-          { label: "ACTUAL BOOKING DB", value: "+57%" },
-          { label: "META CPA", value: "-66.1%" },
-          { label: "SA CPA", value: "-27%" },
-        ],
-        secondary: "Presented as an internal success case",
-        learningLabel: "LEARNING",
-        learning: "Optimizing for conversion volume isn't the same as improving business outcomes — I now track request quality alongside conversion count in every campaign.",
-        measurement: [
-          { label: "PERIOD", value: "Campaign operating period" },
-          { label: "COMPARISON", value: "Before/After North Star Metric change" },
-          { label: "PRIMARY KPI", value: "Actual booking-completed DB" },
-          { label: "MY SCOPE", value: "SA · DA · VA operation · Meta Instant campaign structure · conversion quality analysis" },
-          { label: "LIMITATION", value: "Exact analysis window and DB volume are not disclosed — read this as a directional comparison.", muted: true },
-        ],
-      },
-      {
-        id: "case-crm",
-        index: "CASE 02",
-        headline: ["From blanket sends", "to customer segmentation"],
-        client: "Celltrion Skincare",
-        problem: "The CRM sent the same message to every customer regardless of purchase likelihood.",
-        observationLabel: "OBSERVATION",
-        observation: "We were spending the same cost per send without using differences in purchase intent or purchase history.",
-        hypothesisLabel: "HYPOTHESIS",
-        hypothesis: "I judged that splitting target and message by purchase/behavior state would raise conversion efficiency.",
-        action: [
-          "Segmented by purchase/behavior data into Recent Purchasers, Cart Abandoners, New Non-purchasers, At-risk, Interest-based, and Top RFM customers",
-          "Differentiated messaging by channel — SMS, KakaoTalk, app push",
-          "Analyzed CVR and ROAS by segment after each send and fed results into the next campaign's targeting",
-        ],
-        validationLabel: "VALIDATION",
-        validation: "I compared CVR and ROAS by segment and carried the highest-efficiency combinations into the next campaign's targeting.",
-        result: [
-          { label: "CVR", value: "+102.7%" },
-          { label: "CPA", value: "-10.4%" },
-          { label: "ROAS", value: "+25.3%" },
-        ],
-        learningLabel: "LEARNING",
-        learning: "Segmentation outperformed blanket sends, so I now refresh segments every promotion cycle.",
-        measurement: [
-          { label: "PERIOD", value: "2024 Annual → Jan–Jul 2026" },
-          { label: "COMPARISON", value: "Before/After aggregate" },
-          { label: "PRIMARY KPI", value: "CRM campaign CVR · CPA · ROAS" },
-          { label: "MY SCOPE", value: "Segmentation · Messaging · Operation · Analysis" },
-          { label: "LIMITATION", value: "Comparison windows are not seasonally identical (full year vs. H1).", muted: true },
-        ],
-      },
-      {
-        id: "case-amazon",
-        index: "CASE 03",
-        headline: ["Redesigning the path to purchase", "without materially increasing spend"],
-        client: "Amazon US",
-        tag: "Prime Day → Prime Big Deal",
-        problem: "Traffic KPIs were being hit, but efficiency from traffic to purchase was low.",
-        observationLabel: "OBSERVATION",
-        observation: "During the July Prime Day run, the Demand Gen / Instagram-only / interest-target / scattered-landing structure wasn't capturing enough purchase intent.",
-        hypothesisLabel: "HYPOTHESIS",
-        hypothesis: "I judged that shifting to higher purchase-intent media, expanding audience signal, and concentrating landing on the purchase page could improve purchase efficiency at a similar spend level.",
-        levers: [
-          { lever: "MEDIA", before: "Google Demand Gen", after: "Google Search" },
-          { lever: "TARGET", before: "Interest", after: "Interest + Lookalike" },
-          { lever: "PLACEMENT", before: "Instagram Only", after: "Facebook + Instagram" },
-          { lever: "LANDING", before: "Scattered landing", after: "Unified to PDP" },
-          { lever: "BUDGET", before: "Low-conversion areas", after: "Confirmed purchase-generating areas" },
-        ],
-        validationLabel: "VALIDATION",
-        validation: "I compared before/after performance on 14-day attributed purchases after the media, target, and landing changes.",
-        result: [
-          { label: "SPEND", value: "+4%" },
-          { label: "ATC", value: "+479%" },
-          { label: "PURCHASES", value: "+846%" },
-          { label: "ATTRIBUTED SALES", value: "+801%" },
-        ],
-        purchaseScale: "Purchases 30+ → 300+ (39 → 369)",
-        learningLabel: "LEARNING",
-        learning: "TikTok drove high CTR and DPV but didn't convert into purchases. Traffic efficiency ≠ purchase efficiency — I now trace CTR through DPV, ATC, and Purchase to judge a media or creative's real role.",
-        measurement: [
-          { label: "PERIOD", value: "Jul 2025 → Oct 2025" },
-          { label: "COMPARISON", value: "Prime Day → Prime Big Deal (Event-to-event)" },
-          { label: "PRIMARY KPI", value: "14-day attributed purchases / sales" },
-          { label: "SCALE", value: "Media spend ₩30M-range" },
-          { label: "MY SCOPE", value: "Media strategy · budget · target · landing analysis" },
-          { label: "LIMITATION", value: "Comparison is across two different promotional events with no isolated control group — read directionally, not as a causal lift.", muted: true },
-        ],
-      },
-      {
-        id: "case-startup",
-        index: "CASE 04",
-        headline: ["Starting with the customer problem", "before the ad account"],
-        client: "Dan Soonhan (skincare brand · founder)",
-        problem: "Instead of building a product first and selling it with ads, I needed to find the product opportunity starting from a real customer problem.",
-        observationLabel: "RESEARCH",
-        observation: "I ran FGIs and surveys to uncover recurring skincare customer pain points.",
-        hypothesisLabel: "HYPOTHESIS",
-        hypothesis: "I judged that reflecting recurring customer problems directly in the product, USP, and content could create purchase intent even for an early-stage brand.",
-        action: [
-          "Customer Research → Product Planning → ODM → Brand/Positioning → Product Detail Page → Ads/Viral → Customer Management",
-          "Ran the entire process myself",
-        ],
-        validationLabel: "VALIDATION",
-        validation: "I validated the hypothesis against Wadiz funding performance and whether the initial stock sold out.",
-        result: [
-          { label: "WADIZ CAMPAIGN 01", value: "1,106%" },
-          { label: "WADIZ CAMPAIGN 02", value: "949%" },
-        ],
-        secondary: "Sold out initial stock in 2 weeks · Grand Prize, Yonsei University Startup Competition",
-        learningLabel: "LEARNING",
-        learning: "Never building a product without validating the customer problem first — a habit that carried into my later marketing work.",
-        measurement: [
-          { label: "PERIOD", value: "2019–2021" },
-          { label: "COMPARISON", value: "Wadiz funding target vs. actual" },
-          { label: "PRIMARY KPI", value: "Wadiz funding rate (% of target)" },
-          { label: "MY SCOPE", value: "Customer research · product planning · PDP · ads/viral · CS, end to end" },
-          { label: "LIMITATION", value: "Performance measured against crowdfunding platform targets, not a market-wide sales benchmark.", muted: true },
-        ],
-      },
+      { tag: "COMMERCE SALES", kpi: "+316%", label: "ONLINE SALES", name: "Olive Young", context: "YoY · Same Month", color: CORAL, target: "lever-commerce" },
+      { tag: "CUSTOMER GROWTH", kpi: "+102.7%", label: "CRM CVR", name: "Customer Segmentation", context: "CPA -10.4% · ROAS +25.3%", color: TEAL, target: "lever-crm" },
+      { tag: "GLOBAL PERFORMANCE", kpi: "+846%", label: "PURCHASES", name: "Amazon US", context: "Spend +4% · Prime Day → Prime Big Deal", color: NAVY_SOFT, target: "global-amazon" },
+      { tag: "CREATIVE EXPERIMENT", kpi: "+116%", label: "CTR", name: "AI Creative", context: "Same Product · Media · Week", color: CORAL, target: "experiment" },
     ],
     inhouse: {
-      eyebrow: "IN-HOUSE GROWTH SYSTEM",
-      title: "In-house strengths not used as a Main Case",
-      sub: "Four supporting cases from my time at Celltrion Skincare that changed how the team operates.",
-      cases: [
+      eyebrow: "CURRENT IN-HOUSE GROWTH",
+      title: "I ran media, CRM, and CRO together, judged by actual online revenue.",
+      sub: "At Celltrion Skincare I own performance marketing and CRM across D2C and our main commerce channels, changing how I operate depending on where the funnel — from ad traffic to purchase — was actually stuck.",
+      levers: [
         {
-          title: "REVENUE-BASED BUDGETING",
-          headline: "I moved the budget decision rule from media ROAS to GA4 actual-revenue contribution.",
-          flow: ["Media ROAS", "GA4 Actual Revenue", "Low-contribution Cut-off", "Budget Reallocation"],
-          note: "The point isn't the +104% D2C ROAS result — it's that the budget decision rule itself changed.",
-          result: [{ label: "D2C ROAS (Index)", value: "+104%" }],
-          caveat: "This compares 2024 to 2025, so I use it as a supporting metric, not a headline causal KPI.",
-        },
-        {
-          title: "POST-CLICK CRO",
-          headline: "Traffic was there, but conversion wasn't — so I looked at post-landing behavior.",
-          flow: ["Traffic", "Low CVR", "VOC / Behavior", "Review Repositioning"],
-          result: [{ label: "CVR", value: "+20%" }],
-          note: "VOC analysis showed real-use reviews mattered more to purchase decisions, so I repositioned the review section.",
-          evidence: [
-            { src: "IMG_INNERLAB_LP", caption: "InnerLab Hold-it MAD · Exit-prevention banner applied" },
-            { src: "IMG_ZIPIDERM_REVIEW", caption: "GpDerm · Same strategy expanded + creator picks" },
+          id: "lever-media",
+          tag: "MEDIA / BUDGET",
+          title: "I looked at actual revenue contribution, not just media-reported ROAS.",
+          challenge: "Media-dashboard ROAS alone couldn't tell me which campaigns looked efficient but weren't really driving revenue.",
+          changes: [
+            "Cross-checked media ROAS against GA4 revenue to find overstated campaigns",
+            "Reallocated budget toward the areas with real revenue contribution",
+            "Kept expanding retargeting and existing-customer share as efficiency shifted",
           ],
+          flow: ["Media ROAS", "GA4 Revenue", "Cut / Scale", "Budget Reallocation"],
+          result: [{ label: "D2C ROAS (Index)", value: "+104%", context: "Supporting KPI" }],
+          role: "Media strategy · budget allocation · GA4 analysis",
         },
         {
-          title: "OLIVE YOUNG COMMERCE",
-          headline: "I designed a different operating mode for each stage of the promotion cycle.",
+          id: "lever-commerce",
+          tag: "COMMERCE",
+          title: "I ran the full funnel around each promotion, not just sale day.",
+          challenge: "Running the same always-on setup only during big promotions left traffic and retargeting pools short right when we needed them.",
+          changes: [
+            "Always-on — low-cost traffic, building the retargeting pool",
+            "Pre-sale — expanding the interested-customer pool",
+            "Sale — shifting budget toward high-intent customers",
+          ],
           flow: ["Always-on", "Pre-sale", "Sale", "Post-sale"],
-          result: [{ label: "Online Sales (YoY, same month)", value: "+316%" }],
-          note: "Compared to the same month last year; the highest monthly sales since launching on the platform.",
+          result: [{ label: "ONLINE SALES", value: "+316%", context: "YoY · Same Month" }],
+          secondary: "Highest monthly sales since launching on the platform",
+          role: "Campaign strategy · budget · co-op ads · performance analysis",
         },
         {
-          title: "AI CREATIVE EXPERIMENT",
-          headline: "Not about using AI well — about validating hypotheses faster.",
-          flow: ["VOC / Performance Data", "Hypothesis", "AI Variants", "Media Test", "Winning Pattern"],
-          result: [{ label: "CTR (Index 100 → 216)", value: "+116%" }],
-          note: "A controlled comparison — same product, same media, same week — baseline creative vs. AI creative CTR.",
-          contribution: "Concept planning · creative direction · AI production · performance analysis",
+          id: "lever-crm",
+          tag: "CRM",
+          title: "From blanket sends to CRM by customer state.",
+          challenge: "The CRM sent the same message to every customer, regardless of purchase likelihood.",
+          changes: [
+            "Re-segmented customers by purchase history and behavior data",
+            "Varied messaging and channel (SMS, KakaoTalk, app push) by segment",
+            "Reviewed CVR and ROAS by segment after each send and fed it into the next target",
+          ],
+          flow: ["All Customers", "Purchase / Behavior Data", "Customer Segments", "Message / Offer"],
+          result: [
+            { label: "CVR", value: "+102.7%" },
+            { label: "CPA", value: "-10.4%" },
+            { label: "ROAS", value: "+25.3%" },
+          ],
+          context: "2024 Annual → Jan–Jul 2026",
+          role: "Segmentation · messaging · operation",
+        },
+        {
+          id: "lever-cro",
+          tag: "CRO",
+          title: "When traffic was fine but sales weren't, I looked at the landing page, not the ads.",
+          challenge: "Ad traffic to the product page was solid, but conversion from that traffic was low.",
+          changes: [
+            "Reviewed VOC and on-page customer behavior",
+            "Moved the real-review section to the top and added an exit-prevention banner",
+            "Compared CVR before/after, then expanded to another product line (GpDerm)",
+          ],
+          flow: ["Traffic", "Low CVR", "VOC / Behavior", "Page Change"],
+          result: [{ label: "CVR", value: "+20%" }],
+          role: "Traffic and conversion analysis · fix design",
+          evidence: [
+            { src: "IMG_INNERLAB_LP", caption: "InnerLab Hold-it MAD · Exit-prevention banner" },
+            { src: "IMG_ZIPIDERM_REVIEW", caption: "GpDerm · Same strategy expanded" },
+          ],
         },
       ],
     },
     global: {
-      eyebrow: "GLOBAL COMMERCE",
-      title: "Shopee and Qoo10 — a growth record that shows both wins and misses",
-      sub: "Amazon is already covered as a Selected Growth Case. Here I combine Shopee and Qoo10 into one Global Commerce page.",
-      shopee: {
-        title: "SHOPEE — From reach to conversion",
-        period: "2025 Sep → Oct · Singapore + Vietnam",
-        before: "Conversion Only",
-        after: "Reach → Conversion",
-        result: [
-          { label: "Spend", value: "-24%" },
-          { label: "ATC", value: "+90%" },
-          { label: "Purchases", value: "+163%" },
-          { label: "Sales", value: "+229%" },
+      eyebrow: "GLOBAL PERFORMANCE & COMMERCE",
+      title: "I designed a different conversion structure for each market and channel.",
+      sub: "Amazon in the US, Shopee in Singapore and Vietnam, Qoo10 in Japan — I ran the ad funnel and actual e-commerce sales together.",
+      amazon: {
+        tag: "AMAZON US · GLOBAL HERO",
+        title: "Instead of spending more, I changed the path to purchase.",
+        levers: [
+          { lever: "GOOGLE", before: "Demand Gen", after: "Search", desc: "Captured customers already searching with intent" },
+          { lever: "META", before: "Interest", after: "Interest + Lookalike", desc: "Expanded to lookalikes of existing responders" },
+          { lever: "PLACEMENT", before: "Instagram", after: "Facebook + Instagram", desc: "" },
+          { lever: "LANDING", before: "Scattered", after: "PDP", desc: "" },
         ],
-        scale: "Purchases 8 → 21",
-        failTitle: "WHAT DIDN'T WORK — November",
-        failBody: "Adding a Reach + Content View Conversion structure drove Singapore DPV +461% and Vietnam DPV +754%, but CVR and Sales both declined.",
-        failQuote: "Expanding upper-funnel volume alone didn't guarantee purchase quality.",
-        learningLabel: "LEARNING",
-        learning: "I now judge upper-funnel quality by tracing through to ATC, Purchase, and Sales — not DPV alone.",
+        result: [
+          { label: "SPEND", value: "+4%" },
+          { label: "PURCHASES", value: "+846%" },
+          { label: "ATTRIBUTED SALES", value: "+801%" },
+        ],
+        scale: "Purchases 39 → 369",
+        caption: "2025 Jul Prime Day → Oct Prime Big Deal · 14-day attributed data",
+        footnote: "* Comparison across different promotion periods — directional only.",
+        learning: "TikTok drove high CTR and DPV but didn't convert well, so I started tracking through to ATC and Purchase too.",
+      },
+      shopee: {
+        tag: "SHOPEE · SUPPORTING",
+        title: "From conversion-only to reach plus conversion.",
+        flow: ["Conversion Only", "Reach + Conversion"],
+        result: [
+          { label: "SPEND", value: "-24%" },
+          { label: "PURCHASES", value: "+163%" },
+          { label: "SALES", value: "+229%" },
+        ],
+        context: "2025 Sep → Oct · Singapore + Vietnam",
+        learning: "Expanding the upper funnel in November raised DPV but lowered Sales — after that I judged by ATC and Purchase, not traffic alone.",
       },
       qoo10: {
-        title: "QOO10 — Marketplace Growth + Customer Mix",
-        headline: "Beyond ad clicks — what actually sells inside the marketplace.",
-        levers: [
-          { label: "PRODUCT", desc: "Strengthened the sales structure around the DD Cream (73% of sales)" },
-          { label: "SEARCH", desc: "Focused on high-intent keywords — BB cream, Hanskin, cleansing oil" },
-          { label: "IN-APP MEDIA", desc: "Shifted the media mix toward top-placement ads like Power Rank-up" },
-          { label: "EXPOSURE", desc: "Also worked internal touchpoints — Ranking, TS slots, planned exhibits, Seller Shop, Wishlist" },
-        ],
-        result: { label: "TOTAL SALES", value: "+176.58%", period: "2025 Aug → Nov" },
-        signalTag: "MARKETPLACE CUSTOMER MIX SIGNAL",
-        signalCopy: "Returning customers grew from 43 to 383 over the operating period.",
-        signalNote: "A marketplace-level observation — not claimed as a causal lift in repeat-purchase rate from advertising.",
-        retentionLeverTag: "MARKETPLACE RETENTION LEVERS (Operating Direction)",
-        retentionLevers: ["Wishlist-based targeting", "Cart coupon", "Push notification", "Follower audience"],
-        measurement: "For paid media I tracked CTR, CPC, and traffic; for Qoo10 I also reviewed Sales, Product, Search, and Ranking data to judge performance.",
+        tag: "QOO10 · SUPPORTING",
+        title: "Managed product, search, in-app media, and exposure together.",
+        result: [{ label: "TOTAL SALES", value: "+176.58%", context: "2025 Aug → Nov" }],
+        signalLabel: "MARKETPLACE CUSTOMER SIGNAL",
+        signalCopy: "Returning customers 43 → 383",
+      },
+    },
+    experiment: {
+      eyebrow: "EXPERIMENT & MEASUREMENT",
+      title: "Same product, media, and week — I only changed the creative angle.",
+      sub: "Creative testing and measurement work, beyond media metrics alone.",
+      flow: ["Insight", "Creative Hypothesis", "Variants", "Media Test", "Learning"],
+      result: [{ label: "CTR", value: "+116%", context: "Index 100 → 216 · Same Product · Media · Week" }],
+      contribution: "Concept · creative direction · production · performance analysis",
+      tools: "Midjourney · ChatGPT · Claude",
+      recap: {
+        title: "CRM / CRO Evidence",
+        note: "Segmentation and landing-page work are covered in the In-house Growth section — kept brief here as supporting evidence.",
       },
     },
     agency: {
       eyebrow: "SELECTED AGENCY EXPERIENCE",
-      title: "Evidence of execution built at an agency",
-      sub: "Bright Eye Clinic moved to Selected Growth Cases, so it isn't repeated here.",
+      title: "Built my media execution fundamentals across a range of brands.",
       cases: [
         {
-          title: "HANYUL",
-          headline: "Turned 1,000 customer reviews into an ad hypothesis.",
+          tag: "HANYUL",
+          title: "Turned 1,000 customer reviews into an ad hypothesis.",
           client: "Amorepacific Hanyul",
-          flow: ["1,000 Reviews", "VOC Pattern", "Customer Need", "Ad Hypothesis", "Creative Test"],
+          changes: ["Analyzed ~1,000 Olive Young reviews for recurring keywords", "Turned seasonal/skin-concern reviews into ad messaging", "Built a VOC → hypothesis → creative test process"],
+          flow: ["1,000 Reviews", "VOC", "Creative Hypothesis"],
           result: [
-            { label: "Promotion ROAS", value: "222%" },
-            { label: "ROI (vs. prior period)", value: "+144%" },
-          ],
-          note: "The VOC-driven message became the default creative direction for later seasonal campaigns.",
-          evidence: [{ src: "IMG_HANYUL_VOC", caption: "Hanyul · Seasonal VOC-driven creative (Meta, Kakao)", focus: "center 30%" }],
-        },
-        {
-          title: "WOONGJIN",
-          headline: "Went back to which products actually convert, not just which keywords.",
-          client: "Woongjin Thinkbig / Woongjin Bookstore",
-          flow: ["Search Intent", "Product Characteristics", "GA4 Purchases", "SA Structure Rebuild"],
-          result: [
-            { label: "Purchases", value: "+44%" },
-            { label: "CPC", value: "-65%" },
-            { label: "CPA", value: "-35%" },
+            { label: "ROI", value: "+144%" },
+            { label: "PROMOTION ROAS", value: "222%" },
           ],
         },
         {
-          title: "BODYLUV",
-          headline: "Ran branding and conversion as one funnel.",
+          tag: "BODYLUV",
+          title: "Ran branding and conversion together.",
           client: "Blank Corporation Bodyluv",
-          flow: ["Branding → New Reach", "Performance → Retargeting/Purchase"],
-          measurementNote: "Measured together via purchase performance, Google Brand Lift, and organic search.",
+          changes: ["Grew new reach with a branding campaign", "Retargeted interested users with performance campaigns", "Measured brand impact with Google Brand Lift Survey"],
+          flow: ["Branding", "Performance"],
           result: [
-            { label: "Business · Purchases", value: "+120%" },
-            { label: "Efficiency · CVR", value: "+94%" },
-            { label: "Brand · Preference", value: "+1.5pp" },
+            { label: "PURCHASES", value: "+120%" },
+            { label: "CVR", value: "+94%" },
+            { label: "BRAND PREFERENCE", value: "+1.5pp" },
           ],
-          secondaryResult: "Traffic +91% · ROAS +60% · Organic Search +25% · Featured as a Google Korea/global success case",
+          secondary: "Google Brand Lift Survey · Korea/global success case",
         },
+        {
+          tag: "MAEIL",
+          title: "Attached paid media to live commerce to grow sales.",
+          client: "Maeil Dairies",
+          changes: ["Proposed and ran new Toss Live Shopping ads", "Connected paid media to Naver LIVE Shopping"],
+          flow: ["Live Commerce", "Paid Media"],
+          result: [{ label: "SALES", value: "×4", context: "Same product/bundle basis" }],
+        },
+      ],
+      additionalTitle: "ADDITIONAL EXPERIENCE",
+      additional: [
+        { client: "Woongjin Thinkbig / Bookstore", result: "Purchases +44% · CPC -65% · CPA -35%" },
+        { client: "Bright Eye Clinic", result: "Actual Booking DB +57% · Meta CPA -66.1% · SA CPA -27%" },
+        { client: "Heodak · Fresheasy", result: "ROAS 1,000% range" },
+        { client: "Kakao Style (Zigzag, Posty)", result: "Built a platform-specific SA structure" },
       ],
     },
-    additionalExperience: {
-      title: "ADDITIONAL EXPERIENCE",
-      items: [
-        { client: "Heodak · Fresheasy", result: "ROAS 1,000% range · Signup CPA ₩2,000 range" },
-        { client: "Maeil Dairies", result: "Naver LIVE Shopping revenue ×4 (same product/bundle basis)" },
-        { client: "Kakao Style (Zigzag, Posty)", result: "Built a platform-specific SA operating structure" },
+    startup: {
+      eyebrow: "0→1 EXPERIENCE",
+      title: "I started from a customer problem and ran product through sales myself.",
+      brand: "Dan Soonhan (skincare brand)",
+      flow: ["FGI / Survey", "Product Planning", "ODM", "Brand / PDP", "Marketing"],
+      result: [
+        { label: "WADIZ", value: "1,106% / 949%" },
+        { label: "INITIAL STOCK", value: "Sold out in 2 weeks" },
       ],
+      secondary: "Grand Prize, Yonsei University Startup Competition",
     },
     career: {
-      title: "Career Timeline",
-      storyline: "CUSTOMER / PRODUCT → MEDIA EXECUTION → BUSINESS GROWTH OWNERSHIP",
+      title: "Career",
+      storyline: "STARTUP · Customer/Product → AGENCY · Hands-on Media Execution → IN-HOUSE · Strategy·Budget·CRM·CRO·Commerce",
       timeline: [
-        { period: "2019–2021", org: "Startup", role: "Startup · Brand Owner", detail: "Planned and ran a skincare brand end-to-end, starting from customer research" },
-        { period: "2021–2024", org: "AdEfficiency / Madup", role: "Agency · Hands-on Performance Execution", detail: "Ran SA/DA/VA across beauty, F&B, education, healthcare, and fashion clients" },
-        { period: "2025–NOW", org: "Celltrion Skincare", role: "In-house · Strategy / Budget / CRM / CRO / Commerce Ownership", detail: "Led domestic performance and CRM in H2 2025; owned performance marketing and CRM solo following the 2026 reorganization", current: true },
+        { period: "2019–2021", org: "Startup", role: "Customer / Product", detail: "" },
+        { period: "2021–2024", org: "AdEfficiency / Madup", role: "Agency · Hands-on Media Execution", detail: "" },
+        { period: "2025–NOW", org: "Celltrion Skincare", role: "In-house · Strategy · Budget · CRM · CRO · Commerce", detail: "Led domestic performance and CRM in H2 2025; owned performance marketing and CRM solo following the 2026 reorganization", current: true },
       ],
     },
     contact: {
-      line: "If this candidate sounds interesting,",
-      lineBreak: "let's talk more.",
+      line: "Want to talk about",
+      lineBreak: "online revenue and performance?",
     },
-    misc: { close: "Close", playVideo: "Play video", menu: "Menu", backToTop: "Back to top" },
+    misc: { backToTop: "Back to top" },
   },
 };
 
@@ -793,7 +628,7 @@ function LanguageSwitcher({ lang, setLang, dark = false }) {
 
 function SectionHeading({ eyebrow, title, sub }) {
   return (
-    <div className="mb-8 print-heading-group">
+    <div className="mb-6 print-heading-group">
       <div className="text-xs font-semibold tracking-[0.18em] mb-2" style={{ color: CORAL, fontFamily: "'IBM Plex Mono', monospace" }}>{eyebrow}</div>
       <h2 className="text-2xl md:text-3xl font-semibold mb-2" style={{ color: NAVY, fontFamily: "'Space Grotesk', sans-serif" }}>{title}</h2>
       {sub && <p className="text-sm md:text-base" style={{ color: MUTED }}>{sub}</p>}
@@ -821,14 +656,14 @@ function EvidenceGallery({ images }) {
   const openLightbox = useContext(LightboxContext);
   const IMG = { IMG_INNERLAB_LP, IMG_ZIPIDERM_REVIEW, IMG_ZIPIDERM_PRODUCT, IMG_HANSKIN_PROMO, IMG_HANSKIN_AI, IMG_HANYUL_VOC, IMG_HEODAK, IMG_HEODAK_2, IMG_MAEIL_TOSS, IMG_BODYLUV };
   return (
-    <div className="mt-4 grid grid-cols-2 sm:grid-cols-3 gap-2">
+    <div className="mt-3 grid grid-cols-2 gap-2">
       {images.map((img, i) => {
         const src = typeof img.src === "string" && IMG[img.src] ? IMG[img.src] : img.src;
         return (
           <div key={i} className="rounded-xl overflow-hidden border relative group cursor-zoom-in evidence-thumb-wrap" style={{ borderColor: "#EAE5D8" }} onClick={(e) => { e.stopPropagation(); openLightbox({ ...img, src }); }}>
-            <img src={src} alt={img.caption} className="w-full h-32 object-cover evidence-thumb" style={{ objectPosition: img.focus || "top" }} />
+            <img src={src} alt={img.caption} className="w-full h-28 object-cover evidence-thumb" style={{ objectPosition: img.focus || "top" }} />
             <div className="absolute inset-0 flex items-center justify-center bg-black/0 group-hover:bg-black/20 transition-colors">
-              <ZoomIn size={18} className="text-white opacity-0 group-hover:opacity-90 transition-opacity" />
+              <ZoomIn size={16} className="text-white opacity-0 group-hover:opacity-90 transition-opacity" />
             </div>
             <div className="text-[10px] px-2 py-1.5 evidence-caption" style={{ color: MUTED, background: "#FAF7EF" }}>{img.caption}</div>
           </div>
@@ -855,92 +690,22 @@ function Lightbox({ image, onClose }) {
   );
 }
 
-function SimpleBars({ data, height = 150, colorFor, labelFor }) {
-  const max = Math.max(...data.map((d) => d.value), 1);
+function StatChip({ value, label, context, size = "md" }) {
   return (
-    <div style={{ height, display: "flex", alignItems: "flex-end", gap: 16, padding: "0 4px" }}>
-      {data.map((d, i) => {
-        const pct = Math.max((d.value / max) * 100, 3);
-        return (
-          <div key={i} style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-end", height: "100%" }}>
-            <div style={{ fontFamily: "'IBM Plex Mono', monospace", fontSize: 11.5, fontWeight: 600, color: NAVY, marginBottom: 4 }}>{labelFor(d.value)}</div>
-            <div style={{ height: `${pct}%`, width: "100%", maxWidth: 50, background: colorFor(i), borderRadius: "8px 8px 0 0", transition: "height 0.3s ease" }} />
-            <div style={{ fontSize: 10.5, color: MUTED, fontFamily: "Inter", marginTop: 8, textAlign: "center" }}>{d.name}</div>
-          </div>
-        );
-      })}
+    <div className="rounded-xl px-4 py-3 flex-1 min-w-[130px]" style={{ background: "#F3EFE3" }}>
+      <div className={size === "lg" ? "text-2xl font-semibold" : "text-lg font-semibold"} style={{ color: CORAL, fontFamily: "'IBM Plex Mono', monospace" }}>{value}</div>
+      <div className="text-xs mt-0.5 font-medium" style={{ color: NAVY }}>{label}</div>
+      {context && <div className="text-[10px] mt-1" style={{ color: MUTED }}>{context}</div>}
     </div>
   );
 }
 
-function ImprovementBars({ data, height = 150, color = CORAL }) {
-  return <SimpleBars data={data} height={height} colorFor={(i) => (Array.isArray(color) ? color[i % color.length] : color)} labelFor={(v) => `+${v}%`} />;
-}
-
-function BeforeAfterCompare({ beforeLabel, beforeValue, afterLabel, afterValue, suffix = "", deltaText, height = 160, indexMode = false }) {
-  const max = Math.max(beforeValue, afterValue) || 1;
-  const beforePct = Math.max((beforeValue / max) * 100, 6);
-  const afterPct = Math.max((afterValue / max) * 100, 6);
-  const barArea = height - 46;
-  const fmt = (v) => (indexMode ? `Index ${v}` : `${v}${suffix}`);
+function FlowChips({ items }) {
   return (
-    <div>
-      <div className="flex items-end justify-center gap-3 md:gap-4" style={{ height }}>
-        <div className="flex flex-col items-center justify-end" style={{ height: "100%" }}>
-          <div className="text-sm font-semibold mb-1.5" style={{ fontFamily: "'IBM Plex Mono', monospace", color: NAVY_SOFT }}>{fmt(beforeValue)}</div>
-          <div style={{ width: 52, height: (barArea * beforePct) / 100, background: "#D9D2BF", borderRadius: "8px 8px 0 0" }} />
-          <div className="text-xs mt-2" style={{ color: MUTED }}>{beforeLabel}</div>
-        </div>
-        <div className="flex flex-col items-center justify-center pb-7 gap-1 px-1">
-          <ArrowRight size={18} color={CORAL} />
-          {deltaText && <div className="text-xs font-semibold px-2.5 py-1 rounded-full text-white whitespace-nowrap" style={{ background: CORAL }}>{deltaText}</div>}
-        </div>
-        <div className="flex flex-col items-center justify-end" style={{ height: "100%" }}>
-          <div className="text-sm font-semibold mb-1.5" style={{ fontFamily: "'IBM Plex Mono', monospace", color: CORAL }}>{fmt(afterValue)}</div>
-          <div style={{ width: 52, height: (barArea * afterPct) / 100, background: CORAL, borderRadius: "8px 8px 0 0" }} />
-          <div className="text-xs mt-2 font-medium" style={{ color: NAVY }}>{afterLabel}</div>
-        </div>
-      </div>
-      {indexMode && <div className="text-[10px] text-center mt-1" style={{ color: MUTED }}>Baseline = 100</div>}
-    </div>
-  );
-}
-
-function KPIDeltaCard({ metrics }) {
-  return (
-    <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-      {metrics.map((m, i) => {
-        const isGood = m.good !== false;
-        const color = isGood ? CORAL : NAVY_SOFT;
-        return (
-          <div key={i} className="rounded-xl p-4" style={{ background: "#FAF7EF" }}>
-            <div className="text-xs mb-2" style={{ color: MUTED }}>{m.label}</div>
-            <div className="flex items-center gap-1.5">
-              <span style={{ color, fontSize: 15 }}>{m.direction === "down" ? "↓" : "↑"}</span>
-              <span className="text-lg font-semibold" style={{ color, fontFamily: "'IBM Plex Mono', monospace" }}>{m.value}</span>
-            </div>
-          </div>
-        );
-      })}
-    </div>
-  );
-}
-
-function StatChip({ value, label, color = CORAL, tone = "light" }) {
-  return (
-    <div className="rounded-xl px-4 py-3 flex-1 min-w-[130px]" style={{ background: tone === "dark" ? CORAL : "#F3EFE3" }}>
-      <div className="text-lg font-semibold" style={{ color: tone === "dark" ? "white" : color, fontFamily: "'IBM Plex Mono', monospace" }}>{value}</div>
-      <div className="text-xs mt-0.5" style={{ color: tone === "dark" ? "rgba(255,255,255,0.85)" : NAVY }}>{label}</div>
-    </div>
-  );
-}
-
-function FlowChips({ items, highlightLast = true }) {
-  return (
-    <div className="flex flex-wrap items-center gap-1.5 mb-4 text-xs" style={{ color: NAVY }}>
+    <div className="flex flex-wrap items-center gap-1.5 mb-3 text-xs" style={{ color: NAVY }}>
       {items.map((it, i) => (
         <React.Fragment key={i}>
-          <span className="px-2.5 py-1 rounded-full" style={i === items.length - 1 && highlightLast ? { background: CORAL, color: "white", fontWeight: 600 } : { background: "#F3EFE3" }}>{it}</span>
+          <span className="px-2.5 py-1 rounded-full" style={i === items.length - 1 ? { background: CORAL, color: "white", fontWeight: 600 } : { background: "#F3EFE3" }}>{it}</span>
           {i < items.length - 1 && <ArrowRight size={11} color={MUTED} />}
         </React.Fragment>
       ))}
@@ -948,107 +713,61 @@ function FlowChips({ items, highlightLast = true }) {
   );
 }
 
-function LeverRow({ lever, before, after }) {
+function LeverRow({ lever, before, after, desc }) {
   return (
     <div className="flex flex-col sm:flex-row sm:items-center gap-1.5 sm:gap-3 py-2 border-t text-xs" style={{ borderColor: "#EDE8DA" }}>
-      <div className="sm:w-28 font-semibold flex-shrink-0" style={{ color: NAVY, fontFamily: "'IBM Plex Mono', monospace", fontSize: 10.5 }}>{lever}</div>
-      <div className="flex items-center gap-2 flex-1 min-w-0">
+      <div className="sm:w-24 font-semibold flex-shrink-0" style={{ color: NAVY, fontFamily: "'IBM Plex Mono', monospace", fontSize: 10.5 }}>{lever}</div>
+      <div className="flex items-center gap-2 flex-shrink-0">
         <span style={{ color: MUTED }}>{before}</span>
         <ArrowRight size={11} color={MUTED} />
         <span style={{ color: NAVY, fontWeight: 600 }}>{after}</span>
       </div>
-    </div>
-  );
-}
-
-function MeasurementBox({ rows }) {
-  return (
-    <div className="rounded-lg p-3.5 mt-4" style={{ background: "#FAF7EF", border: "1px solid #EAE5D8" }}>
-      <div className="text-[10px] font-semibold tracking-wider mb-2" style={{ color: NAVY_SOFT, fontFamily: "'IBM Plex Mono', monospace" }}>MEASUREMENT</div>
-      <div className="grid sm:grid-cols-2 gap-x-6 gap-y-1.5">
-        {rows.map((r, i) => (
-          <div key={i} className="flex gap-2 text-xs">
-            <span className="flex-shrink-0" style={{ color: MUTED, minWidth: 92, fontFamily: "'IBM Plex Mono', monospace", fontSize: 10 }}>{r.label}</span>
-            <span style={{ color: r.muted ? "#9C9585" : INK, fontStyle: r.muted ? "italic" : "normal" }}>{r.value}</span>
-          </div>
-        ))}
-      </div>
+      {desc && <div className="flex-1 min-w-0" style={{ color: MUTED }}>{desc}</div>}
     </div>
   );
 }
 
 /* ---------------------------------------------------------------------- */
-/*  Main Case — the core repeated unit for the 4 Selected Growth Cases.   */
-/*  Problem → Observation → Hypothesis → Action → Validation → Result →   */
-/*  Learning, plus a Measurement box for credibility.                     */
+/*  GrowthLever — the single reusable card format for every case:          */
+/*  Challenge (1–2 lines) → What I Changed (max 3) → Visual → Result       */
+/*  → My Role (1 line) → Optional Learning (web only, print-hide).         */
 /* ---------------------------------------------------------------------- */
-function MainCase({ data, lang, extraVisual }) {
+function GrowthLever({ data, id, printChapter }) {
   return (
-    <Card id={data.id} className="p-6 md:p-8 mb-6 scroll-mt-24 print-chapter">
-      <div className="flex items-start justify-between gap-3 flex-wrap mb-3">
-        <div className="text-xs font-semibold tracking-wider" style={{ color: CORAL, fontFamily: "'IBM Plex Mono', monospace" }}>{data.index}</div>
-        {data.tag && <Tag tone="navy">{data.tag}</Tag>}
-      </div>
-      <h3 className="font-semibold mb-2 leading-snug" style={{ color: NAVY, fontFamily: "'Space Grotesk', sans-serif", fontSize: "clamp(20px, 3vw, 28px)", textWrap: "balance" }}>
-        {data.headline[0]}<br />{data.headline[1]}
-      </h3>
-      <p className="text-xs mb-5" style={{ color: MUTED }}>{data.client}</p>
+    <Card id={id || data.id} className={`p-5 md:p-6 ${printChapter ? "print-chapter" : ""}`}>
+      <div className="text-xs font-semibold tracking-wider mb-1.5" style={{ color: CORAL, fontFamily: "'IBM Plex Mono', monospace" }}>{data.tag}</div>
+      <h3 className="text-base md:text-lg font-semibold mb-2 leading-snug" style={{ color: NAVY, fontFamily: "'Space Grotesk', sans-serif" }}>{data.title}</h3>
+      {data.client && <div className="text-xs mb-2" style={{ color: MUTED }}>{data.client}</div>}
+      {data.challenge && <p className="text-sm leading-relaxed mb-3" style={{ color: INK }}>{data.challenge}</p>}
 
-      <div className="grid md:grid-cols-2 gap-x-8 gap-y-4 mb-5">
-        <div>
-          <div className="text-xs font-semibold mb-1.5" style={{ color: NAVY_SOFT }}>PROBLEM</div>
-          <p className="text-sm leading-relaxed" style={{ color: INK }}>{data.problem}</p>
-        </div>
-        <div>
-          <div className="text-xs font-semibold mb-1.5" style={{ color: NAVY_SOFT }}>{data.observationLabel}</div>
-          <p className="text-sm leading-relaxed" style={{ color: INK }}>{data.observation}</p>
-        </div>
-      </div>
-
-      <div className="mb-5 rounded-lg p-3.5" style={{ background: "#FAF7EF", borderLeft: `3px solid ${CORAL}` }}>
-        <div className="text-xs font-semibold mb-1.5" style={{ color: CORAL }}>{data.hypothesisLabel}</div>
-        <p className="text-sm leading-relaxed" style={{ color: INK }}>{data.hypothesis}</p>
-      </div>
-
-      {data.action && (
-        <div className="mb-5">
-          <div className="text-xs font-semibold mb-1.5" style={{ color: NAVY_SOFT }}>ACTION / EXPERIMENT</div>
-          <ul className="text-sm space-y-1 exec-list" style={{ color: INK }}>
-            {data.action.map((p, i) => <li key={i} className="flex gap-2"><span style={{ color: CORAL }}>·</span>{p}</li>)}
-          </ul>
-        </div>
+      {data.changes && (
+        <ul className="text-sm space-y-1 mb-3" style={{ color: INK }}>
+          {data.changes.slice(0, 3).map((c, i) => <li key={i} className="flex gap-2"><span style={{ color: CORAL }}>·</span>{c}</li>)}
+        </ul>
       )}
 
-      {data.levers && (
-        <div className="mb-5 rounded-lg overflow-hidden px-1" style={{ background: "white" }}>
-          <div className="text-xs font-semibold mb-1" style={{ color: NAVY_SOFT }}>ACTION / EXPERIMENT</div>
-          {data.levers.map((l, i) => <LeverRow key={i} lever={l.lever} before={l.before} after={l.after} />)}
+      {data.flow && <FlowChips items={data.flow} />}
+      {data.levers && <div className="mb-3">{data.levers.map((l, i) => <LeverRow key={i} {...l} />)}</div>}
+
+      <div className="flex flex-wrap gap-2 mb-1">
+        {data.result.map((r, i) => <StatChip key={i} value={r.value} label={r.label} context={r.context} />)}
+      </div>
+      {data.scale && <div className="text-xs mt-1" style={{ color: MUTED }}>{data.scale}</div>}
+      {data.caption && <div className="text-xs mt-1" style={{ color: MUTED }}>{data.caption}</div>}
+      {data.secondary && <div className="text-xs mt-2 px-3 py-1.5 rounded-full inline-block" style={{ background: "#F3EFE3", color: NAVY }}>{data.secondary}</div>}
+      {data.footnote && <div className="text-[10px] italic mt-2" style={{ color: "#9C9585" }}>{data.footnote}</div>}
+
+      {data.role && (
+        <div className="text-xs mt-3 pt-3 border-t" style={{ borderColor: "#EDE8DA", color: MUTED }}>
+          <span className="font-semibold" style={{ color: CORAL }}>MY ROLE  </span>{data.role}
         </div>
       )}
-
-      {extraVisual}
-
-      <div className="mb-4 text-xs" style={{ color: MUTED }}>
-        <span className="font-semibold" style={{ color: NAVY_SOFT }}>{data.validationLabel}  </span>
-        {data.validation}
-      </div>
-
-      <div className="flex flex-wrap gap-2 mb-2">
-        {data.result.map((r, i) => (
-          <StatChip key={i} value={r.value} label={r.label} tone={i === 0 && data.levers ? "dark" : "light"} color={CORAL} />
-        ))}
-      </div>
-      {data.purchaseScale && <div className="text-xs mb-3" style={{ color: MUTED }}>{data.purchaseScale}</div>}
-      {data.secondary && (
-        <div className="mt-1 mb-3 text-xs px-3 py-1.5 rounded-full inline-block" style={{ background: "#F3EFE3", color: NAVY }}>{data.secondary}</div>
+      {data.learning && (
+        <p className="text-xs leading-relaxed mt-2 print-hide" style={{ color: MUTED }}>
+          <span className="font-semibold" style={{ color: NAVY_SOFT }}>LEARNING  </span>{data.learning}
+        </p>
       )}
-
-      <div className="mt-4 rounded-lg p-3.5" style={{ background: NAVY }}>
-        <div className="text-[10px] font-semibold tracking-wider mb-1" style={{ color: CORAL_SOFT }}>{data.learningLabel}</div>
-        <p className="text-sm leading-relaxed text-white">{data.learning}</p>
-      </div>
-
-      <MeasurementBox rows={data.measurement} />
+      {data.evidence && <EvidenceGallery images={data.evidence} />}
     </Card>
   );
 }
@@ -1093,7 +812,7 @@ function Portfolio() {
 
   React.useEffect(() => {
     try {
-      document.title = lang === "kr" ? "문희지 — Performance-led Commerce Growth Portfolio" : "Heeji MOON — Performance-led Commerce Growth Portfolio";
+      document.title = lang === "kr" ? "문희지 — Performance & Growth Marketer" : "Heeji MOON — Performance & Growth Marketer";
     } catch (e) { /* ignore */ }
   }, [lang]);
 
@@ -1105,8 +824,7 @@ function Portfolio() {
   };
   const setRef = (id) => (el) => { refs.current[id] = el; };
 
-  const scrollToCase = (id) => {
-    setActive("cases");
+  const scrollToId = (id) => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
@@ -1130,8 +848,6 @@ function Portfolio() {
         [data-lang="en"] p, [data-lang="en"] li { text-wrap: pretty; }
         h1, h2, h3, h4 { text-wrap: balance; }
         .flex > *, .grid > * { min-width: 0; }
-        .print-video-poster { display: none; }
-        .print-only-link { display: none; }
         .print-only { display: none; }
 
         /* ============ PRINT / PDF (A4 Landscape) ============ */
@@ -1141,31 +857,28 @@ function Portfolio() {
           .no-print { display: none !important; }
           aside { position: static !important; height: auto !important; width: auto !important; display: none !important; }
           .lg\\:ml-64 { margin-left: 0 !important; }
-          video { display: none !important; }
-          .video-frame { display: none !important; }
           .print-hide { display: none !important; }
-          .print-video-poster { display: block !important; width: 100% !important; height: auto !important; max-height: 150px !important; object-fit: cover !important; border-radius: 8px !important; }
-          .print-only-link { display: block !important; }
           .print-only { display: block !important; }
           .screen-only { display: none !important; }
-          .exec-list li:nth-child(n+4) { display: none !important; }
           img:not(.evidence-thumb) { max-width: 100% !important; height: auto !important; object-fit: contain !important; }
           .evidence-thumb-wrap { background: #FAF7EF !important; }
-          .evidence-thumb { max-width: 100% !important; max-height: 110px !important; width: 100% !important; height: 110px !important; object-fit: contain !important; }
+          .evidence-thumb { max-width: 100% !important; max-height: 100px !important; width: 100% !important; height: 100px !important; object-fit: contain !important; }
           .evidence-caption { white-space: nowrap !important; overflow: hidden !important; text-overflow: ellipsis !important; }
           h1, h2, h3, h4, .avoid-break-after { break-after: avoid; page-break-after: avoid; }
           .print-heading-group { break-after: avoid !important; page-break-after: avoid !important; }
           p, li { orphans: 3; widows: 3; }
           .card-print, figure { break-inside: avoid; page-break-inside: avoid; }
           .print-closing-footer { display: block !important; }
-          section { margin-bottom: 6mm !important; }
-          .p-5, .p-6, .p-7, .p-8, .md\\:p-7, .md\\:p-8 { padding: 4mm !important; }
-          .mb-8 { margin-bottom: 4mm !important; }
-          .mb-6, .mb-5 { margin-bottom: 3mm !important; }
-          .gap-5 { gap: 3mm !important; }
-          /* Page map: 01 Overview / 02 Bright Eye / 03 CRM / 04 Amazon / 05 Startup /
-             06 In-house Growth / 07 Global Commerce / 08 Agency / 09 Career / 10 Contact.
-             Each Main Case card and each chapter section starts its own printed page. */
+          section { margin-bottom: 5mm !important; }
+          .p-5, .p-6, .p-7, .p-8, .md\\:p-6, .md\\:p-7, .md\\:p-8 { padding: 4mm !important; }
+          .mb-8, .mb-6 { margin-bottom: 3mm !important; }
+          .mb-5, .mb-3 { margin-bottom: 2.5mm !important; }
+          .gap-5, .gap-3 { gap: 2.5mm !important; }
+          /* Selected Impact: always 4 equal columns on one row, never wraps/breaks */
+          .impact-grid { display: grid !important; grid-template-columns: repeat(4, 1fr) !important; gap: 3mm !important; }
+          /* Page map (~10 pages): 01 Overview / 02 Impact+In-house intro / 03 Media+Commerce /
+             04 CRM+CRO / 05 Amazon / 06 Shopee+Qoo10 / 07 Experiment / 08 Agency /
+             09 Startup+Career / 10 Contact. */
           .print-chapter { break-before: page; page-break-before: always; }
         }
       `}</style>
@@ -1207,7 +920,7 @@ function Portfolio() {
           <div className="mb-10">
             <img src={IMG_AVATAR} alt={lang === "kr" ? "문희지" : "Heeji MOON"} className="w-14 h-14 rounded-full object-cover mb-3" style={{ border: "2px solid rgba(225,88,63,0.4)" }} />
             <div className="text-white text-lg font-semibold mb-1" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>{lang === "kr" ? "문희지" : "Heeji MOON"}</div>
-            <div className="text-xs" style={{ color: CORAL_SOFT }}>Performance-led Commerce Growth Marketer</div>
+            <div className="text-xs" style={{ color: CORAL_SOFT }}>Performance & Growth Marketer</div>
           </div>
           <nav className="flex flex-col gap-1">
             {NAV_ITEMS.map((item) => {
@@ -1229,30 +942,37 @@ function Portfolio() {
 
         <main className="flex-1 lg:ml-64 px-4 md:px-10 py-10 md:py-14 max-w-6xl">
           {/* ===================== PAGE 01 — OVERVIEW ===================== */}
-          <section id="overview" ref={setRef("overview")} className="mb-16 scroll-mt-6">
+          <section id="overview" ref={setRef("overview")} className="mb-12 scroll-mt-6">
             <div className="text-xs font-semibold tracking-[0.2em] mb-3" style={{ color: CORAL, fontFamily: "'IBM Plex Mono', monospace" }}>{t.hero.eyebrow}</div>
-            <h1 className="font-semibold leading-tight mb-4" style={{ color: NAVY, fontFamily: "'Space Grotesk', sans-serif", textWrap: "balance", fontSize: "clamp(28px, 5vw, 52px)" }}>
+            <h1 className="font-semibold leading-tight mb-4" style={{ color: NAVY, fontFamily: "'Space Grotesk', sans-serif", textWrap: "balance", fontSize: "clamp(26px, 4.5vw, 46px)" }}>
               {t.hero.title1}<br /><span style={{ color: CORAL }}>{t.hero.titleHighlight}</span>{t.hero.title2}
             </h1>
-            <p className="text-sm md:text-base max-w-2xl font-medium" style={{ color: INK, textWrap: "balance" }}>{t.hero.sub}</p>
+            <p className="text-sm md:text-base max-w-2xl" style={{ color: INK, textWrap: "balance" }}>{t.hero.sub}</p>
             <div className="flex items-center gap-2 mt-4 text-[11px] font-semibold tracking-wide" style={{ fontFamily: "'IBM Plex Mono', monospace" }}>
               <span className="px-2.5 py-1 rounded-full" style={{ background: "#F3EFE3", color: MUTED }}>{t.hero.evolutionFrom}</span>
               <ArrowRight size={12} color={MUTED} />
               <span className="px-2.5 py-1 rounded-full text-white" style={{ background: NAVY }}>{t.hero.evolutionTo}</span>
             </div>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mt-7">
-              {t.hero.quad.map((q, i) => (
+
+            <div className="mt-6 rounded-xl p-4 flex flex-wrap items-center gap-3" style={{ background: NAVY }}>
+              <span className="text-[10px] font-semibold tracking-wider px-2 py-1 rounded" style={{ color: NAVY, background: CORAL_SOFT }}>{t.currentRole.tag}</span>
+              <span className="text-sm font-semibold text-white">{t.currentRole.org}</span>
+              <span className="text-xs" style={{ color: "rgba(255,255,255,0.7)" }}>{t.currentRole.role}</span>
+              <span className="text-xs ml-auto" style={{ color: "rgba(255,255,255,0.5)" }}>{t.currentRole.note}</span>
+            </div>
+
+            <div className="grid sm:grid-cols-3 gap-3 mt-4">
+              {t.scope.rows.map((r, i) => (
                 <div key={i} className="rounded-xl p-3.5" style={{ background: "#FAF7EF" }}>
-                  <div className="text-[10px] font-semibold tracking-wider mb-1" style={{ color: CORAL, fontFamily: "'IBM Plex Mono', monospace" }}>{q.label}</div>
-                  <div className="text-xs leading-snug" style={{ color: NAVY }}>{q.value}</div>
+                  <div className="text-[10px] font-semibold tracking-wider mb-1" style={{ color: CORAL, fontFamily: "'IBM Plex Mono', monospace" }}>{r.label}</div>
+                  <div className="text-xs leading-snug" style={{ color: NAVY }}>{r.value}</div>
                 </div>
               ))}
             </div>
           </section>
 
-          <section id="snapshot" className="mb-16 scroll-mt-6">
+          <section id="snapshot" className="mb-12 scroll-mt-6">
             <div className="text-xs font-semibold tracking-[0.18em] mb-2" style={{ color: CORAL, fontFamily: "'IBM Plex Mono', monospace" }}>EXPERIENCE SNAPSHOT</div>
-            <h2 className="text-xl md:text-2xl font-semibold mb-4" style={{ color: NAVY, fontFamily: "'Space Grotesk', sans-serif" }}>{t.snapshot.headline}</h2>
             <div className="rounded-xl p-5" style={{ background: "#FAF7EF" }}>
               {t.snapshot.categories.map((cat, i) => (
                 <div key={i} className={i > 0 ? "mt-3 pt-3 border-t" : ""} style={i > 0 ? { borderColor: "#EDE8DA" } : {}}>
@@ -1273,177 +993,110 @@ function Portfolio() {
             </div>
           </section>
 
-          <section id="impact" className="mb-16 scroll-mt-6">
-            <SectionHeading eyebrow="SELECTED IMPACT" title={t.impactTitle} />
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+          {/* ===================== PAGE 02 — SELECTED IMPACT ===================== */}
+          <section id="impact" className="mb-12 scroll-mt-6 print-chapter">
+            <div className="text-xs font-semibold tracking-[0.18em] mb-2" style={{ color: CORAL, fontFamily: "'IBM Plex Mono', monospace" }}>SELECTED IMPACT</div>
+            <div className="grid grid-cols-2 impact-grid gap-3">
               {t.selectedImpact.map((c, i) => (
-                <Card key={i} className="p-4 flex flex-col" onClick={() => scrollToCase(c.target)}>
-                  <div className="text-[10px] font-semibold tracking-wider mb-2" style={{ color: MUTED, fontFamily: "'IBM Plex Mono', monospace" }}>{c.num} · {c.tag}</div>
+                <Card key={i} className="p-4" onClick={() => scrollToId(c.target)}>
+                  <div className="text-[10px] font-semibold tracking-wider mb-2" style={{ color: MUTED, fontFamily: "'IBM Plex Mono', monospace" }}>{c.tag}</div>
                   <div className="text-xl font-semibold mb-0.5" style={{ color: c.color, fontFamily: "'IBM Plex Mono', monospace" }}>{c.kpi}</div>
-                  <div className="text-[11px] mb-2" style={{ color: MUTED }}>{c.kpiLabel}</div>
-                  <div className="text-xs font-semibold mb-1" style={{ color: NAVY }}>{c.name}</div>
-                  <div className="text-[11px] leading-snug mb-3" style={{ color: MUTED }}>{c.change}</div>
-                  <div className="mt-auto flex items-center gap-1 text-[11px] font-semibold print-hide" style={{ color: CORAL }}>View Case <ChevronRight size={12} color={CORAL} /></div>
+                  <div className="text-[11px] mb-1.5" style={{ color: MUTED }}>{c.label}</div>
+                  <div className="text-xs font-semibold" style={{ color: NAVY }}>{c.name}</div>
+                  <div className="text-[10px] leading-snug mt-1" style={{ color: MUTED }}>{c.context}</div>
                 </Card>
               ))}
             </div>
           </section>
 
-          {/* ===================== PAGE 02–05 — SELECTED GROWTH CASES ===================== */}
-          <section id="cases" ref={setRef("cases")} className="mb-4 scroll-mt-6">
-            <SectionHeading eyebrow={t.casesEyebrow} title={t.casesTitle} sub={t.casesSub} />
-
-            <MainCase
-              data={t.mainCases[0]}
-              lang={lang}
-              extraVisual={
-                <div className="flex flex-col sm:flex-row items-center gap-3 mb-4">
-                  <div className="flex-1 w-full text-center rounded-xl p-4" style={{ background: "#FAF7EF" }}>
-                    <div className="text-xs mb-1" style={{ color: MUTED }}>AD CONVERSION</div>
-                    <div className="text-sm font-semibold" style={{ color: NAVY }}>{lang === "kr" ? "상담신청 (Lead CPA 중심)" : "Consultation Lead (Lead CPA-driven)"}</div>
-                  </div>
-                  <ArrowRight size={16} color={MUTED} className="rotate-90 sm:rotate-0 flex-shrink-0" />
-                  <div className="flex-1 w-full text-center rounded-xl p-4" style={{ background: "#FAF7EF" }}>
-                    <div className="text-xs" style={{ color: MUTED }}>QUALITY FILTER</div>
-                    <div className="text-sm font-semibold" style={{ color: NAVY }}>{lang === "kr" ? "실명 입력 · 예약 완료 확인" : "Real-name entry · Booking confirmation"}</div>
-                  </div>
-                  <ArrowRight size={16} color={MUTED} className="rotate-90 sm:rotate-0 flex-shrink-0" />
-                  <div className="flex-1 w-full text-center rounded-xl p-4" style={{ background: CORAL }}>
-                    <div className="text-xs mb-1" style={{ color: "rgba(255,255,255,0.8)" }}>ACTUAL BOOKING</div>
-                    <div className="text-sm font-semibold text-white">{lang === "kr" ? "Booking Quality 중심" : "Booking Quality-driven"}</div>
-                  </div>
-                </div>
-              }
-            />
-
-            <MainCase
-              data={t.mainCases[1]}
-              lang={lang}
-              extraVisual={
-                <div className="mb-4">
-                  <FlowChips items={lang === "kr" ? ["전체 고객", "구매·행동 데이터", "세그먼트 설계", "전환·재구매"] : ["All Customers", "Purchase & Behavior Data", "Segment Design", "Conversion · Repeat Purchase"]} />
-                </div>
-              }
-            />
-
-            <MainCase data={t.mainCases[2]} lang={lang} />
-
-            <MainCase
-              data={t.mainCases[3]}
-              lang={lang}
-              extraVisual={
-                <div className="mb-4">
-                  <FlowChips items={["Customer Research", "Product Planning", "ODM", "Brand / Positioning", "PDP", "Ads / Viral", "Customer Management"]} />
-                </div>
-              }
-            />
-          </section>
-
-          {/* ===================== PAGE 06 — IN-HOUSE GROWTH SYSTEM ===================== */}
-          <section id="inhouse" ref={setRef("inhouse")} className="mb-16 scroll-mt-6 print-chapter">
+          {/* ===================== PAGE 03–04 — CURRENT IN-HOUSE GROWTH ===================== */}
+          <section id="inhouse" ref={setRef("inhouse")} className="mb-12 scroll-mt-6">
             <SectionHeading eyebrow={t.inhouse.eyebrow} title={t.inhouse.title} sub={t.inhouse.sub} />
-            <div className="grid md:grid-cols-2 gap-5">
-              {t.inhouse.cases.map((c, i) => (
-                <Card key={i} className="p-6">
-                  <div className="text-xs font-semibold tracking-wider mb-2" style={{ color: CORAL, fontFamily: "'IBM Plex Mono', monospace" }}>{c.title}</div>
-                  <p className="text-sm font-medium mb-3" style={{ color: NAVY }}>{c.headline}</p>
-                  <FlowChips items={c.flow} highlightLast={false} />
-                  <div className="flex flex-wrap gap-2 mb-3">
-                    {c.result.map((r, j) => <StatChip key={j} value={r.value} label={r.label} />)}
-                  </div>
-                  <p className="text-sm leading-relaxed" style={{ color: INK }}>{c.note}</p>
-                  {c.caveat && <p className="text-xs mt-2 italic" style={{ color: "#9C9585" }}>{c.caveat}</p>}
-                  {c.contribution && (
-                    <div className="text-xs mt-3 pt-3 border-t" style={{ borderColor: "#EDE8DA", color: MUTED }}>
-                      <span className="font-semibold" style={{ color: CORAL }}>CONTRIBUTION  </span>{c.contribution}
-                    </div>
-                  )}
-                  {c.evidence && (
-                    <EvidenceGallery images={c.evidence} />
-                  )}
-                </Card>
-              ))}
+            {/* Two explicit page-grouped rows (Media+Commerce / CRM+CRO) — the print-chapter
+                break lives on the ROW wrapper, not on an individual grid item, so a 2-column
+                grid can't split one row's card onto the following page. */}
+            <div className="grid md:grid-cols-2 gap-4 print-chapter">
+              <GrowthLever data={t.inhouse.levers[0]} />
+              <GrowthLever data={t.inhouse.levers[1]} />
+            </div>
+            <div className="grid md:grid-cols-2 gap-4 print-chapter mt-4">
+              <GrowthLever data={t.inhouse.levers[2]} />
+              <GrowthLever data={t.inhouse.levers[3]} />
             </div>
           </section>
 
-          {/* ===================== PAGE 07 — GLOBAL COMMERCE ===================== */}
-          <section id="global" ref={setRef("global")} className="mb-16 scroll-mt-6 print-chapter">
+          {/* ===================== PAGE 05 — GLOBAL: AMAZON ===================== */}
+          <section id="global" ref={setRef("global")} className="mb-12 scroll-mt-6">
             <SectionHeading eyebrow={t.global.eyebrow} title={t.global.title} sub={t.global.sub} />
-
-            <Card className="p-6 md:p-7 mb-5" id="kpi-shopee">
-              <div className="flex items-start justify-between gap-3 flex-wrap mb-1">
-                <div className="text-xs font-semibold tracking-wider" style={{ color: CORAL, fontFamily: "'IBM Plex Mono', monospace" }}>{t.global.shopee.title}</div>
-                <Tag tone="navy">{t.global.shopee.period}</Tag>
+            <Card id="global-amazon" className="p-6 md:p-7 mb-4 print-chapter">
+              <div className="text-xs font-semibold tracking-wider mb-1.5" style={{ color: CORAL, fontFamily: "'IBM Plex Mono', monospace" }}>{t.global.amazon.tag}</div>
+              <h3 className="text-lg md:text-xl font-semibold mb-4" style={{ color: NAVY, fontFamily: "'Space Grotesk', sans-serif" }}>{t.global.amazon.title}</h3>
+              <div className="mb-4">{t.global.amazon.levers.map((l, i) => <LeverRow key={i} {...l} />)}</div>
+              <div className="flex flex-wrap gap-2 mb-1">
+                {t.global.amazon.result.map((r, i) => <StatChip key={i} value={r.value} label={r.label} size="lg" />)}
               </div>
-              <div className="flex items-center gap-2 my-4 text-xs" style={{ color: NAVY }}>
-                <span className="px-2.5 py-1 rounded-full" style={{ background: "#F3EFE3" }}>{t.global.shopee.before}</span>
-                <ArrowRight size={12} color={MUTED} />
-                <span className="px-2.5 py-1 rounded-full text-white" style={{ background: CORAL }}>{t.global.shopee.after}</span>
-              </div>
-              <div className="flex flex-wrap gap-2 mb-2">
-                {t.global.shopee.result.map((r, i) => <StatChip key={i} value={r.value} label={r.label} />)}
-              </div>
-              <div className="text-xs mb-5" style={{ color: MUTED }}>{t.global.shopee.scale}</div>
-
-              <div className="rounded-lg p-4" style={{ background: "#FAF7EF", borderLeft: `3px solid ${NAVY_SOFT}` }}>
-                <div className="text-xs font-semibold mb-1.5" style={{ color: NAVY_SOFT }}>{t.global.shopee.failTitle}</div>
-                <p className="text-sm leading-relaxed mb-2" style={{ color: INK }}>{t.global.shopee.failBody}</p>
-                <p className="text-sm font-medium mb-2" style={{ color: NAVY }}>“{t.global.shopee.failQuote}”</p>
-                <div className="text-xs" style={{ color: MUTED }}><span className="font-semibold" style={{ color: CORAL }}>{t.global.shopee.learningLabel}  </span>{t.global.shopee.learning}</div>
-              </div>
+              <div className="text-xs mt-1" style={{ color: MUTED }}>{t.global.amazon.scale}</div>
+              <div className="text-xs mt-1" style={{ color: MUTED }}>{t.global.amazon.caption}</div>
+              <div className="text-[10px] italic mt-2" style={{ color: "#9C9585" }}>{t.global.amazon.footnote}</div>
+              <p className="text-xs leading-relaxed mt-3 print-hide" style={{ color: MUTED }}>
+                <span className="font-semibold" style={{ color: NAVY_SOFT }}>LEARNING  </span>{t.global.amazon.learning}
+              </p>
             </Card>
 
+            {/* ===================== PAGE 06 — GLOBAL: SHOPEE + QOO10 ===================== */}
+            <div className="grid md:grid-cols-2 gap-4 print-chapter">
+              <Card className="p-5 md:p-6">
+                <div className="text-xs font-semibold tracking-wider mb-1.5" style={{ color: CORAL, fontFamily: "'IBM Plex Mono', monospace" }}>{t.global.shopee.tag}</div>
+                <h3 className="text-base font-semibold mb-2" style={{ color: NAVY }}>{t.global.shopee.title}</h3>
+                <FlowChips items={t.global.shopee.flow} />
+                <div className="flex flex-wrap gap-2 mb-1">
+                  {t.global.shopee.result.map((r, i) => <StatChip key={i} value={r.value} label={r.label} />)}
+                </div>
+                <div className="text-xs mt-1" style={{ color: MUTED }}>{t.global.shopee.context}</div>
+                <p className="text-xs leading-relaxed mt-3 print-hide" style={{ color: MUTED }}>
+                  <span className="font-semibold" style={{ color: NAVY_SOFT }}>LEARNING  </span>{t.global.shopee.learning}
+                </p>
+              </Card>
+              <Card className="p-5 md:p-6">
+                <div className="text-xs font-semibold tracking-wider mb-1.5" style={{ color: CORAL, fontFamily: "'IBM Plex Mono', monospace" }}>{t.global.qoo10.tag}</div>
+                <h3 className="text-base font-semibold mb-3" style={{ color: NAVY }}>{t.global.qoo10.title}</h3>
+                <div className="flex flex-wrap gap-2 mb-3">
+                  {t.global.qoo10.result.map((r, i) => <StatChip key={i} value={r.value} label={r.label} context={r.context} />)}
+                </div>
+                <div className="rounded-lg p-3" style={{ background: "#F3EFE3" }}>
+                  <div className="text-[10px] font-semibold tracking-wider mb-1" style={{ color: CORAL }}>{t.global.qoo10.signalLabel}</div>
+                  <div className="text-sm" style={{ color: NAVY }}>{t.global.qoo10.signalCopy}</div>
+                </div>
+              </Card>
+            </div>
+          </section>
+
+          {/* ===================== PAGE 07 — EXPERIMENT & MEASUREMENT ===================== */}
+          <section id="experiment" ref={setRef("experiment")} className="mb-12 scroll-mt-6 print-chapter">
+            <SectionHeading eyebrow={t.experiment.eyebrow} title={t.experiment.title} sub={t.experiment.sub} />
             <Card className="p-6 md:p-7">
-              <div className="text-xs font-semibold tracking-wider mb-1" style={{ color: CORAL, fontFamily: "'IBM Plex Mono', monospace" }}>{t.global.qoo10.title}</div>
-              <p className="text-sm font-medium mb-4" style={{ color: NAVY }}>{t.global.qoo10.headline}</p>
-              <div className="grid sm:grid-cols-2 gap-3 mb-5">
-                {t.global.qoo10.levers.map((l, i) => (
-                  <div key={i} className="rounded-lg p-3" style={{ background: "#FAF7EF" }}>
-                    <div className="text-[10px] font-semibold tracking-wider mb-1" style={{ color: NAVY_SOFT, fontFamily: "'IBM Plex Mono', monospace" }}>{l.label}</div>
-                    <div className="text-xs" style={{ color: INK }}>{l.desc}</div>
-                  </div>
-                ))}
+              <FlowChips items={t.experiment.flow} />
+              <div className="flex flex-wrap gap-2 mb-3">
+                {t.experiment.result.map((r, i) => <StatChip key={i} value={r.value} label={r.label} context={r.context} size="lg" />)}
               </div>
-              <div className="flex flex-wrap gap-2 mb-5">
-                <StatChip value={t.global.qoo10.result.value} label={`${t.global.qoo10.result.label} · ${t.global.qoo10.result.period}`} />
+              <div className="text-xs mt-2 pt-3 border-t" style={{ borderColor: "#EDE8DA", color: MUTED }}>
+                <span className="font-semibold" style={{ color: CORAL }}>CONTRIBUTION  </span>{t.experiment.contribution}
               </div>
-              <div className="rounded-lg p-4 mb-3" style={{ background: "#F3EFE3" }}>
-                <div className="text-[10px] font-semibold tracking-wider mb-1" style={{ color: CORAL }}>{t.global.qoo10.signalTag}</div>
-                <p className="text-sm mb-1" style={{ color: NAVY }}>{t.global.qoo10.signalCopy}</p>
-                <p className="text-xs italic" style={{ color: "#9C9585" }}>{t.global.qoo10.signalNote}</p>
-              </div>
-              <div className="text-xs font-semibold tracking-wider mb-1.5" style={{ color: NAVY_SOFT }}>{t.global.qoo10.retentionLeverTag}</div>
-              <div className="flex flex-wrap gap-1.5 mb-4">
-                {t.global.qoo10.retentionLevers.map((lv, i) => <span key={i} className="text-xs px-2.5 py-1 rounded-full" style={{ background: "#F3EFE3", color: NAVY }}>{lv}</span>)}
-              </div>
-              <div className="text-xs" style={{ color: MUTED }}>{t.global.qoo10.measurement}</div>
+              <div className="text-[10px] mt-1" style={{ color: "#A8A08C" }}>{t.experiment.tools}</div>
             </Card>
+            <div className="mt-3 text-xs italic" style={{ color: "#9C9585" }}>{t.experiment.recap.note}</div>
           </section>
 
           {/* ===================== PAGE 08 — SELECTED AGENCY ===================== */}
-          <section id="agency" ref={setRef("agency")} className="mb-16 scroll-mt-6 print-chapter">
-            <SectionHeading eyebrow={t.agency.eyebrow} title={t.agency.title} sub={t.agency.sub} />
-            <div className="grid md:grid-cols-2 gap-5">
-              {t.agency.cases.map((c, i) => (
-                <Card key={i} className={`p-6 ${i === 2 ? "md:col-span-2" : ""}`}>
-                  <div className="text-xs font-semibold tracking-wider mb-1" style={{ color: CORAL, fontFamily: "'IBM Plex Mono', monospace" }}>{c.title}</div>
-                  <p className="text-sm font-medium mb-0.5" style={{ color: NAVY }}>{c.headline}</p>
-                  <p className="text-xs mb-3" style={{ color: MUTED }}>{c.client}</p>
-                  <FlowChips items={c.flow} />
-                  {c.measurementNote && <div className="text-xs mb-3" style={{ color: MUTED }}>{c.measurementNote}</div>}
-                  <div className="flex flex-wrap gap-2 mb-2">
-                    {c.result.map((r, j) => <StatChip key={j} value={r.value} label={r.label} />)}
-                  </div>
-                  {c.secondaryResult && <div className="text-xs mt-1 mb-2" style={{ color: MUTED }}>{c.secondaryResult}</div>}
-                  {c.note && <p className="text-sm leading-relaxed mt-2" style={{ color: INK }}>{c.note}</p>}
-                  {c.evidence && <EvidenceGallery images={c.evidence} />}
-                </Card>
-              ))}
+          <section id="agency" ref={setRef("agency")} className="mb-12 scroll-mt-6 print-chapter">
+            <SectionHeading eyebrow={t.agency.eyebrow} title={t.agency.title} />
+            <div className="grid md:grid-cols-3 gap-4">
+              {t.agency.cases.map((c, i) => <GrowthLever key={i} data={c} id={`agency-${i}`} />)}
             </div>
-            <div className="mt-6 card-print">
-              <div className="text-xs font-semibold tracking-wider mb-3" style={{ color: NAVY_SOFT, fontFamily: "'IBM Plex Mono', monospace" }}>{t.additionalExperience.title}</div>
+            <div className="mt-5 card-print">
+              <div className="text-xs font-semibold tracking-wider mb-3" style={{ color: NAVY_SOFT, fontFamily: "'IBM Plex Mono', monospace" }}>{t.agency.additionalTitle}</div>
               <div className="rounded-xl overflow-hidden" style={{ background: "#FAF7EF" }}>
-                {t.additionalExperience.items.map((item, i) => (
+                {t.agency.additional.map((item, i) => (
                   <div key={i} className={`flex flex-wrap gap-x-3 gap-y-1 px-4 py-3 text-xs ${i > 0 ? "border-t" : ""}`} style={{ borderColor: "#EDE8DA" }}>
                     <span className="font-semibold" style={{ color: NAVY, minWidth: 200 }}>{item.client}</span>
                     <span style={{ color: CORAL }}>{item.result}</span>
@@ -1453,8 +1106,20 @@ function Portfolio() {
             </div>
           </section>
 
-          {/* ===================== PAGE 09 — CAREER ===================== */}
-          <section id="career" ref={setRef("career")} className="mb-16 scroll-mt-6 print-chapter">
+          {/* ===================== PAGE 09 — STARTUP + CAREER ===================== */}
+          <section id="startup" ref={setRef("startup")} className="mb-12 scroll-mt-6 print-chapter">
+            <SectionHeading eyebrow={t.startup.eyebrow} title={t.startup.title} />
+            <Card className="p-6">
+              <div className="text-xs mb-3" style={{ color: MUTED }}>{t.startup.brand}</div>
+              <FlowChips items={t.startup.flow} />
+              <div className="flex flex-wrap gap-2 mb-1">
+                {t.startup.result.map((r, i) => <StatChip key={i} value={r.value} label={r.label} />)}
+              </div>
+              <div className="text-xs mt-2" style={{ color: MUTED }}>{t.startup.secondary}</div>
+            </Card>
+          </section>
+
+          <section id="career" ref={setRef("career")} className="mb-12 scroll-mt-6">
             <SectionHeading eyebrow="CAREER" title={t.career.title} />
             <div className="text-xs font-semibold tracking-wider mb-4 px-3 py-2 rounded-full inline-block" style={{ background: "#F3EFE3", color: NAVY, fontFamily: "'IBM Plex Mono', monospace" }}>{t.career.storyline}</div>
             <div className="grid md:grid-cols-3 gap-3">
@@ -1477,7 +1142,7 @@ function Portfolio() {
             <div className="rounded-2xl p-8 md:p-12 overflow-hidden relative card-print" style={{ background: NAVY }}>
               <div className="flex flex-col md:flex-row items-start md:items-end gap-8">
                 <div className="flex-1">
-                  <div className="text-xs font-semibold tracking-[0.2em] mb-4" style={{ color: CORAL_SOFT, fontFamily: "'IBM Plex Mono', monospace" }}>PERFORMANCE-LED COMMERCE GROWTH PORTFOLIO</div>
+                  <div className="text-xs font-semibold tracking-[0.2em] mb-4" style={{ color: CORAL_SOFT, fontFamily: "'IBM Plex Mono', monospace" }}>PERFORMANCE & GROWTH MARKETER</div>
                   <h2 className="text-2xl md:text-3xl font-semibold text-white mb-8 leading-snug" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>{t.contact.line}<br />{t.contact.lineBreak}</h2>
                   <div className="flex flex-wrap gap-6 text-sm text-white/80">
                     <div className="flex items-center gap-2"><Mail size={15} color={CORAL_SOFT} />heejimoon96@gmail.com</div>
@@ -1490,7 +1155,7 @@ function Portfolio() {
           </section>
 
           <div className="hidden print-closing-footer text-[10px] text-center pt-4 mt-6 border-t" style={{ borderColor: "#EDE8DA", color: "#A8A08C" }}>
-            Heeji MOON · Performance-led Commerce Growth Portfolio · heeji.vercel.app
+            Heeji MOON · Performance & Growth Marketer · heeji.vercel.app
           </div>
         </main>
       </div>

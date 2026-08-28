@@ -773,7 +773,7 @@ function EvidenceGallery({ images }) {
           style={{ borderColor: "#EAE5D8" }}
           onClick={(e) => { e.stopPropagation(); openLightbox(img); }}
         >
-          <img src={img.src} alt={img.caption} className="w-full h-32 object-cover object-top evidence-thumb" />
+          <img src={img.src} alt={img.caption} className="w-full h-32 object-cover evidence-thumb" style={{ objectPosition: img.focus || "top" }} />
           <div className="absolute inset-0 flex items-center justify-center bg-black/0 group-hover:bg-black/20 transition-colors">
             <ZoomIn size={18} className="text-white opacity-0 group-hover:opacity-90 transition-opacity" />
           </div>
@@ -1954,7 +1954,7 @@ function Portfolio() {
                   </div>
                 }
                 result={t.agency[0].result}
-                evidence={[{ src: IMG_HANYUL_VOC, caption: t.agency[0].evidenceCaption }]}
+                evidence={[{ src: IMG_HANYUL_VOC, caption: t.agency[0].evidenceCaption, focus: "center 30%" }]}
                 role={t.agency[0].role}
                 contribution={lang === "kr" ? "담당" : "Owner"}
               />

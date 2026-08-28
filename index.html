@@ -115,10 +115,11 @@ const IMG_BODYLUV = "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAAAAAAD/4QEZRXhp
 /* ---------------------------------------------------------------------- */
 const NAV_ITEMS = [
   { id: "overview", icon: Gauge },
-  { id: "career", icon: ListOrdered },
   { id: "celltrion", icon: BarChart3 },
   { id: "global", icon: TrendingUp },
   { id: "kpi-ai", icon: Sparkles },
+  { id: "agency", icon: Building2 },
+  { id: "career", icon: ListOrdered },
   { id: "contact", icon: Mail },
 ];
 
@@ -129,7 +130,7 @@ const NAV_ITEMS = [
 /* ---------------------------------------------------------------------- */
 const LANG_CONTENT = {
   kr: {
-    navLabels: { overview: "Overview", career: "Career", celltrion: "Growth Cases", global: "Global", "kpi-ai": "AI & Data", contact: "About" },
+    navLabels: { overview: "Overview", celltrion: "Growth Cases", global: "Global", "kpi-ai": "AI & Creative", agency: "Agency", career: "Career", contact: "About" },
     hero: {
       eyebrow: "GROWTH / PERFORMANCE MARKETER",
       title1: "데이터로 진단하고,",
@@ -137,24 +138,9 @@ const LANG_CONTENT = {
       title2Highlight: "전략으로",
       title2Post: " 매출을 만듭니다",
       subtitle: "Performance · CRM · CRO · Data · AI를 연결해 고객 획득부터 구매·재구매까지 성장 구조를 설계합니다.",
-    },
-    kpiTiles: [
-      { label: "자사몰 광고 ROAS", value: "+104%", sub: "2024 Annual vs 2025" },
-      { label: "CRM 구매전환율", value: "+102.7%", sub: "2024 Annual vs 2026 Jan–Jul" },
-      { label: "올리브영 Online Sales", value: "+316%", sub: "전년 동월 대비" },
-      { label: "Amazon Promotion Sales", value: "+801%", sub: "Prime Day vs Prime Big Deal" },
-    ],
-    capability: {
-      eyebrow: "Growth Framework",
-      title: "광고 유입부터 구매·재구매까지, 데이터를 기준으로 성장 지점을 설계합니다",
-      sub: "미디어 전략과 예산 배분부터 CRM, 상세페이지 CRO, AI 기반 크리에이티브 실험까지 직접 설계하고 실행합니다.",
-      steps: [
-        { n: "01", title: "Acquisition", desc: "미디어 전략 · 예산 배분" },
-        { n: "02", title: "Conversion", desc: "캠페인 · 상세페이지 CRO" },
-        { n: "03", title: "Retention", desc: "CRM 세분화 · 재구매" },
-      ],
-      foundationLabel: "Data & AI",
-      foundationDesc: "성과를 읽고, 가설을 세우고, 더 빠르게 검증합니다.",
+      positioning: "광고 성과를 보는 데서 끝나지 않습니다. 매출이 막히는 지점을 데이터로 찾고, 예산·매체·CRM·CRO까지 필요한 레버를 직접 바꿉니다.",
+      evolutionFrom: "AGENCY EXECUTION",
+      evolutionTo: "IN-HOUSE GROWTH OWNERSHIP",
     },
     celltrion: [
       {
@@ -209,19 +195,6 @@ const LANG_CONTENT = {
         result: ["구매전환율(CVR) +20%", "지피덤 브랜드로 확대 적용"],
         note: "광고 최적화만으로는 해결되지 않는 문제였고, 랜딩 이후의 구매전환까지 함께 봤을 때 개선이 가능했습니다.",
         role: "상품별 유입·이탈·전환 데이터 분석, 이탈방지 장치 기획, VOC 기반 콘텐츠 구조 개선",
-      },
-      {
-        title: "생성형 AI 기반 크리에이티브 실험 속도 개선",
-        problem: "동일 소재를 장기간 운영하면 소재 피로도가 빠르게 발생했지만, 내부 디자인 리소스만으로는 충분한 수의 변형 소재를 빠르게 만들어 테스트하기 어려웠습니다.",
-        how: [
-          "VOC·성과 데이터에서 반응 좋았던 메시지·톤 파악해 가설 수립",
-          "후기형·제보형·커뮤니티형 등 다양한 버전으로 소재 제작 및 테스트",
-          "Winning Creative의 메시지·구도를 다음 테스트에 반영",
-        ],
-        flowChips: ["VOC·성과 데이터", "Insight", "Hypothesis", "AI Creative Variants", "Media Test", "Winning Creative", "Learning → Next Test"],
-        result: ["CTR +116%", "Winning Creative 발굴 주기 단축"],
-        note: "AI 도구 자체보다, AI로 분석·제작·테스트 속도를 높여 더 많은 가설을 더 빠르게 검증할 수 있었던 과정이 핵심입니다.",
-        role: "광고 소재 전략 및 크리에이티브 기획, AI 이미지 제작, 소재별 성과 분석",
       },
     ],
     companyHeaders: {
@@ -331,13 +304,6 @@ const LANG_CONTENT = {
       { client: "매일유업", problem: "신규 광고상품 발굴 및 고객DB 타겟팅", result: "쿠팡 협력광고 신설, 네이버 LIVE쇼핑 매출 ×4" },
       { client: "카카오스타일 (지그재그·포스티)", problem: "플랫폼별 검색광고 전략 분리", result: "SA 운영 구조 구축, 키워드 최적화 프로세스 고도화" },
     ],
-    growthLoop: [
-      { n: "01", t: "Diagnose", d: "매체·GA4 데이터로 실매출 기여도 진단" },
-      { n: "02", t: "Prioritize", d: "저효율 Cut-off, 고효율 영역 선정" },
-      { n: "03", t: "Execute", d: "예산 재배분 · 소재 · CRM 실행" },
-      { n: "04", t: "Measure", d: "CTR·CVR·ROAS·CPA로 성과 확인" },
-      { n: "05", t: "Scale", d: "검증된 방식 타 상품군 확대 적용" },
-    ],
     careerTimeline: [
       { period: "2021.03–2023.08 / 2024.08–2024.12", org: "㈜애드이피션시", role: "퍼포먼스마케팅 · 주임 (총 2년 10개월)", detail: "뷰티·식품·교육·의료·패션 등 다양한 업종 SA·DA·VA 운영" },
       { period: "2024.01–2024.03", org: "㈜매드업", role: "퍼포먼스마케팅 · M2", detail: "식품·패션 커머스 광고 운영 및 신규 광고상품 제안" },
@@ -353,7 +319,6 @@ const LANG_CONTENT = {
       inhouseItems: ["Strategy", "Budget", "KPI", "CRM / CRO", "Sales Analysis"],
       common: "캠페인 결과를 목표 대비 진단하고, 저효율 영역부터 예산·타겟을 재조정합니다. Acquisition(미디어·예산) → Conversion(캠페인·CRO) → Retention(CRM·재구매) — 광고 유입부터 구매·재구매까지 하나의 흐름으로 설계합니다.",
     },
-    growthLoopTitle: "데이터를 기준으로 의사결정과 실행을 반복합니다",
     startup: {
       desc: "광고 이전의 제품과 고객 문제부터 고민해본 마케터입니다. FGI·설문 기반 고객 문제 발굴로 스킨케어 브랜드를 기획하고, 상세페이지·광고·바이럴을 직접 운영했습니다.",
       metric: "와디즈 크라우드펀딩 2회 성공 (목표 대비)",
@@ -377,8 +342,8 @@ const LANG_CONTENT = {
       headline: "경험 범위를 한눈에",
       categories: [
         { label: "MARKETS", items: ["한국", "미국", "싱가포르", "베트남", "일본"] },
-        { label: "PAID MEDIA", items: ["Meta", "Google", "TikTok", "Naver", "Kakao", "Buzzvil", "Toss"] },
-        { label: "COMMERCE", items: ["D2C", "올리브영", "올리브영 글로벌", "네이버 스마트스토어", "Amazon", "Shopee", "Qoo10"] },
+        { label: "PAID MEDIA", items: ["Meta", { label: "Google", sub: "Search · Demand Gen · YouTube" }, "TikTok", { label: "Naver", sub: "SA · GFA" }, "Kakao", { label: "올리브영", sub: "협력광고" }, "Buzzvil", "Toss"] },
+        { label: "COMMERCE", items: ["D2C", "올리브영", "올리브영 글로벌", "네이버 스마트스토어", "Amazon", "Shopee", "Qoo10", "Coupang"] },
         { label: "DATA & TRACKING", items: ["GA4", "GTM", "Airbridge", "UTM", "ADID Audience Data"] },
         { label: "AI", items: ["Midjourney", "ChatGPT", "Claude"] },
       ],
@@ -444,7 +409,7 @@ const LANG_CONTENT = {
     },
   },
   en: {
-    navLabels: { overview: "Overview", career: "Career", celltrion: "Growth Cases", global: "Global", "kpi-ai": "AI & Data", contact: "About" },
+    navLabels: { overview: "Overview", celltrion: "Growth Cases", global: "Global", "kpi-ai": "AI & Creative", agency: "Agency", career: "Career", contact: "About" },
     hero: {
       eyebrow: "GROWTH / PERFORMANCE MARKETER",
       title1: "Diagnose with data.",
@@ -452,24 +417,9 @@ const LANG_CONTENT = {
       title2Highlight: "Drive",
       title2Post: " revenue with strategy.",
       subtitle: "I connect Performance, CRM, CRO, Data, and AI to design growth structures across acquisition, conversion, and retention.",
-    },
-    kpiTiles: [
-      { label: "D2C Ad ROAS", value: "+104%", sub: "2024 Annual vs. 2025" },
-      { label: "CRM Conversion Rate", value: "+102.7%", sub: "2024 Annual vs. Jan–Jul 2026" },
-      { label: "Olive Young Online Sales", value: "+316%", sub: "YoY, Same Month" },
-      { label: "Amazon Promotion Sales", value: "+801%", sub: "Prime Day vs. Prime Big Deal" },
-    ],
-    capability: {
-      eyebrow: "Growth Framework",
-      title: "From paid traffic to repeat purchase, I design growth points on data",
-      sub: "I plan and execute everything from media strategy and budget allocation to CRM, product-page CRO, and AI-driven creative experiments.",
-      steps: [
-        { n: "01", title: "Acquisition", desc: "Media strategy · Budget allocation" },
-        { n: "02", title: "Conversion", desc: "Campaigns · Product-page CRO" },
-        { n: "03", title: "Retention", desc: "CRM segmentation · Repeat purchase" },
-      ],
-      foundationLabel: "Data & AI",
-      foundationDesc: "Reading performance, forming hypotheses, and testing them faster.",
+      positioning: "I look beyond media efficiency to understand what actually drives revenue. I identify where growth is blocked and change the right levers across media, budget, CRM, and CRO.",
+      evolutionFrom: "AGENCY EXECUTION",
+      evolutionTo: "IN-HOUSE GROWTH OWNERSHIP",
     },
     celltrion: [
       {
@@ -504,7 +454,7 @@ const LANG_CONTENT = {
         problem: "This platform sees traffic and purchases spike hard around major promotions, so running the same playbook as a normal week left us short on traffic and retargeting pools once a sale actually hit.",
         how: [
           "Always-on — low-cost traffic acquisition, retargeting pool accumulation",
-          "Pre-sale — expand interested audience, pre-secure prospects",
+          "Pre-sale — build a qualified audience ahead of the promotion",
           "Sale period — conversion-focused ads on high-intent customers, expanded budget",
           "Post-sale — additional conversions from remaining retargeting, efficiency recovery",
         ],
@@ -525,22 +475,9 @@ const LANG_CONTENT = {
         note: "Ad optimization alone didn't solve it — the fix came from also addressing post-landing conversion.",
         role: "Analyzed traffic, exit, and conversion data by product, designed exit-prevention mechanisms, restructured content based on VOC",
       },
-      {
-        title: "Faster Creative Experimentation with Generative AI",
-        problem: "Running the same creative too long meant it wore out fast, and our internal design team couldn't produce and test enough new variations to keep up.",
-        how: [
-          "Identified high-performing messages and tones from VOC and performance data to form hypotheses",
-          "Produced and tested multiple creative variants — review-style, tip-style, community-style",
-          "Fed the winning creative's message and composition into the next test",
-        ],
-        flowChips: ["VOC & Performance Data", "Insight", "Hypothesis", "AI Creative Variants", "Media Test", "Winning Creative", "Learning → Next Test"],
-        result: ["CTR +116%", "Shortened the cycle to find winning creative"],
-        note: "The core wasn't the AI tool itself, but using it to speed up analysis, production, and testing — validating more hypotheses, faster.",
-        role: "Creative strategy and planning, AI image production, per-creative performance analysis",
-      },
     ],
     companyHeaders: {
-      celltrion: { name: "Celltrion Skincare", meta: "Omnichannel Business Team · Associate · Jul 2025–Present", note: "Performance marketing and CRM across D2C, Olive Young, and Naver Smart Store — led domestic performance/CRM in H2 2025, sole owner of performance/CRM after the 2026 reorg" },
+      celltrion: { name: "Celltrion Skincare", meta: "Omnichannel Business Team · Associate · Jul 2025–Present", note: "Performance marketing and CRM across D2C, Olive Young, and Naver Smart Store — led domestic performance and CRM in H2 2025, then owned performance marketing and CRM solo following the 2026 reorganization" },
       adefficiency: { name: "AdEfficiency Co., Ltd.", meta: "Performance Marketing · Associate · Mar 2021–Aug 2023, Aug 2024–Dec 2024 (2 yrs 10 mo total)", note: "SA/DA/VA performance marketing and campaign strategy across beauty, F&B, education, healthcare, fashion, and household-goods clients" },
       madup: { name: "Madup Co., Ltd.", meta: "Performance Marketing · M2 · Jan 2024–Mar 2024", note: "Performance ad operations for F&B and fashion commerce brands, plus proposals for new ad products and customer-data strategies" },
     },
@@ -646,17 +583,10 @@ const LANG_CONTENT = {
       { client: "Maeil Dairies", problem: "New ad products & customer-DB targeting", result: "Launched Coupang co-op ads, Naver LIVE Shopping revenue ×4" },
       { client: "Kakao Style (Zigzag, Posty)", problem: "Split search-ad strategy by platform", result: "Built platform-specific SA structure, matured keyword optimization" },
     ],
-    growthLoop: [
-      { n: "01", t: "Diagnose", d: "Diagnose revenue contribution from media and GA4 data" },
-      { n: "02", t: "Prioritize", d: "Cut low-efficiency spend, identify high-efficiency areas" },
-      { n: "03", t: "Execute", d: "Reallocate budget · run creative and CRM" },
-      { n: "04", t: "Measure", d: "Check results via CTR, CVR, ROAS, CPA" },
-      { n: "05", t: "Scale", d: "Expand the proven approach to other product lines" },
-    ],
     careerTimeline: [
       { period: "Mar 2021–Aug 2023 / Aug 2024–Dec 2024", org: "AdEfficiency Co., Ltd.", role: "Performance Marketing · Associate (2 yrs 10 mo total)", detail: "Ran SA/DA/VA across beauty, F&B, education, healthcare, and fashion clients" },
       { period: "Jan 2024–Mar 2024", org: "Madup Co., Ltd.", role: "Performance Marketing · M2", detail: "Ran F&B and fashion commerce ads, proposed new ad products" },
-      { period: "Jul 2025–Present", org: "Celltrion Skincare", role: "Omnichannel Business Team · Associate", detail: "Led domestic performance/CRM in H2 2025, sole owner of performance/CRM after the 2026 reorg", current: true },
+      { period: "Jul 2025–Present", org: "Celltrion Skincare", role: "Omnichannel Business Team · Associate", detail: "Led domestic performance and CRM in H2 2025; owned performance marketing and CRM solo following the 2026 reorganization", current: true },
     ],
     roleSnapshot: {
       title: "From hands-on execution to growth strategy and budget ownership",
@@ -668,7 +598,6 @@ const LANG_CONTENT = {
       inhouseItems: ["Strategy", "Budget", "KPI", "CRM / CRO", "Sales Analysis"],
       common: "I diagnose campaign results against targets and reallocate budget and targeting away from low-efficiency areas. Acquisition (media, budget) → Conversion (campaigns, CRO) → Retention (CRM, repeat purchase) — I design one continuous flow from paid traffic to repeat purchase.",
     },
-    growthLoopTitle: "I repeat decision-making and execution on a data-driven cycle",
     startup: {
       desc: "Before I ever touched an ad account, I was already thinking about the product and the customer's problem. I ran FGIs and surveys to find real customer pain points, planned a skincare brand around them, and personally ran the product page, ads, and viral push.",
       metric: "Two successful Wadiz crowdfunding campaigns (vs. target)",
@@ -692,8 +621,8 @@ const LANG_CONTENT = {
       headline: "Experience at a Glance",
       categories: [
         { label: "MARKETS", items: ["Korea", "US", "Singapore", "Vietnam", "Japan"] },
-        { label: "PAID MEDIA", items: ["Meta", "Google", "TikTok", "Naver", "Kakao", "Buzzvil", "Toss"] },
-        { label: "COMMERCE", items: ["D2C", "Olive Young", "Olive Young Global", "Naver Smart Store", "Amazon", "Shopee", "Qoo10"] },
+        { label: "PAID MEDIA", items: ["Meta", { label: "Google", sub: "Search · Demand Gen · YouTube" }, "TikTok", { label: "Naver", sub: "SA · GFA" }, "Kakao", { label: "Olive Young", sub: "Partnership Ads" }, "Buzzvil", "Toss"] },
+        { label: "COMMERCE", items: ["D2C", "Olive Young", "Olive Young Global", "Naver Smart Store", "Amazon", "Shopee", "Qoo10", "Coupang"] },
         { label: "DATA & TRACKING", items: ["GA4", "GTM", "Airbridge", "UTM", "ADID Audience Data"] },
         { label: "AI", items: ["Midjourney", "ChatGPT", "Claude"] },
       ],
@@ -859,7 +788,7 @@ function Lightbox({ image, onClose }) {
   if (!image) return null;
   return (
     <div
-      className="fixed inset-0 z-[100] overflow-y-auto p-4 md:p-10"
+      className="fixed inset-0 z-[100] overflow-y-auto p-4 md:p-10 no-print"
       style={{ background: "rgba(20,31,59,0.92)" }}
       onClick={onClose}
     >
@@ -1098,8 +1027,13 @@ function YouTubeClickToLoad({ videoId, caption }) {
  * VideoCard — local /videos/*.mp4 creative evidence card.
  * Click-to-play (no autoplay), native controls, preload="metadata" only,
  * so the grid doesn't download full video weight just by scrolling into view.
+ *
+ * `poster` (optional): a real extracted video-frame image (webp/jpg). When present,
+ * it prints as a static Creative Evidence image via .print-video-poster. When absent,
+ * print falls back to hiding the video box — we never render a placeholder box,
+ * play-icon-only image, or "video coming soon" graphic in the PDF output.
  */
-function VideoCard({ src, label, desc }) {
+function VideoCard({ src, label, desc, poster }) {
   const [playing, setPlaying] = useState(false);
   const [failed, setFailed] = useState(false);
 
@@ -1110,6 +1044,7 @@ function VideoCard({ src, label, desc }) {
           <ImageIcon size={22} color="#B8B09C" />
           <div className="text-[11px]" style={{ color: "#B8B09C" }}>영상 준비 중</div>
         </div>
+        {poster && <img src={poster} alt={label} className="print-video-poster" />}
         <div className="p-3">
           <div className="text-xs font-semibold mb-0.5" style={{ color: NAVY }}>{label}</div>
           {desc && <div className="text-[11px]" style={{ color: MUTED }}>{desc}</div>}
@@ -1145,6 +1080,7 @@ function VideoCard({ src, label, desc }) {
           </button>
         )}
       </div>
+      {poster && <img src={poster} alt={label} className="print-video-poster" />}
       <div className="p-3">
         <div className="text-xs font-semibold mb-0.5" style={{ color: NAVY }}>{label}</div>
         {desc && <div className="text-[11px]" style={{ color: MUTED }}>{desc}</div>}
@@ -1153,15 +1089,17 @@ function VideoCard({ src, label, desc }) {
   );
 }
 
-/** Horizontal-scroll video gallery (desktop: grid via CSS; mobile: swipe carousel via overflow-x) */
-function VideoGallery({ videos, columns = 3 }) {
+/** Horizontal-scroll video gallery (desktop: grid via CSS; mobile: swipe carousel via overflow-x).
+ *  `printLimit` (optional): only the first N videos render in the printed PDF — the rest stay
+ *  in the web gallery but get a print-only "hidden" class so Creative Evidence pages don't balloon. */
+function VideoGallery({ videos, columns = 3, printLimit }) {
   return (
     <div
       className="flex gap-3 overflow-x-auto sm:grid sm:overflow-visible scroll-thin"
       style={{ gridTemplateColumns: `repeat(${columns}, minmax(0, 1fr))`, WebkitOverflowScrolling: "touch" }}
     >
       {videos.map((v, i) => (
-        <div key={i} className="w-[62%] xs:w-[55%] sm:w-full flex-shrink-0">
+        <div key={i} className={`w-[62%] xs:w-[55%] sm:w-full flex-shrink-0 ${printLimit != null && i >= printLimit ? "print-hide" : ""}`}>
           <VideoCard {...v} />
         </div>
       ))}
@@ -1169,9 +1107,9 @@ function VideoGallery({ videos, columns = 3 }) {
   );
 }
 
-function ProjectCard({ index, title, client, tag, contribution, problem, decision, how, result, role, chart, imgHint, evidence, video, note, anchorId }) {
+function ProjectCard({ index, title, client, tag, contribution, problem, decision, how, result, role, chart, imgHint, evidence, video, note, anchorId, printChapter }) {
   return (
-    <Card id={anchorId} className="p-6 md:p-7 scroll-mt-24">
+    <Card id={anchorId} className={`p-6 md:p-7 scroll-mt-24 ${printChapter ? "print-chapter" : ""}`}>
       <div className="flex items-start justify-between gap-3 flex-wrap mb-1">
         <div
           className="text-xs font-semibold tracking-wider"
@@ -1355,6 +1293,9 @@ function Portfolio() {
 
         /* No forced heights on cards — content defines height */
         .auto-h { height: auto; min-height: 0; }
+        /* Poster images only exist for the printed PDF — never shown on screen */
+        .print-video-poster { display: none; }
+        .print-only-link { display: none; }
 
         /* ============ PRINT / PDF (A4 Landscape) ============ */
         @page { size: A4 landscape; margin: 10mm; }
@@ -1366,11 +1307,16 @@ function Portfolio() {
           .no-print { display: none !important; }
           aside { position: static !important; height: auto !important; width: auto !important; display: none !important; }
           .lg\\:ml-64 { margin-left: 0 !important; }
-          * { position: static !important; }
           video { display: none !important; }
           /* Video thumbnails collapse entirely in print (native video block would otherwise
              leave a tall empty 9:16 box and blow out the page count); caption/label still show. */
           .video-frame { display: none !important; }
+          .print-hide { display: none !important; }
+          .print-video-poster {
+            display: block !important; width: 100% !important; height: auto !important;
+            max-height: 150px !important; object-fit: cover !important; border-radius: 8px !important;
+          }
+          .print-only-link { display: block !important; }
           img:not(.evidence-thumb) { max-width: 100% !important; height: auto !important; object-fit: contain !important; }
           /* Evidence gallery thumbnails keep their fixed grid size in print so a single
              full-resolution photo can't fill an entire page. */
@@ -1378,6 +1324,11 @@ function Portfolio() {
           h1, h2, h3, h4, .avoid-break-after { break-after: avoid; page-break-after: avoid; }
           p, li { orphans: 3; widows: 3; }
           .card-print, figure { break-inside: avoid; page-break-inside: avoid; }
+          .print-closing-footer { display: block !important; }
+          /* Start each major chapter (Growth Cases / Global / Agency / Career) on its own
+             printed page instead of letting the browser break wherever content runs out —
+             keeps related cases grouped and avoids orphaned single-card pages. */
+          .print-chapter { break-before: page; page-break-before: always; }
         }
       `}</style>
 
@@ -1497,6 +1448,14 @@ function Portfolio() {
             <p className="text-sm md:text-base max-w-2xl" style={{ color: MUTED, textWrap: "balance" }}>
               {t.hero.subtitle}
             </p>
+            <p className="text-sm md:text-base max-w-2xl mt-3 font-medium" style={{ color: INK, textWrap: "balance", maxWidth: "700px" }}>
+              {t.hero.positioning}
+            </p>
+            <div className="flex items-center gap-2 mt-4 text-[11px] font-semibold tracking-wide" style={{ fontFamily: "'IBM Plex Mono', monospace" }}>
+              <span className="px-2.5 py-1 rounded-full" style={{ background: "#F3EFE3", color: MUTED }}>{t.hero.evolutionFrom}</span>
+              <ArrowRight size={12} color={MUTED} />
+              <span className="px-2.5 py-1 rounded-full text-white" style={{ background: NAVY }}>{t.hero.evolutionTo}</span>
+            </div>
           </section>
 
           {/* EXPERIENCE SNAPSHOT */}
@@ -1510,7 +1469,13 @@ function Portfolio() {
                     <div className="text-[10px] font-semibold tracking-wider flex-shrink-0 sm:w-32" style={{ color: MUTED, fontFamily: "'IBM Plex Mono', monospace" }}>{cat.label}</div>
                     <div className="flex flex-wrap gap-1.5">
                       {cat.items.map((it, j) => (
-                        <span key={j} className="text-xs px-2.5 py-1 rounded-full" style={{ background: "white", color: NAVY, border: "1px solid #EAE5D8" }}>{it}</span>
+                        typeof it === "object" ? (
+                          <span key={j} className="text-xs px-2.5 py-1 rounded-full leading-tight" style={{ background: "white", color: NAVY, border: "1px solid #EAE5D8" }}>
+                            {it.label}<span style={{ color: MUTED }}> · {it.sub}</span>
+                          </span>
+                        ) : (
+                          <span key={j} className="text-xs px-2.5 py-1 rounded-full" style={{ background: "white", color: NAVY, border: "1px solid #EAE5D8" }}>{it}</span>
+                        )
                       ))}
                     </div>
                   </div>
@@ -1572,7 +1537,7 @@ function Portfolio() {
           </section>
 
           {/* 셀트리온스킨큐어 */}
-          <section id="celltrion" ref={setRef("celltrion")} className="mb-20 scroll-mt-6">
+          <section id="celltrion" ref={setRef("celltrion")} className="mb-20 scroll-mt-6 print-chapter">
             <CompanyHeader
               name={t.companyHeaders.celltrion.name}
               meta={t.companyHeaders.celltrion.meta}
@@ -1638,6 +1603,7 @@ function Portfolio() {
               <ProjectCard
                 anchorId="kpi-olive"
                 index="03"
+                printChapter
                 title={t.celltrion[2].title}
                 problem={t.celltrion[2].problem}
                 how={t.celltrion[2].how}
@@ -1678,46 +1644,11 @@ function Portfolio() {
                 role={t.celltrion[3].role}
                 contribution={lang === "kr" ? "주도" : "Lead"}
               />
-              <ProjectCard
-                anchorId="kpi-ai"
-                index="05"
-                title={t.celltrion[4].title}
-                problem={t.celltrion[4].problem}
-                how={t.celltrion[4].how}
-                chart={
-                  <div>
-                    <div className="flex flex-wrap items-center gap-1.5 mb-4 text-xs" style={{ color: NAVY }}>
-                      <span className="px-2.5 py-1 rounded-full text-white" style={{ background: NAVY_SOFT }}>{t.celltrion[4].flowChips[0]}</span>
-                      <ArrowRight size={12} color={MUTED} />
-                      <span className="px-2.5 py-1 rounded-full" style={{ background: "#F3EFE3" }}>{t.celltrion[4].flowChips[1]}</span>
-                      <ArrowRight size={12} color={MUTED} />
-                      <span className="px-2.5 py-1 rounded-full" style={{ background: "#F3EFE3" }}>{t.celltrion[4].flowChips[2]}</span>
-                      <ArrowRight size={12} color={MUTED} />
-                      <span className="px-2.5 py-1 rounded-full" style={{ background: CORAL_SOFT }}>{t.celltrion[4].flowChips[3]}</span>
-                      <ArrowRight size={12} color={MUTED} />
-                      <span className="px-2.5 py-1 rounded-full" style={{ background: "#F3EFE3" }}>{t.celltrion[4].flowChips[4]}</span>
-                      <ArrowRight size={12} color={MUTED} />
-                      <span className="px-2.5 py-1 rounded-full text-white" style={{ background: CORAL }}>{t.celltrion[4].flowChips[5]}</span>
-                      <ArrowRight size={12} color={MUTED} />
-                      <span className="px-2.5 py-1 rounded-full" style={{ background: "#F3EFE3" }}>{t.celltrion[4].flowChips[6]}</span>
-                    </div>
-                    <BeforeAfterCompare beforeLabel={lang === "kr" ? "기존 소재" : "Baseline Creative"} beforeValue={100} afterLabel={lang === "kr" ? "AI 소재" : "AI Creative"} afterValue={216} deltaText="+116%" indexMode />
-                  </div>
-                }
-                result={t.celltrion[4].result}
-                note={t.celltrion[4].note}
-                evidence={[
-                  { src: IMG_HANSKIN_AI, caption: lang === "kr" ? "한스킨 PDRN 세럼 · AI 활용 후기형 소재" : "Hanskin PDRN Serum · AI-generated review-style creative" },
-                  { src: IMG_VIDEO_POSTER, caption: lang === "kr" ? "동일 소재 3-section 영상 버전 (자사몰 상시 운영)" : "Same creative, 3-section video version (always-on D2C)" },
-                ]}
-                role={t.celltrion[4].role}
-                contribution={lang === "kr" ? "주도" : "Lead"}
-              />
             </div>
           </section>
 
           {/* GLOBAL COMMERCE PERFORMANCE */}
-          <section id="global" ref={setRef("global")} className="mb-20 scroll-mt-6">
+          <section id="global" ref={setRef("global")} className="mb-20 scroll-mt-6 print-chapter">
             <SectionHeading
               eyebrow="Global Performance"
               title={t.global.title}
@@ -1743,7 +1674,7 @@ function Portfolio() {
             </p>
 
             {/* CASE 01 — Amazon: Paid Media Restructure */}
-            <Card className="p-6 md:p-7 mb-5" id="kpi-global-amazon">
+            <Card className="p-6 md:p-7 mb-5 scroll-mt-24" id="kpi-global-amazon">
               <div className="flex items-start justify-between gap-3 flex-wrap mb-1">
                 <div className="text-xs font-semibold tracking-wider" style={{ color: CORAL, fontFamily: "'IBM Plex Mono', monospace" }}>AMAZON US · PAID MEDIA RESTRUCTURE</div>
                 <Tag tone="navy">Prime Day → Prime Big Deal</Tag>
@@ -1795,12 +1726,10 @@ function Portfolio() {
                 </div>
               </div>
 
-              <div className="rounded-xl px-4 py-3 mb-5" style={{ background: NAVY }}>
-                <div className="text-xs font-semibold mb-1" style={{ color: CORAL_SOFT }}>LEARNING</div>
-                <div className="text-xs text-white">
-                  {t.global.amazon.learning}
-                </div>
-              </div>
+              <p className="text-xs leading-relaxed mb-5" style={{ color: MUTED }}>
+                <span className="font-semibold" style={{ color: CORAL }}>LEARNING  </span>
+                {t.global.amazon.learning}
+              </p>
 
               <div className="text-xs font-semibold tracking-wider mb-1.5" style={{ color: NAVY_SOFT, fontFamily: "'IBM Plex Mono', monospace" }}>CREATIVE TESTING</div>
               <p className="text-xs leading-relaxed mb-3" style={{ color: MUTED }}>
@@ -1808,16 +1737,20 @@ function Portfolio() {
               </p>
               <VideoGallery
                 columns={3}
+                printLimit={2}
                 videos={[
                   { src: "amazon-ugc-natural.mp4", label: "NATURAL USAGE", desc: t.global.amazon.creativeVideos[0] },
                   { src: "amazon-usp-demo.mp4", label: "USP + DEMO", desc: t.global.amazon.creativeVideos[1] },
                   { src: "amazon-ba-proof.mp4", label: "B&A / PROOF", desc: t.global.amazon.creativeVideos[2] },
                 ]}
               />
+              <div className="print-only-link text-[10px]" style={{ color: MUTED }}>
+                See remaining Amazon creative online → heeji.vercel.app/#kpi-amazon
+              </div>
             </Card>
 
             {/* CASE 02 — Shopee: Funnel Restructure */}
-            <Card className="p-5 mb-5" id="kpi-shopee">
+            <Card className="p-5 mb-5 print-chapter scroll-mt-24" id="kpi-shopee">
               <div className="flex items-start justify-between gap-3 flex-wrap mb-2">
                 <div className="text-xs font-semibold tracking-wider" style={{ color: CORAL, fontFamily: "'IBM Plex Mono', monospace" }}>SHOPEE · FUNNEL RESTRUCTURE</div>
                 <Tag tone="teal">Singapore · Vietnam</Tag>
@@ -1846,6 +1779,7 @@ function Portfolio() {
                   <div className="text-[11px] font-semibold mb-2" style={{ color: NAVY }}>SINGAPORE · UGC · Usage · Routine</div>
                   <VideoGallery
                     columns={2}
+                    printLimit={1}
                     videos={[
                       { src: "shopee-sg-ugc.mp4", label: "UGC · Product Benefit", desc: t.global.shopee.videoDescs[0] },
                       { src: "shopee-sg-routine.mp4", label: "Routine / Demo", desc: t.global.shopee.videoDescs[1] },
@@ -1856,6 +1790,7 @@ function Portfolio() {
                   <div className="text-[11px] font-semibold mb-2" style={{ color: NAVY }}>VIETNAM · Comparison · UGC</div>
                   <VideoGallery
                     columns={2}
+                    printLimit={1}
                     videos={[
                       { src: "shopee-vn-comparison.mp4", label: "Product Comparison", desc: t.global.shopee.videoDescs[2] },
                       { src: "shopee-vn-ugc-makeup.mp4", label: "UGC · Makeup Routine", desc: t.global.shopee.videoDescs[3] },
@@ -1864,6 +1799,9 @@ function Portfolio() {
                 </div>
               </div>
               <div className="text-[11px] mt-3" style={{ color: MUTED }}>{t.global.shopee.ctrNote}</div>
+              <div className="print-only-link text-[10px] mt-1" style={{ color: MUTED }}>
+                See remaining Shopee creative online → heeji.vercel.app/#kpi-shopee
+              </div>
             </Card>
 
             {/* CASE 03 — Qoo10: Marketplace Growth */}
@@ -1911,16 +1849,14 @@ function Portfolio() {
                 {t.global.qoo10.measurement}
               </div>
 
-              <div className="rounded-xl px-4 py-3" style={{ background: NAVY }}>
-                <div className="text-xs font-semibold mb-1" style={{ color: CORAL_SOFT }}>LEARNING</div>
-                <div className="text-xs text-white">
-                  {t.global.qoo10.learning}
-                </div>
-              </div>
+              <p className="text-xs leading-relaxed" style={{ color: MUTED }}>
+                <span className="font-semibold" style={{ color: CORAL }}>LEARNING  </span>
+                {t.global.qoo10.learning}
+              </p>
             </Card>
 
             {/* AI CREATIVE EXPERIMENT — separate from local market execution galleries */}
-            <Card className="p-6 mb-5">
+            <Card id="kpi-ai" className="p-6 mb-5 scroll-mt-24 print-chapter">
               <div className="flex items-start justify-between gap-3 flex-wrap mb-2">
                 <div className="text-xs font-semibold tracking-wider" style={{ color: CORAL, fontFamily: "'IBM Plex Mono', monospace" }}>AI CREATIVE EXPERIMENT</div>
                 <Tag tone="coral">{t.global.aiCreative.tag}</Tag>
@@ -1944,12 +1880,16 @@ function Portfolio() {
               </div>
               <VideoGallery
                 columns={3}
+                printLimit={2}
                 videos={[
                   { src: "ai-meme-situation.mp4", label: "MEME / SITUATION", desc: t.global.aiCreative.videoDescs[0] },
                   { src: "ai-character.mp4", label: "CHARACTER", desc: t.global.aiCreative.videoDescs[1] },
                   { src: "ai-storytelling.mp4", label: "STORYTELLING", desc: t.global.aiCreative.videoDescs[2] },
                 ]}
               />
+              <div className="print-only-link text-[10px] mt-1" style={{ color: MUTED }}>
+                See remaining AI Creative videos online → heeji.vercel.app/#kpi-ai
+              </div>
               <div className="mt-4 pt-3 border-t text-sm" style={{ borderColor: "#EDE8DA" }}>
                 <span className="font-semibold" style={{ color: CORAL }}>MY CONTRIBUTION  </span>
                 <span style={{ color: MUTED }}>{t.global.aiCreative.contribution}</span>
@@ -1981,7 +1921,7 @@ function Portfolio() {
 
 
           {/* SELECTED AGENCY EXPERIENCE — 3 detailed cases + compact Additional Experience list */}
-          <section id="adefficiency" ref={setRef("adefficiency")} className="mb-20 scroll-mt-6">
+          <section id="agency" ref={setRef("agency")} className="mb-20 scroll-mt-6 print-chapter">
             <SectionHeading eyebrow="Selected Agency Experience" title={lang === "kr" ? "대행사에서 쌓은 실행력의 증거" : "Evidence of Hands-on Execution at Agencies"} />
             <div className="grid md:grid-cols-2 gap-5">
               <ProjectCard
@@ -2031,6 +1971,7 @@ function Portfolio() {
               />
               <ProjectCard
                 index="03"
+                printChapter
                 title={t.agency[2].title}
                 client={t.agency[2].client}
                 problem={t.agency[2].problem}
@@ -2058,7 +1999,7 @@ function Portfolio() {
           </section>
 
           {/* CAREER & STARTUP */}
-          <section id="career" ref={setRef("career")} className="mb-20 scroll-mt-6">
+          <section id="career" ref={setRef("career")} className="mb-20 scroll-mt-6 print-chapter">
             <SectionHeading eyebrow="Career & Startup" title={lang === "kr" ? "회사별 이력과 창업 경험" : "Company History & Startup Experience"} />
 
             <div className="grid lg:grid-cols-5 gap-6">
@@ -2125,6 +2066,13 @@ function Portfolio() {
               </div>
             </div>
           </section>
+
+          {/* Print-only footer — replaces the browser's own header/footer info
+              (date, URL, page number) with a designed one. Ask users to turn OFF
+              "Headers and footers" in the Chrome print dialog so only this shows. */}
+          <div className="hidden print-closing-footer text-[10px] text-center pt-4 mt-6 border-t" style={{ borderColor: "#EDE8DA", color: "#A8A08C" }}>
+            Heeji MOON · Performance / Growth Marketing Portfolio · Live: heeji.vercel.app
+          </div>
         </main>
       </div>
     </div>

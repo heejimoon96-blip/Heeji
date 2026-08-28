@@ -190,8 +190,8 @@ const LANG_CONTENT = {
             "리타겟팅·기존 고객 비중을 늘려 효율을 계속 조정",
           ],
           flow: ["Media ROAS", "GA4 Revenue", "Cut / Scale", "Budget Reallocation"],
-          compare: { title: "자사몰 ROAS", beforeLabel: "2024", beforeIndex: 100, afterLabel: "2025", afterIndex: 204, caption: "2024 연간 → 2025 연간 · 자사몰 채널 ROAS 기준" },
-          result: [{ label: "자사몰 ROAS (Index)", value: "+104%", context: "2024 → 2025" }],
+          compare: { title: "자사몰 ROAS · Channel Trend", beforeLabel: "2024", beforeIndex: 100, afterLabel: "2025", afterIndex: 204, caption: "2024 연간 → 2025 연간 · 자사몰 채널 ROAS 기준 (Supporting KPI)", footnote: "* 2025.07 합류 — 2024년 전체를 개인 성과로 단정하지 않으며, 매체 ROAS 대비 GA4 실매출 기여도를 예산 판단 기준에 추가한 방향성 지표로 사용합니다." },
+          result: [{ label: "자사몰 ROAS (Index)", value: "+104%", context: "Channel Trend" }],
           role: "매체 ROAS 대비 GA4 실매출 대조 분석 · 예산 재배분 의사결정 · 리타겟팅 비중 조정",
         },
         {
@@ -215,6 +215,7 @@ const LANG_CONTENT = {
           result: [{ label: "ONLINE SALES", value: "+316%", context: "전년 동월 대비" }],
           secondary: "입점 이래 월 최고 매출",
           role: "올리브영 협력광고 전략·운영 · 세일 전후 Campaign Structure 설계 · 단계별 Budget Allocation · Performance Analysis",
+          rolePrint: "올리브영 협력광고 전략·운영 · 세일 전후 Campaign Structure 설계 · 단계별 예산 배분",
         },
         {
           id: "lever-crm",
@@ -371,7 +372,7 @@ const LANG_CONTENT = {
       ],
       secondary: "연세대학교 창업경진대회 최우수상",
       articles: [
-        { label: "관련 기사 보기", title: "창업톡톡 · 단, 순한 창업 인터뷰", url: "https://bit.ly/3RV89HM" },
+        { label: "관련 기사 보기", title: "한경 JOB&JOY · 단, 순한 창업 인터뷰", url: "https://magazine.hankyung.com/job-joy/article/202102164931d" },
         { label: "제품·펀딩 프로젝트 보기", title: "Wadiz 펀딩 페이지", url: "https://bit.ly/3RMQnX4" },
       ],
     },
@@ -445,8 +446,8 @@ const LANG_CONTENT = {
             "Kept expanding retargeting and existing-customer share as efficiency shifted",
           ],
           flow: ["Media ROAS", "GA4 Revenue", "Cut / Scale", "Budget Reallocation"],
-          compare: { title: "D2C ROAS", beforeLabel: "2024", beforeIndex: 100, afterLabel: "2025", afterIndex: 204, caption: "2024 Annual → 2025 Annual · D2C Channel ROAS" },
-          result: [{ label: "D2C ROAS (Index)", value: "+104%", context: "2024 → 2025" }],
+          compare: { title: "D2C ROAS · Channel Trend", beforeLabel: "2024", beforeIndex: 100, afterLabel: "2025", afterIndex: 204, caption: "2024 Annual → 2025 Annual · D2C Channel ROAS (Supporting KPI)", footnote: "* Joined July 2025 — this isn't framed as a full-year personal result. It's a directional trend showing GA4 revenue contribution added to the budget decision alongside media ROAS." },
+          result: [{ label: "D2C ROAS (Index)", value: "+104%", context: "Channel Trend" }],
           role: "Cross-checked media ROAS against GA4 revenue · made budget-reallocation decisions · adjusted retargeting share",
         },
         {
@@ -470,6 +471,7 @@ const LANG_CONTENT = {
           result: [{ label: "ONLINE SALES", value: "+316%", context: "YoY · Same Month" }],
           secondary: "Highest monthly sales since launching on the platform",
           role: "Olive Young co-op ads strategy & operation · designed pre/post-sale campaign structure · staged budget allocation · performance analysis",
+          rolePrint: "Olive Young co-op ads strategy & operation · pre/post-sale campaign structure · staged budget allocation",
         },
         {
           id: "lever-crm",
@@ -626,8 +628,8 @@ const LANG_CONTENT = {
       ],
       secondary: "Grand Prize, Yonsei University Startup Competition",
       articles: [
-        { label: "Read the article", title: "Startup Talk-Talk · Dan Soonhan founder interview", url: "https://bit.ly/3RV89HM" },
-        { label: "View the funding project", title: "Wadiz funding page", url: "https://bit.ly/3RMQnX4" },
+        { label: "Read Article", title: "Hankyung JOB&JOY · Founder Interview", url: "https://magazine.hankyung.com/job-joy/article/202102164931d" },
+        { label: "View Funding Project", title: "Wadiz Funding Project", url: "https://bit.ly/3RMQnX4" },
       ],
     },
     career: {
@@ -658,6 +660,51 @@ function LanguageSwitcher({ lang, setLang, dark = false }) {
       <button onClick={() => setLang("kr")} style={{ color: lang === "kr" ? activeColor : base, fontWeight: lang === "kr" ? 700 : 400 }}>KR</button>
       <span style={{ color: base }}>|</span>
       <button onClick={() => setLang("en")} style={{ color: lang === "en" ? activeColor : base, fontWeight: lang === "en" ? 700 : 400 }}>ENG</button>
+    </div>
+  );
+}
+
+/* RecruiterActions — compact web-only utility row (PDF download / print / LinkedIn) so a
+   recruiter can go from reading the page straight to a PDF, a printout, or the LinkedIn
+   profile without hunting for a link. Intentionally smaller than the hero CTA — this is
+   utility chrome, not the headline. Hidden entirely in print via .recruiter-actions. */
+function RecruiterActions({ lang, layout = "row" }) {
+  const pdfLabel = lang === "kr" ? "PDF 다운로드" : "Download PDF";
+  const printLabel = lang === "kr" ? "인쇄" : "Print";
+  const base = { color: "rgba(255,255,255,0.75)", border: "1px solid rgba(255,255,255,0.18)" };
+  const itemClass = layout === "row"
+    ? "inline-flex items-center gap-1.5 text-[11px] font-medium px-2.5 py-1.5 rounded-lg hover:text-white hover:border-white/40 focus-visible:outline focus-visible:outline-2 transition-colors"
+    : "flex items-center gap-2 text-sm px-4 py-2.5 hover:text-white transition-colors";
+  return (
+    <div className={layout === "row" ? "recruiter-actions flex items-center gap-1.5" : "recruiter-actions flex flex-col"}>
+      <a
+        href="/files/Heeji_Moon_Performance_Growth_Portfolio.pdf"
+        download
+        className={itemClass}
+        style={layout === "row" ? { ...base, textDecoration: "none", outlineColor: CORAL_SOFT } : { color: "rgba(255,255,255,0.8)", textDecoration: "none" }}
+        aria-label={lang === "kr" ? "포트폴리오 PDF 다운로드" : "Download portfolio PDF"}
+      >
+        {pdfLabel}
+      </a>
+      <button
+        type="button"
+        onClick={() => window.print()}
+        className={itemClass}
+        style={layout === "row" ? { ...base, outlineColor: CORAL_SOFT } : { color: "rgba(255,255,255,0.8)" }}
+        aria-label={lang === "kr" ? "포트폴리오 인쇄" : "Print portfolio"}
+      >
+        {printLabel}
+      </button>
+      <a
+        href="https://www.linkedin.com/in/heeji-moon-76000a179/"
+        target="_blank"
+        rel="noopener noreferrer"
+        className={itemClass}
+        style={layout === "row" ? { ...base, textDecoration: "none", outlineColor: CORAL_SOFT } : { color: "rgba(255,255,255,0.8)", textDecoration: "none" }}
+        aria-label={lang === "kr" ? "LinkedIn 프로필 열기" : "Open LinkedIn profile"}
+      >
+        <Linkedin size={12} />{layout === "row" ? "" : "LinkedIn"}
+      </a>
     </div>
   );
 }
@@ -742,7 +789,7 @@ function Lightbox({ image, onClose }) {
 function StatChip({ value, label, context, size = "md" }) {
   return (
     <div className="rounded-xl px-4 py-3 flex-1 min-w-[130px]" style={{ background: "#F3EFE3" }}>
-      <div className={`${size === "lg" ? "text-2xl md:text-3xl print-kpi-number-lg" : "text-lg md:text-xl print-kpi-number"} font-semibold`} style={{ color: CORAL, fontFamily: "'IBM Plex Mono', monospace" }}>{value}</div>
+      <div className={`${size === "lg" ? "text-2xl md:text-3xl print-kpi-number-lg" : "text-lg md:text-xl print-kpi-number"} font-semibold`} style={{ color: CORAL, fontFamily: "'IBM Plex Mono', monospace", whiteSpace: "nowrap" }}>{value}</div>
       <div className="text-xs md:text-sm mt-0.5 font-medium print-caption" style={{ color: NAVY }}>{label}</div>
       {context && <div className="text-[10px] md:text-xs mt-1 print-footnote" style={{ color: MUTED }}>{context}</div>}
     </div>
@@ -785,6 +832,25 @@ function FlowSteps({ items }) {
   );
 }
 
+/* FlowStepsPrint — the SAME steps as FlowSteps, compressed into one wrapped line
+   (step → step → step) with a short reason under each, for print only. Keeps the
+   WHY (not just the step names) without costing a full card's height. */
+function FlowStepsPrint({ items }) {
+  return (
+    <div className="flex flex-wrap items-start gap-x-1 gap-y-2 mb-3">
+      {items.map((it, i) => (
+        <React.Fragment key={i}>
+          <div style={{ maxWidth: 108 }}>
+            <div className="font-semibold print-footnote" style={{ color: NAVY, fontFamily: "'IBM Plex Mono', monospace" }}>{it.step}</div>
+            <div className="print-footnote" style={{ color: MUTED, lineHeight: 1.25 }}>{it.desc}</div>
+          </div>
+          {i < items.length - 1 && <ArrowRight size={11} color={MUTED} style={{ marginTop: 3, flexShrink: 0 }} />}
+        </React.Fragment>
+      ))}
+    </div>
+  );
+}
+
 /* IndexCompare — an explicit before/after year-index visual (e.g. 2024 Index 100
    → 2025 Index 204), so a relative KPI like "+104%" always shows its comparison
    basis instead of standing alone as an isolated number. */
@@ -816,6 +882,7 @@ function IndexCompare({ data }) {
         </div>
         <div className="font-semibold compare-delta mt-2" style={{ color: CORAL, fontFamily: "'IBM Plex Mono', monospace" }}>+{delta}%</div>
         {data.caption && <div className="text-xs mt-2 pt-2 border-t text-center print-role" style={{ color: MUTED, borderColor: "#E3DDCC" }}>{data.caption}</div>}
+        {data.footnote && <div className="text-[10px] italic mt-1.5 text-center print-footnote" style={{ color: "#9C9585" }}>{data.footnote}</div>}
       </div>
     </div>
   );
@@ -849,12 +916,21 @@ function GrowthLever({ data, id, printChapter }) {
       {data.challenge && <p className="text-sm md:text-base leading-relaxed mb-3 print-body" style={{ color: INK }}>{data.challenge}</p>}
 
       {data.changes && (
-        <ul className="text-sm md:text-base space-y-1 mb-3 print-body" style={{ color: INK }}>
+        <ul className={`text-sm md:text-base space-y-1 mb-3 print-body ${data.flowSteps ? "print-hide" : ""}`} style={{ color: INK }}>
           {data.changes.slice(0, 3).map((c, i) => <li key={i} className="flex gap-2"><span style={{ color: CORAL }}>·</span>{c}</li>)}
         </ul>
       )}
 
-      {data.flowSteps ? <FlowSteps items={data.flowSteps} /> : data.flow && <FlowChips items={data.flow} />}
+      {/* Web keeps the detailed vertical flow; print swaps to a compact single-line
+          version of the SAME steps (never both) so a 5-step strategy doesn't cost a
+          full card's worth of vertical space on the page. */}
+      {data.flowSteps && (
+        <>
+          <div className="print-hide"><FlowSteps items={data.flowSteps} /></div>
+          <div className="print-only"><FlowStepsPrint items={data.flowSteps} /></div>
+        </>
+      )}
+      {!data.flowSteps && data.flow && <FlowChips items={data.flow} />}
       {data.levers && <div className="mb-3">{data.levers.map((l, i) => <LeverRow key={i} {...l} />)}</div>}
       {data.compare && <IndexCompare data={data.compare} />}
 
@@ -875,7 +951,13 @@ function GrowthLever({ data, id, printChapter }) {
 
       {data.role && (
         <div className="text-xs md:text-sm mt-3 pt-3 border-t print-role" style={{ borderColor: "#EDE8DA", color: MUTED }}>
-          <span className="font-semibold print-eyebrow" style={{ color: CORAL }}>MY ROLE  </span>{data.role}
+          <span className="font-semibold print-eyebrow" style={{ color: CORAL }}>MY ROLE  </span>
+          {data.rolePrint ? (
+            <>
+              <span className="print-hide">{data.role}</span>
+              <span className="print-only">{data.rolePrint}</span>
+            </>
+          ) : data.role}
         </div>
       )}
       {data.learning && (
@@ -1013,14 +1095,18 @@ function Portfolio() {
           .print-kpi-number-lg { font-size: 36pt !important; line-height: 1.1 !important; }
           .compare-index { font-size: 16pt !important; line-height: 1.2 !important; }
           .compare-delta { font-size: 34pt !important; line-height: 1.1 !important; }
+          /* KPI numbers must never break mid-number (e.g. "+102" / ".7%" across two lines). */
+          .print-kpi-number, .print-kpi-number-lg, .compare-index, .compare-delta { white-space: nowrap !important; }
 
           /* Selected Impact: 2×2 large cards in print (web keeps its 4-column row) */
           .impact-grid { display: grid !important; grid-template-columns: repeat(2, 1fr) !important; gap: 6mm !important; }
           /* AI Creative gallery: force 3-across in print regardless of the sm: breakpoint,
              same reasoning as .inhouse-primary-row — don't depend on a screen breakpoint
              inside the print engine. */
-          .evidence-grid-3-print { grid-template-columns: repeat(3, 1fr) !important; gap: 4mm !important; }
-          .evidence-grid-3-print .evidence-thumb { height: 32mm !important; max-height: 32mm !important; }
+          /* PDF uses a 2×2 grid (not 3-across) for the AI Creative gallery — more stable
+             and shorter overall than a 3-col row with one orphaned 4th item on its own row. */
+          .evidence-grid-3-print { grid-template-columns: repeat(2, 1fr) !important; gap: 4mm !important; }
+          .evidence-grid-3-print .evidence-thumb { height: 28mm !important; max-height: 28mm !important; }
           /* PDF shows a curated 4 (2 images + 2 video posters, in data order) even when the
              web gallery has more — never print an unbounded number of thumbnails. */
           .evidence-grid-3-print > *:nth-child(n+5) { display: none !important; }
@@ -1054,9 +1140,26 @@ function Portfolio() {
           }
           .inhouse-secondary-row > .card-print { height: 100% !important; }
 
-          /* Page map (readability-first, ~12–14 pages): 01 Overview / 02 Selected Impact /
-             03 Media+Budget + Olive Young / 04 CRM + CRO / 05 Amazon / 06 Shopee+Qoo10 /
-             07 Experiment / 08 Agency / 09 Startup+Career / 10 Contact. */
+          /* Agency: Hanyul+Bodyluv 2-col (page A), Maeil+Additional together (page B).
+             .print-only already forces display:block !important — this rule is declared
+             after it in the stylesheet so display:grid wins for this specific element. */
+          .agency-pair-row { display: grid !important; grid-template-columns: 1fr 1fr !important; gap: 7mm !important; align-items: stretch !important; break-inside: avoid !important; page-break-inside: avoid !important; }
+          .agency-pair-row > .card-print { height: 100% !important; }
+
+          /* Startup + Career share one printed page, side by side (42% / 58%) instead of
+             stacking sequentially — sequential stacking was what pushed Career's 3-card
+             row onto its own extra page. */
+          .startup-career-print-row { display: grid !important; grid-template-columns: 42% 58% !important; gap: 8mm !important; align-items: start !important; break-inside: avoid !important; page-break-inside: avoid !important; }
+          .startup-career-print-row section { margin-bottom: 0 !important; }
+          .career-row { break-inside: avoid !important; page-break-inside: avoid !important; }
+
+          /* Recruiter utility actions (PDF download / print / LinkedIn) are web-only chrome. */
+          .recruiter-actions { display: none !important; }
+
+          /* Page map (readability-first, ~11–13 pages): 01 Overview / 02 Selected Impact /
+             03 Current In-house — D2C + Olive Young / 04 CRM + CRO / 05 Amazon /
+             06 Shopee+Qoo10 / 07 AI Creative & Experiment / 08 Hanyul+Bodyluv /
+             09 Maeil+Additional / 10 Startup+Career / 11 Contact. */
           .print-chapter { break-before: page; page-break-before: always; }
         }
       `}</style>
@@ -1078,6 +1181,9 @@ function Portfolio() {
             {showTop && (
               <button onClick={() => { scrollToTop(); setNavOpen(false); }} className="w-full text-left px-4 py-2.5 text-sm border-t" style={{ color: "rgba(255,255,255,0.6)", borderColor: "rgba(255,255,255,0.1)" }}>↑ {t.misc.backToTop}</button>
             )}
+            <div className="border-t" style={{ borderColor: "rgba(255,255,255,0.1)" }}>
+              <RecruiterActions lang={lang} layout="stack" />
+            </div>
             <div className="px-4 py-2.5 border-t flex justify-center" style={{ borderColor: "rgba(255,255,255,0.1)" }}>
               <LanguageSwitcher lang={lang} setLang={setLang} dark />
             </div>
@@ -1111,10 +1217,13 @@ function Portfolio() {
               );
             })}
           </nav>
-          <div className="mt-4"><LanguageSwitcher lang={lang} setLang={setLang} dark /></div>
+          <div className="mt-4 flex items-center justify-between gap-2">
+            <LanguageSwitcher lang={lang} setLang={setLang} dark />
+            <RecruiterActions lang={lang} layout="row" />
+          </div>
           <div className="mt-auto pt-8 border-t" style={{ borderColor: "rgba(255,255,255,0.1)" }}>
             <div className="text-xs text-white/40 mb-2">Contact</div>
-            <div className="text-xs text-white/70">heejimoon96@gmail.com</div>
+            <a href="mailto:heejimoon96@gmail.com" className="text-xs text-white/70 hover:text-white transition-colors" style={{ textDecoration: "none" }}>heejimoon96@gmail.com</a>
           </div>
         </aside>
 
@@ -1187,16 +1296,16 @@ function Portfolio() {
           </section>
 
           {/* ===================== PAGE 03–04 — CURRENT IN-HOUSE GROWTH ===================== */}
-          <section id="inhouse" ref={setRef("inhouse")} className="mb-12 scroll-mt-6">
-            {/* Heading + row 1 (Media/Budget + Olive Young) are grouped in ONE print-chapter
-                wrapper so the section title never dangles alone on the Selected Impact page
-                with a row pushed to the next page — the break lands before the whole group. */}
-            <div className="print-chapter">
-              <SectionHeading eyebrow={t.inhouse.eyebrow} title={t.inhouse.title} sub={t.inhouse.sub} />
-              <div className="grid md:grid-cols-2 gap-4 inhouse-primary-row">
-                <GrowthLever data={t.inhouse.levers[0]} />
-                <GrowthLever data={t.inhouse.levers[1]} />
-              </div>
+          {/* print-chapter lives on the SECTION so In-house always starts a fresh page.
+              The heading is NOT bundled into a forced-break wrapper with row 1 — instead
+              it relies on .print-heading-group's break-after:avoid plus the row's own
+              break-inside:avoid, so if row 1 can't fit under the heading, the break moves
+              BEFORE the heading (never leaving it stranded alone on the prior page). */}
+          <section id="inhouse" ref={setRef("inhouse")} className="mb-12 scroll-mt-6 print-chapter">
+            <SectionHeading eyebrow={t.inhouse.eyebrow} title={t.inhouse.title} sub={t.inhouse.sub} />
+            <div className="grid md:grid-cols-2 gap-4 inhouse-primary-row">
+              <GrowthLever data={t.inhouse.levers[0]} />
+              <GrowthLever data={t.inhouse.levers[1]} />
             </div>
             <div className="grid md:grid-cols-2 gap-4 inhouse-secondary-row print-chapter mt-4">
               <GrowthLever data={t.inhouse.levers[2]} />
@@ -1205,26 +1314,22 @@ function Portfolio() {
           </section>
 
           {/* ===================== PAGE 05 — GLOBAL: AMAZON ===================== */}
-          <section id="global" ref={setRef("global")} className="mb-12 scroll-mt-6">
-            {/* Heading grouped with the Amazon card in one break wrapper — same reasoning
-                as the in-house section: never let a heading dangle alone on the prior page. */}
-            <div className="print-chapter">
-              <SectionHeading eyebrow={t.global.eyebrow} title={t.global.title} sub={t.global.sub} />
-              <Card id="global-amazon" className="p-6 md:p-7 mb-4">
-                <div className="text-xs font-semibold tracking-wider mb-1.5 print-eyebrow" style={{ color: CORAL, fontFamily: "'IBM Plex Mono', monospace" }}>{t.global.amazon.tag}</div>
-                <h3 className="text-lg md:text-xl font-semibold mb-4 print-case-title" style={{ color: NAVY, fontFamily: "'Space Grotesk', sans-serif" }}>{t.global.amazon.title}</h3>
-                <div className="mb-4">{t.global.amazon.levers.map((l, i) => <LeverRow key={i} {...l} />)}</div>
-                <div className="flex flex-wrap gap-2 mb-1">
-                  {t.global.amazon.result.map((r, i) => <StatChip key={i} value={r.value} label={r.label} size="lg" />)}
-                </div>
-                <div className="text-xs mt-1 print-caption" style={{ color: MUTED }}>{t.global.amazon.scale}</div>
-                <div className="text-xs mt-1 print-caption" style={{ color: MUTED }}>{t.global.amazon.caption}</div>
-                <div className="text-[10px] italic mt-2 print-footnote" style={{ color: "#9C9585" }}>{t.global.amazon.footnote}</div>
-                <p className="text-xs leading-relaxed mt-3 print-hide" style={{ color: MUTED }}>
-                  <span className="font-semibold" style={{ color: NAVY_SOFT }}>LEARNING  </span>{t.global.amazon.learning}
-                </p>
-              </Card>
-            </div>
+          <section id="global" ref={setRef("global")} className="mb-12 scroll-mt-6 print-chapter">
+            <SectionHeading eyebrow={t.global.eyebrow} title={t.global.title} sub={t.global.sub} />
+            <Card id="global-amazon" className="p-6 md:p-7 mb-4">
+              <div className="text-xs font-semibold tracking-wider mb-1.5 print-eyebrow" style={{ color: CORAL, fontFamily: "'IBM Plex Mono', monospace" }}>{t.global.amazon.tag}</div>
+              <h3 className="text-lg md:text-xl font-semibold mb-4 print-case-title" style={{ color: NAVY, fontFamily: "'Space Grotesk', sans-serif" }}>{t.global.amazon.title}</h3>
+              <div className="mb-4">{t.global.amazon.levers.map((l, i) => <LeverRow key={i} {...l} />)}</div>
+              <div className="flex flex-wrap gap-2 mb-1">
+                {t.global.amazon.result.map((r, i) => <StatChip key={i} value={r.value} label={r.label} size="lg" />)}
+              </div>
+              <div className="text-xs mt-1 print-caption" style={{ color: MUTED }}>{t.global.amazon.scale}</div>
+              <div className="text-xs mt-1 print-caption" style={{ color: MUTED }}>{t.global.amazon.caption}</div>
+              <div className="text-[10px] italic mt-2 print-footnote" style={{ color: "#9C9585" }}>{t.global.amazon.footnote}</div>
+              <p className="text-xs leading-relaxed mt-3 print-hide" style={{ color: MUTED }}>
+                <span className="font-semibold" style={{ color: NAVY_SOFT }}>LEARNING  </span>{t.global.amazon.learning}
+              </p>
+            </Card>
 
             {/* ===================== PAGE 06 — GLOBAL: SHOPEE + QOO10 ===================== */}
             <div className="grid md:grid-cols-2 gap-4 print-chapter">
@@ -1282,63 +1387,108 @@ function Portfolio() {
           </section>
 
           {/* ===================== PAGE 08 — SELECTED AGENCY ===================== */}
+          {/* Web keeps the original 3-across grid + full-width Additional list (print-hide).
+              Print uses a separate, print-only layout: Hanyul+Bodyluv 2-col on page A,
+              Maeil + Additional list together on page B — because 3 full cards side by
+              side don't fit one A4 landscape page at readable font sizes, which was
+              pushing each case onto its own page with large empty space below it. */}
           <section id="agency" ref={setRef("agency")} className="mb-12 scroll-mt-6 print-chapter">
             <SectionHeading eyebrow={t.agency.eyebrow} title={t.agency.title} />
-            <div className="grid md:grid-cols-3 gap-4">
+
+            <div className="grid md:grid-cols-3 gap-4 print-hide">
               {t.agency.cases.map((c, i) => <GrowthLever key={i} data={c} id={`agency-${i}`} />)}
             </div>
-            <div className="mt-5 card-print">
+            <div className="mt-5 card-print print-hide">
               <div className="text-xs font-semibold tracking-wider mb-3 print-eyebrow" style={{ color: NAVY_SOFT, fontFamily: "'IBM Plex Mono', monospace" }}>{t.agency.additionalTitle}</div>
               <div className="rounded-xl overflow-hidden" style={{ background: "#FAF7EF" }}>
                 {t.agency.additional.map((item, i) => (
-                  <div key={i} className={`flex flex-wrap gap-x-3 gap-y-1 px-4 py-3 text-xs print-caption ${i > 0 ? "border-t" : ""}`} style={{ borderColor: "#EDE8DA" }}>
+                  <div key={i} className={`flex flex-wrap gap-x-3 gap-y-1 px-4 py-3 text-xs ${i > 0 ? "border-t" : ""}`} style={{ borderColor: "#EDE8DA" }}>
                     <span className="font-semibold" style={{ color: NAVY, minWidth: 200 }}>{item.client}</span>
                     <span style={{ color: CORAL }}>{item.result}</span>
                   </div>
                 ))}
               </div>
             </div>
+
+            <div className="print-only agency-pair-row">
+              <GrowthLever data={t.agency.cases[0]} />
+              <GrowthLever data={t.agency.cases[1]} />
+            </div>
+            <div className="print-only print-chapter">
+              <GrowthLever data={t.agency.cases[2]} />
+              <div className="mt-5 card-print">
+                <div className="text-xs font-semibold tracking-wider mb-3 print-eyebrow" style={{ color: NAVY_SOFT, fontFamily: "'IBM Plex Mono', monospace" }}>{t.agency.additionalTitle}</div>
+                <div className="rounded-xl overflow-hidden" style={{ background: "#FAF7EF" }}>
+                  {t.agency.additional.map((item, i) => (
+                    <div key={i} className={`flex flex-wrap gap-x-3 gap-y-1 px-4 py-3 text-xs print-caption ${i > 0 ? "border-t" : ""}`} style={{ borderColor: "#EDE8DA" }}>
+                      <span className="font-semibold" style={{ color: NAVY, minWidth: 200 }}>{item.client}</span>
+                      <span style={{ color: CORAL }}>{item.result}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
           </section>
 
           {/* ===================== PAGE 09 — STARTUP + CAREER ===================== */}
-          <section id="startup" ref={setRef("startup")} className="mb-12 scroll-mt-6 print-chapter">
-            <SectionHeading eyebrow={t.startup.eyebrow} title={t.startup.title} />
-            <Card className="p-6">
-              <div className="text-xs mb-3 print-role" style={{ color: MUTED }}>{t.startup.brand}</div>
-              <FlowChips items={t.startup.flow} />
-              <div className="flex flex-wrap gap-2 mb-1">
-                {t.startup.result.map((r, i) => <StatChip key={i} value={r.value} label={r.label} />)}
-              </div>
-              <div className="text-xs mt-2 print-role" style={{ color: MUTED }}>{t.startup.secondary}</div>
-              {t.startup.articles && (
-                <div className="flex flex-wrap gap-2 mt-3 pt-3 border-t" style={{ borderColor: "#EDE8DA" }}>
-                  {t.startup.articles.map((a, i) => (
-                    <a key={i} href={a.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-xs md:text-sm font-medium px-3 py-1.5 rounded-full print-role" style={{ background: "#F3EFE3", color: NAVY, textDecoration: "none" }}>
-                      {a.label} <span style={{ color: MUTED, fontWeight: 400 }}>· {a.title}</span> <span style={{ color: CORAL }}>↗</span>
-                    </a>
-                  ))}
+          {/* Startup + Career share one printed page (42% / 58%, side by side) — see
+              .startup-career-print-row. Web keeps both as full-width sequential sections. */}
+          <div className="startup-career-print-row print-chapter">
+            <section id="startup" ref={setRef("startup")} className="mb-12 scroll-mt-6">
+              <SectionHeading eyebrow={t.startup.eyebrow} title={t.startup.title} />
+              <Card className="p-6">
+                <div className="text-xs mb-3 print-role" style={{ color: MUTED }}>{t.startup.brand}</div>
+                <FlowChips items={t.startup.flow} />
+                <div className="flex flex-wrap gap-2 mb-1">
+                  {t.startup.result.map((r, i) => <StatChip key={i} value={r.value} label={r.label} />)}
                 </div>
-              )}
-            </Card>
-          </section>
-
-          <section id="career" ref={setRef("career")} className="mb-12 scroll-mt-6">
-            <SectionHeading eyebrow="CAREER" title={t.career.title} />
-            <div className="text-xs font-semibold tracking-wider mb-4 px-3 py-2 rounded-full inline-block" style={{ background: "#F3EFE3", color: NAVY, fontFamily: "'IBM Plex Mono', monospace" }}>{t.career.storyline}</div>
-            <div className="grid md:grid-cols-3 gap-3">
-              {t.career.timeline.map((c, i) => (
-                <Card key={i} className="p-5" style={c.current ? { borderColor: CORAL } : {}}>
-                  <div className="flex items-center justify-between mb-1 flex-wrap gap-2">
-                    <div className="text-xs" style={{ color: MUTED, fontFamily: "'IBM Plex Mono', monospace" }}>{c.period}</div>
-                    {c.current && <Tag tone="coral">{lang === "kr" ? "현재" : "Current"}</Tag>}
+                <div className="text-xs mt-2 print-role" style={{ color: MUTED }}>{t.startup.secondary}</div>
+                {t.startup.articles && (
+                  <div className="flex flex-wrap gap-2 mt-3 pt-3 border-t" style={{ borderColor: "#EDE8DA" }}>
+                    {t.startup.articles.map((a, i) => (
+                      <a key={i} href={a.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-xs md:text-sm font-medium px-3 py-1.5 rounded-full print-role" style={{ background: "#F3EFE3", color: NAVY, textDecoration: "none" }}>
+                        {a.label} <span style={{ color: MUTED, fontWeight: 400 }}>· {a.title}</span> <span style={{ color: CORAL }}>↗</span>
+                      </a>
+                    ))}
                   </div>
-                  <div className="font-semibold text-sm mb-1" style={{ color: NAVY }}>{c.org}</div>
-                  <div className="text-xs mb-1" style={{ color: MUTED }}>{c.role}</div>
-                  {c.detail && <div className="text-xs italic" style={{ color: "#9C9585" }}>{c.detail}</div>}
-                </Card>
-              ))}
-            </div>
-          </section>
+                )}
+              </Card>
+            </section>
+
+            <section id="career" ref={setRef("career")} className="mb-12 scroll-mt-6">
+              <SectionHeading eyebrow="CAREER" title={t.career.title} />
+              <div className="text-xs font-semibold tracking-wider mb-4 px-3 py-2 rounded-full inline-block print-hide" style={{ background: "#F3EFE3", color: NAVY, fontFamily: "'IBM Plex Mono', monospace" }}>{t.career.storyline}</div>
+
+              {/* WEB: 3-card grid */}
+              <div className="grid md:grid-cols-3 gap-3 print-hide">
+                {t.career.timeline.map((c, i) => (
+                  <Card key={i} className="p-5" style={c.current ? { borderColor: CORAL } : {}}>
+                    <div className="flex items-center justify-between mb-1 flex-wrap gap-2">
+                      <div className="text-xs" style={{ color: MUTED, fontFamily: "'IBM Plex Mono', monospace" }}>{c.period}</div>
+                      {c.current && <Tag tone="coral">{lang === "kr" ? "현재" : "Current"}</Tag>}
+                    </div>
+                    <div className="font-semibold text-sm mb-1" style={{ color: NAVY }}>{c.org}</div>
+                    <div className="text-xs mb-1" style={{ color: MUTED }}>{c.role}</div>
+                    {c.detail && <div className="text-xs italic" style={{ color: "#9C9585" }}>{c.detail}</div>}
+                  </Card>
+                ))}
+              </div>
+
+              {/* PRINT: compact stacked list — a narrow 58%-width column reads better as
+                  three rows than as three narrow cards side by side. */}
+              <div className="print-only career-row rounded-xl overflow-hidden" style={{ background: "#FAF7EF" }}>
+                {t.career.timeline.map((c, i) => (
+                  <div key={i} className={`px-4 py-3 ${i > 0 ? "border-t" : ""}`} style={{ borderColor: "#EDE8DA" }}>
+                    <div className="flex items-center gap-2 mb-0.5">
+                      <span className="print-eyebrow font-semibold" style={{ color: CORAL, fontFamily: "'IBM Plex Mono', monospace" }}>{c.period}</span>
+                      {c.current && <Tag tone="coral">{lang === "kr" ? "현재" : "Current"}</Tag>}
+                    </div>
+                    <div className="font-semibold print-role" style={{ color: NAVY }}>{c.org} <span style={{ color: MUTED, fontWeight: 400 }}>· {c.role}</span></div>
+                  </div>
+                ))}
+              </div>
+            </section>
+          </div>
 
           {/* ===================== PAGE 10 — CONTACT ===================== */}
           <section id="contact" ref={setRef("contact")} className="scroll-mt-6 print-chapter">
@@ -1348,8 +1498,12 @@ function Portfolio() {
                   <div className="text-xs font-semibold tracking-[0.2em] mb-4" style={{ color: CORAL_SOFT, fontFamily: "'IBM Plex Mono', monospace" }}>PERFORMANCE & GROWTH MARKETER</div>
                   <h2 className="text-2xl md:text-3xl font-semibold text-white mb-8 leading-snug" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>{t.contact.line}<br />{t.contact.lineBreak}</h2>
                   <div className="flex flex-wrap gap-6 text-sm text-white/80">
-                    <div className="flex items-center gap-2"><Mail size={15} color={CORAL_SOFT} />heejimoon96@gmail.com</div>
-                    <div className="flex items-center gap-2"><Linkedin size={15} color={CORAL_SOFT} />linkedin.com/in/heeji-moon-76000a179</div>
+                    <a href="mailto:heejimoon96@gmail.com" className="flex items-center gap-2 hover:text-white transition-colors focus-visible:outline focus-visible:outline-2" style={{ textDecoration: "none", color: "inherit", outlineColor: CORAL_SOFT }} aria-label={lang === "kr" ? "이메일 보내기" : "Send an email"}>
+                      <Mail size={15} color={CORAL_SOFT} />heejimoon96@gmail.com
+                    </a>
+                    <a href="https://www.linkedin.com/in/heeji-moon-76000a179/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-white transition-colors focus-visible:outline focus-visible:outline-2" style={{ textDecoration: "none", color: "inherit", outlineColor: CORAL_SOFT }} aria-label={lang === "kr" ? "LinkedIn 프로필 열기" : "Open LinkedIn profile"}>
+                      <Linkedin size={15} color={CORAL_SOFT} />linkedin.com/in/heeji-moon-76000a179
+                    </a>
                   </div>
                 </div>
                 <img src={IMG_CONTACT_PHOTO} alt={lang === "kr" ? "문희지" : "Heeji MOON"} className="w-40 md:w-56 rounded-2xl object-cover flex-shrink-0" style={{ filter: "grayscale(15%)" }} />

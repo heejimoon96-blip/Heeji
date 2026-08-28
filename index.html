@@ -186,7 +186,7 @@ const LANG_CONTENT = {
             "리타겟팅·기존 고객 비중을 늘려 효율을 계속 조정",
           ],
           flow: ["Media ROAS", "GA4 Revenue", "Cut / Scale", "Budget Reallocation"],
-          compare: { beforeLabel: "2024", beforeIndex: 100, afterLabel: "2025", afterIndex: 204, note: "자사몰 채널 연도별 ROAS 기준 (Index)" },
+          compare: { title: "자사몰 ROAS", beforeLabel: "2024", beforeIndex: 100, afterLabel: "2025", afterIndex: 204, caption: "2024 연간 → 2025 연간 · 자사몰 채널 ROAS 기준" },
           result: [{ label: "자사몰 ROAS (Index)", value: "+104%", context: "2024 → 2025" }],
           role: "매체 ROAS 대비 GA4 실매출 대조 분석 · 예산 재배분 의사결정 · 리타겟팅 비중 조정",
         },
@@ -207,7 +207,8 @@ const LANG_CONTENT = {
             { step: "SALE", desc: "Retargeting + Conversion Ads · 구매 가능 고객에 예산 집중" },
             { step: "POST-SALE", desc: "잔여 Retargeting 추가 전환" },
           ],
-          result: [{ label: "ONLINE SALES", value: "+316%", context: "YoY · Same Month" }],
+          resultHeading: "OLIVE YOUNG",
+          result: [{ label: "ONLINE SALES", value: "+316%", context: "전년 동월 대비" }],
           secondary: "입점 이래 월 최고 매출",
           role: "올리브영 협력광고 전략·운영 · 세일 전후 Campaign Structure 설계 · 단계별 Budget Allocation · Performance Analysis",
         },
@@ -432,7 +433,7 @@ const LANG_CONTENT = {
             "Kept expanding retargeting and existing-customer share as efficiency shifted",
           ],
           flow: ["Media ROAS", "GA4 Revenue", "Cut / Scale", "Budget Reallocation"],
-          compare: { beforeLabel: "2024", beforeIndex: 100, afterLabel: "2025", afterIndex: 204, note: "D2C channel ROAS by year (Index)" },
+          compare: { title: "D2C ROAS", beforeLabel: "2024", beforeIndex: 100, afterLabel: "2025", afterIndex: 204, caption: "2024 Annual → 2025 Annual · D2C Channel ROAS" },
           result: [{ label: "D2C ROAS (Index)", value: "+104%", context: "2024 → 2025" }],
           role: "Cross-checked media ROAS against GA4 revenue · made budget-reallocation decisions · adjusted retargeting share",
         },
@@ -453,6 +454,7 @@ const LANG_CONTENT = {
             { step: "SALE", desc: "Retargeting + conversion ads · budget on high-intent customers" },
             { step: "POST-SALE", desc: "Convert remaining retargeting audience" },
           ],
+          resultHeading: "OLIVE YOUNG",
           result: [{ label: "ONLINE SALES", value: "+316%", context: "YoY · Same Month" }],
           secondary: "Highest monthly sales since launching on the platform",
           role: "Olive Young co-op ads strategy & operation · designed pre/post-sale campaign structure · staged budget allocation · performance analysis",
@@ -707,9 +709,9 @@ function Lightbox({ image, onClose }) {
 function StatChip({ value, label, context, size = "md" }) {
   return (
     <div className="rounded-xl px-4 py-3 flex-1 min-w-[130px]" style={{ background: "#F3EFE3" }}>
-      <div className={`${size === "lg" ? "text-2xl print-kpi-number-lg" : "text-lg print-kpi-number"} font-semibold`} style={{ color: CORAL, fontFamily: "'IBM Plex Mono', monospace" }}>{value}</div>
-      <div className="text-xs mt-0.5 font-medium print-caption" style={{ color: NAVY }}>{label}</div>
-      {context && <div className="text-[10px] mt-1 print-footnote" style={{ color: MUTED }}>{context}</div>}
+      <div className={`${size === "lg" ? "text-2xl md:text-3xl print-kpi-number-lg" : "text-lg md:text-xl print-kpi-number"} font-semibold`} style={{ color: CORAL, fontFamily: "'IBM Plex Mono', monospace" }}>{value}</div>
+      <div className="text-xs md:text-sm mt-0.5 font-medium print-caption" style={{ color: NAVY }}>{label}</div>
+      {context && <div className="text-[10px] md:text-xs mt-1 print-footnote" style={{ color: MUTED }}>{context}</div>}
     </div>
   );
 }
@@ -753,27 +755,32 @@ function FlowSteps({ items }) {
 /* IndexCompare — an explicit before/after year-index visual (e.g. 2024 Index 100
    → 2025 Index 204), so a relative KPI like "+104%" always shows its comparison
    basis instead of standing alone as an isolated number. */
+/* IndexCompare — a large, explicit before/after box for a relative KPI. Replaces
+   a bare "+104%" chip with the actual comparison basis (2024 Index 100 → 2025
+   Index 204) so the number never needs a follow-up question. */
 function IndexCompare({ data }) {
   const scale = Math.max(1, data.afterIndex / data.beforeIndex);
+  const delta = Math.round((data.afterIndex / data.beforeIndex - 1) * 100);
   return (
-    <div className="rounded-xl p-3.5 mb-1" style={{ background: "#F3EFE3" }}>
-      <div className="flex items-end gap-4">
+    <div className="rounded-xl p-4 md:p-5 mb-1 compare-box" style={{ background: "#F3EFE3" }}>
+      {data.title && <div className="text-xs md:text-sm font-semibold mb-3 print-eyebrow" style={{ color: NAVY, fontFamily: "'IBM Plex Mono', monospace" }}>{data.title}</div>}
+      <div className="flex items-end gap-5 md:gap-6 flex-wrap">
         <div className="flex flex-col items-center">
-          <div className="rounded-t" style={{ width: 34, height: 46, background: "#D9D2BE" }} />
-          <div className="text-xs font-semibold mt-1.5 print-caption" style={{ color: MUTED, fontFamily: "'IBM Plex Mono', monospace" }}>{data.beforeLabel}</div>
-          <div className="text-[10px] print-footnote" style={{ color: MUTED }}>Index {data.beforeIndex}</div>
+          <div className="rounded-t" style={{ width: 40, height: 50, background: "#D9D2BE" }} />
+          <div className="text-sm font-semibold mt-2 print-role" style={{ color: MUTED, fontFamily: "'IBM Plex Mono', monospace" }}>{data.beforeLabel}</div>
+          <div className="font-semibold compare-index" style={{ color: MUTED, fontFamily: "'IBM Plex Mono', monospace" }}>INDEX {data.beforeIndex}</div>
         </div>
-        <ArrowRight size={14} color={MUTED} />
+        <ArrowRight size={18} color={MUTED} />
         <div className="flex flex-col items-center">
-          <div className="rounded-t" style={{ width: 34, height: Math.min(46 * scale, 92), background: CORAL }} />
-          <div className="text-xs font-semibold mt-1.5 print-caption" style={{ color: NAVY, fontFamily: "'IBM Plex Mono', monospace" }}>{data.afterLabel}</div>
-          <div className="text-[10px] print-footnote" style={{ color: CORAL, fontWeight: 600 }}>Index {data.afterIndex}</div>
+          <div className="rounded-t" style={{ width: 40, height: Math.min(50 * scale, 100), background: CORAL }} />
+          <div className="text-sm font-semibold mt-2 print-role" style={{ color: NAVY, fontFamily: "'IBM Plex Mono', monospace" }}>{data.afterLabel}</div>
+          <div className="font-semibold compare-index" style={{ color: CORAL, fontFamily: "'IBM Plex Mono', monospace" }}>INDEX {data.afterIndex}</div>
         </div>
         <div className="ml-auto text-right">
-          <div className="text-2xl font-semibold print-kpi-number" style={{ color: CORAL, fontFamily: "'IBM Plex Mono', monospace" }}>+{Math.round((data.afterIndex / data.beforeIndex - 1) * 100)}%</div>
+          <div className="font-semibold compare-delta" style={{ color: CORAL, fontFamily: "'IBM Plex Mono', monospace" }}>+{delta}%</div>
         </div>
       </div>
-      {data.note && <div className="text-[10px] mt-2 print-footnote" style={{ color: MUTED }}>{data.note}</div>}
+      {data.caption && <div className="text-xs mt-3 pt-3 border-t print-role" style={{ color: MUTED, borderColor: "#E3DDCC" }}>{data.caption}</div>}
     </div>
   );
 }
@@ -800,13 +807,13 @@ function LeverRow({ lever, before, after, desc }) {
 function GrowthLever({ data, id, printChapter }) {
   return (
     <Card id={id || data.id} className={`p-5 md:p-6 ${printChapter ? "print-chapter" : ""}`}>
-      <div className="text-xs font-semibold tracking-wider mb-1.5 print-eyebrow" style={{ color: CORAL, fontFamily: "'IBM Plex Mono', monospace" }}>{data.tag}</div>
-      <h3 className="text-base md:text-lg font-semibold mb-2 leading-snug print-case-title" style={{ color: NAVY, fontFamily: "'Space Grotesk', sans-serif" }}>{data.title}</h3>
-      {data.client && <div className="text-xs mb-2 print-caption" style={{ color: MUTED }}>{data.client}</div>}
-      {data.challenge && <p className="text-sm leading-relaxed mb-3 print-body" style={{ color: INK }}>{data.challenge}</p>}
+      <div className="text-xs md:text-sm font-semibold tracking-wider mb-1.5 print-eyebrow" style={{ color: CORAL, fontFamily: "'IBM Plex Mono', monospace" }}>{data.tag}</div>
+      <h3 className="text-lg md:text-xl font-semibold mb-2 leading-snug print-case-title" style={{ color: NAVY, fontFamily: "'Space Grotesk', sans-serif" }}>{data.title}</h3>
+      {data.client && <div className="text-xs mb-2 print-role" style={{ color: MUTED }}>{data.client}</div>}
+      {data.challenge && <p className="text-sm md:text-base leading-relaxed mb-3 print-body" style={{ color: INK }}>{data.challenge}</p>}
 
       {data.changes && (
-        <ul className="text-sm space-y-1 mb-3 print-body" style={{ color: INK }}>
+        <ul className="text-sm md:text-base space-y-1 mb-3 print-body" style={{ color: INK }}>
           {data.changes.slice(0, 3).map((c, i) => <li key={i} className="flex gap-2"><span style={{ color: CORAL }}>·</span>{c}</li>)}
         </ul>
       )}
@@ -815,16 +822,23 @@ function GrowthLever({ data, id, printChapter }) {
       {data.levers && <div className="mb-3">{data.levers.map((l, i) => <LeverRow key={i} {...l} />)}</div>}
       {data.compare && <IndexCompare data={data.compare} />}
 
-      <div className="flex flex-wrap gap-2 mb-1">
-        {data.result.map((r, i) => <StatChip key={i} value={r.value} label={r.label} context={r.context} />)}
-      </div>
-      {data.scale && <div className="text-xs mt-1 print-caption" style={{ color: MUTED }}>{data.scale}</div>}
-      {data.caption && <div className="text-xs mt-1 print-caption" style={{ color: MUTED }}>{data.caption}</div>}
-      {data.secondary && <div className="text-xs mt-2 px-3 py-1.5 rounded-full inline-block print-caption" style={{ background: "#F3EFE3", color: NAVY }}>{data.secondary}</div>}
+      {/* When a compare box (before/after) is present, it already carries the delta —
+          skip the small generic StatChip row so the KPI isn't shown twice. */}
+      {!data.compare && (
+        <>
+          {data.resultHeading && <div className="text-sm md:text-base font-semibold mb-1 print-case-title" style={{ color: NAVY, fontFamily: "'Space Grotesk', sans-serif" }}>{data.resultHeading}</div>}
+          <div className="flex flex-wrap gap-2 mb-1">
+            {data.result.map((r, i) => <StatChip key={i} value={r.value} label={r.label} context={r.context} />)}
+          </div>
+        </>
+      )}
+      {data.scale && <div className="text-xs mt-1 print-role" style={{ color: MUTED }}>{data.scale}</div>}
+      {data.caption && <div className="text-xs mt-1 print-role" style={{ color: MUTED }}>{data.caption}</div>}
+      {data.secondary && <div className="text-xs mt-2 px-3 py-1.5 rounded-full inline-block print-role" style={{ background: "#F3EFE3", color: NAVY }}>{data.secondary}</div>}
       {data.footnote && <div className="text-[10px] italic mt-2 print-footnote" style={{ color: "#9C9585" }}>{data.footnote}</div>}
 
       {data.role && (
-        <div className="text-xs mt-3 pt-3 border-t print-caption" style={{ borderColor: "#EDE8DA", color: MUTED }}>
+        <div className="text-xs md:text-sm mt-3 pt-3 border-t print-role" style={{ borderColor: "#EDE8DA", color: MUTED }}>
           <span className="font-semibold print-eyebrow" style={{ color: CORAL }}>MY ROLE  </span>{data.role}
         </div>
       )}
@@ -917,12 +931,17 @@ function Portfolio() {
         .print-only { display: none; }
 
         /* ============ PRINT / PDF (A4 Landscape) ============ */
-        @page { size: A4 landscape; margin: 10mm; }
+        @page { size: A4 landscape; margin: 8mm 10mm; }
         @media print {
           html, body { margin: 0; padding: 0; background: #fff; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
           .no-print { display: none !important; }
           aside { position: static !important; height: auto !important; width: auto !important; display: none !important; }
           .lg\\:ml-64 { margin-left: 0 !important; }
+          /* The web layout caps content at max-w-6xl and offsets it for the fixed sidebar —
+             neither applies in print, where the sidebar is hidden. Override on the real
+             classes actually present on <main> so the page uses the full A4 landscape width. */
+          main, .max-w-6xl { max-width: none !important; width: 100% !important; }
+          main { padding-left: 0 !important; padding-right: 0 !important; }
           .print-hide { display: none !important; }
           .print-only { display: block !important; }
           .screen-only { display: none !important; }
@@ -937,26 +956,59 @@ function Portfolio() {
           .print-closing-footer { display: block !important; }
           section { margin-bottom: 6mm !important; }
           /* Readability > page count: padding/margins are generous, not compressed to
-             force a page-count target. Cards and sections are allowed to breathe. */
-          .p-5, .p-6, .p-7, .p-8, .md\\:p-6, .md\\:p-7, .md\\:p-8 { padding: 6mm !important; }
+             force a page-count target. Cards and sections are allowed to breathe — empty
+             page space is fixed by making content bigger, never by shrinking margins. */
+          .p-5, .p-6, .p-7, .p-8, .md\\:p-6, .md\\:p-7, .md\\:p-8 { padding: 7mm !important; }
           .mb-8, .mb-6 { margin-bottom: 4mm !important; }
           .mb-5, .mb-3 { margin-bottom: 3mm !important; }
-          .gap-5, .gap-3, .gap-4 { gap: 3.5mm !important; }
+          .gap-5, .gap-3, .gap-4 { gap: 4mm !important; }
 
-          /* ---- Minimum print font sizes (pt) — never shrunk to fit a page target ---- */
-          .print-hero-title { font-size: 32pt !important; line-height: 1.15 !important; }
-          .print-section-title { font-size: 23pt !important; line-height: 1.2 !important; }
-          .print-case-title { font-size: 19pt !important; line-height: 1.25 !important; }
-          .print-body { font-size: 11.5pt !important; line-height: 1.5 !important; }
-          .print-caption { font-size: 11pt !important; line-height: 1.4 !important; }
-          .print-eyebrow { font-size: 10pt !important; line-height: 1.3 !important; }
-          .print-footnote { font-size: 9pt !important; line-height: 1.35 !important; }
-          .print-kpi-number { font-size: 27pt !important; line-height: 1.1 !important; }
-          .print-kpi-number-lg { font-size: 32pt !important; line-height: 1.1 !important; }
+          /* ---- Minimum print font sizes (pt) — measured against actual printed output,
+             never shrunk to hit a page-count target. Nothing below 9.5pt. ---- */
+          .print-hero-title { font-size: 34pt !important; line-height: 1.15 !important; }
+          .print-section-title { font-size: 25pt !important; line-height: 1.2 !important; }
+          .print-case-title { font-size: 21pt !important; line-height: 1.25 !important; }
+          .print-body { font-size: 12.5pt !important; line-height: 1.5 !important; }
+          .print-caption { font-size: 12pt !important; line-height: 1.4 !important; }
+          .print-role { font-size: 11pt !important; line-height: 1.4 !important; }
+          .print-eyebrow { font-size: 11pt !important; line-height: 1.3 !important; letter-spacing: 0.06em !important; }
+          .print-footnote { font-size: 9.5pt !important; line-height: 1.35 !important; }
+          .print-kpi-number { font-size: 32pt !important; line-height: 1.1 !important; }
+          .print-kpi-number-lg { font-size: 36pt !important; line-height: 1.1 !important; }
+          .compare-index { font-size: 16pt !important; line-height: 1.2 !important; }
+          .compare-delta { font-size: 34pt !important; line-height: 1.1 !important; }
 
           /* Selected Impact: 2×2 large cards in print (web keeps its 4-column row) */
-          .impact-grid { display: grid !important; grid-template-columns: repeat(2, 1fr) !important; gap: 5mm !important; }
-          .impact-card-print { padding: 7mm !important; }
+          .impact-grid { display: grid !important; grid-template-columns: repeat(2, 1fr) !important; gap: 6mm !important; }
+          .impact-card-print { padding: 8mm !important; min-height: 72mm !important; display: flex !important; flex-direction: column !important; justify-content: center !important; }
+          .print-impact-name { font-size: 16pt !important; line-height: 1.2 !important; }
+          .print-impact-kpi { font-size: 33pt !important; line-height: 1.1 !important; }
+          .print-impact-label { font-size: 12.5pt !important; line-height: 1.3 !important; }
+          .print-impact-strategy { font-size: 11.5pt !important; line-height: 1.4 !important; }
+          .print-impact-context { font-size: 10.5pt !important; line-height: 1.3 !important; }
+
+          /* In-house primary row (D2C Media/Budget + Olive Young): an explicit, print-only
+             2-column grid — not dependent on Tailwind's md: breakpoint, which can behave
+             inconsistently against a print viewport. Cards stretch to equal height and the
+             row never splits across a page. */
+          .inhouse-primary-row {
+            display: grid !important;
+            grid-template-columns: 1fr 1fr !important;
+            gap: 7mm !important;
+            align-items: stretch !important;
+            break-inside: avoid !important;
+            page-break-inside: avoid !important;
+          }
+          .inhouse-primary-row > .card-print { height: 100% !important; }
+          .inhouse-secondary-row {
+            display: grid !important;
+            grid-template-columns: 1fr 1fr !important;
+            gap: 7mm !important;
+            align-items: stretch !important;
+            break-inside: avoid !important;
+            page-break-inside: avoid !important;
+          }
+          .inhouse-secondary-row > .card-print { height: 100% !important; }
 
           /* Page map (readability-first, ~12–14 pages): 01 Overview / 02 Selected Impact /
              03 Media+Budget + Olive Young / 04 CRM + CRO / 05 Amazon / 06 Shopee+Qoo10 /
@@ -1081,10 +1133,10 @@ function Portfolio() {
             <div className="grid grid-cols-2 impact-grid gap-3">
               {t.selectedImpact.map((c, i) => (
                 <Card key={i} className="p-4 md:p-5 impact-card-print" onClick={() => scrollToId(c.target)}>
-                  <div className="text-sm md:text-base font-semibold mb-1.5 print-case-title" style={{ color: NAVY, fontFamily: "'Space Grotesk', sans-serif" }}>{c.name}</div>
-                  <div className="text-xl md:text-2xl font-semibold mb-0.5 print-kpi-number" style={{ color: c.color, fontFamily: "'IBM Plex Mono', monospace" }}>{c.kpi}</div>
-                  <div className="text-[11px] mb-2 print-caption" style={{ color: MUTED }}>{c.label} <span style={{ color: "#B9B29E" }}>· {c.context}</span></div>
-                  <div className="text-[10.5px] leading-snug pt-2 border-t print-footnote" style={{ color: MUTED, borderColor: "#EDE8DA" }}>{c.strategy}</div>
+                  <div className="text-sm md:text-base font-semibold mb-1.5 print-impact-name" style={{ color: NAVY, fontFamily: "'Space Grotesk', sans-serif" }}>{c.name}</div>
+                  <div className="text-xl md:text-2xl font-semibold mb-0.5 print-impact-kpi" style={{ color: c.color, fontFamily: "'IBM Plex Mono', monospace" }}>{c.kpi}</div>
+                  <div className="text-[11px] mb-2" style={{ color: MUTED }}><span className="print-impact-label">{c.label}</span> <span className="print-impact-context" style={{ color: "#B9B29E" }}>· {c.context}</span></div>
+                  <div className="text-[10.5px] leading-snug pt-2 border-t print-impact-strategy" style={{ color: MUTED, borderColor: "#EDE8DA" }}>{c.strategy}</div>
                 </Card>
               ))}
             </div>
@@ -1097,12 +1149,12 @@ function Portfolio() {
                 with a row pushed to the next page — the break lands before the whole group. */}
             <div className="print-chapter">
               <SectionHeading eyebrow={t.inhouse.eyebrow} title={t.inhouse.title} sub={t.inhouse.sub} />
-              <div className="grid md:grid-cols-2 gap-4">
+              <div className="grid md:grid-cols-2 gap-4 inhouse-primary-row">
                 <GrowthLever data={t.inhouse.levers[0]} />
                 <GrowthLever data={t.inhouse.levers[1]} />
               </div>
             </div>
-            <div className="grid md:grid-cols-2 gap-4 print-chapter mt-4">
+            <div className="grid md:grid-cols-2 gap-4 inhouse-secondary-row print-chapter mt-4">
               <GrowthLever data={t.inhouse.levers[2]} />
               <GrowthLever data={t.inhouse.levers[3]} />
             </div>

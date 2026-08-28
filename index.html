@@ -193,6 +193,9 @@ const LANG_CONTENT = {
           compare: { title: "D2C ROAS · CHANNEL TREND", beforeLabel: "2024", beforeIndex: 100, afterLabel: "2025", afterIndex: 204, caption: "2024 → 2025 연간 채널 추이 · 2025.07 합류" },
           result: [{ label: "자사몰 ROAS (Index)", value: "+104%", context: "Channel Trend" }],
           role: "매체 ROAS 대비 GA4 실매출 대조 분석 · 예산 재배분 의사결정 · 리타겟팅 비중 조정",
+          printContext: "매체 성과와 GA4 실매출을 대조해 실제 매출 기여도를 기준으로 예산을 재배분했습니다.",
+          printChanges: ["매체 ROAS ↔ GA4 실매출 대조", "저기여 Campaign Cut / 고기여 Campaign Scale", "Retargeting 비중 조정"],
+          printRole: "GA4 실매출 분석 · Budget Reallocation · Retargeting 운영",
         },
         {
           id: "lever-commerce",
@@ -216,6 +219,9 @@ const LANG_CONTENT = {
           secondary: "입점 이래 월 최고 매출",
           role: "올리브영 협력광고 전략·운영 · 세일 전후 Campaign Structure 설계 · 단계별 Budget Allocation · Performance Analysis",
           rolePrint: "올리브영 협력광고 전략·운영 · 세일 전후 Campaign Structure 설계 · 단계별 예산 배분",
+          printContext: "세일 전에 리타겟팅 가능한 고객 모수를 확보하고, 세일 기간 전환 캠페인에 집중했습니다.",
+          printFlow: ["평시 유입", "관심 고객 모수", "세일 전 재공략", "세일 전환 집중", "잔여 고객 전환"],
+          printRole: "협력광고 전략·운영 · 세일 전후 Campaign Structure · 단계별 Budget Allocation",
         },
         {
           id: "lever-crm",
@@ -446,9 +452,12 @@ const LANG_CONTENT = {
             "Kept expanding retargeting and existing-customer share as efficiency shifted",
           ],
           flow: ["Media ROAS", "GA4 Revenue", "Cut / Scale", "Budget Reallocation"],
-          compare: { title: "D2C ROAS · CHANNEL TREND", beforeLabel: "2024", beforeIndex: 100, afterLabel: "2025", afterIndex: 204, caption: "2024 → 2025 Annual Channel Trend · Joined Jul 2025" },
+          compare: { title: "D2C ROAS · CHANNEL TREND", beforeLabel: "2024", beforeIndex: 100, afterLabel: "2025", afterIndex: 204, caption: "2024 → 2025 Channel Trend · Joined Jul 2025" },
           result: [{ label: "D2C ROAS (Index)", value: "+104%", context: "Channel Trend" }],
           role: "Cross-checked media ROAS against GA4 revenue · made budget-reallocation decisions · adjusted retargeting share",
+          printContext: "I cross-checked media ROAS with GA4 revenue and reallocated budget toward real sales contribution.",
+          printChanges: ["Cross-check media ROAS vs. GA4 revenue", "Cut / scale by sales contribution", "Adjust retargeting share"],
+          printRole: "Revenue analysis · budget reallocation · retargeting",
         },
         {
           id: "lever-commerce",
@@ -472,6 +481,10 @@ const LANG_CONTENT = {
           secondary: "Highest monthly sales since launching on the platform",
           role: "Olive Young co-op ads strategy & operation · designed pre/post-sale campaign structure · staged budget allocation · performance analysis",
           rolePrint: "Olive Young co-op ads strategy & operation · pre/post-sale campaign structure · staged budget allocation",
+          printTitle: "I built the retargeting pool before the sale started.",
+          printContext: "Always-on traffic built a retargetable audience before conversion demand peaked.",
+          printFlow: ["Always-on", "Audience Pool", "Pre-sale", "Sale", "Post-sale"],
+          printRole: "Co-op ads strategy · campaign structure · staged budget allocation",
         },
         {
           id: "lever-crm",
@@ -971,212 +984,392 @@ function GrowthLever({ data, id, printChapter }) {
 }
 
 /* ---------------------------------------------------------------------- */
-/*  PrintPortfolio — a fully separate PDF/paper layout (FINAL PDF           */
-/*  COMPATIBILITY REBUILD). It shares LANG_CONTENT with the web Portfolio   */
-/*  but NOT its DOM: every page is an explicit .print-page wrapper, so a    */
-/*  page's boundary is a real DOM boundary, never a CSS fragmentation       */
-/*  guess. Heading + content for a story are always written into the SAME  */
-/*  .print-page — never split so a heading alone lands on the prior page.  */
+/*  PrintPortfolio — CRITICAL PDF FIX rebuild. A fully separate print-only  */
+/*  component tree: it shares LANG_CONTENT, color tokens and icons with    */
+/*  the web Portfolio but shares NO DOM with it. GrowthLever, StatChip,    */
+/*  EvidenceGallery and SectionHeading are WEB-ONLY and are never reused    */
+/*  here (item 21) — their combined padding/typography is what pushed a    */
+/*  card past one A4 page and caused Chrome to re-fragment .print-page.    */
+/*                                                                          */
+/*  Every .print-page is a FIXED 277mm × 194mm canvas — the actual A4      */
+/*  landscape printable area at the @page 8mm/10mm margins (item 3). It is */
+/*  treated like a slide: content is composed to fit the canvas, the       */
+/*  canvas never grows to fit the content. A heading and its content live  */
+/*  in the SAME .print-page (flex column, heading auto-height + body       */
+/*  flex:1/min-height:0) so they physically cannot land on different       */
+/*  pages — no CSS fragmentation guess is involved (item 4, item 10).      */
 /* ---------------------------------------------------------------------- */
-function PrintPortfolioHeading({ eyebrow, title, sub }) {
+
+const PRINT_IMG = { IMG_INNERLAB_LP, IMG_ZIPIDERM_REVIEW, IMG_ZIPIDERM_PRODUCT, IMG_HANSKIN_PROMO, IMG_HANSKIN_AI, IMG_VIDEO_POSTER, IMG_PDRN_VIDEO_POSTER, IMG_AI_CHARACTER_POSTER, IMG_AI_MEME_POSTER, IMG_AI_STORY_POSTER, IMG_HANYUL_VOC, IMG_HEODAK, IMG_HEODAK_2, IMG_MAEIL_TOSS, IMG_BODYLUV };
+
+function CompactPrintHeading({ eyebrow, title, sub }) {
   return (
-    <div className="mb-4">
-      <div className="print-eyebrow font-semibold" style={{ color: CORAL, fontFamily: "'IBM Plex Mono', monospace", letterSpacing: "0.06em" }}>{eyebrow}</div>
-      <h2 className="print-section-title font-semibold" style={{ color: NAVY, fontFamily: "'Space Grotesk', sans-serif", margin: "2mm 0" }}>{title}</h2>
-      {sub && <p className="print-body" style={{ color: MUTED, margin: 0 }}>{sub}</p>}
+    <div className="print-page-heading" style={{ marginBottom: "3mm" }}>
+      <div style={{ fontSize: "10pt", fontWeight: 700, color: CORAL, fontFamily: "'IBM Plex Mono', monospace", letterSpacing: "0.05em", marginBottom: "1mm" }}>{eyebrow}</div>
+      <h2 style={{ fontSize: "19pt", fontWeight: 700, color: NAVY, fontFamily: "'Space Grotesk', sans-serif", margin: 0, lineHeight: 1.2 }}>{title}</h2>
+      {sub && <p style={{ fontSize: "10.5pt", color: MUTED, margin: "1mm 0 0 0", lineHeight: 1.35 }}>{sub}</p>}
+    </div>
+  );
+}
+
+/* PrintStat — auto-shrinks + wraps for long values ("Sold out in 2 weeks",
+   "1,106% / 949%") instead of overflowing its box or crossing into a
+   neighboring column (items 17–18). minWidth:0 + overflowWrap so a long
+   value wraps INSIDE its own card rather than pushing the box wider than
+   its grid column. */
+function PrintStat({ value, label, context, size = "md" }) {
+  const isLong = value.length > 10;
+  const fontSize = isLong ? "21pt" : size === "lg" ? "26pt" : "22pt";
+  return (
+    <div style={{ background: "#F3EFE3", borderRadius: 10, padding: "2.5mm 4mm", flex: "1 1 auto", minWidth: 0 }}>
+      <div style={{ fontSize, fontWeight: 700, color: CORAL, fontFamily: "'IBM Plex Mono', monospace", lineHeight: 1.15, whiteSpace: isLong ? "normal" : "nowrap", overflowWrap: "break-word", wordBreak: "normal" }}>{value}</div>
+      <div style={{ fontSize: "9.5pt", fontWeight: 600, color: NAVY, marginTop: "0.5mm" }}>{label}</div>
+      {context && <div style={{ fontSize: "8.5pt", color: MUTED, marginTop: "0.5mm" }}>{context}</div>}
+    </div>
+  );
+}
+
+function PrintFlowRow({ items }) {
+  return (
+    <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: "1.5mm", marginBottom: "2mm" }}>
+      {items.map((it, i) => (
+        <React.Fragment key={i}>
+          <span style={{ fontSize: "9.5pt", fontWeight: i === items.length - 1 ? 700 : 500, color: i === items.length - 1 ? "white" : NAVY, background: i === items.length - 1 ? CORAL : "#F3EFE3", borderRadius: 999, padding: "1mm 2.5mm", whiteSpace: "nowrap" }}>{it}</span>
+          {i < items.length - 1 && <ArrowRight size={9} color={MUTED} />}
+        </React.Fragment>
+      ))}
+    </div>
+  );
+}
+
+function PrintLeverRow({ lever, before, after, desc }) {
+  return (
+    <div style={{ display: "flex", alignItems: "center", gap: "3mm", padding: "1.5mm 0", borderTop: "1px solid #EDE8DA", fontSize: "9.5pt" }}>
+      <div style={{ width: "22mm", flexShrink: 0, fontWeight: 700, color: NAVY, fontFamily: "'IBM Plex Mono', monospace", fontSize: "8.5pt" }}>{lever}</div>
+      <div style={{ display: "flex", alignItems: "center", gap: "1.5mm", flexShrink: 0 }}>
+        <span style={{ color: MUTED }}>{before}</span><ArrowRight size={9} color={MUTED} /><span style={{ color: NAVY, fontWeight: 600 }}>{after}</span>
+      </div>
+      {desc && <div style={{ color: MUTED, flex: 1, minWidth: 0 }}>{desc}</div>}
+    </div>
+  );
+}
+
+/* PrintCompare — D2C before/after index visual, mm-sized (replaces the
+   web-only IndexCompare). KPI delta sized 30pt per item 11's 28–31pt spec. */
+function PrintCompare({ data }) {
+  const scale = Math.max(1, data.afterIndex / data.beforeIndex);
+  const delta = Math.round((data.afterIndex / data.beforeIndex - 1) * 100);
+  return (
+    <div style={{ background: "#F3EFE3", borderRadius: 10, padding: "3mm 4mm", marginBottom: "2mm" }}>
+      {data.title && <div style={{ fontSize: "9pt", fontWeight: 700, color: NAVY, fontFamily: "'IBM Plex Mono', monospace", textAlign: "center", marginBottom: "2mm" }}>{data.title}</div>}
+      <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "center", gap: "4mm" }}>
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+          <div style={{ width: "9mm", height: "11mm", background: "#D9D2BE", borderRadius: "1mm 1mm 0 0" }} />
+          <div style={{ fontSize: "9pt", fontWeight: 700, color: MUTED, fontFamily: "'IBM Plex Mono', monospace", marginTop: "1mm" }}>{data.beforeLabel}</div>
+          <div style={{ fontSize: "8.5pt", fontWeight: 700, color: MUTED, fontFamily: "'IBM Plex Mono', monospace" }}>INDEX {data.beforeIndex}</div>
+        </div>
+        <ArrowRight size={13} color={MUTED} style={{ marginBottom: "7mm" }} />
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+          <div style={{ width: "9mm", height: `${Math.min(11 * scale, 22)}mm`, background: CORAL, borderRadius: "1mm 1mm 0 0" }} />
+          <div style={{ fontSize: "9pt", fontWeight: 700, color: NAVY, fontFamily: "'IBM Plex Mono', monospace", marginTop: "1mm" }}>{data.afterLabel}</div>
+          <div style={{ fontSize: "8.5pt", fontWeight: 700, color: CORAL, fontFamily: "'IBM Plex Mono', monospace" }}>INDEX {data.afterIndex}</div>
+        </div>
+      </div>
+      <div style={{ fontSize: "30pt", fontWeight: 700, color: CORAL, fontFamily: "'IBM Plex Mono', monospace", textAlign: "center", marginTop: "1.5mm", lineHeight: 1.05 }}>+{delta}%</div>
+      {data.caption && <div style={{ fontSize: "8.5pt", color: MUTED, textAlign: "center", marginTop: "1.5mm", paddingTop: "1.5mm", borderTop: "1px solid #E3DDCC" }}>{data.caption}</div>}
+    </div>
+  );
+}
+
+function PrintEvidenceGrid({ images, cols = 2, thumbH = "24mm" }) {
+  return (
+    <div style={{ display: "grid", gridTemplateColumns: `repeat(${cols}, 1fr)`, gap: "2.5mm" }}>
+      {images.map((img, i) => {
+        const src = typeof img.src === "string" && PRINT_IMG[img.src] ? PRINT_IMG[img.src] : img.src;
+        return (
+          <div key={i} style={{ borderRadius: 8, overflow: "hidden", border: "1px solid #EAE5D8", minWidth: 0 }}>
+            <img src={src} alt={img.caption} style={{ width: "100%", height: thumbH, objectFit: "cover", objectPosition: img.focus || "top", display: "block" }} />
+            <div style={{ fontSize: "7.5pt", color: MUTED, background: "#FAF7EF", padding: "1mm 1.5mm", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{img.caption}</div>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+/* PrintCase — the ONE reusable print card shape (tag/title/context/actions/
+   flow/result/role), used for every case EXCEPT D2C and Olive Young, which
+   have fully bespoke layouts per items 6–13. MY ROLE is pinned to the
+   bottom via marginTop:auto so two cards side by side always align. */
+function PrintCase({ tag, title, context, actions, flow, resultHeading, result, secondary, role, evidence, evidenceCols, resultSize }) {
+  return (
+    <div className="print-card" style={{ background: CARD, border: "1px solid #EAE5D8", borderRadius: 12, padding: "4mm 5mm", height: "100%", display: "flex", flexDirection: "column", minHeight: 0 }}>
+      <div style={{ flex: "1 1 auto", minHeight: 0, display: "flex", flexDirection: "column", justifyContent: "center" }}>
+        {tag && <div style={{ fontSize: "10pt", fontWeight: 700, color: CORAL, fontFamily: "'IBM Plex Mono', monospace", letterSpacing: "0.04em", marginBottom: "1mm" }}>{tag}</div>}
+        <h3 style={{ fontSize: "17pt", fontWeight: 700, color: NAVY, fontFamily: "'Space Grotesk', sans-serif", margin: "0 0 1.5mm 0", lineHeight: 1.2 }}>{title}</h3>
+        {context && <p style={{ fontSize: "10.5pt", color: INK, margin: "0 0 2mm 0", lineHeight: 1.4 }}>{context}</p>}
+        {actions && (
+          <ul style={{ fontSize: "10pt", color: INK, margin: "0 0 2mm 0", padding: 0, listStyle: "none", lineHeight: 1.35 }}>
+            {actions.slice(0, 3).map((a, i) => <li key={i} style={{ display: "flex", gap: "1.5mm" }}><span style={{ color: CORAL }}>·</span>{a}</li>)}
+          </ul>
+        )}
+        {flow && <PrintFlowRow items={flow} />}
+        {result && (
+          <>
+            {resultHeading && <div style={{ fontSize: "10.5pt", fontWeight: 700, color: NAVY, fontFamily: "'Space Grotesk', sans-serif", marginBottom: "1mm" }}>{resultHeading}</div>}
+            <div style={{ display: "flex", flexWrap: "wrap", gap: "2mm", marginBottom: "1mm" }}>
+              {result.map((r, i) => <PrintStat key={i} value={r.value} label={r.label} context={r.context} size={resultSize} />)}
+            </div>
+          </>
+        )}
+        {secondary && <div style={{ fontSize: "9pt", color: NAVY, background: "#F3EFE3", borderRadius: 999, padding: "1mm 3mm", display: "inline-block", marginTop: "1mm" }}>{secondary}</div>}
+        {evidence && <div style={{ marginTop: "1.5mm" }}><PrintEvidenceGrid images={evidence} cols={evidenceCols || 2} thumbH="13mm" /></div>}
+      </div>
+      {role && (
+        <div style={{ fontSize: "9.5pt", color: MUTED, borderTop: "1px solid #EDE8DA", paddingTop: "2mm", marginTop: "2mm", flex: "0 0 auto" }}>
+          <span style={{ fontWeight: 700, color: CORAL }}>MY ROLE  </span>{role}
+        </div>
+      )}
     </div>
   );
 }
 
 function PrintPortfolio({ lang, t }) {
   const currentLabel = lang === "kr" ? "현재" : "Current";
+  const d2c = t.inhouse.levers[0];
+  const oy = t.inhouse.levers[1];
+  const crm = t.inhouse.levers[2];
+  const cro = t.inhouse.levers[3];
+
   return (
     <div>
       {/* PAGE 01 — Hero / Current Role / Scope / Snapshot */}
-      <div className="print-page">
-        <div className="print-eyebrow font-semibold" style={{ color: CORAL, fontFamily: "'IBM Plex Mono', monospace", letterSpacing: "0.08em", marginBottom: "3mm" }}>{t.hero.eyebrow}</div>
-        <h1 className="print-hero-title font-semibold" style={{ color: NAVY, fontFamily: "'Space Grotesk', sans-serif", margin: "0 0 3mm 0" }}>
-          {t.hero.title1} <span style={{ color: CORAL }}>{t.hero.titleHighlight}</span>{t.hero.title2}
-        </h1>
-        <p className="print-body" style={{ color: INK, maxWidth: "80%", margin: "0 0 4mm 0" }}>{t.hero.sub}</p>
+      <div className="print-page" style={{ padding: "7mm 9mm" }}>
+        <div className="print-page-body" style={{ overflow: "hidden" }}>
+          <div style={{ fontSize: "10.5pt", fontWeight: 700, color: CORAL, fontFamily: "'IBM Plex Mono', monospace", letterSpacing: "0.08em", marginBottom: "3mm" }}>{t.hero.eyebrow}</div>
+          <h1 style={{ fontSize: "30pt", fontWeight: 700, color: NAVY, fontFamily: "'Space Grotesk', sans-serif", margin: "0 0 3mm 0", lineHeight: 1.18 }}>
+            {t.hero.title1} <span style={{ color: CORAL }}>{t.hero.titleHighlight}</span>{t.hero.title2}
+          </h1>
+          <p style={{ fontSize: "11pt", color: INK, maxWidth: "78%", margin: "0 0 4mm 0", lineHeight: 1.4 }}>{t.hero.sub}</p>
 
-        <div className="rounded-xl" style={{ background: NAVY, padding: "5mm 6mm", display: "flex", flexWrap: "wrap", alignItems: "center", gap: "4mm", marginBottom: "5mm" }}>
-          <span className="print-footnote font-semibold" style={{ color: NAVY, background: CORAL_SOFT, padding: "1mm 2.5mm", borderRadius: 6 }}>{t.currentRole.tag}</span>
-          <span className="print-role font-semibold" style={{ color: "white" }}>{t.currentRole.org}</span>
-          <span className="print-role" style={{ color: "rgba(255,255,255,0.75)" }}>{t.currentRole.role}</span>
-          <span className="print-footnote" style={{ color: "rgba(255,255,255,0.55)", marginLeft: "auto" }}>{t.currentRole.note}</span>
-        </div>
+          <div style={{ background: NAVY, borderRadius: 12, padding: "4mm 5mm", display: "flex", flexWrap: "wrap", alignItems: "center", gap: "4mm", marginBottom: "5mm" }}>
+            <span style={{ fontSize: "8.5pt", fontWeight: 700, color: NAVY, background: CORAL_SOFT, padding: "1mm 2.5mm", borderRadius: 6 }}>{t.currentRole.tag}</span>
+            <span style={{ fontSize: "10.5pt", fontWeight: 700, color: "white" }}>{t.currentRole.org}</span>
+            <span style={{ fontSize: "9.5pt", color: "rgba(255,255,255,0.75)" }}>{t.currentRole.role}</span>
+            <span style={{ fontSize: "9pt", color: "rgba(255,255,255,0.55)", marginLeft: "auto" }}>{t.currentRole.note}</span>
+          </div>
 
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "4mm", marginBottom: "6mm" }}>
-          {t.scope.rows.map((r, i) => (
-            <div key={i} className="rounded-xl" style={{ background: "#FAF7EF", padding: "4mm 4.5mm" }}>
-              <div className="print-scope-label font-semibold" style={{ color: CORAL, fontFamily: "'IBM Plex Mono', monospace", letterSpacing: "0.04em", marginBottom: "1.5mm" }}>{r.label}</div>
-              <div className="print-scope-value" style={{ color: NAVY }}>{r.value}</div>
-            </div>
-          ))}
-        </div>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "4mm", marginBottom: "5mm" }}>
+            {t.scope.rows.map((r, i) => (
+              <div key={i} style={{ background: "#FAF7EF", borderRadius: 10, padding: "3.5mm 4mm" }}>
+                <div style={{ fontSize: "9.5pt", fontWeight: 700, color: CORAL, fontFamily: "'IBM Plex Mono', monospace", letterSpacing: "0.04em", marginBottom: "1.5mm" }}>{r.label}</div>
+                <div style={{ fontSize: "10pt", color: NAVY, lineHeight: 1.35 }}>{r.value}</div>
+              </div>
+            ))}
+          </div>
 
-        <div className="print-eyebrow font-semibold" style={{ color: CORAL, fontFamily: "'IBM Plex Mono', monospace", letterSpacing: "0.06em", marginBottom: "2mm" }}>EXPERIENCE SNAPSHOT</div>
-        <div className="rounded-xl" style={{ background: "#FAF7EF", padding: "5mm" }}>
-          {t.snapshot.categories.map((cat, i) => (
-            <div key={i} style={i > 0 ? { borderTop: "1px solid #EDE8DA", marginTop: "3mm", paddingTop: "3mm" } : {}}>
-              <div style={{ display: "flex", alignItems: "flex-start", gap: "4mm" }}>
-                <div className="print-snap-cat font-semibold" style={{ color: MUTED, fontFamily: "'IBM Plex Mono', monospace", letterSpacing: "0.04em", flexShrink: 0, width: "32mm", paddingTop: "1mm" }}>{cat.label}</div>
-                <div style={{ display: "flex", flexWrap: "wrap", gap: "2mm" }}>
-                  {cat.items.map((it, j) => (
-                    typeof it === "object" ? (
-                      <span key={j} className="print-snap-chip" style={{ background: "white", color: NAVY, border: "1px solid #EAE5D8", borderRadius: 999, padding: "1mm 3mm" }}>{it.label}<span className="print-snap-chip-sub" style={{ color: MUTED }}> · {it.sub}</span></span>
-                    ) : (
-                      <span key={j} className="print-snap-chip" style={{ background: "white", color: NAVY, border: "1px solid #EAE5D8", borderRadius: 999, padding: "1mm 3mm" }}>{it}</span>
-                    )
-                  ))}
+          <div style={{ fontSize: "10.5pt", fontWeight: 700, color: CORAL, fontFamily: "'IBM Plex Mono', monospace", letterSpacing: "0.06em", marginBottom: "2mm" }}>EXPERIENCE SNAPSHOT</div>
+          <div style={{ background: "#FAF7EF", borderRadius: 10, padding: "4mm" }}>
+            {t.snapshot.categories.map((cat, i) => (
+              <div key={i} style={i > 0 ? { borderTop: "1px solid #EDE8DA", marginTop: "2.5mm", paddingTop: "2.5mm" } : {}}>
+                <div style={{ display: "flex", alignItems: "flex-start", gap: "4mm" }}>
+                  <div style={{ fontSize: "9pt", fontWeight: 700, color: MUTED, fontFamily: "'IBM Plex Mono', monospace", letterSpacing: "0.04em", flexShrink: 0, width: "28mm", paddingTop: "0.5mm" }}>{cat.label}</div>
+                  <div style={{ display: "flex", flexWrap: "wrap", gap: "1.5mm" }}>
+                    {cat.items.map((it, j) => (
+                      typeof it === "object" ? (
+                        <span key={j} style={{ fontSize: "9pt", background: "white", color: NAVY, border: "1px solid #EAE5D8", borderRadius: 999, padding: "0.8mm 2.5mm" }}>{it.label}<span style={{ fontSize: "8pt", color: MUTED }}> · {it.sub}</span></span>
+                      ) : (
+                        <span key={j} style={{ fontSize: "9pt", background: "white", color: NAVY, border: "1px solid #EAE5D8", borderRadius: 999, padding: "0.8mm 2.5mm" }}>{it}</span>
+                      )
+                    ))}
+                  </div>
                 </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* PAGE 02 — Selected Impact (2×2) */}
-      <div className="print-page">
-        <div className="print-eyebrow font-semibold" style={{ color: CORAL, fontFamily: "'IBM Plex Mono', monospace", letterSpacing: "0.06em", marginBottom: "4mm" }}>SELECTED IMPACT</div>
-        <div className="impact-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "6mm" }}>
-          {t.selectedImpact.map((c, i) => (
-            <div key={i} className="rounded-2xl card-print impact-card-print" style={{ background: CARD, border: "1px solid #EAE5D8" }}>
-              <div className="print-impact-name font-semibold" style={{ color: NAVY, fontFamily: "'Space Grotesk', sans-serif", marginBottom: "1.5mm" }}>{c.name}</div>
-              <div className="print-impact-kpi font-semibold" style={{ color: c.color, fontFamily: "'IBM Plex Mono', monospace" }}>{c.kpi}</div>
-              <div style={{ marginBottom: "2mm" }}><span className="print-impact-label" style={{ color: MUTED }}>{c.label}</span> <span className="print-impact-context" style={{ color: "#B9B29E" }}>· {c.context}</span></div>
-              <div className="print-impact-strategy" style={{ color: MUTED, borderTop: "1px solid #EDE8DA", paddingTop: "2mm" }}>{c.strategy}</div>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* PAGE 03 — Current In-house Growth: D2C + Olive Young, side by side, complete */}
-      <div className="print-page">
-        <PrintPortfolioHeading eyebrow={t.inhouse.eyebrow} title={t.inhouse.title} sub={t.inhouse.sub} />
-        <div className="print-two-col">
-          <GrowthLever data={t.inhouse.levers[0]} id={`print-${t.inhouse.levers[0].id}`} />
-          <GrowthLever data={t.inhouse.levers[1]} id={`print-${t.inhouse.levers[1].id}`} />
-        </div>
-      </div>
-
-      {/* PAGE 04 — CRM + CRO, side by side, complete (incl. CRO evidence) */}
-      <div className="print-page">
-        <div className="print-two-col">
-          <GrowthLever data={t.inhouse.levers[2]} id={`print-${t.inhouse.levers[2].id}`} />
-          <GrowthLever data={t.inhouse.levers[3]} id={`print-${t.inhouse.levers[3].id}`} />
-        </div>
-      </div>
-
-      {/* PAGE 05 — Global: Amazon (hero case, alone) */}
-      <div className="print-page">
-        <PrintPortfolioHeading eyebrow={t.global.eyebrow} title={t.global.title} sub={t.global.sub} />
-        <div className="rounded-2xl card-print" style={{ background: CARD, border: "1px solid #EAE5D8", padding: "7mm" }}>
-          <div className="print-eyebrow font-semibold" style={{ color: CORAL, fontFamily: "'IBM Plex Mono', monospace", marginBottom: "1.5mm" }}>{t.global.amazon.tag}</div>
-          <h3 className="print-case-title font-semibold" style={{ color: NAVY, fontFamily: "'Space Grotesk', sans-serif", margin: "0 0 4mm 0" }}>{t.global.amazon.title}</h3>
-          <div style={{ marginBottom: "4mm" }}>{t.global.amazon.levers.map((l, i) => <LeverRow key={i} {...l} />)}</div>
-          <div style={{ display: "flex", flexWrap: "wrap", gap: "3mm", marginBottom: "1mm" }}>
-            {t.global.amazon.result.map((r, i) => <StatChip key={i} value={r.value} label={r.label} size="lg" />)}
-          </div>
-          <div className="print-caption" style={{ color: MUTED, marginTop: "1mm" }}>{t.global.amazon.scale}</div>
-          <div className="print-caption" style={{ color: MUTED, marginTop: "1mm" }}>{t.global.amazon.caption}</div>
-          <div className="print-footnote" style={{ color: "#9C9585", fontStyle: "italic", marginTop: "2mm" }}>{t.global.amazon.footnote}</div>
-        </div>
-      </div>
-
-      {/* PAGE 06 — Global: Shopee + Qoo10, side by side, complete */}
-      <div className="print-page">
-        <div className="print-two-col">
-          <div className="rounded-2xl card-print" style={{ background: CARD, border: "1px solid #EAE5D8", padding: "6mm" }}>
-            <div className="print-eyebrow font-semibold" style={{ color: CORAL, fontFamily: "'IBM Plex Mono', monospace", marginBottom: "1.5mm" }}>{t.global.shopee.tag}</div>
-            <h3 className="print-case-title font-semibold" style={{ color: NAVY, margin: "0 0 2mm 0" }}>{t.global.shopee.title}</h3>
-            <FlowChips items={t.global.shopee.flow} />
-            <div style={{ display: "flex", flexWrap: "wrap", gap: "2mm", marginBottom: "1mm" }}>
-              {t.global.shopee.result.map((r, i) => <StatChip key={i} value={r.value} label={r.label} />)}
-            </div>
-            <div className="print-caption" style={{ color: MUTED, marginTop: "1mm" }}>{t.global.shopee.context}</div>
-          </div>
-          <div className="rounded-2xl card-print" style={{ background: CARD, border: "1px solid #EAE5D8", padding: "6mm" }}>
-            <div className="print-eyebrow font-semibold" style={{ color: CORAL, fontFamily: "'IBM Plex Mono', monospace", marginBottom: "1.5mm" }}>{t.global.qoo10.tag}</div>
-            <h3 className="print-case-title font-semibold" style={{ color: NAVY, margin: "0 0 3mm 0" }}>{t.global.qoo10.title}</h3>
-            <div style={{ display: "flex", flexWrap: "wrap", gap: "2mm", marginBottom: "3mm" }}>
-              {t.global.qoo10.result.map((r, i) => <StatChip key={i} value={r.value} label={r.label} context={r.context} />)}
-            </div>
-            <div className="rounded-lg" style={{ background: "#F3EFE3", padding: "3mm" }}>
-              <div className="print-footnote font-semibold" style={{ color: CORAL, marginBottom: "1mm" }}>{t.global.qoo10.signalLabel}</div>
-              <div className="print-body" style={{ color: NAVY }}>{t.global.qoo10.signalCopy}</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* PAGE 07 — Experiment & Measurement / AI Creative, heading + 2-col card, ONE page */}
-      <div className="print-page">
-        <PrintPortfolioHeading eyebrow={t.experiment.eyebrow} title={t.experiment.title} sub={t.experiment.sub} />
-        <div className="rounded-2xl card-print" style={{ background: CARD, border: "1px solid #EAE5D8", padding: "7mm" }}>
-          <div style={{ display: "grid", gridTemplateColumns: "36% 64%", gap: "6mm" }}>
-            <div>
-              <FlowChips items={t.experiment.flow} />
-              <div style={{ display: "flex", flexWrap: "wrap", gap: "2mm", marginBottom: "3mm" }}>
-                {t.experiment.result.map((r, i) => <StatChip key={i} value={r.value} label={r.label} context={r.context} size="lg" />)}
-              </div>
-              <div className="print-role" style={{ color: MUTED, borderTop: "1px solid #EDE8DA", paddingTop: "3mm", marginTop: "2mm" }}>
-                <span className="print-eyebrow font-semibold" style={{ color: CORAL }}>MY ROLE  </span>{t.experiment.contribution}
-              </div>
-              <div className="print-footnote" style={{ color: "#A8A08C", marginTop: "1.5mm" }}>
-                <span className="font-semibold" style={{ color: NAVY_SOFT }}>TOOLS  </span>{t.experiment.tools}
-              </div>
-            </div>
-            <div>
-              <div className="print-eyebrow font-semibold" style={{ color: CORAL, fontFamily: "'IBM Plex Mono', monospace", marginBottom: "1.5mm" }}>ACTUAL CREATIVE</div>
-              <EvidenceGallery images={t.experiment.creative} cols={3} />
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* PAGE 08 — Selected Agency: Hanyul + Bodyluv, side by side, complete */}
-      <div className="print-page">
-        <PrintPortfolioHeading eyebrow={t.agency.eyebrow} title={t.agency.title} />
-        <div className="print-two-col">
-          <GrowthLever data={t.agency.cases[0]} />
-          <GrowthLever data={t.agency.cases[1]} />
-        </div>
-      </div>
-
-      {/* PAGE 09 — Maeil (top) + Additional Experience (bottom), complete */}
-      <div className="print-page">
-        <GrowthLever data={t.agency.cases[2]} />
-        <div className="rounded-2xl card-print" style={{ marginTop: "5mm", background: CARD, border: "1px solid #EAE5D8", padding: "5mm" }}>
-          <div className="print-eyebrow font-semibold" style={{ color: NAVY_SOFT, fontFamily: "'IBM Plex Mono', monospace", marginBottom: "3mm" }}>{t.agency.additionalTitle}</div>
-          <div className="rounded-xl" style={{ overflow: "hidden", background: "#FAF7EF" }}>
-            {t.agency.additional.map((item, i) => (
-              <div key={i} className="print-caption" style={{ display: "flex", flexWrap: "wrap", gap: "3mm", padding: "3mm 4mm", borderTop: i > 0 ? "1px solid #EDE8DA" : "none" }}>
-                <span className="font-semibold" style={{ color: NAVY, minWidth: "45mm" }}>{item.client}</span>
-                <span style={{ color: CORAL }}>{item.result}</span>
               </div>
             ))}
           </div>
         </div>
       </div>
 
-      {/* PAGE 10 — Startup (42%) + Career (58%), side by side, complete */}
-      <div className="print-page">
-        <div className="print-split-4258">
-          <div>
-            <PrintPortfolioHeading eyebrow={t.startup.eyebrow} title={t.startup.title} />
-            <div className="rounded-2xl card-print" style={{ background: CARD, border: "1px solid #EAE5D8", padding: "6mm" }}>
-              <div className="print-role" style={{ color: MUTED, marginBottom: "3mm" }}>{t.startup.brand}</div>
-              <FlowChips items={t.startup.flow} />
+      {/* PAGE 02 — Selected Impact (2×2) */}
+      <div className="print-page" style={{ padding: "7mm 9mm" }}>
+        <div className="print-page-heading" style={{ fontSize: "10.5pt", fontWeight: 700, color: CORAL, fontFamily: "'IBM Plex Mono', monospace", letterSpacing: "0.06em", marginBottom: "4mm" }}>SELECTED IMPACT</div>
+        <div className="print-page-body" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gridTemplateRows: "1fr 1fr", gap: "5mm", minHeight: 0 }}>
+          {t.selectedImpact.map((c, i) => (
+            <div key={i} style={{ background: CARD, border: "1px solid #EAE5D8", borderRadius: 14, padding: "5mm 6mm", display: "flex", flexDirection: "column", justifyContent: "center", minHeight: 0 }}>
+              <div style={{ fontSize: "13pt", fontWeight: 700, color: NAVY, fontFamily: "'Space Grotesk', sans-serif", marginBottom: "1.5mm" }}>{c.name}</div>
+              <div style={{ fontSize: "26pt", fontWeight: 700, color: c.color, fontFamily: "'IBM Plex Mono', monospace", lineHeight: 1.1 }}>{c.kpi}</div>
+              <div style={{ fontSize: "10pt", color: MUTED, marginBottom: "2mm" }}>{c.label} <span style={{ fontSize: "9pt", color: "#B9B29E" }}>· {c.context}</span></div>
+              <div style={{ fontSize: "9.5pt", color: MUTED, borderTop: "1px solid #EDE8DA", paddingTop: "2mm", lineHeight: 1.35 }}>{c.strategy}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* PAGE 03 — Current In-house Growth: D2C + Olive Young, dedicated layout,
+          content per items 6–13 exactly. Heading has NO sub (kept under 30mm
+          total) — the web page's long sub is intentionally not printed here. */}
+      <div className="print-page print-inhouse-page" style={{ padding: "7mm 9mm" }}>
+        <CompactPrintHeading eyebrow={t.inhouse.eyebrow} title={t.inhouse.title} />
+        <div className="print-page-body print-two-col print-case-area">
+          <div className="print-card" style={{ background: CARD, border: "1px solid #EAE5D8", borderRadius: 12, padding: "4mm 5mm", height: "100%", display: "flex", flexDirection: "column", minHeight: 0 }}>
+            <div style={{ flex: "1 1 auto", minHeight: 0, display: "flex", flexDirection: "column", justifyContent: "center" }}>
+              <div style={{ fontSize: "10pt", fontWeight: 700, color: CORAL, fontFamily: "'IBM Plex Mono', monospace", letterSpacing: "0.04em", marginBottom: "1mm" }}>{d2c.tag}</div>
+              <h3 style={{ fontSize: "17pt", fontWeight: 700, color: NAVY, fontFamily: "'Space Grotesk', sans-serif", margin: "0 0 1.5mm 0", lineHeight: 1.2 }}>{d2c.title}</h3>
+              <p style={{ fontSize: "10.5pt", color: INK, margin: "0 0 2mm 0", lineHeight: 1.4 }}>{d2c.printContext}</p>
+              <ul style={{ fontSize: "10pt", color: INK, margin: "0 0 2mm 0", padding: 0, listStyle: "none", lineHeight: 1.35 }}>
+                {d2c.printChanges.map((a, i) => <li key={i} style={{ display: "flex", gap: "1.5mm" }}><span style={{ color: CORAL }}>·</span>{a}</li>)}
+              </ul>
+              <PrintFlowRow items={d2c.flow} />
+              <PrintCompare data={d2c.compare} />
+            </div>
+            <div style={{ fontSize: "9.5pt", color: MUTED, borderTop: "1px solid #EDE8DA", paddingTop: "2mm", marginTop: "2mm", flex: "0 0 auto" }}>
+              <span style={{ fontWeight: 700, color: CORAL }}>MY ROLE  </span>{d2c.printRole}
+            </div>
+          </div>
+          <div className="print-card" style={{ background: CARD, border: "1px solid #EAE5D8", borderRadius: 12, padding: "4mm 5mm", height: "100%", display: "flex", flexDirection: "column", minHeight: 0 }}>
+            <div style={{ flex: "1 1 auto", minHeight: 0, display: "flex", flexDirection: "column", justifyContent: "center" }}>
+              <div style={{ fontSize: "10pt", fontWeight: 700, color: CORAL, fontFamily: "'IBM Plex Mono', monospace", letterSpacing: "0.04em", marginBottom: "1mm" }}>{oy.tag}</div>
+              <h3 style={{ fontSize: "17pt", fontWeight: 700, color: NAVY, fontFamily: "'Space Grotesk', sans-serif", margin: "0 0 1.5mm 0", lineHeight: 1.2 }}>{oy.printTitle || oy.title}</h3>
+              <p style={{ fontSize: "10.5pt", color: INK, margin: "0 0 2mm 0", lineHeight: 1.4 }}>{oy.printContext}</p>
+              <PrintFlowRow items={oy.printFlow} />
+              <div style={{ fontSize: "10.5pt", fontWeight: 700, color: NAVY, fontFamily: "'Space Grotesk', sans-serif", marginBottom: "1mm" }}>{oy.resultHeading}</div>
               <div style={{ display: "flex", flexWrap: "wrap", gap: "2mm", marginBottom: "1mm" }}>
-                {t.startup.result.map((r, i) => <StatChip key={i} value={r.value} label={r.label} />)}
+                {oy.result.map((r, i) => <PrintStat key={i} value={r.value} label={r.label} context={r.context} size="lg" />)}
               </div>
-              <div className="print-role" style={{ color: MUTED, marginTop: "2mm" }}>{t.startup.secondary}</div>
+              <div style={{ fontSize: "9pt", color: NAVY, background: "#F3EFE3", borderRadius: 999, padding: "1mm 3mm", display: "inline-block", marginTop: "1mm" }}>{oy.secondary}</div>
+            </div>
+            <div style={{ fontSize: "9.5pt", color: MUTED, borderTop: "1px solid #EDE8DA", paddingTop: "2mm", marginTop: "2mm", flex: "0 0 auto" }}>
+              <span style={{ fontWeight: 700, color: CORAL }}>MY ROLE  </span>{oy.printRole}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* PAGE 04 — CRM + CRO, dedicated cards, CRO Evidence included, complete. */}
+      <div className="print-page" style={{ padding: "7mm 9mm" }}>
+        <div className="print-page-body print-two-col" style={{ height: "100%" }}>
+          <PrintCase tag={crm.tag} title={crm.title} context={crm.challenge} actions={crm.changes} flow={crm.flow} result={crm.result} role={crm.role} />
+          <PrintCase tag={cro.tag} title={cro.title} context={cro.challenge} actions={cro.changes} flow={cro.flow} result={cro.result} role={cro.role} evidence={cro.evidence} evidenceCols={2} />
+        </div>
+      </div>
+
+      {/* PAGE 05 — Global: Amazon (hero case, alone) */}
+      <div className="print-page" style={{ padding: "7mm 9mm" }}>
+        <CompactPrintHeading eyebrow={t.global.eyebrow} title={t.global.title} sub={t.global.sub} />
+        <div className="print-page-body">
+          <div className="print-card" style={{ background: CARD, border: "1px solid #EAE5D8", borderRadius: 12, padding: "5mm 6mm", height: "100%", display: "flex", flexDirection: "column", justifyContent: "center", minHeight: 0 }}>
+            <div style={{ fontSize: "10pt", fontWeight: 700, color: CORAL, fontFamily: "'IBM Plex Mono', monospace", marginBottom: "1.5mm" }}>{t.global.amazon.tag}</div>
+            <h3 style={{ fontSize: "17pt", fontWeight: 700, color: NAVY, fontFamily: "'Space Grotesk', sans-serif", margin: "0 0 3mm 0", lineHeight: 1.2 }}>{t.global.amazon.title}</h3>
+            <div style={{ marginBottom: "3mm" }}>{t.global.amazon.levers.map((l, i) => <PrintLeverRow key={i} {...l} />)}</div>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: "3mm", marginBottom: "1mm" }}>
+              {t.global.amazon.result.map((r, i) => <PrintStat key={i} value={r.value} label={r.label} size="lg" />)}
+            </div>
+            <div style={{ fontSize: "9.5pt", color: MUTED, marginTop: "1.5mm" }}>{t.global.amazon.scale}</div>
+            <div style={{ fontSize: "9.5pt", color: MUTED, marginTop: "0.5mm" }}>{t.global.amazon.caption}</div>
+            <div style={{ fontSize: "8.5pt", color: "#9C9585", fontStyle: "italic", marginTop: "1.5mm" }}>{t.global.amazon.footnote}</div>
+          </div>
+        </div>
+      </div>
+
+      {/* PAGE 06 — Global: Shopee + Qoo10, side by side, complete */}
+      <div className="print-page" style={{ padding: "7mm 9mm" }}>
+        <div className="print-page-body print-two-col" style={{ height: "100%" }}>
+          <div className="print-card" style={{ background: CARD, border: "1px solid #EAE5D8", borderRadius: 12, padding: "6mm 7mm", height: "100%", display: "flex", flexDirection: "column", justifyContent: "center", minHeight: 0 }}>
+            <div style={{ fontSize: "10.5pt", fontWeight: 700, color: CORAL, fontFamily: "'IBM Plex Mono', monospace", marginBottom: "2.5mm" }}>{t.global.shopee.tag}</div>
+            <h3 style={{ fontSize: "18pt", fontWeight: 700, color: NAVY, fontFamily: "'Space Grotesk', sans-serif", margin: "0 0 5mm 0", lineHeight: 1.25 }}>{t.global.shopee.title}</h3>
+            <div style={{ marginBottom: "5mm" }}><PrintFlowRow items={t.global.shopee.flow} /></div>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: "4mm", marginBottom: "3mm" }}>
+              {t.global.shopee.result.map((r, i) => <PrintStat key={i} value={r.value} label={r.label} size="lg" />)}
+            </div>
+            <div style={{ fontSize: "10pt", color: MUTED, marginTop: "1mm" }}>{t.global.shopee.context}</div>
+          </div>
+          <div className="print-card" style={{ background: CARD, border: "1px solid #EAE5D8", borderRadius: 12, padding: "6mm 7mm", height: "100%", display: "flex", flexDirection: "column", justifyContent: "center", minHeight: 0 }}>
+            <div style={{ fontSize: "10.5pt", fontWeight: 700, color: CORAL, fontFamily: "'IBM Plex Mono', monospace", marginBottom: "2.5mm" }}>{t.global.qoo10.tag}</div>
+            <h3 style={{ fontSize: "18pt", fontWeight: 700, color: NAVY, fontFamily: "'Space Grotesk', sans-serif", margin: "0 0 5mm 0", lineHeight: 1.25 }}>{t.global.qoo10.title}</h3>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: "4mm", marginBottom: "5mm" }}>
+              {t.global.qoo10.result.map((r, i) => <PrintStat key={i} value={r.value} label={r.label} context={r.context} size="lg" />)}
+            </div>
+            <div style={{ background: "#F3EFE3", borderRadius: 8, padding: "4mm" }}>
+              <div style={{ fontSize: "8.5pt", fontWeight: 700, color: CORAL, marginBottom: "1mm" }}>{t.global.qoo10.signalLabel}</div>
+              <div style={{ fontSize: "10.5pt", color: NAVY }}>{t.global.qoo10.signalCopy}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* PAGE 07 — Experiment & Measurement / AI Creative, heading + 2-col card, ONE page */}
+      <div className="print-page" style={{ padding: "7mm 9mm" }}>
+        <CompactPrintHeading eyebrow={t.experiment.eyebrow} title={t.experiment.title} sub={t.experiment.sub} />
+        <div className="print-page-body">
+          <div className="print-card" style={{ background: CARD, border: "1px solid #EAE5D8", borderRadius: 12, padding: "5mm 6mm", height: "100%", display: "grid", gridTemplateColumns: "36% 64%", gap: "6mm", minHeight: 0 }}>
+            <div style={{ display: "flex", flexDirection: "column", minHeight: 0 }}>
+              <PrintFlowRow items={t.experiment.flow} />
+              <div style={{ display: "flex", flexWrap: "wrap", gap: "2mm", marginBottom: "3mm" }}>
+                {t.experiment.result.map((r, i) => <PrintStat key={i} value={r.value} label={r.label} context={r.context} size="lg" />)}
+              </div>
+              <div style={{ fontSize: "9.5pt", color: MUTED, borderTop: "1px solid #EDE8DA", paddingTop: "2mm", marginTop: "2mm" }}>
+                <span style={{ fontWeight: 700, color: CORAL }}>MY ROLE  </span>{t.experiment.contribution}
+              </div>
+              <div style={{ fontSize: "8.5pt", color: "#A8A08C", marginTop: "1.5mm" }}>
+                <span style={{ fontWeight: 700, color: NAVY_SOFT }}>TOOLS  </span>{t.experiment.tools}
+              </div>
+            </div>
+            <div style={{ minHeight: 0 }}>
+              <div style={{ fontSize: "8.5pt", fontWeight: 700, color: CORAL, fontFamily: "'IBM Plex Mono', monospace", marginBottom: "1.5mm" }}>ACTUAL CREATIVE</div>
+              <PrintEvidenceGrid images={t.experiment.creative.slice(0, 4)} cols={2} thumbH="19mm" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* PAGE 08 — Selected Agency: Hanyul + Bodyluv, side by side, complete */}
+      <div className="print-page" style={{ padding: "7mm 9mm" }}>
+        <CompactPrintHeading eyebrow={t.agency.eyebrow} title={t.agency.title} />
+        <div className="print-page-body print-two-col" style={{ height: "100%" }}>
+          <PrintCase tag={t.agency.cases[0].tag} title={t.agency.cases[0].title} context={t.agency.cases[0].client} actions={t.agency.cases[0].changes} flow={t.agency.cases[0].flow} result={t.agency.cases[0].result} />
+          <PrintCase tag={t.agency.cases[1].tag} title={t.agency.cases[1].title} context={t.agency.cases[1].client} actions={t.agency.cases[1].changes} flow={t.agency.cases[1].flow} result={t.agency.cases[1].result} secondary={t.agency.cases[1].secondary} />
+        </div>
+      </div>
+
+      {/* PAGE 09 — Maeil (top) + Additional Experience (bottom), complete */}
+      <div className="print-page" style={{ padding: "7mm 9mm" }}>
+        <div className="print-page-body" style={{ display: "flex", flexDirection: "column", minHeight: 0 }}>
+          <div style={{ flex: "0 1 auto", marginBottom: "4mm" }}>
+            <PrintCase tag={t.agency.cases[2].tag} title={t.agency.cases[2].title} context={t.agency.cases[2].client} actions={t.agency.cases[2].changes} flow={t.agency.cases[2].flow} result={t.agency.cases[2].result} />
+          </div>
+          <div className="print-card" style={{ flex: "1 1 auto", minHeight: 0, background: CARD, border: "1px solid #EAE5D8", borderRadius: 12, padding: "5mm 6mm", overflow: "hidden", display: "flex", flexDirection: "column", justifyContent: "center" }}>
+            <div style={{ fontSize: "10pt", fontWeight: 700, color: NAVY_SOFT, fontFamily: "'IBM Plex Mono', monospace", marginBottom: "3mm" }}>{t.agency.additionalTitle}</div>
+            <div style={{ borderRadius: 8, overflow: "hidden", background: "#FAF7EF" }}>
+              {t.agency.additional.map((item, i) => (
+                <div key={i} style={{ display: "flex", flexWrap: "wrap", gap: "4mm", padding: "4.5mm 5mm", fontSize: "11pt", borderTop: i > 0 ? "1px solid #EDE8DA" : "none" }}>
+                  <span style={{ fontWeight: 700, color: NAVY, minWidth: "44mm" }}>{item.client}</span>
+                  <span style={{ color: CORAL }}>{item.result}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* PAGE 10 — Startup (42%) + Career (58%), side by side, complete.
+          Startup's long KPI values ("1,106% / 949%", "Sold out in 2 weeks")
+          go through PrintStat, which auto-wraps instead of overflowing into
+          the Career column (items 17–18). */}
+      <div className="print-page" style={{ padding: "7mm 9mm" }}>
+        <div className="print-page-body print-split-4258" style={{ height: "100%" }}>
+          <div style={{ minWidth: 0, display: "flex", flexDirection: "column", minHeight: 0 }}>
+            <CompactPrintHeading eyebrow={t.startup.eyebrow} title={t.startup.title} />
+            <div className="print-card" style={{ background: CARD, border: "1px solid #EAE5D8", borderRadius: 12, padding: "4mm 5mm", flex: "1 1 auto", minHeight: 0, display: "flex", flexDirection: "column" }}>
+              <div style={{ fontSize: "9.5pt", color: MUTED, marginBottom: "2mm" }}>{t.startup.brand}</div>
+              <PrintFlowRow items={t.startup.flow} />
+              <div style={{ display: "flex", flexWrap: "wrap", gap: "2mm", marginBottom: "1mm", minWidth: 0 }}>
+                {t.startup.result.map((r, i) => <PrintStat key={i} value={r.value} label={r.label} />)}
+              </div>
+              <div style={{ fontSize: "9.5pt", color: MUTED, marginTop: "1.5mm" }}>{t.startup.secondary}</div>
               {t.startup.articles && (
-                <div style={{ display: "flex", flexWrap: "wrap", gap: "2mm", marginTop: "3mm", paddingTop: "3mm", borderTop: "1px solid #EDE8DA" }}>
+                <div style={{ display: "flex", flexWrap: "wrap", gap: "2mm", marginTop: "2.5mm", paddingTop: "2.5mm", borderTop: "1px solid #EDE8DA" }}>
                   {t.startup.articles.map((a, i) => (
-                    <a key={i} href={a.url} target="_blank" rel="noopener noreferrer" className="print-role" style={{ display: "inline-flex", alignItems: "center", gap: "1.5mm", background: "#F3EFE3", color: NAVY, textDecoration: "none", borderRadius: 999, padding: "1.5mm 3mm" }}>
+                    <a key={i} href={a.url} target="_blank" rel="noopener noreferrer" style={{ display: "inline-flex", alignItems: "center", gap: "1.5mm", fontSize: "9pt", background: "#F3EFE3", color: NAVY, textDecoration: "none", borderRadius: 999, padding: "1.5mm 3mm" }}>
                       {a.label} <span style={{ color: MUTED, fontWeight: 400 }}>· {a.title}</span> <span style={{ color: CORAL }}>↗</span>
                     </a>
                   ))}
@@ -1184,17 +1377,17 @@ function PrintPortfolio({ lang, t }) {
               )}
             </div>
           </div>
-          <div>
-            <PrintPortfolioHeading eyebrow="CAREER" title={t.career.title} />
-            <div className="rounded-2xl card-print" style={{ overflow: "hidden", background: "#FAF7EF" }}>
+          <div style={{ minWidth: 0, display: "flex", flexDirection: "column", minHeight: 0 }}>
+            <CompactPrintHeading eyebrow="CAREER" title={t.career.title} />
+            <div className="print-card" style={{ borderRadius: 12, overflow: "hidden", background: "#FAF7EF", flex: "1 1 auto", minHeight: 0 }}>
               {t.career.timeline.map((c, i) => (
                 <div key={i} style={{ padding: "3.5mm 4mm", borderTop: i > 0 ? "1px solid #EDE8DA" : "none" }}>
                   <div style={{ display: "flex", alignItems: "center", gap: "2mm", marginBottom: "0.5mm" }}>
-                    <span className="print-eyebrow font-semibold" style={{ color: CORAL, fontFamily: "'IBM Plex Mono', monospace" }}>{c.period}</span>
-                    {c.current && <Tag tone="coral">{currentLabel}</Tag>}
+                    <span style={{ fontSize: "9.5pt", fontWeight: 700, color: CORAL, fontFamily: "'IBM Plex Mono', monospace" }}>{c.period}</span>
+                    {c.current && <span style={{ fontSize: "8pt", fontWeight: 700, color: "white", background: CORAL, borderRadius: 999, padding: "0.5mm 2mm" }}>{currentLabel}</span>}
                   </div>
-                  <div className="print-role font-semibold" style={{ color: NAVY }}>{c.org} <span style={{ color: MUTED, fontWeight: 400 }}>· {c.role}</span></div>
-                  {c.detail && <div className="print-footnote" style={{ color: "#9C9585", fontStyle: "italic", marginTop: "0.5mm" }}>{c.detail}</div>}
+                  <div style={{ fontSize: "10.5pt", fontWeight: 700, color: NAVY }}>{c.org} <span style={{ color: MUTED, fontWeight: 400 }}>· {c.role}</span></div>
+                  {c.detail && <div style={{ fontSize: "8.5pt", color: "#9C9585", fontStyle: "italic", marginTop: "0.5mm" }}>{c.detail}</div>}
                 </div>
               ))}
             </div>
@@ -1203,21 +1396,23 @@ function PrintPortfolio({ lang, t }) {
       </div>
 
       {/* PAGE 11 — Contact (last page: no trailing page break) */}
-      <div className="print-page">
-        <div className="rounded-2xl card-print" style={{ background: NAVY, padding: "10mm 12mm", position: "relative", overflow: "hidden" }}>
-          <div className="print-eyebrow font-semibold" style={{ color: CORAL_SOFT, fontFamily: "'IBM Plex Mono', monospace", letterSpacing: "0.08em", marginBottom: "4mm" }}>PERFORMANCE & GROWTH MARKETER</div>
-          <h2 className="print-section-title font-semibold" style={{ color: "white", margin: "0 0 6mm 0" }}>{t.contact.line}<br />{t.contact.lineBreak}</h2>
-          <div style={{ display: "flex", flexWrap: "wrap", gap: "6mm" }}>
-            <a href="mailto:heejimoon96@gmail.com" className="print-body" style={{ color: "rgba(255,255,255,0.85)", textDecoration: "none", display: "flex", alignItems: "center", gap: "2mm" }}>
-              <Mail size={13} color={CORAL_SOFT} />heejimoon96@gmail.com
-            </a>
-            <a href="https://www.linkedin.com/in/heeji-moon-76000a179/" target="_blank" rel="noopener noreferrer" className="print-body" style={{ color: "rgba(255,255,255,0.85)", textDecoration: "none", display: "flex", alignItems: "center", gap: "2mm" }}>
-              <Linkedin size={13} color={CORAL_SOFT} />linkedin.com/in/heeji-moon-76000a179
-            </a>
+      <div className="print-page" style={{ padding: "7mm 9mm" }}>
+        <div className="print-page-body" style={{ display: "flex", flexDirection: "column", justifyContent: "center", minHeight: 0 }}>
+          <div style={{ background: NAVY, borderRadius: 16, padding: "10mm 12mm", position: "relative", overflow: "hidden" }}>
+            <div style={{ fontSize: "10.5pt", fontWeight: 700, color: CORAL_SOFT, fontFamily: "'IBM Plex Mono', monospace", letterSpacing: "0.08em", marginBottom: "4mm" }}>PERFORMANCE & GROWTH MARKETER</div>
+            <h2 style={{ fontSize: "21pt", fontWeight: 700, color: "white", margin: "0 0 6mm 0", lineHeight: 1.3 }}>{t.contact.line}<br />{t.contact.lineBreak}</h2>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: "6mm" }}>
+              <a href="mailto:heejimoon96@gmail.com" style={{ fontSize: "11pt", color: "rgba(255,255,255,0.85)", textDecoration: "none", display: "flex", alignItems: "center", gap: "2mm" }}>
+                <Mail size={13} color={CORAL_SOFT} />heejimoon96@gmail.com
+              </a>
+              <a href="https://www.linkedin.com/in/heeji-moon-76000a179/" target="_blank" rel="noopener noreferrer" style={{ fontSize: "11pt", color: "rgba(255,255,255,0.85)", textDecoration: "none", display: "flex", alignItems: "center", gap: "2mm" }}>
+                <Linkedin size={13} color={CORAL_SOFT} />linkedin.com/in/heeji-moon-76000a179
+              </a>
+            </div>
           </div>
-        </div>
-        <div className="print-footnote" style={{ color: "#A8A08C", textAlign: "center", marginTop: "5mm" }}>
-          Heeji MOON · Performance & Growth Marketer · heeji.vercel.app
+          <div style={{ fontSize: "8.5pt", color: "#A8A08C", textAlign: "center", marginTop: "5mm" }}>
+            Heeji MOON · Performance & Growth Marketer · heeji.vercel.app
+          </div>
         </div>
       </div>
     </div>
@@ -1267,6 +1462,29 @@ function Portfolio() {
       document.title = lang === "kr" ? "문희지 — Performance & Growth Marketer" : "Heeji MOON — Performance & Growth Marketer";
     } catch (e) { /* ignore */ }
   }, [lang]);
+
+  /* PRINT PREVIEW DEBUG MODE — ?printPreview=1 renders PrintPortfolio full-size in an
+     ordinary Chrome tab (see body.print-preview-debug rules above) so its exact page
+     boxes can be inspected and measured WITHOUT exporting a PDF. window.__printOverflowCheck()
+     reports each .print-page's scrollHeight vs clientHeight so an overflowing page is a
+     number, not a guess (items 22–23). This is diagnostic tooling, not a normal feature —
+     it does nothing unless the query param is present. */
+  React.useEffect(() => {
+    try {
+      const isDebug = new URL(window.location.href).searchParams.get("printPreview") === "1";
+      document.body.classList.toggle("print-preview-debug", isDebug);
+      window.__printOverflowCheck = () => {
+        const rows = Array.from(document.querySelectorAll(".print-page")).map((page, i) => {
+          const overflow = page.scrollHeight - page.clientHeight;
+          return { page: i + 1, clientHeight: page.clientHeight, scrollHeight: page.scrollHeight, overflow };
+        });
+        rows.forEach((r) => console.log(`PRINT PAGE ${r.page}`, "client:", r.clientHeight, "scroll:", r.scrollHeight, "overflow:", r.overflow));
+        const bad = rows.filter((r) => r.overflow > 2);
+        console.log(bad.length === 0 ? "ALL PAGES FIT (overflow <= 2px)" : `${bad.length} PAGE(S) OVERFLOW`, bad);
+        return rows;
+      };
+    } catch (e) { /* ignore */ }
+  }, []);
 
   const scrollTo = (id) => {
     setActive(id);
@@ -1320,21 +1538,36 @@ function Portfolio() {
           .print-portfolio { display: block !important; }
           .print-hide { display: none !important; }
           .print-only { display: block !important; }
-          img:not(.evidence-thumb) { max-width: 100% !important; height: auto !important; object-fit: contain !important; }
-          .evidence-thumb-wrap { background: #FAF7EF !important; }
-          .evidence-thumb { max-width: 100% !important; max-height: 100px !important; width: 100% !important; height: 100px !important; object-fit: contain !important; }
-          .evidence-caption { white-space: nowrap !important; overflow: hidden !important; text-overflow: ellipsis !important; }
+          /* Legacy web-DOM evidence-gallery normalization — WEB-ONLY (scoped to
+             .web-portfolio, which is itself hidden in print). Left unscoped, the bare
+             "img:not(.evidence-thumb)" selector below matched PrintPortfolio's own
+             evidence images too and forced height:auto !important on them, stretching
+             each thumbnail to its natural aspect ratio (900×2175px source → ~135mm
+             tall) instead of the fixed 13–19mm print height — this was the real cause
+             of PAGE 04 (CRO) and PAGE 07 (AI) overflowing by 145px/280px (root-caused
+             via Chromium print-media emulation + getBoundingClientRect, not guessed). */
+          .web-portfolio img:not(.evidence-thumb) { max-width: 100% !important; height: auto !important; object-fit: contain !important; }
+          .web-portfolio .evidence-thumb-wrap { background: #FAF7EF !important; }
+          .web-portfolio .evidence-thumb { max-width: 100% !important; max-height: 100px !important; width: 100% !important; height: 100px !important; object-fit: contain !important; }
+          .web-portfolio .evidence-caption { white-space: nowrap !important; overflow: hidden !important; text-overflow: ellipsis !important; }
           h1, h2, h3, h4, .avoid-break-after { break-after: avoid; page-break-after: avoid; }
           .print-heading-group { break-after: avoid !important; page-break-after: avoid !important; }
           p, li { orphans: 3; widows: 3; }
-          .card-print, figure { break-inside: avoid; page-break-inside: avoid; }
-          /* Readability > page count: padding/margins are generous, not compressed to
-             force a page-count target. Cards and sections are allowed to breathe — empty
-             page space is fixed by making content bigger, never by shrinking margins. */
-          .p-5, .p-6, .p-7, .p-8, .md\\:p-6, .md\\:p-7, .md\\:p-8 { padding: 7mm !important; }
-          .mb-8, .mb-6 { margin-bottom: 4mm !important; }
-          .mb-5, .mb-3 { margin-bottom: 3mm !important; }
-          .gap-5, .gap-3, .gap-4 { gap: 4mm !important; }
+          figure { break-inside: avoid; page-break-inside: avoid; }
+          /* .card-print's break-inside:avoid is WEB-DOM only (scoped to .web-portfolio) —
+             on a card taller than one A4 page, Chrome ignores break-inside:avoid anyway and
+             fragments it unpredictably. PrintPortfolio owns its own fixed-height .print-page
+             canvas instead, so its cards never need to gamble on that rule. See .print-card
+             below for PrintPortfolio's own (much narrower) break-inside safety net. */
+          .web-portfolio .card-print { break-inside: avoid; page-break-inside: avoid; }
+          /* Readability > page count: padding/margins are generous, not compressed to force a
+             page-count target — WEB-DOM only. PrintPortfolio's own components carry their own
+             mm-unit padding directly, so this global override never touches them (item 19). */
+          .web-portfolio .p-5, .web-portfolio .p-6, .web-portfolio .p-7, .web-portfolio .p-8,
+          .web-portfolio .md\\:p-6, .web-portfolio .md\\:p-7, .web-portfolio .md\\:p-8 { padding: 7mm !important; }
+          .web-portfolio .mb-8, .web-portfolio .mb-6 { margin-bottom: 4mm !important; }
+          .web-portfolio .mb-5, .web-portfolio .mb-3 { margin-bottom: 3mm !important; }
+          .web-portfolio .gap-5, .web-portfolio .gap-3, .web-portfolio .gap-4 { gap: 4mm !important; }
 
           /* ---- Print font sizes (pt) — nothing below 9.5pt, never shrunk to hit a
              page-count target. English pages use the SAME minimums as Korean. ---- */
@@ -1376,19 +1609,68 @@ function Portfolio() {
 
           /* Generic print-only layout helpers — used across multiple PrintPortfolio pages
              (D2C+Olive Young, CRM+CRO, Shopee+Qoo10, Hanyul+Bodyluv). Two equal columns,
-             stretched to the same height, never split across a page break. */
-          .print-two-col { display: grid !important; grid-template-columns: 1fr 1fr !important; gap: 7mm !important; align-items: stretch !important; }
-          .print-two-col > .card-print { height: 100% !important; }
+             stretched to the same height inside the fixed-height .print-page canvas. */
+          .print-two-col { display: grid !important; grid-template-columns: 1fr 1fr !important; gap: 7mm !important; align-items: stretch !important; min-height: 0 !important; }
+          .print-two-col > * { min-height: 0 !important; }
           /* Startup (42%) + Career (58%) share one page, side by side. */
-          .print-split-4258 { display: grid !important; grid-template-columns: 42% 58% !important; gap: 8mm !important; align-items: start !important; }
+          .print-split-4258 { display: grid !important; grid-template-columns: 42% 58% !important; gap: 8mm !important; align-items: start !important; min-height: 0 !important; }
+          /* PrintPortfolio's own (narrow) break-inside safety net — used on individual case
+             cards only, never globally. The real guarantee is the fixed-height .print-page
+             canvas below; this is a secondary net, not the mechanism (item 20). */
+          .print-card { break-inside: avoid; page-break-inside: avoid; }
 
-          /* Each .print-page IS a page: it defines the boundary directly instead of relying
-             on CSS fragmentation to guess where a heading or card should land. Blank pages
-             are prevented structurally — a heading and its content are always written into
-             the SAME .print-page wrapper, never split across two. */
-          .print-page { width: 100%; box-sizing: border-box; break-after: page; page-break-after: always; }
+          /* CRITICAL FIX — .print-page is a fixed CANVAS (like a slide), not a container that
+             grows to fit its content. A4 landscape is 297mm × 210mm; at the @page margin of
+             8mm top/bottom and 10mm left/right, the printable area is 277mm × 194mm. Content
+             is composed to FIT that canvas, not the other way around (item 3–4). flex column
+             lets a heading take its natural height and the content area fill exactly what's
+             left via flex:1/min-height:0, so a heading can never orphan the content below it
+             onto a different page — they physically cannot be on different pages, because
+             they're both inside the same fixed box. */
+          .print-page {
+            width: 277mm;
+            height: 194mm;
+            max-height: 194mm;
+            margin: 0 auto;
+            box-sizing: border-box;
+            break-after: page;
+            page-break-after: always;
+            break-inside: avoid;
+            page-break-inside: avoid;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+          }
           .print-page:last-child { break-after: auto; page-break-after: auto; }
+          .print-page-heading { flex: 0 0 auto; }
+          .print-page-body { flex: 1 1 auto; min-height: 0; }
         }
+
+        /* ============ PRINT PREVIEW DEBUG MODE (?printPreview=1) ============ */
+        /* Lets PrintPortfolio be inspected and measured in an ordinary Chrome tab — no PDF
+           export needed — by applying the SAME fixed-canvas rules outside of @media print.
+           Each .print-page gets a red outline so an overflowing page is visible at a glance,
+           and window.__printOverflowCheck() (defined in Portfolio()) reports exact numbers.
+           This is how PAGE 03/04/10 fragmentation was actually found and fixed, not guessed
+           at from source code alone (items 22–23). */
+        body.print-preview-debug .web-portfolio { display: none !important; }
+        body.print-preview-debug .print-portfolio { display: block !important; }
+        body.print-preview-debug .print-page {
+          width: 277mm;
+          height: 194mm;
+          max-height: 194mm;
+          margin: 6mm auto;
+          box-sizing: border-box;
+          display: flex;
+          flex-direction: column;
+          outline: 1px solid red;
+          overflow: hidden;
+          background: white;
+        }
+        body.print-preview-debug .print-page-heading { flex: 0 0 auto; }
+        body.print-preview-debug .print-page-body { flex: 1 1 auto; min-height: 0; }
+        body.print-preview-debug .print-only { display: block !important; }
+        body.print-preview-debug .print-hide { display: none !important; }
       `}</style>
 
       <Lightbox image={lightbox} onClose={() => setLightbox(null)} />

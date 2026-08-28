@@ -190,7 +190,7 @@ const LANG_CONTENT = {
             "리타겟팅·기존 고객 비중을 늘려 효율을 계속 조정",
           ],
           flow: ["Media ROAS", "GA4 Revenue", "Cut / Scale", "Budget Reallocation"],
-          compare: { title: "자사몰 ROAS · Channel Trend", beforeLabel: "2024", beforeIndex: 100, afterLabel: "2025", afterIndex: 204, caption: "2024 연간 → 2025 연간 · 자사몰 채널 ROAS 기준 (Supporting KPI)", footnote: "* 2025.07 합류 — 2024년 전체를 개인 성과로 단정하지 않으며, 매체 ROAS 대비 GA4 실매출 기여도를 예산 판단 기준에 추가한 방향성 지표로 사용합니다." },
+          compare: { title: "D2C ROAS · CHANNEL TREND", beforeLabel: "2024", beforeIndex: 100, afterLabel: "2025", afterIndex: 204, caption: "2024 → 2025 연간 채널 추이 · 2025.07 합류" },
           result: [{ label: "자사몰 ROAS (Index)", value: "+104%", context: "Channel Trend" }],
           role: "매체 ROAS 대비 GA4 실매출 대조 분석 · 예산 재배분 의사결정 · 리타겟팅 비중 조정",
         },
@@ -205,11 +205,11 @@ const LANG_CONTENT = {
             "세일 기간에는 평시에 쌓아둔 관심 고객을 다시 공략하고, 전환 가능성이 높은 타겟에 예산을 집중",
           ],
           flowSteps: [
-            { step: "ALWAYS-ON", desc: "저비용 Traffic 확보" },
-            { step: "RETARGETING POOL", desc: "관심 고객 모수 축적" },
-            { step: "PRE-SALE", desc: "세일 전 관심 고객 확대" },
-            { step: "SALE", desc: "Retargeting + Conversion Ads · 구매 가능 고객에 예산 집중" },
-            { step: "POST-SALE", desc: "잔여 Retargeting 추가 전환" },
+            { step: "평시", desc: "저비용 유입 확보" },
+            { step: "리타겟팅 모수", desc: "관심 고객 축적" },
+            { step: "세일 전", desc: "관심 고객 재공략" },
+            { step: "세일", desc: "리타겟팅 + 전환 예산 집중" },
+            { step: "세일 후", desc: "잔여 고객 추가 전환" },
           ],
           resultHeading: "OLIVE YOUNG",
           result: [{ label: "ONLINE SALES", value: "+316%", context: "전년 동월 대비" }],
@@ -373,7 +373,7 @@ const LANG_CONTENT = {
       secondary: "연세대학교 창업경진대회 최우수상",
       articles: [
         { label: "관련 기사 보기", title: "한경 JOB&JOY · 단, 순한 창업 인터뷰", url: "https://magazine.hankyung.com/job-joy/article/202102164931d" },
-        { label: "제품·펀딩 프로젝트 보기", title: "Wadiz 펀딩 페이지", url: "https://bit.ly/3RMQnX4" },
+        { label: "제품·펀딩 프로젝트 보기", title: "Wadiz 펀딩 페이지", url: "https://www.wadiz.io/web/campaign/detail/42542" },
       ],
     },
     career: {
@@ -446,26 +446,26 @@ const LANG_CONTENT = {
             "Kept expanding retargeting and existing-customer share as efficiency shifted",
           ],
           flow: ["Media ROAS", "GA4 Revenue", "Cut / Scale", "Budget Reallocation"],
-          compare: { title: "D2C ROAS · Channel Trend", beforeLabel: "2024", beforeIndex: 100, afterLabel: "2025", afterIndex: 204, caption: "2024 Annual → 2025 Annual · D2C Channel ROAS (Supporting KPI)", footnote: "* Joined July 2025 — this isn't framed as a full-year personal result. It's a directional trend showing GA4 revenue contribution added to the budget decision alongside media ROAS." },
+          compare: { title: "D2C ROAS · CHANNEL TREND", beforeLabel: "2024", beforeIndex: 100, afterLabel: "2025", afterIndex: 204, caption: "2024 → 2025 Annual Channel Trend · Joined Jul 2025" },
           result: [{ label: "D2C ROAS (Index)", value: "+104%", context: "Channel Trend" }],
           role: "Cross-checked media ROAS against GA4 revenue · made budget-reallocation decisions · adjusted retargeting share",
         },
         {
           id: "lever-commerce",
           tag: "OLIVE YOUNG · SALES GROWTH",
-          title: "I built the customer pool before the sale started, not just during it.",
-          challenge: "Running ads only during the sale period meant we didn't have enough returning customers to re-target once the sale actually began.",
+          title: "I built the retargeting pool before the sale, not only during it.",
+          challenge: "If we only advertised during sale periods, we had too little retargetable audience when conversion demand peaked.",
           changes: [
             "Built a low-cost, always-on retargeting pool of interested customers year-round",
             "Re-engaged that pool before each sale to expand the interested-customer base",
-            "During the sale, re-targeted the pool we'd built and concentrated budget on high-intent customers",
+            "During the sale, re-targeted the pool we'd built and concentrated budget on high-intent shoppers",
           ],
           flowSteps: [
-            { step: "ALWAYS-ON", desc: "Low-cost traffic acquisition" },
-            { step: "RETARGETING POOL", desc: "Build the interested-customer pool" },
-            { step: "PRE-SALE", desc: "Expand the pool before the sale" },
-            { step: "SALE", desc: "Retargeting + conversion ads · budget on high-intent customers" },
-            { step: "POST-SALE", desc: "Convert remaining retargeting audience" },
+            { step: "ALWAYS-ON", desc: "Acquire low-cost traffic" },
+            { step: "AUDIENCE POOL", desc: "Build retargetable audience" },
+            { step: "PRE-SALE", desc: "Re-engage and expand interest" },
+            { step: "SALE", desc: "Retarget + concentrate conversion spend" },
+            { step: "POST-SALE", desc: "Capture remaining demand" },
           ],
           resultHeading: "OLIVE YOUNG",
           result: [{ label: "ONLINE SALES", value: "+316%", context: "YoY · Same Month" }],
@@ -476,12 +476,12 @@ const LANG_CONTENT = {
         {
           id: "lever-crm",
           tag: "CRM",
-          title: "From blanket sends to CRM by customer state.",
-          challenge: "The CRM sent the same message to every customer, regardless of purchase likelihood.",
+          title: "From blanket sends to behavior-based CRM.",
+          challenge: "The same message was going to customers regardless of purchase history or intent.",
           changes: [
-            "Re-segmented customers by purchase history and behavior data",
-            "Varied messaging and channel (SMS, KakaoTalk, app push) by segment",
-            "Reviewed CVR and ROAS by segment after each send and fed it into the next target",
+            "Segmented customers by purchase history and behavior",
+            "Adjusted message and channel by segment",
+            "Used segment-level CVR and ROAS to refine the next send",
           ],
           flow: ["All Customers", "Purchase / Behavior Data", "Customer Segments", "Message / Offer"],
           result: [
@@ -490,21 +490,21 @@ const LANG_CONTENT = {
             { label: "ROAS", value: "+25.3%" },
           ],
           context: "2024 Annual → Jan–Jul 2026",
-          role: "Segmentation · messaging · operation",
+          role: "Customer segmentation · message/channel planning · performance analysis",
         },
         {
           id: "lever-cro",
           tag: "CRO",
-          title: "When traffic was fine but sales weren't, I looked at the landing page, not the ads.",
+          title: "When traffic was healthy but sales lagged, I looked at the landing page — not the ads.",
           challenge: "Ad traffic to the product page was solid, but conversion from that traffic was low.",
           changes: [
-            "Reviewed VOC and on-page customer behavior",
-            "Moved the real-review section to the top and added an exit-prevention banner",
-            "Compared CVR before/after, then expanded to another product line (GpDerm)",
+            "Reviewed VOC and on-page behavior",
+            "Moved real reviews higher on the page and added an exit-intent banner",
+            "Compared CVR before/after and expanded the approach to GpDerm",
           ],
           flow: ["Traffic", "Low CVR", "VOC / Behavior", "Page Change"],
           result: [{ label: "CVR", value: "+20%" }],
-          role: "Traffic and conversion analysis · fix design",
+          role: "Traffic & conversion analysis · CRO planning",
           evidence: [
             { src: "IMG_INNERLAB_LP", caption: "InnerLab Hold-it MAD · Exit-prevention banner" },
             { src: "IMG_ZIPIDERM_REVIEW", caption: "GpDerm · Same strategy expanded" },
@@ -514,8 +514,8 @@ const LANG_CONTENT = {
     },
     global: {
       eyebrow: "GLOBAL PERFORMANCE & COMMERCE",
-      title: "I designed a different conversion structure for each market and channel.",
-      sub: "Amazon in the US, Shopee in Singapore and Vietnam, Qoo10 in Japan — I ran the ad funnel and actual e-commerce sales together.",
+      title: "I tailored the conversion structure to each market and commerce platform.",
+      sub: "Across Amazon US, Shopee SG/VN, and Qoo10 Japan, I managed media against actual e-commerce sales, not platform metrics alone.",
       amazon: {
         tag: "AMAZON US · GLOBAL HERO",
         title: "Instead of spending more, I changed the path to purchase.",
@@ -537,7 +537,7 @@ const LANG_CONTENT = {
       },
       shopee: {
         tag: "SHOPEE · SUPPORTING",
-        title: "From conversion-only to reach plus conversion.",
+        title: "From conversion-only to reach + conversion.",
         flow: ["Conversion Only", "Reach + Conversion"],
         result: [
           { label: "SPEND", value: "-24%" },
@@ -549,7 +549,7 @@ const LANG_CONTENT = {
       },
       qoo10: {
         tag: "QOO10 · SUPPORTING",
-        title: "Managed product, search, in-app media, and exposure together.",
+        title: "Managed product, search, in-app media, and marketplace exposure together.",
         result: [{ label: "TOTAL SALES", value: "+176.58%", context: "2025 Aug → Nov" }],
         signalLabel: "MARKETPLACE CUSTOMER SIGNAL",
         signalCopy: "Returning customers 43 → 383",
@@ -557,8 +557,8 @@ const LANG_CONTENT = {
     },
     experiment: {
       eyebrow: "EXPERIMENT & MEASUREMENT",
-      title: "Same product, media, and week — I only changed the creative angle.",
-      sub: "Creative testing and measurement work, beyond media metrics alone.",
+      title: "Same product. Same media. Same week. Only the creative angle changed.",
+      sub: "I used controlled creative tests to isolate creative impact from media conditions.",
       flow: ["Insight", "Creative Hypothesis", "Variants", "Media Test", "Learning"],
       result: [{ label: "CTR", value: "+116%", context: "Index 100 → 216 · Same Product · Media · Week" }],
       contribution: "Concept · creative direction · production · performance analysis",
@@ -578,7 +578,7 @@ const LANG_CONTENT = {
       cases: [
         {
           tag: "HANYUL",
-          title: "Turned 1,000 customer reviews into an ad hypothesis.",
+          title: "Turned ~1,000 customer reviews into creative hypotheses.",
           client: "Amorepacific Hanyul",
           changes: ["Analyzed ~1,000 Olive Young reviews for recurring keywords", "Turned seasonal/skin-concern reviews into ad messaging", "Built a VOC → hypothesis → creative test process"],
           flow: ["1,000 Reviews", "VOC", "Creative Hypothesis"],
@@ -589,7 +589,7 @@ const LANG_CONTENT = {
         },
         {
           tag: "BODYLUV",
-          title: "Ran branding and conversion together.",
+          title: "Connected brand-building with conversion campaigns.",
           client: "Blank Corporation Bodyluv",
           changes: ["Grew new reach with a branding campaign", "Retargeted interested users with performance campaigns", "Measured brand impact with Google Brand Lift Survey"],
           flow: ["Branding", "Performance"],
@@ -602,11 +602,11 @@ const LANG_CONTENT = {
         },
         {
           tag: "MAEIL",
-          title: "Attached paid media to live commerce to grow sales.",
+          title: "Connected paid media to live commerce to scale sales.",
           client: "Maeil Dairies",
           changes: ["Proposed and ran new Toss Live Shopping ads", "Connected paid media to Naver LIVE Shopping"],
           flow: ["Live Commerce", "Paid Media"],
-          result: [{ label: "SALES", value: "×4", context: "Same product/bundle basis" }],
+          result: [{ label: "SALES", value: "×4", context: "Same product and offer configuration" }],
         },
       ],
       additionalTitle: "ADDITIONAL EXPERIENCE",
@@ -619,7 +619,7 @@ const LANG_CONTENT = {
     },
     startup: {
       eyebrow: "0→1 EXPERIENCE",
-      title: "I started from a customer problem and ran product through sales myself.",
+      title: "I started with a customer problem and built the path from product planning to sales.",
       brand: "Dan Soonhan (skincare brand)",
       flow: ["FGI / Survey", "Product Planning", "ODM", "Brand / PDP", "Marketing"],
       result: [
@@ -629,7 +629,7 @@ const LANG_CONTENT = {
       secondary: "Grand Prize, Yonsei University Startup Competition",
       articles: [
         { label: "Read Article", title: "Hankyung JOB&JOY · Founder Interview", url: "https://magazine.hankyung.com/job-joy/article/202102164931d" },
-        { label: "View Funding Project", title: "Wadiz Funding Project", url: "https://bit.ly/3RMQnX4" },
+        { label: "View Funding Project", title: "Wadiz Funding Project", url: "https://www.wadiz.io/web/campaign/detail/42542" },
       ],
     },
     career: {
@@ -664,47 +664,47 @@ function LanguageSwitcher({ lang, setLang, dark = false }) {
   );
 }
 
-/* RecruiterActions — compact web-only utility row (PDF download / print / LinkedIn) so a
-   recruiter can go from reading the page straight to a PDF, a printout, or the LinkedIn
-   profile without hunting for a link. Intentionally smaller than the hero CTA — this is
-   utility chrome, not the headline. Hidden entirely in print via .recruiter-actions. */
-function RecruiterActions({ lang, layout = "row" }) {
-  const pdfLabel = lang === "kr" ? "PDF 다운로드" : "Download PDF";
-  const printLabel = lang === "kr" ? "인쇄" : "Print";
-  const base = { color: "rgba(255,255,255,0.75)", border: "1px solid rgba(255,255,255,0.18)" };
-  const itemClass = layout === "row"
-    ? "inline-flex items-center gap-1.5 text-[11px] font-medium px-2.5 py-1.5 rounded-lg hover:text-white hover:border-white/40 focus-visible:outline focus-visible:outline-2 transition-colors"
-    : "flex items-center gap-2 text-sm px-4 py-2.5 hover:text-white transition-colors";
+/* PrintButton — the only web-only utility action left after the FINAL PDF COMPATIBILITY
+   REBUILD: PDF download and a sidebar LinkedIn link were removed (LinkedIn already lives,
+   clickable, in Contact — no need to duplicate it in the sidebar chrome). window.print()
+   only; no new tab, no PDF-generation script. Hidden in print via .no-print. */
+function PrintButton({ lang, full }) {
+  const label = lang === "kr" ? "인쇄" : "Print";
   return (
-    <div className={layout === "row" ? "recruiter-actions flex items-center gap-1.5" : "recruiter-actions flex flex-col"}>
-      <a
-        href="/files/Heeji_Moon_Performance_Growth_Portfolio.pdf"
-        download
-        className={itemClass}
-        style={layout === "row" ? { ...base, textDecoration: "none", outlineColor: CORAL_SOFT } : { color: "rgba(255,255,255,0.8)", textDecoration: "none" }}
-        aria-label={lang === "kr" ? "포트폴리오 PDF 다운로드" : "Download portfolio PDF"}
-      >
-        {pdfLabel}
-      </a>
-      <button
-        type="button"
-        onClick={() => window.print()}
-        className={itemClass}
-        style={layout === "row" ? { ...base, outlineColor: CORAL_SOFT } : { color: "rgba(255,255,255,0.8)" }}
-        aria-label={lang === "kr" ? "포트폴리오 인쇄" : "Print portfolio"}
-      >
-        {printLabel}
-      </button>
-      <a
-        href="https://www.linkedin.com/in/heeji-moon-76000a179/"
-        target="_blank"
-        rel="noopener noreferrer"
-        className={itemClass}
-        style={layout === "row" ? { ...base, textDecoration: "none", outlineColor: CORAL_SOFT } : { color: "rgba(255,255,255,0.8)", textDecoration: "none" }}
-        aria-label={lang === "kr" ? "LinkedIn 프로필 열기" : "Open LinkedIn profile"}
-      >
-        <Linkedin size={12} />{layout === "row" ? "" : "LinkedIn"}
-      </a>
+    <button
+      type="button"
+      onClick={() => window.print()}
+      className={`no-print flex items-center justify-center gap-1.5 font-semibold rounded-lg border transition-colors hover:text-white hover:border-white/40 focus-visible:outline focus-visible:outline-2 ${full ? "w-full" : ""}`}
+      style={{ minHeight: 35, fontSize: 12.5, color: "rgba(255,255,255,0.8)", borderColor: "rgba(255,255,255,0.18)", background: "transparent", outlineColor: CORAL_SOFT }}
+      aria-label={lang === "kr" ? "포트폴리오 인쇄" : "Print portfolio"}
+    >
+      {label}
+    </button>
+  );
+}
+
+/* SidebarUtility — Desktop-only KR/ENG (2-col) + Print (full-width) block. Replaces the
+   old LanguageSwitcher + RecruiterActions row, which crowded PDF/Print/LinkedIn into one
+   cramped line. */
+function SidebarUtility({ lang, setLang }) {
+  const btn = (isActive) => ({
+    minHeight: 35,
+    fontSize: 12.5,
+    borderRadius: 8,
+    border: `1px solid ${isActive ? "rgba(225,88,63,0.45)" : "rgba(255,255,255,0.18)"}`,
+    background: isActive ? "rgba(225,88,63,0.15)" : "transparent",
+    color: isActive ? "white" : "rgba(255,255,255,0.55)",
+    fontWeight: 700,
+  });
+  return (
+    <div className="mt-4">
+      <div className="grid grid-cols-2 gap-2">
+        <button type="button" onClick={() => setLang("kr")} className="focus-visible:outline focus-visible:outline-2 transition-colors" style={{ ...btn(lang === "kr"), outlineColor: CORAL_SOFT }}>KR</button>
+        <button type="button" onClick={() => setLang("en")} className="focus-visible:outline focus-visible:outline-2 transition-colors" style={{ ...btn(lang === "en"), outlineColor: CORAL_SOFT }}>ENG</button>
+      </div>
+      <div className="mt-2">
+        <PrintButton lang={lang} full />
+      </div>
     </div>
   );
 }
@@ -971,6 +971,260 @@ function GrowthLever({ data, id, printChapter }) {
 }
 
 /* ---------------------------------------------------------------------- */
+/*  PrintPortfolio — a fully separate PDF/paper layout (FINAL PDF           */
+/*  COMPATIBILITY REBUILD). It shares LANG_CONTENT with the web Portfolio   */
+/*  but NOT its DOM: every page is an explicit .print-page wrapper, so a    */
+/*  page's boundary is a real DOM boundary, never a CSS fragmentation       */
+/*  guess. Heading + content for a story are always written into the SAME  */
+/*  .print-page — never split so a heading alone lands on the prior page.  */
+/* ---------------------------------------------------------------------- */
+function PrintPortfolioHeading({ eyebrow, title, sub }) {
+  return (
+    <div className="mb-4">
+      <div className="print-eyebrow font-semibold" style={{ color: CORAL, fontFamily: "'IBM Plex Mono', monospace", letterSpacing: "0.06em" }}>{eyebrow}</div>
+      <h2 className="print-section-title font-semibold" style={{ color: NAVY, fontFamily: "'Space Grotesk', sans-serif", margin: "2mm 0" }}>{title}</h2>
+      {sub && <p className="print-body" style={{ color: MUTED, margin: 0 }}>{sub}</p>}
+    </div>
+  );
+}
+
+function PrintPortfolio({ lang, t }) {
+  const currentLabel = lang === "kr" ? "현재" : "Current";
+  return (
+    <div>
+      {/* PAGE 01 — Hero / Current Role / Scope / Snapshot */}
+      <div className="print-page">
+        <div className="print-eyebrow font-semibold" style={{ color: CORAL, fontFamily: "'IBM Plex Mono', monospace", letterSpacing: "0.08em", marginBottom: "3mm" }}>{t.hero.eyebrow}</div>
+        <h1 className="print-hero-title font-semibold" style={{ color: NAVY, fontFamily: "'Space Grotesk', sans-serif", margin: "0 0 3mm 0" }}>
+          {t.hero.title1} <span style={{ color: CORAL }}>{t.hero.titleHighlight}</span>{t.hero.title2}
+        </h1>
+        <p className="print-body" style={{ color: INK, maxWidth: "80%", margin: "0 0 4mm 0" }}>{t.hero.sub}</p>
+
+        <div className="rounded-xl" style={{ background: NAVY, padding: "5mm 6mm", display: "flex", flexWrap: "wrap", alignItems: "center", gap: "4mm", marginBottom: "5mm" }}>
+          <span className="print-footnote font-semibold" style={{ color: NAVY, background: CORAL_SOFT, padding: "1mm 2.5mm", borderRadius: 6 }}>{t.currentRole.tag}</span>
+          <span className="print-role font-semibold" style={{ color: "white" }}>{t.currentRole.org}</span>
+          <span className="print-role" style={{ color: "rgba(255,255,255,0.75)" }}>{t.currentRole.role}</span>
+          <span className="print-footnote" style={{ color: "rgba(255,255,255,0.55)", marginLeft: "auto" }}>{t.currentRole.note}</span>
+        </div>
+
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "4mm", marginBottom: "6mm" }}>
+          {t.scope.rows.map((r, i) => (
+            <div key={i} className="rounded-xl" style={{ background: "#FAF7EF", padding: "4mm 4.5mm" }}>
+              <div className="print-scope-label font-semibold" style={{ color: CORAL, fontFamily: "'IBM Plex Mono', monospace", letterSpacing: "0.04em", marginBottom: "1.5mm" }}>{r.label}</div>
+              <div className="print-scope-value" style={{ color: NAVY }}>{r.value}</div>
+            </div>
+          ))}
+        </div>
+
+        <div className="print-eyebrow font-semibold" style={{ color: CORAL, fontFamily: "'IBM Plex Mono', monospace", letterSpacing: "0.06em", marginBottom: "2mm" }}>EXPERIENCE SNAPSHOT</div>
+        <div className="rounded-xl" style={{ background: "#FAF7EF", padding: "5mm" }}>
+          {t.snapshot.categories.map((cat, i) => (
+            <div key={i} style={i > 0 ? { borderTop: "1px solid #EDE8DA", marginTop: "3mm", paddingTop: "3mm" } : {}}>
+              <div style={{ display: "flex", alignItems: "flex-start", gap: "4mm" }}>
+                <div className="print-snap-cat font-semibold" style={{ color: MUTED, fontFamily: "'IBM Plex Mono', monospace", letterSpacing: "0.04em", flexShrink: 0, width: "32mm", paddingTop: "1mm" }}>{cat.label}</div>
+                <div style={{ display: "flex", flexWrap: "wrap", gap: "2mm" }}>
+                  {cat.items.map((it, j) => (
+                    typeof it === "object" ? (
+                      <span key={j} className="print-snap-chip" style={{ background: "white", color: NAVY, border: "1px solid #EAE5D8", borderRadius: 999, padding: "1mm 3mm" }}>{it.label}<span className="print-snap-chip-sub" style={{ color: MUTED }}> · {it.sub}</span></span>
+                    ) : (
+                      <span key={j} className="print-snap-chip" style={{ background: "white", color: NAVY, border: "1px solid #EAE5D8", borderRadius: 999, padding: "1mm 3mm" }}>{it}</span>
+                    )
+                  ))}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* PAGE 02 — Selected Impact (2×2) */}
+      <div className="print-page">
+        <div className="print-eyebrow font-semibold" style={{ color: CORAL, fontFamily: "'IBM Plex Mono', monospace", letterSpacing: "0.06em", marginBottom: "4mm" }}>SELECTED IMPACT</div>
+        <div className="impact-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "6mm" }}>
+          {t.selectedImpact.map((c, i) => (
+            <div key={i} className="rounded-2xl card-print impact-card-print" style={{ background: CARD, border: "1px solid #EAE5D8" }}>
+              <div className="print-impact-name font-semibold" style={{ color: NAVY, fontFamily: "'Space Grotesk', sans-serif", marginBottom: "1.5mm" }}>{c.name}</div>
+              <div className="print-impact-kpi font-semibold" style={{ color: c.color, fontFamily: "'IBM Plex Mono', monospace" }}>{c.kpi}</div>
+              <div style={{ marginBottom: "2mm" }}><span className="print-impact-label" style={{ color: MUTED }}>{c.label}</span> <span className="print-impact-context" style={{ color: "#B9B29E" }}>· {c.context}</span></div>
+              <div className="print-impact-strategy" style={{ color: MUTED, borderTop: "1px solid #EDE8DA", paddingTop: "2mm" }}>{c.strategy}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* PAGE 03 — Current In-house Growth: D2C + Olive Young, side by side, complete */}
+      <div className="print-page">
+        <PrintPortfolioHeading eyebrow={t.inhouse.eyebrow} title={t.inhouse.title} sub={t.inhouse.sub} />
+        <div className="print-two-col">
+          <GrowthLever data={t.inhouse.levers[0]} id={`print-${t.inhouse.levers[0].id}`} />
+          <GrowthLever data={t.inhouse.levers[1]} id={`print-${t.inhouse.levers[1].id}`} />
+        </div>
+      </div>
+
+      {/* PAGE 04 — CRM + CRO, side by side, complete (incl. CRO evidence) */}
+      <div className="print-page">
+        <div className="print-two-col">
+          <GrowthLever data={t.inhouse.levers[2]} id={`print-${t.inhouse.levers[2].id}`} />
+          <GrowthLever data={t.inhouse.levers[3]} id={`print-${t.inhouse.levers[3].id}`} />
+        </div>
+      </div>
+
+      {/* PAGE 05 — Global: Amazon (hero case, alone) */}
+      <div className="print-page">
+        <PrintPortfolioHeading eyebrow={t.global.eyebrow} title={t.global.title} sub={t.global.sub} />
+        <div className="rounded-2xl card-print" style={{ background: CARD, border: "1px solid #EAE5D8", padding: "7mm" }}>
+          <div className="print-eyebrow font-semibold" style={{ color: CORAL, fontFamily: "'IBM Plex Mono', monospace", marginBottom: "1.5mm" }}>{t.global.amazon.tag}</div>
+          <h3 className="print-case-title font-semibold" style={{ color: NAVY, fontFamily: "'Space Grotesk', sans-serif", margin: "0 0 4mm 0" }}>{t.global.amazon.title}</h3>
+          <div style={{ marginBottom: "4mm" }}>{t.global.amazon.levers.map((l, i) => <LeverRow key={i} {...l} />)}</div>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: "3mm", marginBottom: "1mm" }}>
+            {t.global.amazon.result.map((r, i) => <StatChip key={i} value={r.value} label={r.label} size="lg" />)}
+          </div>
+          <div className="print-caption" style={{ color: MUTED, marginTop: "1mm" }}>{t.global.amazon.scale}</div>
+          <div className="print-caption" style={{ color: MUTED, marginTop: "1mm" }}>{t.global.amazon.caption}</div>
+          <div className="print-footnote" style={{ color: "#9C9585", fontStyle: "italic", marginTop: "2mm" }}>{t.global.amazon.footnote}</div>
+        </div>
+      </div>
+
+      {/* PAGE 06 — Global: Shopee + Qoo10, side by side, complete */}
+      <div className="print-page">
+        <div className="print-two-col">
+          <div className="rounded-2xl card-print" style={{ background: CARD, border: "1px solid #EAE5D8", padding: "6mm" }}>
+            <div className="print-eyebrow font-semibold" style={{ color: CORAL, fontFamily: "'IBM Plex Mono', monospace", marginBottom: "1.5mm" }}>{t.global.shopee.tag}</div>
+            <h3 className="print-case-title font-semibold" style={{ color: NAVY, margin: "0 0 2mm 0" }}>{t.global.shopee.title}</h3>
+            <FlowChips items={t.global.shopee.flow} />
+            <div style={{ display: "flex", flexWrap: "wrap", gap: "2mm", marginBottom: "1mm" }}>
+              {t.global.shopee.result.map((r, i) => <StatChip key={i} value={r.value} label={r.label} />)}
+            </div>
+            <div className="print-caption" style={{ color: MUTED, marginTop: "1mm" }}>{t.global.shopee.context}</div>
+          </div>
+          <div className="rounded-2xl card-print" style={{ background: CARD, border: "1px solid #EAE5D8", padding: "6mm" }}>
+            <div className="print-eyebrow font-semibold" style={{ color: CORAL, fontFamily: "'IBM Plex Mono', monospace", marginBottom: "1.5mm" }}>{t.global.qoo10.tag}</div>
+            <h3 className="print-case-title font-semibold" style={{ color: NAVY, margin: "0 0 3mm 0" }}>{t.global.qoo10.title}</h3>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: "2mm", marginBottom: "3mm" }}>
+              {t.global.qoo10.result.map((r, i) => <StatChip key={i} value={r.value} label={r.label} context={r.context} />)}
+            </div>
+            <div className="rounded-lg" style={{ background: "#F3EFE3", padding: "3mm" }}>
+              <div className="print-footnote font-semibold" style={{ color: CORAL, marginBottom: "1mm" }}>{t.global.qoo10.signalLabel}</div>
+              <div className="print-body" style={{ color: NAVY }}>{t.global.qoo10.signalCopy}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* PAGE 07 — Experiment & Measurement / AI Creative, heading + 2-col card, ONE page */}
+      <div className="print-page">
+        <PrintPortfolioHeading eyebrow={t.experiment.eyebrow} title={t.experiment.title} sub={t.experiment.sub} />
+        <div className="rounded-2xl card-print" style={{ background: CARD, border: "1px solid #EAE5D8", padding: "7mm" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "36% 64%", gap: "6mm" }}>
+            <div>
+              <FlowChips items={t.experiment.flow} />
+              <div style={{ display: "flex", flexWrap: "wrap", gap: "2mm", marginBottom: "3mm" }}>
+                {t.experiment.result.map((r, i) => <StatChip key={i} value={r.value} label={r.label} context={r.context} size="lg" />)}
+              </div>
+              <div className="print-role" style={{ color: MUTED, borderTop: "1px solid #EDE8DA", paddingTop: "3mm", marginTop: "2mm" }}>
+                <span className="print-eyebrow font-semibold" style={{ color: CORAL }}>MY ROLE  </span>{t.experiment.contribution}
+              </div>
+              <div className="print-footnote" style={{ color: "#A8A08C", marginTop: "1.5mm" }}>
+                <span className="font-semibold" style={{ color: NAVY_SOFT }}>TOOLS  </span>{t.experiment.tools}
+              </div>
+            </div>
+            <div>
+              <div className="print-eyebrow font-semibold" style={{ color: CORAL, fontFamily: "'IBM Plex Mono', monospace", marginBottom: "1.5mm" }}>ACTUAL CREATIVE</div>
+              <EvidenceGallery images={t.experiment.creative} cols={3} />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* PAGE 08 — Selected Agency: Hanyul + Bodyluv, side by side, complete */}
+      <div className="print-page">
+        <PrintPortfolioHeading eyebrow={t.agency.eyebrow} title={t.agency.title} />
+        <div className="print-two-col">
+          <GrowthLever data={t.agency.cases[0]} />
+          <GrowthLever data={t.agency.cases[1]} />
+        </div>
+      </div>
+
+      {/* PAGE 09 — Maeil (top) + Additional Experience (bottom), complete */}
+      <div className="print-page">
+        <GrowthLever data={t.agency.cases[2]} />
+        <div className="rounded-2xl card-print" style={{ marginTop: "5mm", background: CARD, border: "1px solid #EAE5D8", padding: "5mm" }}>
+          <div className="print-eyebrow font-semibold" style={{ color: NAVY_SOFT, fontFamily: "'IBM Plex Mono', monospace", marginBottom: "3mm" }}>{t.agency.additionalTitle}</div>
+          <div className="rounded-xl" style={{ overflow: "hidden", background: "#FAF7EF" }}>
+            {t.agency.additional.map((item, i) => (
+              <div key={i} className="print-caption" style={{ display: "flex", flexWrap: "wrap", gap: "3mm", padding: "3mm 4mm", borderTop: i > 0 ? "1px solid #EDE8DA" : "none" }}>
+                <span className="font-semibold" style={{ color: NAVY, minWidth: "45mm" }}>{item.client}</span>
+                <span style={{ color: CORAL }}>{item.result}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* PAGE 10 — Startup (42%) + Career (58%), side by side, complete */}
+      <div className="print-page">
+        <div className="print-split-4258">
+          <div>
+            <PrintPortfolioHeading eyebrow={t.startup.eyebrow} title={t.startup.title} />
+            <div className="rounded-2xl card-print" style={{ background: CARD, border: "1px solid #EAE5D8", padding: "6mm" }}>
+              <div className="print-role" style={{ color: MUTED, marginBottom: "3mm" }}>{t.startup.brand}</div>
+              <FlowChips items={t.startup.flow} />
+              <div style={{ display: "flex", flexWrap: "wrap", gap: "2mm", marginBottom: "1mm" }}>
+                {t.startup.result.map((r, i) => <StatChip key={i} value={r.value} label={r.label} />)}
+              </div>
+              <div className="print-role" style={{ color: MUTED, marginTop: "2mm" }}>{t.startup.secondary}</div>
+              {t.startup.articles && (
+                <div style={{ display: "flex", flexWrap: "wrap", gap: "2mm", marginTop: "3mm", paddingTop: "3mm", borderTop: "1px solid #EDE8DA" }}>
+                  {t.startup.articles.map((a, i) => (
+                    <a key={i} href={a.url} target="_blank" rel="noopener noreferrer" className="print-role" style={{ display: "inline-flex", alignItems: "center", gap: "1.5mm", background: "#F3EFE3", color: NAVY, textDecoration: "none", borderRadius: 999, padding: "1.5mm 3mm" }}>
+                      {a.label} <span style={{ color: MUTED, fontWeight: 400 }}>· {a.title}</span> <span style={{ color: CORAL }}>↗</span>
+                    </a>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+          <div>
+            <PrintPortfolioHeading eyebrow="CAREER" title={t.career.title} />
+            <div className="rounded-2xl card-print" style={{ overflow: "hidden", background: "#FAF7EF" }}>
+              {t.career.timeline.map((c, i) => (
+                <div key={i} style={{ padding: "3.5mm 4mm", borderTop: i > 0 ? "1px solid #EDE8DA" : "none" }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: "2mm", marginBottom: "0.5mm" }}>
+                    <span className="print-eyebrow font-semibold" style={{ color: CORAL, fontFamily: "'IBM Plex Mono', monospace" }}>{c.period}</span>
+                    {c.current && <Tag tone="coral">{currentLabel}</Tag>}
+                  </div>
+                  <div className="print-role font-semibold" style={{ color: NAVY }}>{c.org} <span style={{ color: MUTED, fontWeight: 400 }}>· {c.role}</span></div>
+                  {c.detail && <div className="print-footnote" style={{ color: "#9C9585", fontStyle: "italic", marginTop: "0.5mm" }}>{c.detail}</div>}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* PAGE 11 — Contact (last page: no trailing page break) */}
+      <div className="print-page">
+        <div className="rounded-2xl card-print" style={{ background: NAVY, padding: "10mm 12mm", position: "relative", overflow: "hidden" }}>
+          <div className="print-eyebrow font-semibold" style={{ color: CORAL_SOFT, fontFamily: "'IBM Plex Mono', monospace", letterSpacing: "0.08em", marginBottom: "4mm" }}>PERFORMANCE & GROWTH MARKETER</div>
+          <h2 className="print-section-title font-semibold" style={{ color: "white", margin: "0 0 6mm 0" }}>{t.contact.line}<br />{t.contact.lineBreak}</h2>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: "6mm" }}>
+            <a href="mailto:heejimoon96@gmail.com" className="print-body" style={{ color: "rgba(255,255,255,0.85)", textDecoration: "none", display: "flex", alignItems: "center", gap: "2mm" }}>
+              <Mail size={13} color={CORAL_SOFT} />heejimoon96@gmail.com
+            </a>
+            <a href="https://www.linkedin.com/in/heeji-moon-76000a179/" target="_blank" rel="noopener noreferrer" className="print-body" style={{ color: "rgba(255,255,255,0.85)", textDecoration: "none", display: "flex", alignItems: "center", gap: "2mm" }}>
+              <Linkedin size={13} color={CORAL_SOFT} />linkedin.com/in/heeji-moon-76000a179
+            </a>
+          </div>
+        </div>
+        <div className="print-footnote" style={{ color: "#A8A08C", textAlign: "center", marginTop: "5mm" }}>
+          Heeji MOON · Performance & Growth Marketer · heeji.vercel.app
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ---------------------------------------------------------------------- */
 /*  Main component                                                         */
 /* ---------------------------------------------------------------------- */
 function Portfolio() {
@@ -1047,22 +1301,25 @@ function Portfolio() {
         h1, h2, h3, h4 { text-wrap: balance; }
         .flex > *, .grid > * { min-width: 0; }
         .print-only { display: none; }
+        /* PrintPortfolio (below) is a fully separate DOM tree, hidden on screen and shown
+           only for print/PDF. The web layout above is hidden the other way round — see
+           the @media print block. Neither depends on the other's breakpoints or DOM order. */
+        .print-portfolio { display: none; }
 
         /* ============ PRINT / PDF (A4 Landscape) ============ */
+        /* FINAL PDF COMPATIBILITY REBUILD: print no longer reuses the web DOM. Every old
+           web-DOM pagination hack (print-chapter / inhouse-primary-row / agency-pair-row /
+           startup-career-print-row / career-row / recruiter-actions) has been removed —
+           PrintPortfolio defines its own explicit .print-page wrappers instead, so a page's
+           boundary is a real DOM boundary, never a CSS fragmentation guess. */
         @page { size: A4 landscape; margin: 8mm 10mm; }
         @media print {
           html, body { margin: 0; padding: 0; background: #fff; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
           .no-print { display: none !important; }
-          aside { position: static !important; height: auto !important; width: auto !important; display: none !important; }
-          .lg\\:ml-64 { margin-left: 0 !important; }
-          /* The web layout caps content at max-w-6xl and offsets it for the fixed sidebar —
-             neither applies in print, where the sidebar is hidden. Override on the real
-             classes actually present on <main> so the page uses the full A4 landscape width. */
-          main, .max-w-6xl { max-width: none !important; width: 100% !important; }
-          main { padding-left: 0 !important; padding-right: 0 !important; }
+          .web-portfolio { display: none !important; }
+          .print-portfolio { display: block !important; }
           .print-hide { display: none !important; }
           .print-only { display: block !important; }
-          .screen-only { display: none !important; }
           img:not(.evidence-thumb) { max-width: 100% !important; height: auto !important; object-fit: contain !important; }
           .evidence-thumb-wrap { background: #FAF7EF !important; }
           .evidence-thumb { max-width: 100% !important; max-height: 100px !important; width: 100% !important; height: 100px !important; object-fit: contain !important; }
@@ -1071,8 +1328,6 @@ function Portfolio() {
           .print-heading-group { break-after: avoid !important; page-break-after: avoid !important; }
           p, li { orphans: 3; widows: 3; }
           .card-print, figure { break-inside: avoid; page-break-inside: avoid; }
-          .print-closing-footer { display: block !important; }
-          section { margin-bottom: 6mm !important; }
           /* Readability > page count: padding/margins are generous, not compressed to
              force a page-count target. Cards and sections are allowed to breathe — empty
              page space is fixed by making content bigger, never by shrinking margins. */
@@ -1081,86 +1336,58 @@ function Portfolio() {
           .mb-5, .mb-3 { margin-bottom: 3mm !important; }
           .gap-5, .gap-3, .gap-4 { gap: 4mm !important; }
 
-          /* ---- Minimum print font sizes (pt) — measured against actual printed output,
-             never shrunk to hit a page-count target. Nothing below 9.5pt. ---- */
+          /* ---- Print font sizes (pt) — nothing below 9.5pt, never shrunk to hit a
+             page-count target. English pages use the SAME minimums as Korean. ---- */
           .print-hero-title { font-size: 34pt !important; line-height: 1.15 !important; }
           .print-section-title { font-size: 25pt !important; line-height: 1.2 !important; }
-          .print-case-title { font-size: 21pt !important; line-height: 1.25 !important; }
-          .print-body { font-size: 12.5pt !important; line-height: 1.5 !important; }
-          .print-caption { font-size: 12pt !important; line-height: 1.4 !important; }
+          .print-case-title { font-size: 18pt !important; line-height: 1.25 !important; }
+          .print-body { font-size: 11pt !important; line-height: 1.5 !important; }
+          .print-caption { font-size: 11pt !important; line-height: 1.4 !important; }
           .print-role { font-size: 11pt !important; line-height: 1.4 !important; }
           .print-eyebrow { font-size: 11pt !important; line-height: 1.3 !important; letter-spacing: 0.06em !important; }
           .print-footnote { font-size: 9.5pt !important; line-height: 1.35 !important; }
-          .print-kpi-number { font-size: 32pt !important; line-height: 1.1 !important; }
-          .print-kpi-number-lg { font-size: 36pt !important; line-height: 1.1 !important; }
-          .compare-index { font-size: 16pt !important; line-height: 1.2 !important; }
-          .compare-delta { font-size: 34pt !important; line-height: 1.1 !important; }
+          .print-kpi-number { font-size: 28pt !important; line-height: 1.1 !important; }
+          .print-kpi-number-lg { font-size: 30pt !important; line-height: 1.1 !important; }
+          .compare-index { font-size: 15pt !important; line-height: 1.2 !important; }
+          .compare-delta { font-size: 30pt !important; line-height: 1.1 !important; }
           /* KPI numbers must never break mid-number (e.g. "+102" / ".7%" across two lines). */
           .print-kpi-number, .print-kpi-number-lg, .compare-index, .compare-delta { white-space: nowrap !important; }
+          /* Scope / Snapshot on PAGE 01 — never below 9pt even in print. */
+          .print-scope-label { font-size: 11pt !important; }
+          .print-scope-value { font-size: 11.5pt !important; line-height: 1.4 !important; }
+          .print-snap-cat { font-size: 10.5pt !important; }
+          .print-snap-chip { font-size: 11pt !important; }
+          .print-snap-chip-sub { font-size: 9.5pt !important; }
 
-          /* Selected Impact: 2×2 large cards in print (web keeps its 4-column row) */
+          /* Selected Impact: 2×2 large cards */
           .impact-grid { display: grid !important; grid-template-columns: repeat(2, 1fr) !important; gap: 6mm !important; }
-          /* AI Creative gallery: force 3-across in print regardless of the sm: breakpoint,
-             same reasoning as .inhouse-primary-row — don't depend on a screen breakpoint
-             inside the print engine. */
-          /* PDF uses a 2×2 grid (not 3-across) for the AI Creative gallery — more stable
-             and shorter overall than a 3-col row with one orphaned 4th item on its own row. */
+          /* AI Creative gallery: explicit 2×2 grid, not a screen breakpoint. */
           .evidence-grid-3-print { grid-template-columns: repeat(2, 1fr) !important; gap: 4mm !important; }
-          .evidence-grid-3-print .evidence-thumb { height: 28mm !important; max-height: 28mm !important; }
-          /* PDF shows a curated 4 (2 images + 2 video posters, in data order) even when the
-             web gallery has more — never print an unbounded number of thumbnails. */
+          .evidence-grid-3-print .evidence-thumb { height: 26mm !important; max-height: 26mm !important; }
+          /* Curated 4 (2 images + 2 video posters, in data order) even when the web gallery
+             has more — never print an unbounded number of thumbnails. */
           .evidence-grid-3-print > *:nth-child(n+5) { display: none !important; }
-          .impact-card-print { padding: 8mm !important; min-height: 72mm !important; display: flex !important; flex-direction: column !important; justify-content: center !important; }
-          .print-impact-name { font-size: 16pt !important; line-height: 1.2 !important; }
-          .print-impact-kpi { font-size: 33pt !important; line-height: 1.1 !important; }
-          .print-impact-label { font-size: 12.5pt !important; line-height: 1.3 !important; }
-          .print-impact-strategy { font-size: 11.5pt !important; line-height: 1.4 !important; }
-          .print-impact-context { font-size: 10.5pt !important; line-height: 1.3 !important; }
+          .impact-card-print { padding: 7mm !important; min-height: 60mm !important; display: flex !important; flex-direction: column !important; justify-content: center !important; }
+          .print-impact-name { font-size: 14pt !important; line-height: 1.2 !important; }
+          .print-impact-kpi { font-size: 28pt !important; line-height: 1.1 !important; }
+          .print-impact-label { font-size: 11.5pt !important; line-height: 1.3 !important; }
+          .print-impact-strategy { font-size: 10.5pt !important; line-height: 1.4 !important; }
+          .print-impact-context { font-size: 10pt !important; line-height: 1.3 !important; }
 
-          /* In-house primary row (D2C Media/Budget + Olive Young): an explicit, print-only
-             2-column grid — not dependent on Tailwind's md: breakpoint, which can behave
-             inconsistently against a print viewport. Cards stretch to equal height and the
-             row never splits across a page. */
-          .inhouse-primary-row {
-            display: grid !important;
-            grid-template-columns: 1fr 1fr !important;
-            gap: 7mm !important;
-            align-items: stretch !important;
-            break-inside: avoid !important;
-            page-break-inside: avoid !important;
-          }
-          .inhouse-primary-row > .card-print { height: 100% !important; }
-          .inhouse-secondary-row {
-            display: grid !important;
-            grid-template-columns: 1fr 1fr !important;
-            gap: 7mm !important;
-            align-items: stretch !important;
-            break-inside: avoid !important;
-            page-break-inside: avoid !important;
-          }
-          .inhouse-secondary-row > .card-print { height: 100% !important; }
+          /* Generic print-only layout helpers — used across multiple PrintPortfolio pages
+             (D2C+Olive Young, CRM+CRO, Shopee+Qoo10, Hanyul+Bodyluv). Two equal columns,
+             stretched to the same height, never split across a page break. */
+          .print-two-col { display: grid !important; grid-template-columns: 1fr 1fr !important; gap: 7mm !important; align-items: stretch !important; }
+          .print-two-col > .card-print { height: 100% !important; }
+          /* Startup (42%) + Career (58%) share one page, side by side. */
+          .print-split-4258 { display: grid !important; grid-template-columns: 42% 58% !important; gap: 8mm !important; align-items: start !important; }
 
-          /* Agency: Hanyul+Bodyluv 2-col (page A), Maeil+Additional together (page B).
-             .print-only already forces display:block !important — this rule is declared
-             after it in the stylesheet so display:grid wins for this specific element. */
-          .agency-pair-row { display: grid !important; grid-template-columns: 1fr 1fr !important; gap: 7mm !important; align-items: stretch !important; break-inside: avoid !important; page-break-inside: avoid !important; }
-          .agency-pair-row > .card-print { height: 100% !important; }
-
-          /* Startup + Career share one printed page, side by side (42% / 58%) instead of
-             stacking sequentially — sequential stacking was what pushed Career's 3-card
-             row onto its own extra page. */
-          .startup-career-print-row { display: grid !important; grid-template-columns: 42% 58% !important; gap: 8mm !important; align-items: start !important; break-inside: avoid !important; page-break-inside: avoid !important; }
-          .startup-career-print-row section { margin-bottom: 0 !important; }
-          .career-row { break-inside: avoid !important; page-break-inside: avoid !important; }
-
-          /* Recruiter utility actions (PDF download / print / LinkedIn) are web-only chrome. */
-          .recruiter-actions { display: none !important; }
-
-          /* Page map (readability-first, ~11–13 pages): 01 Overview / 02 Selected Impact /
-             03 Current In-house — D2C + Olive Young / 04 CRM + CRO / 05 Amazon /
-             06 Shopee+Qoo10 / 07 AI Creative & Experiment / 08 Hanyul+Bodyluv /
-             09 Maeil+Additional / 10 Startup+Career / 11 Contact. */
-          .print-chapter { break-before: page; page-break-before: always; }
+          /* Each .print-page IS a page: it defines the boundary directly instead of relying
+             on CSS fragmentation to guess where a heading or card should land. Blank pages
+             are prevented structurally — a heading and its content are always written into
+             the SAME .print-page wrapper, never split across two. */
+          .print-page { width: 100%; box-sizing: border-box; break-after: page; page-break-after: always; }
+          .print-page:last-child { break-after: auto; page-break-after: auto; }
         }
       `}</style>
 
@@ -1181,8 +1408,8 @@ function Portfolio() {
             {showTop && (
               <button onClick={() => { scrollToTop(); setNavOpen(false); }} className="w-full text-left px-4 py-2.5 text-sm border-t" style={{ color: "rgba(255,255,255,0.6)", borderColor: "rgba(255,255,255,0.1)" }}>↑ {t.misc.backToTop}</button>
             )}
-            <div className="border-t" style={{ borderColor: "rgba(255,255,255,0.1)" }}>
-              <RecruiterActions lang={lang} layout="stack" />
+            <div className="px-4 py-2.5 border-t" style={{ borderColor: "rgba(255,255,255,0.1)" }}>
+              <PrintButton lang={lang} full />
             </div>
             <div className="px-4 py-2.5 border-t flex justify-center" style={{ borderColor: "rgba(255,255,255,0.1)" }}>
               <LanguageSwitcher lang={lang} setLang={setLang} dark />
@@ -1199,6 +1426,9 @@ function Portfolio() {
         <LanguageSwitcher lang={lang} setLang={setLang} dark />
       </div>
 
+      {/* WEB (screen) — unchanged Interactive Portfolio. Hidden entirely in print via
+          .web-portfolio so print never inherits its layout, breakpoints, or DOM order. */}
+      <div className="web-portfolio">
       <div className="flex">
         <aside className="hidden lg:flex flex-col fixed top-0 left-0 h-screen w-64 px-6 py-8 scroll-thin overflow-y-auto" style={{ background: NAVY }}>
           <div className="mb-10">
@@ -1217,10 +1447,7 @@ function Portfolio() {
               );
             })}
           </nav>
-          <div className="mt-4 flex items-center justify-between gap-2">
-            <LanguageSwitcher lang={lang} setLang={setLang} dark />
-            <RecruiterActions lang={lang} layout="row" />
-          </div>
+          <SidebarUtility lang={lang} setLang={setLang} />
           <div className="mt-auto pt-8 border-t" style={{ borderColor: "rgba(255,255,255,0.1)" }}>
             <div className="text-xs text-white/40 mb-2">Contact</div>
             <a href="mailto:heejimoon96@gmail.com" className="text-xs text-white/70 hover:text-white transition-colors" style={{ textDecoration: "none" }}>heejimoon96@gmail.com</a>
@@ -1250,27 +1477,27 @@ function Portfolio() {
 
             <div className="grid sm:grid-cols-3 gap-3 mt-4">
               {t.scope.rows.map((r, i) => (
-                <div key={i} className="rounded-xl p-3.5" style={{ background: "#FAF7EF" }}>
-                  <div className="text-[10px] font-semibold tracking-wider mb-1" style={{ color: CORAL, fontFamily: "'IBM Plex Mono', monospace" }}>{r.label}</div>
-                  <div className="text-xs leading-snug" style={{ color: NAVY }}>{r.value}</div>
+                <div key={i} className="rounded-xl p-4 scope-card" style={{ background: "#FAF7EF" }}>
+                  <div className="text-[11px] md:text-[12px] font-semibold tracking-wider mb-1.5 scope-label" style={{ color: CORAL, fontFamily: "'IBM Plex Mono', monospace" }}>{r.label}</div>
+                  <div className="text-[13px] md:text-[14px] scope-value" style={{ color: NAVY, lineHeight: 1.45 }}>{r.value}</div>
                 </div>
               ))}
             </div>
           </section>
 
           <section id="snapshot" className="mb-12 scroll-mt-6">
-            <div className="text-xs font-semibold tracking-[0.18em] mb-2" style={{ color: CORAL, fontFamily: "'IBM Plex Mono', monospace" }}>EXPERIENCE SNAPSHOT</div>
+            <div className="text-[13px] md:text-[14px] font-semibold tracking-[0.18em] mb-2" style={{ color: CORAL, fontFamily: "'IBM Plex Mono', monospace" }}>EXPERIENCE SNAPSHOT</div>
             <div className="rounded-xl p-5" style={{ background: "#FAF7EF" }}>
               {t.snapshot.categories.map((cat, i) => (
-                <div key={i} className={i > 0 ? "mt-3 pt-3 border-t" : ""} style={i > 0 ? { borderColor: "#EDE8DA" } : {}}>
-                  <div className="flex flex-col sm:flex-row sm:items-center gap-1.5 sm:gap-3">
-                    <div className="text-[10px] font-semibold tracking-wider flex-shrink-0 sm:w-32" style={{ color: MUTED, fontFamily: "'IBM Plex Mono', monospace" }}>{cat.label}</div>
-                    <div className="flex flex-wrap gap-1.5">
+                <div key={i} className={i > 0 ? "pt-[15px] border-t" : ""} style={i > 0 ? { borderColor: "#EDE8DA", marginTop: 15 } : {}}>
+                  <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3">
+                    <div className="text-[11px] md:text-[12px] font-semibold tracking-wider flex-shrink-0 sm:w-32" style={{ color: MUTED, fontFamily: "'IBM Plex Mono', monospace" }}>{cat.label}</div>
+                    <div className="flex flex-wrap gap-x-2 gap-y-2">
                       {cat.items.map((it, j) => (
                         typeof it === "object" ? (
-                          <span key={j} className="text-xs px-2.5 py-1 rounded-full leading-tight" style={{ background: "white", color: NAVY, border: "1px solid #EAE5D8" }}>{it.label}<span style={{ color: MUTED }}> · {it.sub}</span></span>
+                          <span key={j} className="text-[13.5px] md:text-[14px] leading-tight" style={{ background: "white", color: NAVY, border: "1px solid #EAE5D8", borderRadius: 999, padding: "5px 11px" }}>{it.label}<span className="text-[12.5px] md:text-[13px]" style={{ color: MUTED }}> · {it.sub}</span></span>
                         ) : (
-                          <span key={j} className="text-xs px-2.5 py-1 rounded-full" style={{ background: "white", color: NAVY, border: "1px solid #EAE5D8" }}>{it}</span>
+                          <span key={j} className="text-[13.5px] md:text-[14px]" style={{ background: "white", color: NAVY, border: "1px solid #EAE5D8", borderRadius: 999, padding: "5px 11px" }}>{it}</span>
                         )
                       ))}
                     </div>
@@ -1409,32 +1636,11 @@ function Portfolio() {
                 ))}
               </div>
             </div>
-
-            <div className="print-only agency-pair-row">
-              <GrowthLever data={t.agency.cases[0]} />
-              <GrowthLever data={t.agency.cases[1]} />
-            </div>
-            <div className="print-only print-chapter">
-              <GrowthLever data={t.agency.cases[2]} />
-              <div className="mt-5 card-print">
-                <div className="text-xs font-semibold tracking-wider mb-3 print-eyebrow" style={{ color: NAVY_SOFT, fontFamily: "'IBM Plex Mono', monospace" }}>{t.agency.additionalTitle}</div>
-                <div className="rounded-xl overflow-hidden" style={{ background: "#FAF7EF" }}>
-                  {t.agency.additional.map((item, i) => (
-                    <div key={i} className={`flex flex-wrap gap-x-3 gap-y-1 px-4 py-3 text-xs print-caption ${i > 0 ? "border-t" : ""}`} style={{ borderColor: "#EDE8DA" }}>
-                      <span className="font-semibold" style={{ color: NAVY, minWidth: 200 }}>{item.client}</span>
-                      <span style={{ color: CORAL }}>{item.result}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
           </section>
 
-          {/* ===================== PAGE 09 — STARTUP + CAREER ===================== */}
-          {/* Startup + Career share one printed page (42% / 58%, side by side) — see
-              .startup-career-print-row. Web keeps both as full-width sequential sections. */}
-          <div className="startup-career-print-row print-chapter">
-            <section id="startup" ref={setRef("startup")} className="mb-12 scroll-mt-6">
+          {/* ===================== STARTUP + CAREER (web: sequential full-width sections;         ===================== */}
+          {/*                        the PDF layout for these lives entirely in PrintPortfolio) */}
+          <section id="startup" ref={setRef("startup")} className="mb-12 scroll-mt-6">
               <SectionHeading eyebrow={t.startup.eyebrow} title={t.startup.title} />
               <Card className="p-6">
                 <div className="text-xs mb-3 print-role" style={{ color: MUTED }}>{t.startup.brand}</div>
@@ -1457,10 +1663,9 @@ function Portfolio() {
 
             <section id="career" ref={setRef("career")} className="mb-12 scroll-mt-6">
               <SectionHeading eyebrow="CAREER" title={t.career.title} />
-              <div className="text-xs font-semibold tracking-wider mb-4 px-3 py-2 rounded-full inline-block print-hide" style={{ background: "#F3EFE3", color: NAVY, fontFamily: "'IBM Plex Mono', monospace" }}>{t.career.storyline}</div>
+              <div className="text-xs font-semibold tracking-wider mb-4 px-3 py-2 rounded-full inline-block" style={{ background: "#F3EFE3", color: NAVY, fontFamily: "'IBM Plex Mono', monospace" }}>{t.career.storyline}</div>
 
-              {/* WEB: 3-card grid */}
-              <div className="grid md:grid-cols-3 gap-3 print-hide">
+              <div className="grid md:grid-cols-3 gap-3">
                 {t.career.timeline.map((c, i) => (
                   <Card key={i} className="p-5" style={c.current ? { borderColor: CORAL } : {}}>
                     <div className="flex items-center justify-between mb-1 flex-wrap gap-2">
@@ -1473,25 +1678,10 @@ function Portfolio() {
                   </Card>
                 ))}
               </div>
-
-              {/* PRINT: compact stacked list — a narrow 58%-width column reads better as
-                  three rows than as three narrow cards side by side. */}
-              <div className="print-only career-row rounded-xl overflow-hidden" style={{ background: "#FAF7EF" }}>
-                {t.career.timeline.map((c, i) => (
-                  <div key={i} className={`px-4 py-3 ${i > 0 ? "border-t" : ""}`} style={{ borderColor: "#EDE8DA" }}>
-                    <div className="flex items-center gap-2 mb-0.5">
-                      <span className="print-eyebrow font-semibold" style={{ color: CORAL, fontFamily: "'IBM Plex Mono', monospace" }}>{c.period}</span>
-                      {c.current && <Tag tone="coral">{lang === "kr" ? "현재" : "Current"}</Tag>}
-                    </div>
-                    <div className="font-semibold print-role" style={{ color: NAVY }}>{c.org} <span style={{ color: MUTED, fontWeight: 400 }}>· {c.role}</span></div>
-                  </div>
-                ))}
-              </div>
             </section>
-          </div>
 
-          {/* ===================== PAGE 10 — CONTACT ===================== */}
-          <section id="contact" ref={setRef("contact")} className="scroll-mt-6 print-chapter">
+          {/* ===================== CONTACT (web) ===================== */}
+          <section id="contact" ref={setRef("contact")} className="scroll-mt-6">
             <div className="rounded-2xl p-8 md:p-12 overflow-hidden relative card-print" style={{ background: NAVY }}>
               <div className="flex flex-col md:flex-row items-start md:items-end gap-8">
                 <div className="flex-1">
@@ -1510,11 +1700,17 @@ function Portfolio() {
               </div>
             </div>
           </section>
-
-          <div className="hidden print-closing-footer text-[10px] text-center pt-4 mt-6 border-t" style={{ borderColor: "#EDE8DA", color: "#A8A08C" }}>
-            Heeji MOON · Performance & Growth Marketer · heeji.vercel.app
-          </div>
         </main>
+      </div>
+      </div>
+
+      {/* PRINT (PDF/paper only) — a fully separate layout, NOT a re-styled copy of the web
+          DOM above. Web content stays untouched by print rules; PrintPortfolio owns its own
+          explicit per-page wrappers (.print-page) so a page's boundary is never left to CSS
+          fragmentation guessing where a card might break. See FINAL PDF COMPATIBILITY
+          REBUILD notes in the <style> block above (.web-portfolio / .print-portfolio). */}
+      <div className="print-portfolio">
+        <PrintPortfolio lang={lang} t={t} />
       </div>
     </div>
     </LightboxContext.Provider>

@@ -769,7 +769,7 @@ function EvidenceGallery({ images }) {
       {images.map((img, i) => (
         <div
           key={i}
-          className="rounded-xl overflow-hidden border relative group cursor-zoom-in"
+          className="rounded-xl overflow-hidden border relative group cursor-zoom-in evidence-thumb-wrap"
           style={{ borderColor: "#EAE5D8" }}
           onClick={(e) => { e.stopPropagation(); openLightbox(img); }}
         >
@@ -1330,8 +1330,10 @@ function Portfolio() {
           .exec-list li:nth-child(n+4) { display: none !important; }
           img:not(.evidence-thumb) { max-width: 100% !important; height: auto !important; object-fit: contain !important; }
           /* Evidence gallery thumbnails keep their fixed grid size in print so a single
-             full-resolution photo can't fill an entire page. */
-          .evidence-thumb { max-width: 100% !important; max-height: 95px !important; width: 100% !important; height: 95px !important; object-fit: cover !important; }
+             full-resolution photo can't fill an entire page — but show the FULL image
+             (object-fit: contain) instead of cropping it, so no evidence text/number is cut off. */
+          .evidence-thumb-wrap { background: #FAF7EF !important; }
+          .evidence-thumb { max-width: 100% !important; max-height: 110px !important; width: 100% !important; height: 110px !important; object-fit: contain !important; }
           .evidence-caption { white-space: nowrap !important; overflow: hidden !important; text-overflow: ellipsis !important; }
           h1, h2, h3, h4, .avoid-break-after { break-after: avoid; page-break-after: avoid; }
           /* Heading (or company header) must stay glued to whatever follows it —

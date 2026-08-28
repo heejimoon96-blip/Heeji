@@ -165,20 +165,20 @@ const LANG_CONTENT = {
       ],
     },
     selectedImpact: [
-      { tag: "COMMERCE SALES", kpi: "+316%", label: "ONLINE SALES", name: "Olive Young", context: "YoY · Same Month", color: CORAL, target: "lever-commerce" },
-      { tag: "CUSTOMER GROWTH", kpi: "+102.7%", label: "CRM CVR", name: "Customer Segmentation", context: "CPA -10.4% · ROAS +25.3%", color: TEAL, target: "lever-crm" },
-      { tag: "GLOBAL PERFORMANCE", kpi: "+846%", label: "PURCHASES", name: "Amazon US", context: "Spend +4% · Prime Day → Prime Big Deal", color: NAVY_SOFT, target: "global-amazon" },
-      { tag: "CREATIVE EXPERIMENT", kpi: "+116%", label: "CTR", name: "AI Creative", context: "Same Product · Media · Week", color: CORAL, target: "experiment" },
+      { name: "OLIVE YOUNG", kpi: "+316%", label: "ONLINE SALES", strategy: "Always-on Traffic → Retargeting Pool → Sale Conversion", context: "YoY · Same Month", color: CORAL, target: "lever-commerce" },
+      { name: "CRM", kpi: "+102.7%", label: "CRM CVR", strategy: "전체 발송 → 구매·행동 데이터 기반 세그먼트 발송", context: "CPA -10.4% · ROAS +25.3%", color: TEAL, target: "lever-crm" },
+      { name: "AMAZON US", kpi: "+846%", label: "PURCHASES", strategy: "매체·타겟·랜딩 구조 재설계 → 구매 경로 개선", context: "Spend +4% · Prime Day → Prime Big Deal", color: NAVY_SOFT, target: "global-amazon" },
+      { name: "AI CREATIVE TEST", kpi: "+116%", label: "CTR", strategy: "동일 제품·매체·기간 A/B 테스트로 소재 가설 검증", context: "Same Product · Media · Week", color: CORAL, target: "experiment" },
     ],
     inhouse: {
       eyebrow: "CURRENT IN-HOUSE GROWTH",
       title: "온라인 매출을 기준으로 Media·CRM·CRO를 함께 운영했습니다.",
-      sub: "셀트리온스킨큐어에서 자사몰과 주요 Commerce Channel의 Performance Marketing과 CRM을 담당하며, 광고 유입부터 구매전환까지 성과가 막히는 구간에 따라 운영 방식을 바꿔왔습니다.",
+      sub: "셀트리온스킨큐어에서 자사몰과 주요 판매 채널의 퍼포먼스 마케팅과 CRM을 담당하며, 광고 유입부터 구매전환까지 성과가 막히는 구간에 따라 운영 방식을 바꿔왔습니다.",
       levers: [
         {
           id: "lever-media",
-          tag: "MEDIA / BUDGET",
-          title: "광고 플랫폼의 ROAS보다 실제 매출 기여도를 봤습니다.",
+          tag: "D2C · MEDIA / BUDGET",
+          title: "매체 ROAS가 아니라 예산 배분 기준 자체를 바꿨습니다.",
           challenge: "매체 대시보드 ROAS만 보면, 효율이 좋아 보여도 실제 매출로 이어지지 않는 캠페인을 가려낼 수 없었습니다.",
           changes: [
             "매체 대시보드와 GA4 실매출을 대조해 성과가 과대평가된 캠페인을 찾음",
@@ -186,23 +186,30 @@ const LANG_CONTENT = {
             "리타겟팅·기존 고객 비중을 늘려 효율을 계속 조정",
           ],
           flow: ["Media ROAS", "GA4 Revenue", "Cut / Scale", "Budget Reallocation"],
-          result: [{ label: "자사몰 ROAS (Index)", value: "+104%", context: "Supporting KPI" }],
-          role: "Media Strategy · Budget Allocation · GA4 Analysis",
+          compare: { beforeLabel: "2024", beforeIndex: 100, afterLabel: "2025", afterIndex: 204, note: "자사몰 채널 연도별 ROAS 기준 (Index)" },
+          result: [{ label: "자사몰 ROAS (Index)", value: "+104%", context: "2024 → 2025" }],
+          role: "매체 ROAS 대비 GA4 실매출 대조 분석 · 예산 재배분 의사결정 · 리타겟팅 비중 조정",
         },
         {
           id: "lever-commerce",
-          tag: "COMMERCE",
-          title: "프로모션 하루가 아니라, 전후 전체 Funnel을 운영했습니다.",
-          challenge: "대형 프로모션 때만 반짝 운영하면 트래픽·리타겟팅 모수가 세일 기간에 부족했습니다.",
+          tag: "OLIVE YOUNG · SALES GROWTH",
+          title: "세일 때만 광고하지 않고, 평시부터 구매할 고객을 모았습니다.",
+          challenge: "세일 기간에만 광고를 집행하면, 정작 세일이 시작됐을 때 다시 잡을 고객이 부족했습니다.",
           changes: [
-            "평시 — 저비용 트래픽 확보, 리타겟팅 모수 축적",
-            "세일 전 — 관심 고객 확대",
-            "세일 기간 — 구매 가능성 높은 고객 중심으로 예산 확대",
+            "평시부터 저비용 트래픽으로 관심 고객(리타겟팅 모수)을 꾸준히 축적",
+            "세일 전 해당 모수를 다시 공략해 관심 고객 풀을 확대",
+            "세일 기간에는 평시에 쌓아둔 관심 고객을 다시 공략하고, 전환 가능성이 높은 타겟에 예산을 집중",
           ],
-          flow: ["Always-on", "Pre-sale", "Sale", "Post-sale"],
+          flowSteps: [
+            { step: "ALWAYS-ON", desc: "저비용 Traffic 확보" },
+            { step: "RETARGETING POOL", desc: "관심 고객 모수 축적" },
+            { step: "PRE-SALE", desc: "세일 전 관심 고객 확대" },
+            { step: "SALE", desc: "Retargeting + Conversion Ads · 구매 가능 고객에 예산 집중" },
+            { step: "POST-SALE", desc: "잔여 Retargeting 추가 전환" },
+          ],
           result: [{ label: "ONLINE SALES", value: "+316%", context: "YoY · Same Month" }],
           secondary: "입점 이래 월 최고 매출",
-          role: "Campaign Strategy · Budget · Co-op Ads · Performance Analysis",
+          role: "올리브영 협력광고 전략·운영 · 세일 전후 Campaign Structure 설계 · 단계별 Budget Allocation · Performance Analysis",
         },
         {
           id: "lever-crm",
@@ -221,7 +228,7 @@ const LANG_CONTENT = {
             { label: "ROAS", value: "+25.3%" },
           ],
           context: "2024 Annual → Jan–Jul 2026",
-          role: "Segmentation · Messaging · Operation",
+          role: "고객 세그멘테이션 · 메시지·채널 운영 · 세그먼트별 성과 분석",
         },
         {
           id: "lever-cro",
@@ -404,10 +411,10 @@ const LANG_CONTENT = {
       ],
     },
     selectedImpact: [
-      { tag: "COMMERCE SALES", kpi: "+316%", label: "ONLINE SALES", name: "Olive Young", context: "YoY · Same Month", color: CORAL, target: "lever-commerce" },
-      { tag: "CUSTOMER GROWTH", kpi: "+102.7%", label: "CRM CVR", name: "Customer Segmentation", context: "CPA -10.4% · ROAS +25.3%", color: TEAL, target: "lever-crm" },
-      { tag: "GLOBAL PERFORMANCE", kpi: "+846%", label: "PURCHASES", name: "Amazon US", context: "Spend +4% · Prime Day → Prime Big Deal", color: NAVY_SOFT, target: "global-amazon" },
-      { tag: "CREATIVE EXPERIMENT", kpi: "+116%", label: "CTR", name: "AI Creative", context: "Same Product · Media · Week", color: CORAL, target: "experiment" },
+      { name: "OLIVE YOUNG", kpi: "+316%", label: "ONLINE SALES", strategy: "Always-on Traffic → Retargeting Pool → Sale Conversion", context: "YoY · Same Month", color: CORAL, target: "lever-commerce" },
+      { name: "CRM", kpi: "+102.7%", label: "CRM CVR", strategy: "Blanket sends → data-driven customer segments", context: "CPA -10.4% · ROAS +25.3%", color: TEAL, target: "lever-crm" },
+      { name: "AMAZON US", kpi: "+846%", label: "PURCHASES", strategy: "Rebuilt media, targeting and landing to change the path to purchase", context: "Spend +4% · Prime Day → Prime Big Deal", color: NAVY_SOFT, target: "global-amazon" },
+      { name: "AI CREATIVE TEST", kpi: "+116%", label: "CTR", strategy: "Same product / media / week A-B tests to validate creative hypotheses", context: "Same Product · Media · Week", color: CORAL, target: "experiment" },
     ],
     inhouse: {
       eyebrow: "CURRENT IN-HOUSE GROWTH",
@@ -416,8 +423,8 @@ const LANG_CONTENT = {
       levers: [
         {
           id: "lever-media",
-          tag: "MEDIA / BUDGET",
-          title: "I looked at actual revenue contribution, not just media-reported ROAS.",
+          tag: "D2C · MEDIA / BUDGET",
+          title: "I changed the budget decision rule, not just the media ROAS.",
           challenge: "Media-dashboard ROAS alone couldn't tell me which campaigns looked efficient but weren't really driving revenue.",
           changes: [
             "Cross-checked media ROAS against GA4 revenue to find overstated campaigns",
@@ -425,23 +432,30 @@ const LANG_CONTENT = {
             "Kept expanding retargeting and existing-customer share as efficiency shifted",
           ],
           flow: ["Media ROAS", "GA4 Revenue", "Cut / Scale", "Budget Reallocation"],
-          result: [{ label: "D2C ROAS (Index)", value: "+104%", context: "Supporting KPI" }],
-          role: "Media strategy · budget allocation · GA4 analysis",
+          compare: { beforeLabel: "2024", beforeIndex: 100, afterLabel: "2025", afterIndex: 204, note: "D2C channel ROAS by year (Index)" },
+          result: [{ label: "D2C ROAS (Index)", value: "+104%", context: "2024 → 2025" }],
+          role: "Cross-checked media ROAS against GA4 revenue · made budget-reallocation decisions · adjusted retargeting share",
         },
         {
           id: "lever-commerce",
-          tag: "COMMERCE",
-          title: "I ran the full funnel around each promotion, not just sale day.",
-          challenge: "Running the same always-on setup only during big promotions left traffic and retargeting pools short right when we needed them.",
+          tag: "OLIVE YOUNG · SALES GROWTH",
+          title: "I built the customer pool before the sale started, not just during it.",
+          challenge: "Running ads only during the sale period meant we didn't have enough returning customers to re-target once the sale actually began.",
           changes: [
-            "Always-on — low-cost traffic, building the retargeting pool",
-            "Pre-sale — expanding the interested-customer pool",
-            "Sale — shifting budget toward high-intent customers",
+            "Built a low-cost, always-on retargeting pool of interested customers year-round",
+            "Re-engaged that pool before each sale to expand the interested-customer base",
+            "During the sale, re-targeted the pool we'd built and concentrated budget on high-intent customers",
           ],
-          flow: ["Always-on", "Pre-sale", "Sale", "Post-sale"],
+          flowSteps: [
+            { step: "ALWAYS-ON", desc: "Low-cost traffic acquisition" },
+            { step: "RETARGETING POOL", desc: "Build the interested-customer pool" },
+            { step: "PRE-SALE", desc: "Expand the pool before the sale" },
+            { step: "SALE", desc: "Retargeting + conversion ads · budget on high-intent customers" },
+            { step: "POST-SALE", desc: "Convert remaining retargeting audience" },
+          ],
           result: [{ label: "ONLINE SALES", value: "+316%", context: "YoY · Same Month" }],
           secondary: "Highest monthly sales since launching on the platform",
-          role: "Campaign strategy · budget · co-op ads · performance analysis",
+          role: "Olive Young co-op ads strategy & operation · designed pre/post-sale campaign structure · staged budget allocation · performance analysis",
         },
         {
           id: "lever-crm",
@@ -629,9 +643,9 @@ function LanguageSwitcher({ lang, setLang, dark = false }) {
 function SectionHeading({ eyebrow, title, sub }) {
   return (
     <div className="mb-6 print-heading-group">
-      <div className="text-xs font-semibold tracking-[0.18em] mb-2" style={{ color: CORAL, fontFamily: "'IBM Plex Mono', monospace" }}>{eyebrow}</div>
-      <h2 className="text-2xl md:text-3xl font-semibold mb-2" style={{ color: NAVY, fontFamily: "'Space Grotesk', sans-serif" }}>{title}</h2>
-      {sub && <p className="text-sm md:text-base" style={{ color: MUTED }}>{sub}</p>}
+      <div className="text-xs font-semibold tracking-[0.18em] mb-2 print-eyebrow" style={{ color: CORAL, fontFamily: "'IBM Plex Mono', monospace" }}>{eyebrow}</div>
+      <h2 className="text-2xl md:text-3xl font-semibold mb-2 print-section-title" style={{ color: NAVY, fontFamily: "'Space Grotesk', sans-serif" }}>{title}</h2>
+      {sub && <p className="text-sm md:text-base print-body" style={{ color: MUTED }}>{sub}</p>}
     </div>
   );
 }
@@ -693,16 +707,16 @@ function Lightbox({ image, onClose }) {
 function StatChip({ value, label, context, size = "md" }) {
   return (
     <div className="rounded-xl px-4 py-3 flex-1 min-w-[130px]" style={{ background: "#F3EFE3" }}>
-      <div className={size === "lg" ? "text-2xl font-semibold" : "text-lg font-semibold"} style={{ color: CORAL, fontFamily: "'IBM Plex Mono', monospace" }}>{value}</div>
-      <div className="text-xs mt-0.5 font-medium" style={{ color: NAVY }}>{label}</div>
-      {context && <div className="text-[10px] mt-1" style={{ color: MUTED }}>{context}</div>}
+      <div className={`${size === "lg" ? "text-2xl print-kpi-number-lg" : "text-lg print-kpi-number"} font-semibold`} style={{ color: CORAL, fontFamily: "'IBM Plex Mono', monospace" }}>{value}</div>
+      <div className="text-xs mt-0.5 font-medium print-caption" style={{ color: NAVY }}>{label}</div>
+      {context && <div className="text-[10px] mt-1 print-footnote" style={{ color: MUTED }}>{context}</div>}
     </div>
   );
 }
 
 function FlowChips({ items }) {
   return (
-    <div className="flex flex-wrap items-center gap-1.5 mb-3 text-xs" style={{ color: NAVY }}>
+    <div className="flex flex-wrap items-center gap-1.5 mb-3 text-xs print-caption" style={{ color: NAVY }}>
       {items.map((it, i) => (
         <React.Fragment key={i}>
           <span className="px-2.5 py-1 rounded-full" style={i === items.length - 1 ? { background: CORAL, color: "white", fontWeight: 600 } : { background: "#F3EFE3" }}>{it}</span>
@@ -713,9 +727,60 @@ function FlowChips({ items }) {
   );
 }
 
+/* FlowSteps — a richer, step + one-line-reason visual for multi-stage strategies
+   (e.g. Olive Young always-on → retargeting → pre-sale → sale → post-sale). Each
+   step explains WHY it matters, not just its name, so the strategy reads even
+   without the surrounding paragraph. */
+function FlowSteps({ items }) {
+  return (
+    <div className="flex flex-col gap-1.5 mb-3">
+      {items.map((it, i) => (
+        <div key={i} className="flex items-start gap-2.5">
+          <div className="flex flex-col items-center flex-shrink-0" style={{ width: 20 }}>
+            <div className="rounded-full flex items-center justify-center text-white font-semibold print-caption" style={{ width: 20, height: 20, background: i === items.length - 2 ? CORAL : NAVY_SOFT, fontSize: 10 }}>{i + 1}</div>
+            {i < items.length - 1 && <div style={{ width: 2, flex: 1, minHeight: 8, background: "#E3DDCC" }} />}
+          </div>
+          <div className="pb-1">
+            <span className="font-semibold print-caption" style={{ color: NAVY, fontFamily: "'IBM Plex Mono', monospace" }}>{it.step}</span>
+            <span className="print-caption" style={{ color: MUTED }}> — {it.desc}</span>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+/* IndexCompare — an explicit before/after year-index visual (e.g. 2024 Index 100
+   → 2025 Index 204), so a relative KPI like "+104%" always shows its comparison
+   basis instead of standing alone as an isolated number. */
+function IndexCompare({ data }) {
+  const scale = Math.max(1, data.afterIndex / data.beforeIndex);
+  return (
+    <div className="rounded-xl p-3.5 mb-1" style={{ background: "#F3EFE3" }}>
+      <div className="flex items-end gap-4">
+        <div className="flex flex-col items-center">
+          <div className="rounded-t" style={{ width: 34, height: 46, background: "#D9D2BE" }} />
+          <div className="text-xs font-semibold mt-1.5 print-caption" style={{ color: MUTED, fontFamily: "'IBM Plex Mono', monospace" }}>{data.beforeLabel}</div>
+          <div className="text-[10px] print-footnote" style={{ color: MUTED }}>Index {data.beforeIndex}</div>
+        </div>
+        <ArrowRight size={14} color={MUTED} />
+        <div className="flex flex-col items-center">
+          <div className="rounded-t" style={{ width: 34, height: Math.min(46 * scale, 92), background: CORAL }} />
+          <div className="text-xs font-semibold mt-1.5 print-caption" style={{ color: NAVY, fontFamily: "'IBM Plex Mono', monospace" }}>{data.afterLabel}</div>
+          <div className="text-[10px] print-footnote" style={{ color: CORAL, fontWeight: 600 }}>Index {data.afterIndex}</div>
+        </div>
+        <div className="ml-auto text-right">
+          <div className="text-2xl font-semibold print-kpi-number" style={{ color: CORAL, fontFamily: "'IBM Plex Mono', monospace" }}>+{Math.round((data.afterIndex / data.beforeIndex - 1) * 100)}%</div>
+        </div>
+      </div>
+      {data.note && <div className="text-[10px] mt-2 print-footnote" style={{ color: MUTED }}>{data.note}</div>}
+    </div>
+  );
+}
+
 function LeverRow({ lever, before, after, desc }) {
   return (
-    <div className="flex flex-col sm:flex-row sm:items-center gap-1.5 sm:gap-3 py-2 border-t text-xs" style={{ borderColor: "#EDE8DA" }}>
+    <div className="flex flex-col sm:flex-row sm:items-center gap-1.5 sm:gap-3 py-2 border-t text-xs print-caption" style={{ borderColor: "#EDE8DA" }}>
       <div className="sm:w-24 font-semibold flex-shrink-0" style={{ color: NAVY, fontFamily: "'IBM Plex Mono', monospace", fontSize: 10.5 }}>{lever}</div>
       <div className="flex items-center gap-2 flex-shrink-0">
         <span style={{ color: MUTED }}>{before}</span>
@@ -735,31 +800,32 @@ function LeverRow({ lever, before, after, desc }) {
 function GrowthLever({ data, id, printChapter }) {
   return (
     <Card id={id || data.id} className={`p-5 md:p-6 ${printChapter ? "print-chapter" : ""}`}>
-      <div className="text-xs font-semibold tracking-wider mb-1.5" style={{ color: CORAL, fontFamily: "'IBM Plex Mono', monospace" }}>{data.tag}</div>
-      <h3 className="text-base md:text-lg font-semibold mb-2 leading-snug" style={{ color: NAVY, fontFamily: "'Space Grotesk', sans-serif" }}>{data.title}</h3>
-      {data.client && <div className="text-xs mb-2" style={{ color: MUTED }}>{data.client}</div>}
-      {data.challenge && <p className="text-sm leading-relaxed mb-3" style={{ color: INK }}>{data.challenge}</p>}
+      <div className="text-xs font-semibold tracking-wider mb-1.5 print-eyebrow" style={{ color: CORAL, fontFamily: "'IBM Plex Mono', monospace" }}>{data.tag}</div>
+      <h3 className="text-base md:text-lg font-semibold mb-2 leading-snug print-case-title" style={{ color: NAVY, fontFamily: "'Space Grotesk', sans-serif" }}>{data.title}</h3>
+      {data.client && <div className="text-xs mb-2 print-caption" style={{ color: MUTED }}>{data.client}</div>}
+      {data.challenge && <p className="text-sm leading-relaxed mb-3 print-body" style={{ color: INK }}>{data.challenge}</p>}
 
       {data.changes && (
-        <ul className="text-sm space-y-1 mb-3" style={{ color: INK }}>
+        <ul className="text-sm space-y-1 mb-3 print-body" style={{ color: INK }}>
           {data.changes.slice(0, 3).map((c, i) => <li key={i} className="flex gap-2"><span style={{ color: CORAL }}>·</span>{c}</li>)}
         </ul>
       )}
 
-      {data.flow && <FlowChips items={data.flow} />}
+      {data.flowSteps ? <FlowSteps items={data.flowSteps} /> : data.flow && <FlowChips items={data.flow} />}
       {data.levers && <div className="mb-3">{data.levers.map((l, i) => <LeverRow key={i} {...l} />)}</div>}
+      {data.compare && <IndexCompare data={data.compare} />}
 
       <div className="flex flex-wrap gap-2 mb-1">
         {data.result.map((r, i) => <StatChip key={i} value={r.value} label={r.label} context={r.context} />)}
       </div>
-      {data.scale && <div className="text-xs mt-1" style={{ color: MUTED }}>{data.scale}</div>}
-      {data.caption && <div className="text-xs mt-1" style={{ color: MUTED }}>{data.caption}</div>}
-      {data.secondary && <div className="text-xs mt-2 px-3 py-1.5 rounded-full inline-block" style={{ background: "#F3EFE3", color: NAVY }}>{data.secondary}</div>}
-      {data.footnote && <div className="text-[10px] italic mt-2" style={{ color: "#9C9585" }}>{data.footnote}</div>}
+      {data.scale && <div className="text-xs mt-1 print-caption" style={{ color: MUTED }}>{data.scale}</div>}
+      {data.caption && <div className="text-xs mt-1 print-caption" style={{ color: MUTED }}>{data.caption}</div>}
+      {data.secondary && <div className="text-xs mt-2 px-3 py-1.5 rounded-full inline-block print-caption" style={{ background: "#F3EFE3", color: NAVY }}>{data.secondary}</div>}
+      {data.footnote && <div className="text-[10px] italic mt-2 print-footnote" style={{ color: "#9C9585" }}>{data.footnote}</div>}
 
       {data.role && (
-        <div className="text-xs mt-3 pt-3 border-t" style={{ borderColor: "#EDE8DA", color: MUTED }}>
-          <span className="font-semibold" style={{ color: CORAL }}>MY ROLE  </span>{data.role}
+        <div className="text-xs mt-3 pt-3 border-t print-caption" style={{ borderColor: "#EDE8DA", color: MUTED }}>
+          <span className="font-semibold print-eyebrow" style={{ color: CORAL }}>MY ROLE  </span>{data.role}
         </div>
       )}
       {data.learning && (
@@ -869,16 +935,32 @@ function Portfolio() {
           p, li { orphans: 3; widows: 3; }
           .card-print, figure { break-inside: avoid; page-break-inside: avoid; }
           .print-closing-footer { display: block !important; }
-          section { margin-bottom: 5mm !important; }
-          .p-5, .p-6, .p-7, .p-8, .md\\:p-6, .md\\:p-7, .md\\:p-8 { padding: 4mm !important; }
-          .mb-8, .mb-6 { margin-bottom: 3mm !important; }
-          .mb-5, .mb-3 { margin-bottom: 2.5mm !important; }
-          .gap-5, .gap-3 { gap: 2.5mm !important; }
-          /* Selected Impact: always 4 equal columns on one row, never wraps/breaks */
-          .impact-grid { display: grid !important; grid-template-columns: repeat(4, 1fr) !important; gap: 3mm !important; }
-          /* Page map (~10 pages): 01 Overview / 02 Impact+In-house intro / 03 Media+Commerce /
-             04 CRM+CRO / 05 Amazon / 06 Shopee+Qoo10 / 07 Experiment / 08 Agency /
-             09 Startup+Career / 10 Contact. */
+          section { margin-bottom: 6mm !important; }
+          /* Readability > page count: padding/margins are generous, not compressed to
+             force a page-count target. Cards and sections are allowed to breathe. */
+          .p-5, .p-6, .p-7, .p-8, .md\\:p-6, .md\\:p-7, .md\\:p-8 { padding: 6mm !important; }
+          .mb-8, .mb-6 { margin-bottom: 4mm !important; }
+          .mb-5, .mb-3 { margin-bottom: 3mm !important; }
+          .gap-5, .gap-3, .gap-4 { gap: 3.5mm !important; }
+
+          /* ---- Minimum print font sizes (pt) — never shrunk to fit a page target ---- */
+          .print-hero-title { font-size: 32pt !important; line-height: 1.15 !important; }
+          .print-section-title { font-size: 23pt !important; line-height: 1.2 !important; }
+          .print-case-title { font-size: 19pt !important; line-height: 1.25 !important; }
+          .print-body { font-size: 11.5pt !important; line-height: 1.5 !important; }
+          .print-caption { font-size: 11pt !important; line-height: 1.4 !important; }
+          .print-eyebrow { font-size: 10pt !important; line-height: 1.3 !important; }
+          .print-footnote { font-size: 9pt !important; line-height: 1.35 !important; }
+          .print-kpi-number { font-size: 27pt !important; line-height: 1.1 !important; }
+          .print-kpi-number-lg { font-size: 32pt !important; line-height: 1.1 !important; }
+
+          /* Selected Impact: 2×2 large cards in print (web keeps its 4-column row) */
+          .impact-grid { display: grid !important; grid-template-columns: repeat(2, 1fr) !important; gap: 5mm !important; }
+          .impact-card-print { padding: 7mm !important; }
+
+          /* Page map (readability-first, ~12–14 pages): 01 Overview / 02 Selected Impact /
+             03 Media+Budget + Olive Young / 04 CRM + CRO / 05 Amazon / 06 Shopee+Qoo10 /
+             07 Experiment / 08 Agency / 09 Startup+Career / 10 Contact. */
           .print-chapter { break-before: page; page-break-before: always; }
         }
       `}</style>
@@ -944,7 +1026,7 @@ function Portfolio() {
           {/* ===================== PAGE 01 — OVERVIEW ===================== */}
           <section id="overview" ref={setRef("overview")} className="mb-12 scroll-mt-6">
             <div className="text-xs font-semibold tracking-[0.2em] mb-3" style={{ color: CORAL, fontFamily: "'IBM Plex Mono', monospace" }}>{t.hero.eyebrow}</div>
-            <h1 className="font-semibold leading-tight mb-4" style={{ color: NAVY, fontFamily: "'Space Grotesk', sans-serif", textWrap: "balance", fontSize: "clamp(26px, 4.5vw, 46px)" }}>
+            <h1 className="font-semibold leading-tight mb-4 print-hero-title" style={{ color: NAVY, fontFamily: "'Space Grotesk', sans-serif", textWrap: "balance", fontSize: "clamp(26px, 4.5vw, 46px)" }}>
               {t.hero.title1}<br /><span style={{ color: CORAL }}>{t.hero.titleHighlight}</span>{t.hero.title2}
             </h1>
             <p className="text-sm md:text-base max-w-2xl" style={{ color: INK, textWrap: "balance" }}>{t.hero.sub}</p>
@@ -993,17 +1075,16 @@ function Portfolio() {
             </div>
           </section>
 
-          {/* ===================== PAGE 02 — SELECTED IMPACT ===================== */}
+          {/* ===================== PAGE 02 — SELECTED IMPACT (alone, 2×2 large cards in print) ===================== */}
           <section id="impact" className="mb-12 scroll-mt-6 print-chapter">
-            <div className="text-xs font-semibold tracking-[0.18em] mb-2" style={{ color: CORAL, fontFamily: "'IBM Plex Mono', monospace" }}>SELECTED IMPACT</div>
+            <div className="text-xs font-semibold tracking-[0.18em] mb-2 print-eyebrow" style={{ color: CORAL, fontFamily: "'IBM Plex Mono', monospace" }}>SELECTED IMPACT</div>
             <div className="grid grid-cols-2 impact-grid gap-3">
               {t.selectedImpact.map((c, i) => (
-                <Card key={i} className="p-4" onClick={() => scrollToId(c.target)}>
-                  <div className="text-[10px] font-semibold tracking-wider mb-2" style={{ color: MUTED, fontFamily: "'IBM Plex Mono', monospace" }}>{c.tag}</div>
-                  <div className="text-xl font-semibold mb-0.5" style={{ color: c.color, fontFamily: "'IBM Plex Mono', monospace" }}>{c.kpi}</div>
-                  <div className="text-[11px] mb-1.5" style={{ color: MUTED }}>{c.label}</div>
-                  <div className="text-xs font-semibold" style={{ color: NAVY }}>{c.name}</div>
-                  <div className="text-[10px] leading-snug mt-1" style={{ color: MUTED }}>{c.context}</div>
+                <Card key={i} className="p-4 md:p-5 impact-card-print" onClick={() => scrollToId(c.target)}>
+                  <div className="text-sm md:text-base font-semibold mb-1.5 print-case-title" style={{ color: NAVY, fontFamily: "'Space Grotesk', sans-serif" }}>{c.name}</div>
+                  <div className="text-xl md:text-2xl font-semibold mb-0.5 print-kpi-number" style={{ color: c.color, fontFamily: "'IBM Plex Mono', monospace" }}>{c.kpi}</div>
+                  <div className="text-[11px] mb-2 print-caption" style={{ color: MUTED }}>{c.label} <span style={{ color: "#B9B29E" }}>· {c.context}</span></div>
+                  <div className="text-[10.5px] leading-snug pt-2 border-t print-footnote" style={{ color: MUTED, borderColor: "#EDE8DA" }}>{c.strategy}</div>
                 </Card>
               ))}
             </div>
@@ -1011,13 +1092,15 @@ function Portfolio() {
 
           {/* ===================== PAGE 03–04 — CURRENT IN-HOUSE GROWTH ===================== */}
           <section id="inhouse" ref={setRef("inhouse")} className="mb-12 scroll-mt-6">
-            <SectionHeading eyebrow={t.inhouse.eyebrow} title={t.inhouse.title} sub={t.inhouse.sub} />
-            {/* Two explicit page-grouped rows (Media+Commerce / CRM+CRO) — the print-chapter
-                break lives on the ROW wrapper, not on an individual grid item, so a 2-column
-                grid can't split one row's card onto the following page. */}
-            <div className="grid md:grid-cols-2 gap-4 print-chapter">
-              <GrowthLever data={t.inhouse.levers[0]} />
-              <GrowthLever data={t.inhouse.levers[1]} />
+            {/* Heading + row 1 (Media/Budget + Olive Young) are grouped in ONE print-chapter
+                wrapper so the section title never dangles alone on the Selected Impact page
+                with a row pushed to the next page — the break lands before the whole group. */}
+            <div className="print-chapter">
+              <SectionHeading eyebrow={t.inhouse.eyebrow} title={t.inhouse.title} sub={t.inhouse.sub} />
+              <div className="grid md:grid-cols-2 gap-4">
+                <GrowthLever data={t.inhouse.levers[0]} />
+                <GrowthLever data={t.inhouse.levers[1]} />
+              </div>
             </div>
             <div className="grid md:grid-cols-2 gap-4 print-chapter mt-4">
               <GrowthLever data={t.inhouse.levers[2]} />
@@ -1027,45 +1110,49 @@ function Portfolio() {
 
           {/* ===================== PAGE 05 — GLOBAL: AMAZON ===================== */}
           <section id="global" ref={setRef("global")} className="mb-12 scroll-mt-6">
-            <SectionHeading eyebrow={t.global.eyebrow} title={t.global.title} sub={t.global.sub} />
-            <Card id="global-amazon" className="p-6 md:p-7 mb-4 print-chapter">
-              <div className="text-xs font-semibold tracking-wider mb-1.5" style={{ color: CORAL, fontFamily: "'IBM Plex Mono', monospace" }}>{t.global.amazon.tag}</div>
-              <h3 className="text-lg md:text-xl font-semibold mb-4" style={{ color: NAVY, fontFamily: "'Space Grotesk', sans-serif" }}>{t.global.amazon.title}</h3>
-              <div className="mb-4">{t.global.amazon.levers.map((l, i) => <LeverRow key={i} {...l} />)}</div>
-              <div className="flex flex-wrap gap-2 mb-1">
-                {t.global.amazon.result.map((r, i) => <StatChip key={i} value={r.value} label={r.label} size="lg" />)}
-              </div>
-              <div className="text-xs mt-1" style={{ color: MUTED }}>{t.global.amazon.scale}</div>
-              <div className="text-xs mt-1" style={{ color: MUTED }}>{t.global.amazon.caption}</div>
-              <div className="text-[10px] italic mt-2" style={{ color: "#9C9585" }}>{t.global.amazon.footnote}</div>
-              <p className="text-xs leading-relaxed mt-3 print-hide" style={{ color: MUTED }}>
-                <span className="font-semibold" style={{ color: NAVY_SOFT }}>LEARNING  </span>{t.global.amazon.learning}
-              </p>
-            </Card>
+            {/* Heading grouped with the Amazon card in one break wrapper — same reasoning
+                as the in-house section: never let a heading dangle alone on the prior page. */}
+            <div className="print-chapter">
+              <SectionHeading eyebrow={t.global.eyebrow} title={t.global.title} sub={t.global.sub} />
+              <Card id="global-amazon" className="p-6 md:p-7 mb-4">
+                <div className="text-xs font-semibold tracking-wider mb-1.5 print-eyebrow" style={{ color: CORAL, fontFamily: "'IBM Plex Mono', monospace" }}>{t.global.amazon.tag}</div>
+                <h3 className="text-lg md:text-xl font-semibold mb-4 print-case-title" style={{ color: NAVY, fontFamily: "'Space Grotesk', sans-serif" }}>{t.global.amazon.title}</h3>
+                <div className="mb-4">{t.global.amazon.levers.map((l, i) => <LeverRow key={i} {...l} />)}</div>
+                <div className="flex flex-wrap gap-2 mb-1">
+                  {t.global.amazon.result.map((r, i) => <StatChip key={i} value={r.value} label={r.label} size="lg" />)}
+                </div>
+                <div className="text-xs mt-1 print-caption" style={{ color: MUTED }}>{t.global.amazon.scale}</div>
+                <div className="text-xs mt-1 print-caption" style={{ color: MUTED }}>{t.global.amazon.caption}</div>
+                <div className="text-[10px] italic mt-2 print-footnote" style={{ color: "#9C9585" }}>{t.global.amazon.footnote}</div>
+                <p className="text-xs leading-relaxed mt-3 print-hide" style={{ color: MUTED }}>
+                  <span className="font-semibold" style={{ color: NAVY_SOFT }}>LEARNING  </span>{t.global.amazon.learning}
+                </p>
+              </Card>
+            </div>
 
             {/* ===================== PAGE 06 — GLOBAL: SHOPEE + QOO10 ===================== */}
             <div className="grid md:grid-cols-2 gap-4 print-chapter">
               <Card className="p-5 md:p-6">
-                <div className="text-xs font-semibold tracking-wider mb-1.5" style={{ color: CORAL, fontFamily: "'IBM Plex Mono', monospace" }}>{t.global.shopee.tag}</div>
-                <h3 className="text-base font-semibold mb-2" style={{ color: NAVY }}>{t.global.shopee.title}</h3>
+                <div className="text-xs font-semibold tracking-wider mb-1.5 print-eyebrow" style={{ color: CORAL, fontFamily: "'IBM Plex Mono', monospace" }}>{t.global.shopee.tag}</div>
+                <h3 className="text-base font-semibold mb-2 print-case-title" style={{ color: NAVY }}>{t.global.shopee.title}</h3>
                 <FlowChips items={t.global.shopee.flow} />
                 <div className="flex flex-wrap gap-2 mb-1">
                   {t.global.shopee.result.map((r, i) => <StatChip key={i} value={r.value} label={r.label} />)}
                 </div>
-                <div className="text-xs mt-1" style={{ color: MUTED }}>{t.global.shopee.context}</div>
+                <div className="text-xs mt-1 print-caption" style={{ color: MUTED }}>{t.global.shopee.context}</div>
                 <p className="text-xs leading-relaxed mt-3 print-hide" style={{ color: MUTED }}>
                   <span className="font-semibold" style={{ color: NAVY_SOFT }}>LEARNING  </span>{t.global.shopee.learning}
                 </p>
               </Card>
               <Card className="p-5 md:p-6">
-                <div className="text-xs font-semibold tracking-wider mb-1.5" style={{ color: CORAL, fontFamily: "'IBM Plex Mono', monospace" }}>{t.global.qoo10.tag}</div>
-                <h3 className="text-base font-semibold mb-3" style={{ color: NAVY }}>{t.global.qoo10.title}</h3>
+                <div className="text-xs font-semibold tracking-wider mb-1.5 print-eyebrow" style={{ color: CORAL, fontFamily: "'IBM Plex Mono', monospace" }}>{t.global.qoo10.tag}</div>
+                <h3 className="text-base font-semibold mb-3 print-case-title" style={{ color: NAVY }}>{t.global.qoo10.title}</h3>
                 <div className="flex flex-wrap gap-2 mb-3">
                   {t.global.qoo10.result.map((r, i) => <StatChip key={i} value={r.value} label={r.label} context={r.context} />)}
                 </div>
                 <div className="rounded-lg p-3" style={{ background: "#F3EFE3" }}>
-                  <div className="text-[10px] font-semibold tracking-wider mb-1" style={{ color: CORAL }}>{t.global.qoo10.signalLabel}</div>
-                  <div className="text-sm" style={{ color: NAVY }}>{t.global.qoo10.signalCopy}</div>
+                  <div className="text-[10px] font-semibold tracking-wider mb-1 print-eyebrow" style={{ color: CORAL }}>{t.global.qoo10.signalLabel}</div>
+                  <div className="text-sm print-body" style={{ color: NAVY }}>{t.global.qoo10.signalCopy}</div>
                 </div>
               </Card>
             </div>
@@ -1079,12 +1166,12 @@ function Portfolio() {
               <div className="flex flex-wrap gap-2 mb-3">
                 {t.experiment.result.map((r, i) => <StatChip key={i} value={r.value} label={r.label} context={r.context} size="lg" />)}
               </div>
-              <div className="text-xs mt-2 pt-3 border-t" style={{ borderColor: "#EDE8DA", color: MUTED }}>
-                <span className="font-semibold" style={{ color: CORAL }}>CONTRIBUTION  </span>{t.experiment.contribution}
+              <div className="text-xs mt-2 pt-3 border-t print-caption" style={{ borderColor: "#EDE8DA", color: MUTED }}>
+                <span className="font-semibold print-eyebrow" style={{ color: CORAL }}>CONTRIBUTION  </span>{t.experiment.contribution}
               </div>
-              <div className="text-[10px] mt-1" style={{ color: "#A8A08C" }}>{t.experiment.tools}</div>
+              <div className="text-[10px] mt-1 print-footnote" style={{ color: "#A8A08C" }}>{t.experiment.tools}</div>
             </Card>
-            <div className="mt-3 text-xs italic" style={{ color: "#9C9585" }}>{t.experiment.recap.note}</div>
+            <div className="mt-3 text-xs italic print-footnote" style={{ color: "#9C9585" }}>{t.experiment.recap.note}</div>
           </section>
 
           {/* ===================== PAGE 08 — SELECTED AGENCY ===================== */}
@@ -1094,10 +1181,10 @@ function Portfolio() {
               {t.agency.cases.map((c, i) => <GrowthLever key={i} data={c} id={`agency-${i}`} />)}
             </div>
             <div className="mt-5 card-print">
-              <div className="text-xs font-semibold tracking-wider mb-3" style={{ color: NAVY_SOFT, fontFamily: "'IBM Plex Mono', monospace" }}>{t.agency.additionalTitle}</div>
+              <div className="text-xs font-semibold tracking-wider mb-3 print-eyebrow" style={{ color: NAVY_SOFT, fontFamily: "'IBM Plex Mono', monospace" }}>{t.agency.additionalTitle}</div>
               <div className="rounded-xl overflow-hidden" style={{ background: "#FAF7EF" }}>
                 {t.agency.additional.map((item, i) => (
-                  <div key={i} className={`flex flex-wrap gap-x-3 gap-y-1 px-4 py-3 text-xs ${i > 0 ? "border-t" : ""}`} style={{ borderColor: "#EDE8DA" }}>
+                  <div key={i} className={`flex flex-wrap gap-x-3 gap-y-1 px-4 py-3 text-xs print-caption ${i > 0 ? "border-t" : ""}`} style={{ borderColor: "#EDE8DA" }}>
                     <span className="font-semibold" style={{ color: NAVY, minWidth: 200 }}>{item.client}</span>
                     <span style={{ color: CORAL }}>{item.result}</span>
                   </div>

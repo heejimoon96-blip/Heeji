@@ -777,7 +777,7 @@ function EvidenceGallery({ images }) {
           <div className="absolute inset-0 flex items-center justify-center bg-black/0 group-hover:bg-black/20 transition-colors">
             <ZoomIn size={18} className="text-white opacity-0 group-hover:opacity-90 transition-opacity" />
           </div>
-          <div className="text-[10px] px-2 py-1.5" style={{ color: MUTED, background: "#FAF7EF" }}>{img.caption}</div>
+          <div className="text-[10px] px-2 py-1.5 evidence-caption" style={{ color: MUTED, background: "#FAF7EF" }}>{img.caption}</div>
         </div>
       ))}
     </div>
@@ -1107,7 +1107,7 @@ function VideoGallery({ videos, columns = 3, printLimit }) {
   );
 }
 
-function ProjectCard({ index, title, client, tag, contribution, problem, decision, how, result, role, chart, imgHint, evidence, video, note, anchorId, printChapter }) {
+function ProjectCard({ index, title, client, tag, contribution, problem, printContext, decision, how, result, role, chart, imgHint, evidence, video, note, anchorId, printChapter }) {
   return (
     <Card id={anchorId} className={`p-6 md:p-7 scroll-mt-24 ${printChapter ? "print-chapter" : ""}`}>
       <div className="flex items-start justify-between gap-3 flex-wrap mb-1">
@@ -1124,8 +1124,10 @@ function ProjectCard({ index, title, client, tag, contribution, problem, decisio
       </h3>
       {client && <p className="text-xs mb-3" style={{ color: MUTED }}>{client}</p>}
 
+      {/* CONTRIBUTION / MY ROLE — kept on web, hidden in the printed PDF (spec: no large
+          metadata boxes repeated per case; role context lives once at the company header). */}
       {(contribution || role) && (
-        <div className="rounded-lg p-3 mb-4 flex flex-col sm:flex-row sm:items-start gap-2 sm:gap-4" style={{ background: "#FAF7EF" }}>
+        <div className="rounded-lg p-3 mb-4 flex flex-col sm:flex-row sm:items-start gap-2 sm:gap-4 print-hide" style={{ background: "#FAF7EF" }}>
           {contribution && (
             <div className="flex-shrink-0">
               <div className="text-[10px] font-semibold tracking-wider mb-0.5" style={{ color: CORAL }}>CONTRIBUTION</div>
@@ -1142,20 +1144,23 @@ function ProjectCard({ index, title, client, tag, contribution, problem, decisio
       )}
 
       <div className="mb-4">
-        <div className="text-xs font-semibold mb-1.5" style={{ color: NAVY_SOFT }}>PROBLEM</div>
-        <p className="text-sm leading-relaxed" style={{ color: INK }}>{problem}</p>
+        <div className="text-xs font-semibold mb-1.5" style={{ color: NAVY_SOFT }}>{printContext ? "CONTEXT" : "PROBLEM"}</div>
+        <p className={`text-sm leading-relaxed ${printContext ? "screen-only" : ""}`} style={{ color: INK }}>{problem}</p>
+        {printContext && <p className="text-sm leading-relaxed print-only" style={{ color: INK }}>{printContext}</p>}
       </div>
 
+      {/* MY DECISION — full reasoning stays on web; in print the EXECUTION bullets below
+          already carry the decision, so repeating it as a separate box would be redundant. */}
       {decision && (
-        <div className="mb-5 rounded-lg p-3.5" style={{ background: "#FAF7EF", borderLeft: `3px solid ${CORAL}` }}>
+        <div className="mb-5 rounded-lg p-3.5 print-hide" style={{ background: "#FAF7EF", borderLeft: `3px solid ${CORAL}` }}>
           <div className="text-xs font-semibold mb-1.5" style={{ color: CORAL }}>MY DECISION</div>
           <p className="text-sm leading-relaxed" style={{ color: INK }}>{decision}</p>
         </div>
       )}
 
       <div className="mb-5">
-        <div className="text-xs font-semibold mb-1.5" style={{ color: NAVY_SOFT }}>EXECUTION</div>
-        <ul className="text-sm space-y-1" style={{ color: INK }}>
+        <div className="text-xs font-semibold mb-1.5" style={{ color: NAVY_SOFT }}>{printContext ? "WHAT I CHANGED" : "EXECUTION"}</div>
+        <ul className="text-sm space-y-1 exec-list" style={{ color: INK }}>
           {how.map((p, i) => <li key={i} className="flex gap-2"><span style={{ color: CORAL }}>·</span>{p}</li>)}
         </ul>
       </div>
@@ -1172,7 +1177,8 @@ function ProjectCard({ index, title, client, tag, contribution, problem, decisio
         </div>
       )}
 
-      {note && <p className="text-sm leading-relaxed mt-3" style={{ color: INK }}>{note}</p>}
+      {/* Secondary "note" commentary — web only; PDF stays to KPI + What I Changed. */}
+      {note && <p className="text-sm leading-relaxed mt-3 print-hide" style={{ color: INK }}>{note}</p>}
 
       {video && <YouTubeClickToLoad videoId={video.id} caption={video.caption} />}
       {evidence && <EvidenceGallery images={evidence} />}
@@ -1296,6 +1302,7 @@ function Portfolio() {
         /* Poster images only exist for the printed PDF — never shown on screen */
         .print-video-poster { display: none; }
         .print-only-link { display: none; }
+        .print-only { display: none; }
 
         /* ============ PRINT / PDF (A4 Landscape) ============ */
         @page { size: A4 landscape; margin: 10mm; }
@@ -1317,10 +1324,15 @@ function Portfolio() {
             max-height: 150px !important; object-fit: cover !important; border-radius: 8px !important;
           }
           .print-only-link { display: block !important; }
+          .print-only { display: block !important; }
+          .screen-only { display: none !important; }
+          /* Execution/How lists cap at 3 bullets in print — full list stays on web */
+          .exec-list li:nth-child(n+4) { display: none !important; }
           img:not(.evidence-thumb) { max-width: 100% !important; height: auto !important; object-fit: contain !important; }
           /* Evidence gallery thumbnails keep their fixed grid size in print so a single
              full-resolution photo can't fill an entire page. */
-          .evidence-thumb { max-width: 100% !important; max-height: 120px !important; width: 100% !important; height: 120px !important; object-fit: cover !important; }
+          .evidence-thumb { max-width: 100% !important; max-height: 95px !important; width: 100% !important; height: 95px !important; object-fit: cover !important; }
+          .evidence-caption { white-space: nowrap !important; overflow: hidden !important; text-overflow: ellipsis !important; }
           h1, h2, h3, h4, .avoid-break-after { break-after: avoid; page-break-after: avoid; }
           /* Heading (or company header) must stay glued to whatever follows it —
              fixes "heading alone on a page, content starts next page" bug. */
@@ -1511,7 +1523,7 @@ function Portfolio() {
                   <div className="text-[11px] mb-2" style={{ color: MUTED }}>{c.kpiLabel}</div>
                   <div className="text-xs font-semibold mb-1" style={{ color: NAVY }}>{c.name}</div>
                   <div className="text-[11px] leading-snug mb-3" style={{ color: MUTED }}>{c.change}</div>
-                  <div className="mt-auto flex items-center gap-1 text-[11px] font-semibold" style={{ color: CORAL }}>
+                  <div className="mt-auto flex items-center gap-1 text-[11px] font-semibold print-hide" style={{ color: CORAL }}>
                     View Case <ChevronRight size={12} color={CORAL} />
                   </div>
                 </Card>
@@ -1561,6 +1573,7 @@ function Portfolio() {
                 title={t.celltrion[0].title}
                 contribution="Lead"
                 problem={t.celltrion[0].problem}
+                printContext={lang === "kr" ? "매체 ROAS와 GA4 실매출 기여도 간 차이가 있는 캠페인을 확인했습니다." : "I found campaigns where platform ROAS and GA4 actual revenue contribution diverged."}
                 decision={t.celltrion[0].decision}
                 how={t.celltrion[0].how}
                 chart={
@@ -1585,6 +1598,7 @@ function Portfolio() {
                 title={t.celltrion[1].title}
                 contribution="Lead"
                 problem={t.celltrion[1].problem}
+                printContext={lang === "kr" ? "전체 고객 일괄 발송에서 구매·행동 데이터 기반 세분화로 전환했습니다." : "I moved from broadcast sends to segments built on purchase and behavior data."}
                 decision={t.celltrion[1].decision}
                 how={t.celltrion[1].how}
                 chart={
@@ -1617,6 +1631,7 @@ function Portfolio() {
                 printChapter
                 title={t.celltrion[2].title}
                 problem={t.celltrion[2].problem}
+                printContext={lang === "kr" ? "세일 기간엔 평시와 같은 운영으로 트래픽·리타겟팅 모수가 부족했습니다." : "Running the same always-on setup during sale periods left traffic and retargeting pools short."}
                 how={t.celltrion[2].how}
                 chart={
                   <div>
@@ -1632,6 +1647,7 @@ function Portfolio() {
                 index="04"
                 title={t.celltrion[3].title}
                 problem={t.celltrion[3].problem}
+                printContext={lang === "kr" ? "유입 대비 구매전환율이 낮아, 랜딩 이후 고객 행동을 확인했습니다." : "Traffic-to-purchase conversion was low, so I looked at customer behavior after the landing click."}
                 how={t.celltrion[3].how}
                 chart={
                   <div className="flex flex-wrap items-center gap-1.5 mb-4 text-xs" style={{ color: NAVY }}>
@@ -1867,7 +1883,7 @@ function Portfolio() {
             </Card>
 
             {/* AI CREATIVE EXPERIMENT — separate from local market execution galleries */}
-            <Card id="kpi-ai" className="p-6 mb-5 scroll-mt-24 print-chapter">
+            <Card id="kpi-ai" className="p-6 mb-5 scroll-mt-24">
               <div className="flex items-start justify-between gap-3 flex-wrap mb-2">
                 <div className="text-xs font-semibold tracking-wider" style={{ color: CORAL, fontFamily: "'IBM Plex Mono', monospace" }}>AI CREATIVE EXPERIMENT</div>
                 <Tag tone="coral">{t.global.aiCreative.tag}</Tag>

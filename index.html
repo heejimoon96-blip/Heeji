@@ -434,7 +434,7 @@ const LANG_CONTENT = {
       { name: "OLIVE YOUNG", kpi: "+316%", label: "ONLINE SALES", strategy: "Always-on Traffic → Retargeting Pool → Sale Conversion", context: "YoY · Same Month", color: CORAL, target: "lever-commerce" },
       { name: "CRM", kpi: "+102.7%", label: "CRM CVR", strategy: "Blanket sends → data-driven customer segments", context: "CPA -10.4% · ROAS +25.3%", color: TEAL, target: "lever-crm" },
       { name: "AMAZON US", kpi: "+846%", label: "PURCHASES", strategy: "Rebuilt media, targeting and landing to change the path to purchase", context: "Spend +4% · Prime Day → Prime Big Deal", color: NAVY_SOFT, target: "global-amazon" },
-      { name: "AI CREATIVE TEST", kpi: "+116%", label: "CTR", strategy: "Same product / media / week A-B tests to validate creative hypotheses", context: "Same Product · Media · Week", color: CORAL, target: "experiment" },
+      { name: "AI CREATIVE TEST", kpi: "+116%", label: "CTR", strategy: "A/B test under the same product, media, and week conditions", context: "Same Product · Media · Week", color: CORAL, target: "experiment" },
     ],
     inhouse: {
       eyebrow: "CURRENT IN-HOUSE GROWTH",
@@ -512,7 +512,7 @@ const LANG_CONTENT = {
           challenge: "Ad traffic to the product page was solid, but conversion from that traffic was low.",
           changes: [
             "Reviewed VOC and on-page behavior",
-            "Moved real reviews higher on the page and added an exit-intent banner",
+            "Moved real reviews higher on the page and added an exit intent banner",
             "Compared CVR before/after and expanded the approach to GpDerm",
           ],
           flow: ["Traffic", "Low CVR", "VOC / Behavior", "Page Change"],
@@ -562,7 +562,7 @@ const LANG_CONTENT = {
       },
       qoo10: {
         tag: "QOO10 · SUPPORTING",
-        title: "Managed product, search, in-app media, and marketplace exposure together.",
+        title: "Managed product, search, in-platform media, and marketplace exposure together.",
         result: [{ label: "TOTAL SALES", value: "+176.58%", context: "2025 Aug → Nov" }],
         signalLabel: "MARKETPLACE CUSTOMER SIGNAL",
         signalCopy: "Returning customers 43 → 383",
@@ -651,7 +651,7 @@ const LANG_CONTENT = {
       timeline: [
         { period: "2019–2021", org: "Startup", role: "Customer / Product", detail: "" },
         { period: "2021–2024", org: "AdEfficiency / Madup", role: "Agency · Hands-on Media Execution", detail: "" },
-        { period: "2025–NOW", org: "Celltrion Skincare", role: "In-house · Strategy · Budget · CRM · CRO · Commerce", detail: "Led domestic performance and CRM in H2 2025; owned performance marketing and CRM solo following the 2026 reorganization", current: true },
+        { period: "2025–NOW", org: "Celltrion Skincare", role: "In-house · Strategy · Budget · CRM · CRO · Commerce", detail: "Led domestic performance and CRM in H2 2025; continued to own performance marketing and CRM following the 2026 reorganization", current: true },
       ],
     },
     contact: {
@@ -1081,15 +1081,19 @@ function PrintCompare({ data }) {
   );
 }
 
-function PrintEvidenceGrid({ images, cols = 2, thumbH = "24mm" }) {
+function PrintEvidenceGrid({ images, cols = 2, thumbH = "24mm", gap = "2.5mm", captionLines = 1 }) {
   return (
-    <div style={{ display: "grid", gridTemplateColumns: `repeat(${cols}, 1fr)`, gap: "2.5mm" }}>
+    <div style={{ display: "grid", gridTemplateColumns: `repeat(${cols}, 1fr)`, gap }}>
       {images.map((img, i) => {
         const src = typeof img.src === "string" && PRINT_IMG[img.src] ? PRINT_IMG[img.src] : img.src;
         return (
           <div key={i} style={{ borderRadius: 8, overflow: "hidden", border: "1px solid #EAE5D8", minWidth: 0 }}>
             <img src={src} alt={img.caption} style={{ width: "100%", height: thumbH, objectFit: "cover", objectPosition: img.focus || "top", display: "block" }} />
-            <div style={{ fontSize: "7.5pt", color: MUTED, background: "#FAF7EF", padding: "1mm 1.5mm", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{img.caption}</div>
+            {captionLines >= 2 ? (
+              <div style={{ fontSize: "7.5pt", color: MUTED, background: "#FAF7EF", padding: "1mm 1.5mm", lineHeight: 1.25, display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" }}>{img.caption}</div>
+            ) : (
+              <div style={{ fontSize: "7.5pt", color: MUTED, background: "#FAF7EF", padding: "1mm 1.5mm", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{img.caption}</div>
+            )}
           </div>
         );
       })}
@@ -1301,7 +1305,7 @@ function PrintPortfolio({ lang, t }) {
       <div className="print-page" style={{ padding: "7mm 9mm" }}>
         <CompactPrintHeading eyebrow={t.experiment.eyebrow} title={t.experiment.title} sub={t.experiment.sub} />
         <div className="print-page-body">
-          <div className="print-card" style={{ background: CARD, border: "1px solid #EAE5D8", borderRadius: 12, padding: "5mm 6mm", height: "100%", display: "grid", gridTemplateColumns: "36% 64%", gap: "6mm", minHeight: 0 }}>
+          <div className="print-card" style={{ background: CARD, border: "1px solid #EAE5D8", borderRadius: 12, padding: "5mm 6mm", height: "100%", display: "grid", gridTemplateColumns: "34% 66%", gap: "6mm", minHeight: 0 }}>
             <div style={{ display: "flex", flexDirection: "column", minHeight: 0 }}>
               <PrintFlowRow items={t.experiment.flow} />
               <div style={{ display: "flex", flexWrap: "wrap", gap: "2mm", marginBottom: "3mm" }}>
@@ -1314,9 +1318,9 @@ function PrintPortfolio({ lang, t }) {
                 <span style={{ fontWeight: 700, color: NAVY_SOFT }}>TOOLS  </span>{t.experiment.tools}
               </div>
             </div>
-            <div style={{ minHeight: 0 }}>
-              <div style={{ fontSize: "8.5pt", fontWeight: 700, color: CORAL, fontFamily: "'IBM Plex Mono', monospace", marginBottom: "1.5mm" }}>ACTUAL CREATIVE</div>
-              <PrintEvidenceGrid images={t.experiment.creative.slice(0, 4)} cols={2} thumbH="19mm" />
+            <div style={{ minHeight: 0, height: "100%", display: "flex", flexDirection: "column", justifyContent: "center" }}>
+              <div style={{ fontSize: "8.5pt", fontWeight: 700, color: CORAL, fontFamily: "'IBM Plex Mono', monospace", marginBottom: "2.5mm" }}>ACTUAL CREATIVE</div>
+              <PrintEvidenceGrid images={t.experiment.creative.slice(0, 4)} cols={2} thumbH="28mm" gap="4mm" captionLines={2} />
             </div>
           </div>
         </div>

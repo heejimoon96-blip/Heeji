@@ -75,7 +75,8 @@ const MUTED = "#6B7280";
 const INK = "#4B4536";
 
 const FONT_IMPORT =
-  "@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap');";
+  "@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&family=Noto+Sans+KR:wght@400;500;600;700&display=swap');";
+const KR_FONT = "'Noto Sans KR', sans-serif";
 
 /* ---------------------------------------------------------------------- */
 /*  Image assets (uploaded evidence, embedded as data URIs)                */
@@ -1018,11 +1019,32 @@ function CompactPrintHeading({ eyebrow, title, sub }) {
    value wraps INSIDE its own card rather than pushing the box wider than
    its grid column. */
 function PrintStat({ value, label, context, size = "md" }) {
-  const isLong = value.length > 10;
+  // Raised from >10 to >15: "1,106% / 949%" (13 chars) no longer trips the
+  // long-value shrink — it now renders at the same size as "2주 완판" instead
+  // of mismatching it (21pt vs 26pt). Genuinely long values like the EN
+  // "Sold out in 2 weeks" (20 chars) still get the safe wrap+shrink
+  // treatment that keeps them from crossing into a neighboring column.
+  const isLong = value.length > 15;
   const fontSize = isLong ? "21pt" : size === "xl" ? "32pt" : size === "lg" ? "26pt" : "22pt";
+  // A Korean KPI value (e.g. "2주 완판") must never render in IBM Plex Mono —
+  // that font has no proper Hangul glyphs, so Korean falls back to a
+  // different font than the digits/slash around it, producing the mismatched
+  // "2주  완판" look with abnormal spacing. Detect Hangul and switch the whole
+  // value to Noto Sans KR instead, with keep-all so it can't wrap mid-word.
+  const hasKorean = /[가-힣]/.test(value);
   return (
     <div style={{ background: "#F3EFE3", borderRadius: 10, padding: size === "xl" ? "4mm 5mm" : "2.5mm 4mm", flex: "1 1 auto", minWidth: 0 }}>
-      <div style={{ fontSize, fontWeight: 700, color: CORAL, fontFamily: "'IBM Plex Mono', monospace", lineHeight: 1.15, whiteSpace: isLong ? "normal" : "nowrap", overflowWrap: "break-word", wordBreak: "normal" }}>{value}</div>
+      <div style={{
+        fontSize,
+        fontWeight: 700,
+        color: CORAL,
+        fontFamily: hasKorean ? KR_FONT : "'IBM Plex Mono', monospace",
+        letterSpacing: hasKorean ? "-0.02em" : "normal",
+        lineHeight: hasKorean ? 1.1 : 1.15,
+        whiteSpace: hasKorean ? "nowrap" : (isLong ? "normal" : "nowrap"),
+        wordBreak: hasKorean ? "keep-all" : "normal",
+        overflowWrap: "break-word",
+      }}>{value}</div>
       <div style={{ fontSize: "9.5pt", fontWeight: 600, color: NAVY, marginTop: "0.5mm" }}>{label}</div>
       {context && <div style={{ fontSize: "8.5pt", color: MUTED, marginTop: "0.5mm" }}>{context}</div>}
     </div>

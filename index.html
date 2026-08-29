@@ -191,12 +191,17 @@ const LANG_CONTENT = {
             "리타겟팅·기존 고객 비중을 늘려 효율을 계속 조정",
           ],
           flow: ["Media ROAS", "GA4 Revenue", "Cut / Scale", "Budget Reallocation"],
-          compare: { title: "D2C ROAS · CHANNEL TREND", beforeLabel: "2024", beforeIndex: 100, afterLabel: "2025", afterIndex: 204, caption: "2024 → 2025 연간 채널 추이 · 2025.07 합류" },
-          result: [{ label: "자사몰 ROAS (Index)", value: "+104%", context: "Channel Trend" }],
-          role: "매체 ROAS 대비 GA4 실매출 대조 분석 · 예산 재배분 의사결정 · 리타겟팅 비중 조정",
+          resultHeading: "D2C ROAS · CHANNEL RESULT",
+          result: [
+            { label: "자사몰 ROAS", value: "×1.7", context: "Main Result", size: "lg" },
+            { label: "Meta ROAS", value: "×1.8", size: "md" },
+            { label: "Kakao DA ROAS", value: "×2.2", size: "md" },
+          ],
+          caption: "2024 → 2025 YoY · Channel Result · 2025.07 합류",
+          role: "GA4 실매출 분석 · Campaign Cut / Scale 의사결정 · 예산 재배분 · Retargeting 운영",
           printContext: "매체 성과와 GA4 실매출을 대조해 실제 매출 기여도를 기준으로 예산을 재배분했습니다.",
           printChanges: ["매체 ROAS ↔ GA4 실매출 대조", "저기여 Campaign Cut / 고기여 Campaign Scale", "Retargeting 비중 조정"],
-          printRole: "GA4 실매출 분석 · Budget Reallocation · Retargeting 운영",
+          printRole: "GA4 실매출 분석 · Campaign Cut / Scale 의사결정 · 예산 재배분 · Retargeting 운영",
         },
         {
           id: "lever-commerce",
@@ -453,12 +458,17 @@ const LANG_CONTENT = {
             "Kept expanding retargeting and existing-customer share as efficiency shifted",
           ],
           flow: ["Media ROAS", "GA4 Revenue", "Cut / Scale", "Budget Reallocation"],
-          compare: { title: "D2C ROAS · CHANNEL TREND", beforeLabel: "2024", beforeIndex: 100, afterLabel: "2025", afterIndex: 204, caption: "2024 → 2025 Channel Trend · Joined Jul 2025" },
-          result: [{ label: "D2C ROAS (Index)", value: "+104%", context: "Channel Trend" }],
-          role: "Cross-checked media ROAS against GA4 revenue · made budget-reallocation decisions · adjusted retargeting share",
+          resultHeading: "D2C ROAS · CHANNEL RESULT",
+          result: [
+            { label: "Self-mall ROAS", value: "×1.7", context: "Main Result", size: "lg" },
+            { label: "Meta ROAS", value: "×1.8", size: "md" },
+            { label: "Kakao DA ROAS", value: "×2.2", size: "md" },
+          ],
+          caption: "2024 → 2025 YoY · Channel Result · Joined Jul 2025",
+          role: "GA4 revenue analysis · campaign cut / scale decisions · budget reallocation · retargeting optimization",
           printContext: "I cross-checked media ROAS with GA4 revenue and reallocated budget toward real sales contribution.",
           printChanges: ["Cross-check media ROAS vs. GA4 revenue", "Cut / scale by sales contribution", "Adjust retargeting share"],
-          printRole: "Revenue analysis · budget reallocation · retargeting",
+          printRole: "GA4 revenue analysis · campaign cut / scale decisions · budget reallocation · retargeting optimization",
         },
         {
           id: "lever-commerce",
@@ -954,7 +964,7 @@ function GrowthLever({ data, id, printChapter }) {
         <>
           {data.resultHeading && <div className="text-sm md:text-base font-semibold mb-1 print-case-title" style={{ color: NAVY, fontFamily: "'Space Grotesk', sans-serif" }}>{data.resultHeading}</div>}
           <div className="flex flex-wrap gap-2 mb-1">
-            {data.result.map((r, i) => <StatChip key={i} value={r.value} label={r.label} context={r.context} />)}
+            {data.result.map((r, i) => <StatChip key={i} value={r.value} label={r.label} context={r.context} size={r.size} />)}
           </div>
         </>
       )}
@@ -1316,7 +1326,11 @@ function PrintPortfolio({ lang, t }) {
                 {d2c.printChanges.map((a, i) => <li key={i} style={{ display: "flex", gap: "1.5mm" }}><span style={{ color: CORAL }}>·</span>{a}</li>)}
               </ul>
               <PrintFlowRow items={d2c.flow} />
-              <PrintCompare data={d2c.compare} />
+              <div style={{ fontSize: "9.5pt", fontWeight: 700, color: NAVY, fontFamily: "'Space Grotesk', sans-serif", marginBottom: "1mm" }}>{d2c.resultHeading}</div>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: "2mm", marginBottom: "1mm" }}>
+                {d2c.result.map((r, i) => <PrintStat key={i} value={r.value} label={r.label} context={r.context} size={r.size} />)}
+              </div>
+              {d2c.caption && <div style={{ fontSize: "8.5pt", color: MUTED, marginBottom: "1mm" }}>{d2c.caption}</div>}
             </div>
             <div style={{ fontSize: "9.5pt", color: MUTED, borderTop: "1px solid #EDE8DA", paddingTop: "2mm", marginTop: "2mm", flex: "0 0 auto" }}>
               <span style={{ fontWeight: 700, color: CORAL }}>MY ROLE  </span>{d2c.printRole}

@@ -183,25 +183,31 @@ const LANG_CONTENT = {
         {
           id: "lever-media",
           tag: "D2C · MEDIA / BUDGET",
-          title: "매체 ROAS가 아니라 예산 배분 기준 자체를 바꿨습니다.",
+          title: "저효율 매체를 줄이고, 같은 매출 규모를 더 적은 비용으로 만들었습니다.",
           challenge: "매체 대시보드 ROAS만 보면, 효율이 좋아 보여도 실제 매출로 이어지지 않는 캠페인을 가려낼 수 없었습니다.",
           changes: [
-            "매체 대시보드와 GA4 실매출을 대조해 성과가 과대평가된 캠페인을 찾음",
-            "실제 매출 기여도가 높은 영역으로 예산을 다시 배분",
-            "리타겟팅·기존 고객 비중을 늘려 효율을 계속 조정",
+            "매체 대시보드와 GA4 실매출을 대조해 성과가 과대평가된 캠페인 확인",
+            "저효율 채널 Cut, 검증된 채널 중심으로 예산 재배분",
+            "운영 매체를 10개에서 5개 중심 구조로 단순화",
           ],
           flow: ["Media ROAS", "GA4 Revenue", "Cut / Scale", "Budget Reallocation"],
-          resultHeading: "D2C ROAS · CHANNEL RESULT",
-          result: [
-            { label: "자사몰 ROAS", value: "×1.7", context: "Main Result", size: "lg" },
-            { label: "Meta ROAS", value: "×1.8", size: "md" },
-            { label: "Kakao DA ROAS", value: "×2.2", size: "md" },
-          ],
-          caption: "2024 → 2025 YoY · Channel Result · 2025.07 합류",
-          role: "GA4 실매출 분석 · Campaign Cut / Scale 의사결정 · 예산 재배분 · Retargeting 운영",
-          printContext: "매체 성과와 GA4 실매출을 대조해 실제 매출 기여도를 기준으로 예산을 재배분했습니다.",
-          printChanges: ["매체 ROAS ↔ GA4 실매출 대조", "저기여 Campaign Cut / 고기여 Campaign Scale", "Retargeting 비중 조정"],
-          printRole: "GA4 실매출 분석 · Campaign Cut / Scale 의사결정 · 예산 재배분 · Retargeting 운영",
+          mediaStructure: { before: "10 MEDIA", after: "5 CORE MEDIA" },
+          h2: { period: "2025 H1 → H2 · 입사 후 운영 결과", spendLabel: "AD SPEND", spendValue: "-36%", salesLabel: "ATTRIBUTED SALES", salesValue: "-5%", roasLabel: "ROAS", roasBefore: "263%", roasAfter: "429%" },
+          ga4: {
+            period: "GA4 · 2025 H2 vs Previous Period",
+            metrics: [
+              { label: "ACTIVE USERS", value: "-8.8%" },
+              { label: "NEW USERS", value: "-9.1%" },
+              { label: "PURCHASES", value: "+27.8%" },
+            ],
+            note: "유입 규모는 감소했지만 구매는 증가했습니다.",
+          },
+          annualTrend: { label: "ANNUAL TREND · ROAS", value: "+104%", context: "2024 → 2025" },
+          insight: "저효율 영역에서는 비용을 줄이고, 검증된 영역에 예산을 집중해 매출 규모를 유지하면서 효율을 높였습니다.",
+          role: "GA4 실매출 분석 · Campaign Cut / Scale 의사결정 · 예산 재배분 · 운영 매체 구조 단순화",
+          printContext: "저효율 채널을 Cut하고 예산을 재배분해, 광고비를 줄이면서도 매출 규모와 ROAS를 개선했습니다.",
+          printChanges: ["매체 ROAS ↔ GA4 실매출 대조", "저효율 채널 Cut / 검증된 채널 Scale", "운영 매체 10개 → 5개로 단순화"],
+          printRole: "GA4 실매출 분석 · Campaign Cut / Scale 의사결정 · 예산 재배분 · 운영 매체 구조 단순화",
         },
         {
           id: "lever-commerce",
@@ -450,25 +456,31 @@ const LANG_CONTENT = {
         {
           id: "lever-media",
           tag: "D2C · MEDIA / BUDGET",
-          title: "I changed the budget decision rule, not just the media ROAS.",
+          title: "I cut low-efficiency media and produced the same revenue for less spend.",
           challenge: "Media-dashboard ROAS alone couldn't tell me which campaigns looked efficient but weren't really driving revenue.",
           changes: [
             "Cross-checked media ROAS against GA4 revenue to find overstated campaigns",
-            "Reallocated budget toward the areas with real revenue contribution",
-            "Kept expanding retargeting and existing-customer share as efficiency shifted",
+            "Cut low-efficiency channels and reallocated budget to proven ones",
+            "Simplified operating media from 10 channels to a 5-channel core",
           ],
           flow: ["Media ROAS", "GA4 Revenue", "Cut / Scale", "Budget Reallocation"],
-          resultHeading: "D2C ROAS · CHANNEL RESULT",
-          result: [
-            { label: "Self-mall ROAS", value: "×1.7", context: "Main Result", size: "lg" },
-            { label: "Meta ROAS", value: "×1.8", size: "md" },
-            { label: "Kakao DA ROAS", value: "×2.2", size: "md" },
-          ],
-          caption: "2024 → 2025 YoY · Channel Result · Joined Jul 2025",
-          role: "GA4 revenue analysis · campaign cut / scale decisions · budget reallocation · retargeting optimization",
-          printContext: "I cross-checked media ROAS with GA4 revenue and reallocated budget toward real sales contribution.",
-          printChanges: ["Cross-check media ROAS vs. GA4 revenue", "Cut / scale by sales contribution", "Adjust retargeting share"],
-          printRole: "GA4 revenue analysis · campaign cut / scale decisions · budget reallocation · retargeting optimization",
+          mediaStructure: { before: "10 MEDIA", after: "5 CORE MEDIA" },
+          h2: { period: "2025 H1 → H2 · Results since joining", spendLabel: "AD SPEND", spendValue: "-36%", salesLabel: "ATTRIBUTED SALES", salesValue: "-5%", roasLabel: "ROAS", roasBefore: "263%", roasAfter: "429%" },
+          ga4: {
+            period: "GA4 · 2025 H2 vs Previous Period",
+            metrics: [
+              { label: "ACTIVE USERS", value: "-8.8%" },
+              { label: "NEW USERS", value: "-9.1%" },
+              { label: "PURCHASES", value: "+27.8%" },
+            ],
+            note: "Traffic volume fell, but purchases rose.",
+          },
+          annualTrend: { label: "ANNUAL TREND · ROAS", value: "+104%", context: "2024 → 2025" },
+          insight: "I cut spend where contribution was low and concentrated budget where it was proven — holding revenue steady while efficiency improved.",
+          role: "GA4 revenue analysis · campaign cut / scale decisions · budget reallocation · media-structure simplification",
+          printContext: "I cut low-efficiency channels and reallocated budget, cutting spend while improving revenue scale and ROAS.",
+          printChanges: ["Cross-check media ROAS vs. GA4 revenue", "Cut low-efficiency / scale proven channels", "Simplify media from 10 to 5 channels"],
+          printRole: "GA4 revenue analysis · campaign cut / scale decisions · budget reallocation · media-structure simplification",
         },
         {
           id: "lever-commerce",
@@ -958,9 +970,49 @@ function GrowthLever({ data, id, printChapter }) {
       {data.levers && <div className="mb-3">{data.levers.map((l, i) => <LeverRow key={i} {...l} />)}</div>}
       {data.compare && <IndexCompare data={data.compare} />}
 
+      {/* mediaStructure — "10 MEDIA → LOW-EFFICIENCY CUT → 5 CORE MEDIA": reuses
+          FlowChips so a media-consolidation story doesn't need its own visual. */}
+      {data.mediaStructure && (
+        <div className="mb-2">
+          <FlowChips items={[data.mediaStructure.before, "LOW-EFFICIENCY CUT", data.mediaStructure.after]} />
+        </div>
+      )}
+
+      {/* h2 — the real H1 → H2 operating-result triad (Spend / Sales / ROAS).
+          ROAS is the standout (size lg) since it is the efficiency verdict;
+          Spend and Sales stay same-size so neither reads as bigger than it is. */}
+      {data.h2 && (
+        <>
+          <div className="text-sm md:text-base font-semibold mb-1 print-case-title" style={{ color: NAVY, fontFamily: "'Space Grotesk', sans-serif" }}>{data.h2.period}</div>
+          <div className="flex flex-wrap gap-2 mb-2">
+            <StatChip value={data.h2.spendValue} label={data.h2.spendLabel} />
+            <StatChip value={data.h2.salesValue} label={data.h2.salesLabel} />
+            <StatChip value={`${data.h2.roasBefore} → ${data.h2.roasAfter}`} label={data.h2.roasLabel} size="lg" />
+          </div>
+        </>
+      )}
+
+      {/* ga4 — a SEPARATE attribution basis from platform ad metrics above, so it
+          gets its own tinted card (never merged into the same StatChip row). */}
+      {data.ga4 && (
+        <div className="rounded-xl p-3 mb-2" style={{ background: "#EFF3F0", border: "1px solid #DCE6DF" }}>
+          <div className="text-[10.5px] font-semibold tracking-wide mb-1.5" style={{ color: TEAL, fontFamily: "'IBM Plex Mono', monospace" }}>{data.ga4.period}</div>
+          <div className="flex flex-wrap gap-2 mb-1.5">
+            {data.ga4.metrics.map((m, i) => <StatChip key={i} value={m.value} label={m.label} />)}
+          </div>
+          <div className="text-xs" style={{ color: MUTED }}>{data.ga4.note}</div>
+        </div>
+      )}
+
+      {data.annualTrend && (
+        <div className="text-[11px] mb-2" style={{ color: MUTED }}>
+          <span style={{ fontWeight: 600, color: NAVY_SOFT }}>{data.annualTrend.label}</span> {data.annualTrend.value} <span style={{ color: "#B9B29E" }}>· {data.annualTrend.context}</span>
+        </div>
+      )}
+
       {/* When a compare box (before/after) is present, it already carries the delta —
           skip the small generic StatChip row so the KPI isn't shown twice. */}
-      {!data.compare && (
+      {!data.compare && data.result && (
         <>
           {data.resultHeading && <div className="text-sm md:text-base font-semibold mb-1 print-case-title" style={{ color: NAVY, fontFamily: "'Space Grotesk', sans-serif" }}>{data.resultHeading}</div>}
           <div className="flex flex-wrap gap-2 mb-1">
@@ -968,6 +1020,7 @@ function GrowthLever({ data, id, printChapter }) {
           </div>
         </>
       )}
+      {data.insight && <p className="text-sm md:text-base leading-relaxed mb-1" style={{ color: INK }}>{data.insight}</p>}
       {data.scale && <div className="text-xs mt-1 print-role" style={{ color: MUTED }}>{data.scale}</div>}
       {data.caption && <div className="text-xs mt-1 print-role" style={{ color: MUTED }}>{data.caption}</div>}
       {data.secondary && <div className="text-xs mt-2 px-3 py-1.5 rounded-full inline-block print-role" style={{ background: "#F3EFE3", color: NAVY }}>{data.secondary}</div>}
@@ -1326,11 +1379,26 @@ function PrintPortfolio({ lang, t }) {
                 {d2c.printChanges.map((a, i) => <li key={i} style={{ display: "flex", gap: "1.5mm" }}><span style={{ color: CORAL }}>·</span>{a}</li>)}
               </ul>
               <PrintFlowRow items={d2c.flow} />
-              <div style={{ fontSize: "9.5pt", fontWeight: 700, color: NAVY, fontFamily: "'Space Grotesk', sans-serif", marginBottom: "1mm" }}>{d2c.resultHeading}</div>
-              <div style={{ display: "flex", flexWrap: "wrap", gap: "2mm", marginBottom: "1mm" }}>
-                {d2c.result.map((r, i) => <PrintStat key={i} value={r.value} label={r.label} context={r.context} size={r.size} />)}
+              <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: "1.5mm", marginBottom: "1.5mm" }}>
+                {[d2c.mediaStructure.before, "LOW-EFFICIENCY CUT", d2c.mediaStructure.after].map((it, i, arr) => (
+                  <React.Fragment key={i}>
+                    <span style={{ fontSize: "8.5pt", fontWeight: i === arr.length - 1 ? 700 : 500, color: i === arr.length - 1 ? "white" : NAVY, background: i === arr.length - 1 ? CORAL : "#F3EFE3", borderRadius: 999, padding: "0.8mm 2mm", whiteSpace: "nowrap" }}>{it}</span>
+                    {i < arr.length - 1 && <ArrowRight size={8} color={MUTED} />}
+                  </React.Fragment>
+                ))}
               </div>
-              {d2c.caption && <div style={{ fontSize: "8.5pt", color: MUTED, marginBottom: "1mm" }}>{d2c.caption}</div>}
+              <div style={{ fontSize: "9pt", fontWeight: 700, color: NAVY, fontFamily: "'Space Grotesk', sans-serif", marginBottom: "1mm" }}>{d2c.h2.period}</div>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: "2mm", marginBottom: "1.5mm" }}>
+                <PrintStat value={d2c.h2.spendValue} label={d2c.h2.spendLabel} />
+                <PrintStat value={d2c.h2.salesValue} label={d2c.h2.salesLabel} />
+                <PrintStat value={`${d2c.h2.roasBefore} → ${d2c.h2.roasAfter}`} label={d2c.h2.roasLabel} size="lg" />
+              </div>
+              <div style={{ fontSize: "8.5pt", color: MUTED, marginBottom: "1mm" }}>
+                <span style={{ fontWeight: 700, color: TEAL }}>{d2c.ga4.period}</span> · {d2c.ga4.metrics.map((m) => `${m.label} ${m.value}`).join(" · ")}
+              </div>
+              <div style={{ fontSize: "8.5pt", color: MUTED }}>
+                <span style={{ fontWeight: 700, color: NAVY_SOFT }}>{d2c.annualTrend.label}</span> {d2c.annualTrend.value} · {d2c.annualTrend.context}
+              </div>
             </div>
             <div style={{ fontSize: "9.5pt", color: MUTED, borderTop: "1px solid #EDE8DA", paddingTop: "2mm", marginTop: "2mm", flex: "0 0 auto" }}>
               <span style={{ fontWeight: 700, color: CORAL }}>MY ROLE  </span>{d2c.printRole}
